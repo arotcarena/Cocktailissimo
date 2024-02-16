@@ -1,0 +1,106 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_vendor_index') }} class="breadcrumb-link">Vendeurs ({{count_vendors}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Vendeurs non synchronisés avec sendcloud</h1>
+
+        <p style="margin: 40px 0; text-align: center;">
+            Les vendeurs ci-dessous n'ont pas de sender_address associée sur sendcloud. Cliquez sur résoudre pour démarrer le processus pour chaque vendeur.
+        </p>
+        
+        {# total items count #}
+        <div class="admin-count">
+            {{ vendors | length }} résultat{% if (vendors | length) > 1 %}s{% endif %}
+        </div>
+
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Coordonnées de contact</th>
+                    <th>Entreprise</th>
+                    <th>Adresse du siège social</th>
+                    <th>Adresse d'expédition</th>
+                    <th>#sendcloud</th>
+                    <th>#stripe</th>
+                    <th>Date d'inscription</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vendor in vendors %}
+                    <tr style="background-color: rgba(255, 80, 80, .2);">
+                        <td>{{ vendor.id }}</td>
+                        <td>
+                            <span class="capitalize">{{ vendor.civility | trans({}, 'configs', 'fr') }} {{ vendor.firstName }} {{ vendor.lastName }}</span>
+                            <br>
+                            <span>{{ vendor.email }}</span>
+                        </td>
+                        <td>
+                            {% if vendor.company %}
+                                    <strong>Raison sociale :</strong> {{ vendor.company.socialName }}
+                                    <br>
+                                    {% if vendor.company.commercialName %}
+                                        <strong>Nom commercial :</strong> {{ vendor.company.commercialName }}
+                                        <br>
+                                    {% endif %}
+                                    <strong>N° Siret ou équivalent :</strong> {{ vendor.company.identificationNumber }}
+                                    <br>
+                                    {% if vendor.company.vatNumber %}
+                                        <strong>N° TVA intracom :</strong> {{ vendor.company.vatNumber }}
+                                        <br>
+                                    {% endif %}
+                                        <strong>Pays :</strong> {{ vendor.company.country | trans({}, 'countries', 'fr') }} ({{ vendor.company.country }})
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if vendor.company.socialAddress %}
+                                {% set address = vendor.company.socialAddress %}
+                                {{ address.lineOne }}<br>
+                                {% if address.lineTwo %}
+                                    {{ address.lineTwo }}<br>
+                                {% endif %}
+                                {{ address.postcode }} {{ address.city }}<br>
+                                {{ address.country | trans({}, 'countries', 'fr') }} ({{ address.country }})<br>
+                                {{ address.state }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if vendor.company.senderAddress %}
+                                {% set address = vendor.company.senderAddress %}
+                                {{ address.lineOne }}<br>
+                                {% if address.lineTwo %}
+                                    {{ address.lineTwo }}<br>
+                                {% endif %}
+                                {{ address.postcode }} {{ address.city }}<br>
+                                {{ address.country | trans({}, 'countries', 'fr') }} ({{ address.country }})<br>
+                                {{ address.state }}
+                            {% endif %}
+                        </td>
+                        <td>{{ vendor.sendcloudId }}</td>
+                        <td>{{ vendor.stripeConnectId }}</td>
+                        <td>{{ vendor.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>
+                            {% if vendor.stripeConfirmed %}
+                                <span class="admin-active-account-badge">Vérifié</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a class="admin-button danger-color" href="{{ path('admin_vendor_synchronizeSendcloud', {id: vendor.id}) }}">Résoudre</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+   </div>
+
+{% endblock %}

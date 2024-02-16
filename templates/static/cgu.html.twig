@@ -1,0 +1,18 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('title' | trans({}, 'cgu')),
+    }) }}
+{% endblock %}
+
+{% block body %}
+    <div class="container legal-page">
+        <h1 class="legal-title align-left bold">{{ 'title' | trans({}, 'cgu') }}</h1>
+        
+        {{ 'text' | trans({
+            '{legal_link}': path('static_legal', {_locale: app.request.locale}),
+            '{user_update_link}': path('customerAccount_details', {_locale: app.request.locale})
+        }, 'cgu') | raw }}
+    </div>
+{% endblock %}

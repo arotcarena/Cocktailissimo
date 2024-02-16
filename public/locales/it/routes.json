@@ -1,0 +1,88 @@
+{
+    "customerAccount": {
+        "base": {
+          "label": "Conto",
+          "path": "/it/conto"
+        },
+        "details": {
+          "label": "Dati personali",
+          "path": "/dati-personali"
+        },
+        "address": {
+          "label": "Indirizzi",
+          "path": "/indirizzi"
+        },
+        "purchase": {
+          "label": "Ordini",
+          "path": "/ordini"
+        }
+    },
+    "vendorAccount": {
+        "base": {
+          "label": "Conto venditore",
+          "path": "/it/venditore/conto"
+        },
+        "details": {
+            "index": {
+              "label": "Dati",
+              "path": "/it/venditore/conto/dati"
+            },
+            "personal": {
+              "label": "Dati personali",
+              "path": "/it/venditore/conto/dati/dati-personali"
+            },
+            "company": {
+              "label": "Azienda",
+              "path": "/it/venditore/conto/dati/azienda"
+            },
+            "senderAddress": {
+              "label": "Indirizzo di spedizione",
+              "path": "/it/venditore/conto/dati/indirizzo-di-spedizione"
+            },
+            "payment": {
+              "label": "Pagamenti",
+              "path": "/it/venditore/conto/dati/ricevere-pagamenti"
+            }
+        },
+        "buyerSpace": {
+            "index": {
+              "label": "Spazio acquirente",
+              "path": "/it/venditore/conto/spazio-acquirente"
+            },
+            "purchase": {
+              "label": "Ordini",
+              "path": "/it/venditore/conto/spazio-acquirente/ordini"
+            },
+            "deliveryAddress": {
+              "label": "Indirizzi di consegna",
+              "path": "/it/venditore/conto/spazio-acquirente/indirizzi-di-consegna"
+            }
+        },
+        "vendorSpace": {
+            "index": {
+              "label": "Spazio venditore",
+              "path": "/it/venditore/conto/spazio-venditore"
+            },
+            "shop": {
+              "label": "Il mio negozio",
+              "path": "/it/venditore/conto/spazio-venditore/il-mio-negozio"
+            },
+            "product": {
+              "label": "Prodotti",
+              "path": "/it/venditore/conto/spazio-venditore/prodotti"
+            },
+            "review": {
+              "label": "Recensioni",
+              "path": "/it/venditore/conto/spazio-venditore/recensioni"
+            },
+            "purchase": {
+              "label": "Ordini",
+              "path": "/it/venditore/conto/spazio-venditore/ordini"
+            },
+            "question": {
+              "label": "Domande",
+              "path": "/it/venditore/conto/spazio-venditore/domande"
+            }
+        }
+    }
+}

@@ -1,0 +1,69 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">Sendcloud</span>
+    </div>
+
+    <div class="admin-container">
+        <h1>Sendcloud sender_addresses</h1>
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href="{{ path('admin_sendcloud_index', {action: 'sync'}) }}">Synchroniser</a>
+            <a class="admin-button secondary-color" href="{{ path('admin_sendcloud_index', {action: 'view'}) }}">Afficher</a>
+        </div>
+
+        <div style="margin: 20px 0;">
+            {% if action == 'sync' %}
+                <div>
+                    {% if (lines | length) > 0 %}
+                        Synchronisation terminée. Voici les lignes affectées : 
+                    {% else %}
+                        Déjà synchronisé. Aucune ligne affectée.
+                    {% endif %}
+                </div>
+            {% elseif action == 'view' %}
+                <div>Affichage de toutes les lignes</div>
+            {% endif %}
+        </div>
+
+        {% if lines %}
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>vendor->id</th>
+                        <th>vendor->company</th>
+                        <th>vendor->email</th>
+                        <th>vendor->sendcloudId</th>
+                        <th>sender_adress_id (sur sendcloud)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for line in lines %}
+                        {% if line.id is null %}
+                            <tr style="background-color: rgba(255, 80, 80, .2);">
+                                <td colspan="4">Vendeur inexistant</td>
+                                <td>{{ line.sender_address_id }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ line.id }}</td>
+                                <td>{{ line.company }}</td>
+                                <td>{{ line.email }}</td>
+                                <td>{{ line.sendcloudId }}</td>
+                                <td>{{ line.sender_address_id }}</td>
+                            </tr>
+                        {% endif %}
+                        
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+
+
+    </div>
+
+{% endblock %}

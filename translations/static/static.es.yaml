@@ -1,0 +1,37 @@
+aPropos:
+  title: ¿Quiénes somos?
+  text: >
+    <p class="aPropos-text">Bienvenido a Cocktailissimo, el mercado dedicado a la mixología y el aperitivo, creado con pasión por Nina Sandin e Ibai Arotçarena, dos amigos de la infancia. Nina, experta compradora en el sector de la gastronomía y la pastelería, e Ibai, amante de la comida saludable e intransigente en la calidad de los productos, comparten un amor común por los placeres gustativos y los momentos de convivialidad alrededor de una mesa.</p>
+    <p class="aPropos-text">Nuestra historia comenzó con nuestra pasión compartida por los cócteles, el arte de la mixología y la apreciación de los sabores refinados. Nos dimos cuenta de que era difícil encontrar productos de alta calidad y equipos dignos de los mejores bartenders profesionales, así como recursos educativos para aprender a crear cócteles excepcionales desde casa.</p>
+    <p class="aPropos-text">Así fue como decidimos crear Cocktailissimo, un mercado único en su tipo que ofrece una selección cuidada de productos, utensilios e ingredientes esenciales para la elaboración de cócteles sofisticados. También nos comprometemos a proporcionar recetas detalladas y técnicas educativas para permitir que cualquiera se convierta en un experto en mixología, explorando el arte de la mixonomía, un enfoque gastronómico de la mixología que armoniza los cócteles con los platos.</p>
+    <p class="aPropos-text">En Cocktailissimo, creemos que la creación de un cóctel exquisito es mucho más que preparar una simple bebida; es una experiencia culinaria única que se combina perfectamente con los placeres de la mesa. Ya seas un aficionado apasionado o un profesional experimentado, nuestra plataforma está diseñada para satisfacer todos los niveles de experiencia, ofreciendo una selección variada y de calidad.</p>
+    <p class="aPropos-text">Aspiramos a hacer accesible el arte de la mixología para todos, ofreciendo productos de alta gama, consejos de profesionales y fomentando el desarrollo de una comunidad animada por el intercambio de conocimientos y descubrimientos gustativos.</p>
+    <p class="aPropos-text">Únete a nosotros en Cocktailissimo y déjate llevar por una aventura sensorial única, donde el placer de disfrutar de un delicioso cóctel se une al placer de crear recuerdos inolvidables alrededor de una mesa.</p>
+  conclusion: >
+    <p class="aPropos-text">¡A tu éxito en el arte de la mixología!</p>
+    <p class="aPropos-text">¡Salud!</p>
+  legend: 'Nina Sandin e Ibai Arotçarena, fundadores de Cocktailissimo'
+  img: 
+    nina: Foto de Nina Sandin
+    ibai: Foto de Ibai Arotçarena
+
+legal:
+  title: Aviso legal
+  text: >
+    <p class="legal-text">
+      El sitio cocktailissimo.com es editado y operado por la empresa Cocktailissimo.
+    </p>
+    <p class="legal-text">
+      <div>SAS Cocktailissimo</div>
+      <div>101 bis rue Georges Lassalle</div>
+      <div>40220 Tarnos, Francia</div>
+      <div>RCS Dax - 978 536 415</div>
+      <div>N° de IVA intracomunitario: FR93978536415</div>
+    </p>
+    <p class="legal-text">
+      <div>Correo electrónico: <a href="mailto:contacto@cocktailissimo.com">contacto@cocktailissimo.com</a></div>
+      <div>Teléfono: +33647232520</div>
+    </p>
+    <p class="legal-text">
+      Hoster: OVH SAS, 2 rue Kellerman 59100 Roubaix, Francia - <a href="https://www.ovhcloud.com">https://www.ovhcloud.com</a>
+    </p>

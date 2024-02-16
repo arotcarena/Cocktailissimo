@@ -1,0 +1,16 @@
+<div class="shippingMethod-card">
+    <div class="carrier-icon-wrapper">
+        {{ include('UI/_carrier_icon.html.twig', {carrier: shippingInfo.carrier}) }}
+    </div>
+    <div class="text">
+        <div class="text-line ws-nowrap">{{ shippingInfo.name }}</div>
+        {% if shippingInfo.leadTimeHours %}
+            <div class="text-line mute">Livré en {{ shippingInfo.leadTimeHours }}h</div>
+        {% endif %}
+    </div>
+    <div class="right ws-nowrap">
+        {{ include('UI/_price_show.html.twig', {
+            price: shippingInfo.price
+        }) }}
+    </div>
+</div>

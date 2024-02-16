@@ -1,0 +1,16 @@
+.copy-button {
+    padding: 4px 7px;
+    border-radius: 8px;
+    gap: 5px;
+    box-shadow: 0 0 2px var(--color-lightgrey);
+}
+
+.clipboard-copy-success {
+    color: var(--color-success);
+    font-size: .9em;
+    gap: 4px;
+}
+.clipboard-copy-error {
+    color: var(--color-danger);
+    font-size: .9em;
+}

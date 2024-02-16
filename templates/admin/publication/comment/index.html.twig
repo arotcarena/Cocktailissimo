@@ -1,0 +1,37 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_comment_index') }} class="breadcrumb-link">Commentaires ({{count_comments}})</a>
+    </div>
+
+    <div class="admin-container">
+        <h1>Commentaires</h1>
+
+        {% include "admin/publication/comment/_filters.html.twig" %}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        
+        <ul class="admin-review-list">
+            {% for comment in pagination %}
+                {% include "admin/publication/comment/_comment_card.html.twig" %}
+            {% endfor %}
+        </ul>
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+    </div>
+
+{% endblock %}

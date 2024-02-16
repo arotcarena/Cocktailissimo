@@ -1,0 +1,153 @@
+{% extends "admin/admin_base.html.twig" %}
+
+
+{% block body %}
+
+
+    <main class="admin-blocks-container">
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Boutique</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    <strong>{{ product_count }}</strong> produits
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ noStock_count }}</strong> en rupture de stock
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ reviews_pending_count }}</strong> avis à modérer
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ count_acceptedReviews }}</strong> avis acceptés
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_product_index') }}" class="admin-button">Produits</a>
+                <a href="{{ path('admin_review_index') }}" class="admin-button secondary-color">Avis produits</a>
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Blog</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    <strong>{{ recipe_count }}</strong> recettes
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ ingredient_count }}</strong> ingrédients
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ article_count }}</strong> articles
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ post_count }}</strong> publications instagramissimo
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_recipe_index') }}" class="admin-button">Recettes</a>
+                <a href="{{ path('admin_ingredient_index') }}" class="admin-button secondary-color">Ingrédients</a>
+                <a href="{{ path('admin_article_index') }}" class="admin-button">Articles</a>
+                <a href="{{ path('admin_post_index') }}" class="admin-button">Instagramissimo</a>
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Communauté</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text user-count">
+                    <strong>{{ user_count }}</strong> Utilisateur{% if user_count > 1 %}s{% endif %}
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ contact_count }}</strong> contacts public
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ question_count }}</strong> questions
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ questions_waiting_admin_answer }}</strong> en attente d'une réponse de l'admin
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ comment_count }}</strong> commentaires
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_user_index') }}" class="admin-button">Utilisateurs</a>
+                <a href="{{ path('admin_contact_index') }}" class="admin-button secondary-color">Contacts public</a>
+                <a href="{{ path('admin_question_index') }}" class="admin-button secondary-color">Questions/Réponses</a>
+                <a href="{{ path('admin_comment_index') }}" class="admin-button secondary-color">Commentaires</a>
+            </div>
+        </section>
+
+
+        {# <section class="admin-block">
+            <h2 class="admin-block-title">Commandes</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text purchases-in-process">
+                    <strong>{{ purchases_in_process_count }}</strong> Commande{% if purchases_in_process_count > 1 %}s{% endif %}
+                      en cours
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href={{ path('admin_purchase_index') }} class="admin-button secondary-color">Gérer les commandes</a>
+            </div>
+        </section> #}
+        
+
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Vendeurs</h2>
+            <div class="admin-block-body">
+                
+                <div class="admin-block-text vendor-count">
+                    <strong>{{ vendor_count }}</strong> Vendeur{% if user_count > 1 %}s{% endif %}
+                    {% if vendorsWithoutSendcloudId_count > 0 %}
+                        {% set suffix = (vendorsWithoutSendcloudId_count | length) > 1 ? 's': '' %}
+                        <div class="admin-block-text-badge admin-badge alert-badge">
+                            <div class="alert-badge-text">Attention, {{ vendorsWithoutSendcloudId_count }} vendeur{{ suffix }} non synchronisé{{ suffix }} avec sendcloud</div>
+                            <a href="{{ path('admin_vendor_needSendcloudSync') }}" class="admin-button danger-color admin-small-button">Résoudre</a>
+                        </div>
+                    {% endif %}
+                </div>
+                <p class="admin-block-text">
+                    <strong>{{ prospect_emails_count }}</strong> emails de prospection envoyés
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ vendorContact_count }}</strong> contacts vendeurs
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_vendor_index') }}" class="admin-button">Vendeurs</a>
+                <a href="{{ path('admin_vendorContact_index') }}" class="admin-button secondary-color">Contacts vendeurs</a>
+                <a href="{{ path('admin_prospect_index') }}" class="admin-button secondary-color">Prospection</a>
+                <a href="{{ path('admin_sendcloud_index') }}" class="admin-button third-color">Sendcloud</a>
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Web analytics</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    <strong>{{ count_visits }}</strong> visites
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_trafficAnalytics_index') }}" class="admin-button">Voir plus</a>
+            </div>
+        </section>
+        
+        <section class="admin-block">
+            <h2 class="admin-block-title">Configurations</h2>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_category_index') }}" class="admin-button">Catégories</a>
+                <a href="{{ path('admin_highlight_index') }}" class="admin-button secondary-color">Élements à la une</a>
+                <a href="{{ path('admin_vatRates_index') }}" class="admin-button secondary-color">Taux de TVA</a>
+                <a href="{{ path('admin_cronAutoTask_index') }}" class="admin-button third-color">Tâches auto</a>
+            </div>
+        </section>
+
+
+    </main>
+
+
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base.html.twig" %}
+
+{% block metaDescription %}
+    <meta name="description" content="{{ 'meta_description.home' | trans }}">
+{% endblock %}
+
+{% block page_head %}
+    <title>{{ 'title.home' | trans }}</title>
+
+    <meta property="og:title" content="{{ 'title.home' | trans }}">
+    <meta property="og:locale" content="{{ app.request.locale }}">
+    <meta property="og:url" content="{{ app.request.uri }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ '/img/meta_image.jpg' | path_to_url }}">
+{% endblock %}
+
+{% block javascript %}   
+    {{ parent() }}
+    {{ encore_entry_script_tags('home') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="homepage">
+
+        {# hero #}
+        <section 
+            class="hero-section"
+            data-controller="hero"
+            data-hero="{{ heroData | json_encode }}"
+            >
+            {% set hero = heroData.hero1 %}
+            <div class="hero-wrapper">
+                <a class="hero-link" href="{{ hero.target }}">
+                    <img class="hero mobile" src="{{ '/img/hero/' ~ hero.picture ~ '_mobile.jpg' }}" alt="{{ hero.alt }}" />   {# ON A DEJA MIS LA BONNE LOCALE DANS HERODATA  #}
+                    <img class="hero desktop" src="{{ '/img/hero/' ~ hero.picture ~ '_desktop.jpg' }}" alt="{{ hero.alt }}" />
+                </a>
+            </div>
+            <h1 class="home-title">{{ hero.title }} </h1>
+            <div class="home-cta">
+                <a class="home-cta-link" href="{{ hero.target }}">{{ hero.linkLabel }} </a>
+            </div>
+        </section>
+
+        {# carousel products et recipes #}
+        <section id="homepage-carousel">
+        </section>
+        
+        {% if highlight and highlight.article and highlight.recipe %}
+            <div class="homepage-section-dual">
+                {{ include('home/_highlighted_article.html.twig', {article: highlight.article})}}
+                {{ include('home/_highlighted_recipe.html.twig', {highlight: highlight})}}
+            </div>
+        {% endif %}
+
+        {# gazette subCategories #}
+        <section id="home-gazette">
+        </section>
+
+        {# Instagramissimo #}
+        <section class="social-section">
+            <h2 class="border-title">
+                <span>Instagramissimo</span>
+            </h2>
+            <div 
+                class="social-list{% if not is_granted('DEMO_USER') %} without-shop{% endif %}" {# WITHOUT_SHOP suppr la condition avec ce qu'elle contient #}
+                data-controller="homesocial" 
+                data-seemore="{{ ('see_more' | trans) | json_encode }}"
+                data-seeless="{{ ('see_less' | trans) | json_encode }}"
+                >
+                {% for post in posts %}
+                    <div class="social-item invisible" aria-hidden="true">
+                        <div class="social-card-wrapper">
+                            <div class="social-card">
+                                <h3 class="social-card-title">{{ post.title }}</h3>  {# déjà la bonne locale #}
+                                {{ post.iframe | raw }}
+                            </div>
+                        </div>
+                        {# WITHOUT_SHOP // SUPPRIMER CETTE CONDITION #}
+                        {% if is_granted('DEMO_USER') %}
+                            <div class="social-item-sales post-linked-products" data-postid="{{ post.id }}">
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="social-list-more-wrapper">
+                    <button type="button" class="social-list-more">{{ 'see_more' | trans }}</button>
+                </div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

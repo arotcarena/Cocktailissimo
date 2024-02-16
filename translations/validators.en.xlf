@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="GmZzUz6" resname="assert.logged">
+        <source>assert.logged</source>
+        <target>Log in to create an address</target>
+      </trans-unit>
+      <trans-unit id="YvgVdZt" resname="assert.choice">
+        <source>assert.choice</source>
+        <target>Please choose between the differents options</target>
+      </trans-unit>
+      <trans-unit id="s7Xiqvn" resname="assert.maxLength">
+        <source>assert.maxLength</source>
+        <target>{{ limit }} caracters maximum</target>
+      </trans-unit>
+      <trans-unit id="RmoQmrL" resname="assert.notBlank.firstName">
+        <source>assert.notBlank.firstName</source>
+        <target>First name is required</target>
+      </trans-unit>
+      <trans-unit id="ZgOFauS" resname="assert.notBlank.lastName">
+        <source>assert.notBlank.lastName</source>
+        <target>Last name is required</target>
+      </trans-unit>
+      <trans-unit id="AK5ugua" resname="assert.notBlank.streetAddress">
+        <source>assert.notBlank.streetAddress</source>
+        <target>Address is required</target>
+      </trans-unit>
+      <trans-unit id="I12sVvj" resname="assert.notBlank.city">
+        <source>assert.notBlank.city</source>
+        <target>City is required</target>
+      </trans-unit>
+      <trans-unit id="cHW5eOT" resname="assert.notBlank.postcode">
+        <source>assert.notBlank.postcode</source>
+        <target>Postal code is required</target>
+      </trans-unit>
+      <trans-unit id="9oajql7" resname="assert.notBlank.country">
+        <source>assert.notBlank.country</source>
+        <target>Country is required</target>
+      </trans-unit>
+      <trans-unit id="P5W5NaY" resname="assert.email">
+        <source>assert.email</source>
+        <target>Invalid email address</target>
+      </trans-unit>
+      <trans-unit id="FS5T7Rq" resname="assert.notBlank.email">
+        <source>assert.notBlank.email</source>
+        <target>Email address is required</target>
+      </trans-unit>
+      <trans-unit id="JEF_bcc" resname="assert.notBlank.message">
+        <source>assert.notBlank.message</source>
+        <target>Message is required</target>
+      </trans-unit>
+      <trans-unit id="XySseam" resname="assert.notBlank.fullName">
+        <source>assert.notBlank.fullName</source>
+        <target>Name is required</target>
+      </trans-unit>
+      <trans-unit id="SunInHr" resname="assert.notBlank.socialAddress">
+        <source>assert.notBlank.socialAddress</source>
+        <target>Registered office address is required</target>
+      </trans-unit>
+      <trans-unit id="YhsghIJ" resname="assert.notBlank.senderAddress">
+        <source>assert.notBlank.senderAddress</source>
+        <target>Shipping address is required</target>
+      </trans-unit>
+      <trans-unit id="45SIju8" resname="assert.range.rate">
+        <source>assert.range.rate</source>
+        <target>Rate between 1 And 5</target>
+      </trans-unit>
+      <trans-unit id="EBne0.W" resname="assert.notBlank.password">
+        <source>assert.notBlank.password</source>
+        <target>Password is required</target>
+      </trans-unit>
+      <trans-unit id="RfHYKia" resname="assert.notBlank.oldPassword">
+        <source>assert.notBlank.oldPassword</source>
+        <target>Old password is required</target>
+      </trans-unit>
+      <trans-unit id="EPGFEVW" resname="assert.minLength">
+        <source>assert.minLength</source>
+        <target>{{ limit }} caracters at least</target>
+      </trans-unit>
+      <trans-unit id="q95Ip5L" resname="assert.samePasswords">
+        <source>assert.samePasswords</source>
+        <target>The two passwords are different</target>
+      </trans-unit>
+      <trans-unit id="QJAf9ns" resname="assert.notBlank.passwordConfirm">
+        <source>assert.notBlank.passwordConfirm</source>
+        <target>Please confirm your password</target>
+      </trans-unit>
+      <trans-unit id="y8mgik1" resname="assert.notUnique.email">
+        <source>assert.notUnique.email</source>
+        <target>This email address already exists</target>
+      </trans-unit>
+      <trans-unit id="yL.v5MK" resname="assert.true.agreeTerms">
+        <source>assert.true.agreeTerms</source>
+        <target>Please agree with the terms and conditions of use</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

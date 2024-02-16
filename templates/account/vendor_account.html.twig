@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {title: ('my_account' | trans)}) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('vendorAccount') }}
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('vendorAccount') }}
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block pageClass %}vendorDashboard-page{% endblock %}
+
+{% block body %}
+
+    <div id="vendor-account" data-vendor="{{ vendor | json_encode }}">
+        <h1>{{ 'my_account' | trans }}</h1>
+    </div> 
+{% endblock %}

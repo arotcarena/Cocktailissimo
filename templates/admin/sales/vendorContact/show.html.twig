@@ -1,0 +1,124 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_vendorContact_index') }} class="breadcrumb-link">Contacts vendeurs ({{vendorContact_count}})</a>
+        >
+        <span class="breadcrumb-item">{{ vendorContact.companyName }}</span>
+    </div>
+
+    <div class="admin-product-show user-show">
+        
+        <h1>Contact vendeur</h1>
+
+        <h2>Informations de contact</h2>
+
+        <div>
+            <div class="capitalize admin-product-show-row inline">{{ vendorContact.civility | trans({}, 'configs', 'fr') }} {{ vendorContact.firstName }} {{ vendorContact.lastName }}</div>
+            <div class="admin-product-show-row inline">{{ vendorContact.email }}</div>
+            {% if vendorContact.phone %}
+                <div class="admin-product-show-row inline">{{ vendorContact.phone }}</div>
+            {% endif %}
+        </div>
+        
+        <h2>Entreprise</h2>
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.companyName, label: 'Nom', name: 'companyName'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.identificationNumber, label: 'N° Siret ou équivalent', name: 'identificationNumber'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.vatNumber, label: 'N° de TVA intracommunautaire', name: 'vatNumber'}) }}
+
+
+        <h2>Catégorie / sous-catégorie</h2>
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: attribute(vendorContact.category.name, 'fr'), label: 'Catégorie', name: 'category'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: attribute(vendorContact.subCategory.name, 'fr'), label: 'Sous-catégorie', name: 'subCategory'}) }}
+
+
+        <h2>Adresse du siège social</h2>
+
+        {% set address = vendorContact.socialAddress %}
+        <div>
+            <div class="admin-product-show-row inline">{{ address.lineOne }}</div>
+            {% if address.lineTwo %}
+                <div class="admin-product-show-row inline">{{ address.lineTwo }}</div>
+            {% endif %}
+            <div class="admin-product-show-row inline">{{ address.postcode }} {{ address.city }}</div>
+            <div class="admin-product-show-row inline">{{ address.country | trans({}, 'countries', 'fr') }} {{ address.country }} {% if address.state %}({{ address.state }}){% endif %}</div>
+        </div>
+
+
+        <h2>Adresse d'expédition</h2>
+
+        {% set address = vendorContact.senderAddress %}
+        <div>
+            <div class="admin-product-show-row inline">{{ address.lineOne }}</div>
+            {% if address.lineTwo %}
+                <div class="admin-product-show-row inline">{{ address.lineTwo }}</div>
+            {% endif %}
+            <div class="admin-product-show-row inline">{{ address.postcode }} {{ address.city }}</div>
+            <div class="admin-product-show-row inline">{{ address.country | trans({}, 'countries', 'fr') }} {{ address.country }} {% if address.state %}({{ address.state }}){% endif %}</div>
+        </div>
+
+        
+        <h2>Présence sur le web</h2>
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.website, label: 'Site web', name: 'website'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.facebook, label: 'Facebook', name: 'facebook'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.instagram, label: 'Instagram', name: 'instagram'}) }}
+
+
+        <h2>Pourquoi devenir vendeur ?</h2>
+
+        {{ include('admin/parts/_show_row.html.twig', {value: vendorContact.whyBecomeVendor, label: 'Réponse', name: 'whyBecomeVendor'}) }}
+
+
+        <h2>Autres renseignements</h2>
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.lang, label: 'Langue du navigateur', name: 'lang'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.createdAt.format('d/m/Y H:i'), label: 'Date', name: 'createdAt'}) }}
+
+
+
+        <h2>Statut</h2>
+
+        <div>{{ vendorContact.statusLabel }}</div>
+
+        <div class="admin-buttons-wrapper">
+            {% if vendorContact.status != 'vendor_contact_status_accepted' %}
+                <a class="admin-button" href="{{ path('admin_vendor_create', {vendorContactId: vendorContact.id}) }}">Accepter</a>
+            {% endif %}
+            {% if vendorContact.status != 'vendor_contact_status_refused' %}
+                <form action={{ path('admin_vendorContact_refuse') }} method="POST">
+                    <input type="hidden" name="token" value="{{ csrf_token('refuse-vendorContact') }}">
+                    <button class="admin-button secondary-color" type="submit" name="id" value={{ vendorContact.id }}
+                            data-controller="deleteconfirm" data-deletemessage="{{ 'Refuser le candidat vendeur "' ~ vendorContact.email ~ '" ?' }}"
+                    >
+                        Refuser
+                    </button>
+                </form>
+            {% endif %}
+        </div>
+        <div class="admin-buttons-wrapper" style="margin-top: 0;">
+            <form action={{ path('admin_vendorContact_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-vendorContact') }}">
+                <button class="admin-button third-color" type="submit" name="id" value={{ vendorContact.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le contact vendeur de "' ~ vendorContact.email ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

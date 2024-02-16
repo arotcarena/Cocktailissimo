@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('legal.title' | trans({}, 'static')),
+    }) }}
+{% endblock %}
+
+{% block body %}
+    <div class="container legal-page">
+        <h1 class="legal-title align-left bold">{{ 'legal.title' | trans({}, 'static') }}</h1>
+        
+        {{ 'legal.text' | trans({}, 'static') | raw }}
+    </div>
+{% endblock %}

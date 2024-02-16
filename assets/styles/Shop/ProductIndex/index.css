@@ -1,0 +1,301 @@
+.product-index-banner {
+    margin-bottom: 40px;
+}
+.product-index-banner.vendor-shop-banner {
+    padding: 0 15px;
+    margin-bottom: 40px;
+}
+.vendor-shop-banner .product-index-banner-subtitle {
+    line-height: 1.7;
+    font-size: .9em;
+}
+.product-index-banner.vendor-shop-banner.desktop {
+    display: none;
+}
+.vendor-shop-banner .vendor-shop-banner-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+.vendor-shop-banner .vendor-shop-banner-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.product-index-banner.vendor-shop-banner.mobile {
+    margin-top: 10px;
+}
+.product-index-banner-img {
+    width: 100%;
+    height: auto;
+}
+.product-index-banner-img.vendor-shop-banner-img {
+    width: 90px;
+    height: 90px;
+}
+.product-index-banner-text {
+    padding: 0 15px;
+}
+.product-index-banner-title {
+    margin: 7px 0;
+    font-size: 1.6em;
+}
+.product-index-banner-subtitle {
+    font-size: .85em;
+    margin: 5px 0;
+}
+.product-index-footer {
+    margin: 50px 15px 80px;
+    font-size: .85em;
+    border-top: solid 1px rgb(230, 230, 230);
+    padding-top: 25px;
+}
+.product-index-footer h2, .product-index-footer-h3 {
+    text-align: left;
+    font-weight: 600;
+}
+.product-index-footer h3 {
+    margin: 10px 0;
+    font-size: 1em;
+}
+.product-index-footer h2 {
+    font-size: 1.2em;
+}
+.product-index-footer p {
+    margin: 10px 0;
+}
+.product-index-footer a {
+    text-decoration: underline;
+}
+.product-index-footer strong {
+    font-weight: 600;
+}
+.product-index-footer a strong {
+    font-weight: 400;
+}
+
+
+
+.product-index {
+    margin: 12px auto 50px;
+    padding: 0 15px;
+    max-width: 775px;
+}
+#search-index .product-index {
+    margin-top: 20px;
+}
+
+
+.product-index-results {
+    opacity: 1;
+    transition: opacity .3s;
+    position: relative;
+    width: 100%;
+    min-height: calc(40px + 1.4em);
+}
+.product-index-results.loading {
+    opacity: .3;
+}
+.product-index-results .main-loader {
+    position: absolute;
+    top: 20px;
+    left: calc(50% - .7em);
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.product-index h1 {
+    font-size: 1.1em;
+    margin-top: 0;
+}
+
+.product-index-count {
+    font-size: .9em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    margin-top: 20px;
+}
+
+.product-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    row-gap: 30px;
+    margin: 0 0 30px;
+}
+
+
+.product-index-header {
+    position: sticky;
+    z-index: 1;
+    top: -1px;
+    padding: 12px 15px;
+    background-color: #FFF;
+    transition: top ease-in-out .5s;
+    margin: -12px -15px;
+}
+body.scroll-up .product-index-header {
+    top: 69px;
+}
+
+
+
+
+@media only screen and (min-width: 500px) {
+    .product-index-banner-title {
+        font-size: 2em;
+    }
+    .product-index-banner-subtitle {
+        font-size: .95em;
+    }
+    .product-index-banner.vendor-shop-banner {
+        margin-top: 20px;
+    }
+}
+
+
+@media only screen and (min-width: 780px) {
+    .product-index {
+        margin-top: 40px;
+    }
+    .product-index-banner {
+        display: flex;
+        padding: 0 15px;
+        margin-top: 40px;
+        margin-bottom: 10px;
+        gap: 10px;
+    }
+    .product-index-banner.vendor-shop-banner.mobile {
+        display: none;
+    }
+    .product-index-banner.vendor-shop-banner.desktop {
+        display: flex;
+    }
+    .vendor-shop-banner .product-index-banner-subtitle {
+        margin-top: 10px;
+    }
+    .vendor-shop-banner .product-index-banner-title {
+        margin-bottom: 10px;
+    }
+    .product-index-banner-img {
+        width: 50%;
+    }
+    .product-index-banner-img.vendor-shop-banner-img {
+        width: 150px;
+        height: 150px;
+    }
+    .product-index-banner-title {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+    .product-index-banner-subtitle {
+        line-height: 1.7;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .product-index-banner {
+        padding: 0 20px;
+    }
+    .product-index-footer {
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .product-index .main-loader {
+        left: 150px;
+        top: 0;
+    }
+    .product-index-banner {
+        gap: 20px;
+        max-width: 1500px;
+        padding: 0 50px;
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .product-index-banner-subtitle {
+        font-size: 1em;
+    }
+    .product-list {
+        justify-content: flex-start;
+        gap: 20px;
+    }
+    .product-index {
+        display: flex;
+        align-items: flex-start;
+        gap: 50px;
+        max-width: 1500px;
+        padding: 0 50px;
+    }
+    .product-index-count {
+        margin-top: 0;
+    }
+    .product-index-header {
+        padding: 0;
+        margin: 33px 0 50px;
+        flex: none;
+        width: 300px;
+        top: 50px;
+        transition: all .3s;
+        /* max-height: calc(100vh - 75px); */
+        /* overflow-y: auto; */
+    }
+    .product-index h1 {
+        text-align: left;
+    }
+
+    #search-index .product-index-header {
+        top: 150px;
+        /* max-height: calc(100vh - 175px); */
+    }
+    body.scroll-up .product-index-header {
+        top: 120px;
+        /* max-height: calc(100vh - 145px); */
+    }
+    body.scroll-up #search-index .product-index-header {
+        top: 220px;
+        /* max-height: calc(100vh - 245px); */
+    }
+}
+
+@media only screen and (min-width: 1150px) {
+    .product-list {
+        gap: 30px;
+    }
+}
+
+@media only screen and (min-width: 1250px) {
+    .product-index-banner.vendor-shop-banner {
+        margin-top: 40px;
+    }
+    @media only screen and (min-height: 800px) {
+        .product-index-header {
+            top: 130px;
+            /* max-height: calc(100vh - 155px); */
+        }
+        #search-index .product-index-header {
+            top: 230px;
+            /* max-height: calc(100vh - 255px); */
+        }
+        body.scroll-up .product-index-header {
+            top: 208px;
+            /* max-height: calc(100vh - 233px); */
+        }
+        body.scroll-up #search-index .product-index-header {
+            top: 308px;
+            /* max-height: calc(100vh - 333px); */
+        }
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .product-index-footer {
+        margin: 50px auto;
+        max-width: 1500px;
+    }
+}
+

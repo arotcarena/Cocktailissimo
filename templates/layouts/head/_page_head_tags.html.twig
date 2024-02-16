@@ -1,0 +1,9 @@
+<title>{{ title }} - Cocktailissimo</title>
+
+<meta property="og:title" content="{{ title }}">
+<meta property="og:locale" content="{{ app.request.locale }}">
+<meta property="og:url" content="{{ app.request.uri }}">
+
+<meta property="og:type" content="{{ type ?? 'website' }}">
+
+<meta property="og:image" content="{{ (image ?? '/img/meta_image.jpg') | path_to_url }}">

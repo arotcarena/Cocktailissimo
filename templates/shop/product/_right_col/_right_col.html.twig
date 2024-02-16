@@ -1,0 +1,85 @@
+<div class="product-right-col">
+    <div id="js-product-show-button-portal">
+        <div class="product-right-col-header">
+            <h1 class="designation">{{ attribute(product.designation, app.request.locale) }}</h1>
+            <div class="product-show-subtitle-wrapper">
+                <a class="product-show-subtitle" href="{{ path('vendorShop', {companySlug: product.vendor.company.slug, _locale: app.request.locale}) }}">
+                    {% if product.vendor.company.logo %}
+                        <img class="product-show-vendor-logo" src="{{ product.vendor.company.logo | picture_path_resolver('small_index') }}" alt="{{ product.vendor.company.logo | picture_alt_resolver(app.request.locale) }}">
+                    {% endif %}
+                    <span>{{ product.vendor.company.usualName }}</span>
+                </a>
+            </div>
+
+            {% if product.reviewNote and product.countReviews %}
+                {{ include('UI/_review_note_show.html.twig', {count: product.countReviews, note: product.reviewNote}) }}
+            {% endif %}
+            
+            
+        </div>
+
+        {% if product.shortDescription %}
+            <p class="short-description">{{ attribute(product.shortDescription, app.request.locale) }}</p>
+        {% endif %}
+        
+
+        {# packagingChoice, price, quantity, stock, add button #}
+        <div 
+            id="product-show-logistic"
+            data-packagingchoices="{{ packagingChoices | json_encode }}"
+            data-currentpackaging="{{ currentPackaging | json_encode }}"
+            >
+        </div>
+    </div>
+
+
+    <div class="product-show-payment" data-controller="toggleshow">
+        <svg class="icon i-lock">
+            <use xlink:href="/img/icons/sprite.svg#lock"></use>
+        </svg>
+        <span>{{ 'secure_payment' | trans }}</span>
+        <button class="product-show-payment-opener toggle-opener" type="button">{{ 'know_more' | trans }}</button>
+        <div class="toggle invisible product-show-payment-card">
+            <button class="toggle-closer">
+                <svg class="icon i-close">
+                    <use xlink:href="/img/icons/sprite.svg#close"></use>
+                </svg>
+            </button>
+            <p>{{ 'secure_payment_explanation' | trans }}</p>
+        </div>
+    </div>
+
+    <ul class="product-right-col-list">
+        {% if product.longHtmlDescription %}
+            <li class="product-right-col-item" data-controller="toggleshow" data-startingstate="open">
+                <button class="toggle-opener product-right-col-item-button" type="button">
+                    <span>{{ 'product_details' | trans }}</span>
+                    <svg class="icon i-plus">
+                        <use xlink:href="/img/icons/sprite.svg#plus"></use>
+                    </svg>
+                    <svg class="icon i-minus">
+                        <use xlink:href="/img/icons/sprite.svg#minus"></use>
+                    </svg>
+                </button>
+                <div class="toggle product-show-long-description link-underline">
+                    {{ (attribute(product.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale)) | raw }}
+                </div>
+            </li>
+        {% endif %}
+        <li class="product-right-col-item" data-controller="toggleshow">
+            <button class="toggle-opener product-right-col-item-button" type="button">
+                <span>{{ 'delivery_and_return' | trans }}</span>
+                <svg class="icon i-plus">
+                    <use xlink:href="/img/icons/sprite.svg#plus"></use>
+                </svg>
+                <svg class="icon i-minus">
+                    <use xlink:href="/img/icons/sprite.svg#minus"></use>
+                </svg>
+            </button>
+            <div class="toggle invisible">
+                <p>{{ 'delivery_and_return_explanation' | trans }}</p>
+            </div>
+        </li>
+    </ul>
+</div>
+  

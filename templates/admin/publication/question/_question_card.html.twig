@@ -1,0 +1,60 @@
+<li class="admin-review-card">
+
+    {% if question.product %}
+        {{ include('admin/publication/_owner_top_card/_product_top_card.html.twig', {product: question.product}) }}
+    {% elseif question.recipe %}
+        {{ include('admin/publication/_owner_top_card/_recipe_top_card.html.twig', {recipe: question.recipe}) }}
+    {% endif %}
+
+    <div class="admin-review-card-body">
+        <div class="admin-review-card-body-info">
+            <span>{{ question.fullName }}</span>
+            <span class="admin-review-card-text-mute">
+                {% if question.user %}
+                    <a href="{{ path('admin_user_show', {id: question.user.id}) }}">{{ question.user.email }}</a>
+                {% else %}
+                    non inscrit    
+                {% endif %}
+            </span>
+            <span class="admin-review-card-text-semi-mute">{{ question.createdAt.format('d/m/Y H:i') }}</span>
+        </div>
+        <div class="admin-review-card-body-title">
+            {{ question.title }}
+        </div>
+        <div class="admin-review-card-body-content">
+            {{ question.content }}
+        </div>
+    </div>
+
+    
+    {{ include('admin/publication/_answer_counter.html.twig', {answers: question.answers}) }}
+
+    <div class="admin-review-card-footer">
+        {% if question.answers | length > 0 %}
+            <ul class="admin-answer-list">
+                {% for answer in question.answers %}
+                    {{ include('admin/publication/answer/_answer_card.html.twig', {targetRoute: 'admin_question_index'}) }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="admin-review-deletor">
+        <form action="{{ path('admin_question_delete') }}" method="POST">
+            <input type="hidden" name="token" value="{{ csrf_token('delete-question') }}">
+            <button class="admin-table-button danger" name="id" value="{{ question.id }}" type="submit"
+                    data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement la question "' ~ question.title | excerpt ~ '" ?' }}"
+            >
+                <svg class="icon">
+                    <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                </svg>
+                <span>Supprimer</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="admin-answer-control" data-ownerclass="question" data-ownerid="{{question.id}}">
+    </div>
+</li>
+ 
+

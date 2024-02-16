@@ -1,0 +1,45 @@
+{
+    "assert": {
+        "invalid": "Campo non valido",
+        "choice": "Si prega di scegliere tra le opzioni proposte",
+        "choice_country": "Si prega di scegliere tra i paesi proposti",
+        "notBlank": {
+            "civility": "La civiltà è obbligatoria",
+            "firstName": "Il nome è obbligatorio",
+            "lastName": "Il cognome è obbligatorio",
+            "email": "L'indirizzo email è obbligatorio",
+            "phone": "Il numero di telefono è obbligatorio",
+            "password": "La password è obbligatoria",
+            "password_confirm": "La conferma della password è obbligatoria",
+            "address_lineOne": "L'indirizzo è obbligatorio",
+            "postcode": "Il codice postale è obbligatorio",
+            "city": "La città è obbligatoria",
+            "country": "Il paese è obbligatorio",
+            "address_state": "Lo stato / provincia è obbligatorio",
+            "social_name": "La ragione sociale è obbligatoria",
+            "identification_number": "Il Numero di identificazione è obbligatorio",
+            "social_address": "L'indirizzo della sede legale è obbligatorio",
+            "sender_address": "L'indirizzo di spedizione è obbligatorio",
+            "answer": "Una risposta è obbligatoria",
+            "message": "Il messaggio è obbligatorio",
+            "category": "La categoria è obbligatoria",
+            "subCategory": "La sottocategoria è obbligatoria"
+        },
+        "file": {
+            "format": "Formato non corretto. I formati accettati sono: {{accepted_formats}}"
+        },
+        "notUnique": {
+            "email": "Questo indirizzo email è già in uso."
+        },
+        "length": {
+            "min": "{{min}} caratteri minimi",
+            "max": "{{max}} caratteri massimi"
+        },
+        "email": "Indirizzo email non valido",
+        "phone": "Numero di telefono non valido",
+        "checkbox": {
+            "true": "Devi spuntare questa casella"
+        },
+        "not_same_passwords": "Le due password non sono identiche"
+    }
+}

@@ -1,0 +1,98 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href="{{ path('admin_home') }}" class="breadcrumb-home-link">Administration</a>
+        >
+        <a href="{{ path('admin_article_index') }}" class="breadcrumb-link">Articles ({{count_article}})</a>
+        >
+        <a href="{{ path('admin_article_show', {id: article.id}) }}" class="breadcrumb-link">{{ article.title.fr }}</a>
+        >
+        <span class="breadcrumb-item">Modifier</span>
+    </div>
+
+    <h1>Modifier un article</h1>
+    
+
+    {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+        
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+
+        
+        <div class="admin-form-row">
+            <div 
+                class="admin-picture-upload landscape" 
+                data-name="article[picture]" 
+                data-label="Photo * (minimum 1000 x 640 pixels)" 
+                data-value="{{ form.picture.vars.value }}"
+                data-resizewidth="1000"
+                data-resizeheight="640"
+                >
+                {{ form_widget(form.picture) }}
+            </div>
+
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'enAlt', label: 'Balise alt (EN)', field: form.enAlt, lang: 'en'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'frAlt', label: 'Balise alt (FR)', field: form.frAlt, lang: 'fr'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'esAlt', label: 'Balise alt (ES)', field: form.esAlt, lang: 'es'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'itAlt', label: 'Balise alt (IT)', field: form.itAlt, lang: 'it'}) }}
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enTitle', label: 'Titre (EN) *', field: form.enTitle, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frTitle', label: 'Titre (FR) *', field: form.frTitle, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esTitle', label: 'Titre (ES) *', field: form.esTitle, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itTitle', label: 'Titre (IT) *', field: form.itTitle, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enSubtitle', label: 'Sous-titre (EN)', field: form.enSubtitle, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frSubtitle', label: 'Sous-titre (FR)', field: form.frSubtitle, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esSubtitle', label: 'Sous-titre (ES)', field: form.esSubtitle, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itSubtitle', label: 'Sous-titre (IT)', field: form.itSubtitle, lang: 'it'}) }}
+
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enSlug', label: 'Slug (EN) *', field: form.enSlug, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frSlug', label: 'Slug (FR) *', field: form.frSlug, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esSlug', label: 'Slug (ES) *', field: form.esSlug, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itSlug', label: 'Slug (IT) *', field: form.itSlug, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enMetaDescription', label: 'Méta-description (EN)', field: form.enMetaDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frMetaDescription', label: 'Méta-description (FR)', field: form.frMetaDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esMetaDescription', label: 'Méta-description (ES)', field: form.esMetaDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itMetaDescription', label: 'Méta-description (IT)', field: form.itMetaDescription, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'subCategory', label: 'Sous-catégorie *', field: form.subCategory}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enHtmlContent', label: 'Contenu (EN) (balises de liens et BB code acceptés) *', field: form.enHtmlContent, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frHtmlContent', label: 'Contenu (FR) (balises de liens et BB code acceptés) *', field: form.frHtmlContent, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esHtmlContent', label: 'Contenu (ES) (balises de liens et BB code acceptés) *', field: form.esHtmlContent, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itHtmlContent', label: 'Contenu (IT) (balises de liens et BB code acceptés) *', field: form.itHtmlContent, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'ref', label: 'Réf. *', field: form.ref}) }}
+
+        <div 
+            id="select-recipes-input" 
+            data-title="Recettes liées"
+            data-name="article[linkedRecipes][]"
+            data-indexendpoint="{{ path('admin_api_article_linkedRecipes', {id: article.id}) }}" 
+            data-searchendpoint="{{ path('admin_api_recipe_search') }}"
+            >
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'linkedRecipes', label: 'Recettes liées', field: form.linkedRecipes}) }}
+        </div>
+        
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Modifier</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

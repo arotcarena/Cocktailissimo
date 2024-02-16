@@ -1,0 +1,22 @@
+{% if img_filter is not defined %}
+    {% set img_filter = 'index' %}
+{% endif %}
+
+<div>
+    <div class="admin-form-img-container">
+        <img class={{ name }} src={{ picture | picture_path_resolver(img_filter) }} alt={{ picture | picture_alt_resolver('fr') }}>
+        <div class="admin-form-img-alt en-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+            Balise alt (EN) : {{ picture | picture_alt_resolver('en') }}
+        </div>
+        <div class="admin-form-img-alt fr-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+            Balise alt (FR) : {{ picture | picture_alt_resolver('fr') }}
+        </div>
+        <div class="admin-form-img-alt es-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+            Balise alt (ES) : {{ picture | picture_alt_resolver('es') }}
+        </div>
+        <div class="admin-form-img-alt it-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+            Balise alt (IT) : {{ picture | picture_alt_resolver('it') }}
+        </div>
+    </div>
+    <div class="admin-show-img-label">{{ label }}</div>
+</div>

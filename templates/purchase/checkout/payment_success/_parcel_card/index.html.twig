@@ -1,0 +1,20 @@
+<div class="shippingMethod-form-header-title-group">
+    {% include "purchase/checkout/payment_success/_parcel_card/_vendor_group.html.twig" %}
+
+    <div class="parcel-card-shippment">
+        <div class="shippingMethod-form-header-title-line">
+            <span>{{ 'delivery' | trans }} {{ position }}</span>
+            <span class="shippingMethod-form-header-title-badge">
+                {{ vendorGroup.shippingInfo.type | trans({}, 'configs') }}
+            </span>
+            <div class="separator">
+            </div>
+        </div>
+        <div class="shippingMethod-form-header-title-group-expand">
+            {% if vendorGroup.shippingInfo.type == 'shipping_type.relay' %}
+                {{ include('purchase/checkout/payment_success/_parcel_card/_relay_info.html.twig', {relayInfo: vendorGroup.shippingInfo.relayInfo}) }}
+            {% endif %}
+            {{ include('purchase/checkout/payment_success/_parcel_card/_shipping_info.html.twig', {shippingInfo: vendorGroup.shippingInfo}) }}
+        </div>
+    </div>
+</div>

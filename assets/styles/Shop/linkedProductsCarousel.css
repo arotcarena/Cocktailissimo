@@ -1,0 +1,111 @@
+/*dots*/
+.linked-products-carousel .slick-dots {
+    position: absolute;
+    top: calc(100% + 14px);
+    text-align: center;
+}
+.linked-products-carousel .slick-dots li {
+    margin: 0;
+    width: 15px;
+    height: 10px;
+}
+.linked-products-carousel .slick-dots li button {
+    width: 15px;
+    height: 10px;
+}
+.linked-products-carousel .slick-dots li button:before {
+    content: '';
+    border-radius: 1000px;
+    width: 7px;
+    height: 7px;
+    background-color: var(--color-bordeaux-veryflash);
+    opacity: .3;
+    transition: opacity .3s;
+}
+.linked-products-carousel .slick-dots li.slick-active button:before {
+    opacity: 1;
+}
+
+.linked-products-carousel-wrapper .carousel-loader {
+    position: absolute;
+    top: calc(50% - 45px);
+    right: 0;
+}
+.linked-products-carousel-wrapper .carousel-loader .icon {
+    width: 30px;
+    height: 30px;
+}
+
+
+/* pour éviter le bug sur prod avec retour à la ligne un bref instant au moment de charger de nouvelles recipes */
+.linked-products-carousel .slick-track {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.linked-products-carousel .slick-slide {
+    flex: none;
+}
+
+
+/*responsive*/
+
+.linked-products-carousel .product-card {
+    width: calc(50vw - 45px);
+    max-width: 200px;
+    margin: 0 auto;
+}
+
+@media only screen and (min-width: 500px) {
+    .linked-products-carousel .product-card {
+        width: calc(33.33vw - 45px);
+    }
+}
+@media only screen and (min-width: 600px) {
+    .linked-products-carousel .product-card {
+        width: calc(33.33vw - 45px);
+    }
+}
+@media only screen and (min-width: 750px) {
+    .linked-products-carousel .product-card {
+        width: calc(25vw - 40px);
+    }
+}
+@media only screen and (min-width: 960px) {
+    .linked-products-carousel-wrapper.custom-carousel-wrapper .carousel-arrow.prev {
+        left: -55px;
+    }
+    .linked-products-carousel-wrapper.custom-carousel-wrapper .carousel-arrow.next {
+        right: -55px;
+    }
+    .linked-products-carousel-wrapper.custom-carousel-wrapper {
+        margin: 0 50px;
+    }
+    .linked-products-carousel .product-card {
+        width: calc(25vw - 60px);
+    }
+}
+@media only screen and (min-width: 1060px) {
+    .linked-products-carousel .product-card {
+        width: calc(20vw - 51px);
+    }
+}
+@media only screen and (min-width: 1130px) {
+    .linked-products-carousel .product-card {
+        width: calc(20vw - 80px);
+    }
+}
+@media only screen and (min-width: 1500px) {
+    .linked-products-carousel .product-card {
+        /* width: calc(16.66vw - 70px); */
+        width: 180px;
+    }
+}
+
+
+
+
+
+
+
+
+

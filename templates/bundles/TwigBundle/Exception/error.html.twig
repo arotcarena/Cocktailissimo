@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block lang_alternate %}{% endblock %}
+
+{% block body %}
+    {# On est obligé de faire ça car lors d'une erreur la locale n'est pas configurée normalement #}
+    {% set lang = (app.request.pathInfo | path_lang_resolver) %}
+
+    <div class="container error-container">
+        <h1>{{ 'error_template.general_error' | trans({}, 'messages', lang) }} </h1>
+        <div class="center-wrapper">
+            <a href="{{ path('home', {_locale: lang}) }}" class="form-button small bordeaux">{{ 'return_home' | trans({}, 'messages', lang) }}</a>
+        </div>
+        <p>{{ exception.message }}</p>
+    </div> 
+{% endblock %}

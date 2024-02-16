@@ -1,0 +1,14 @@
+{% set locale = app.request.locale %}
+
+<div class="breadcrumb">
+    <a href={{ path('home', {_locale: locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+    >
+    <a 
+        href={{ path('recipe_index', {_locale: locale}) }} 
+        class="breadcrumb-link"
+        >
+        {{ 'recipes' | trans }}
+    </a>
+    >
+    <span class="breadcrumb-item">{{ attribute(recipe.title, locale) }}</span>
+</div>

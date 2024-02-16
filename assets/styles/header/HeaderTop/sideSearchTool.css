@@ -1,0 +1,124 @@
+.side-search-tool {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.side-search-tool .q-group {
+    flex: none;
+    height: 40px;
+    margin: 10px 15px auto 50px;
+    position: relative;
+}
+.side-search-tool .q-input {
+    height: 100%;
+    width: 100%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: solid 1px var(--color-lightgrey);
+    outline: none;
+    font-size: 1.1em;
+    padding-left: 30px;
+    padding-right: calc(10px + 1.1em);
+}
+.side-search-tool .q-input::placeholder {
+    font-weight: 300;
+}
+.side-search-tool .q-icon {
+    position: absolute;
+    left: 0;
+    width: 1.4em;
+    height: 1.4em;
+    top: calc(50% - 0.7em);
+}
+.side-search-tool .icon-button {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - .5em);
+}
+.side-search-tool .i-close {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+.side-search-tool .search-link {
+    flex: none;
+    margin-top: auto;
+}
+
+.side-search-tool .product-suggest-list {
+    flex: 1 0;
+    overflow: auto;
+    padding: 30px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    opacity: 1;
+    transition: opacity .3s;
+    position: relative;
+}
+.side-search-tool .product-suggest-list.loading {
+    opacity: .3;
+}
+.side-search-tool .product-suggest-list .loader {
+    position: absolute;
+    top: 8px;
+    left: calc(50% - .6em);
+    width: 1.2em;
+    height: 1.2em;
+}
+
+
+.side-search-tool .product-suggest-item {
+    display: flex;
+    align-items: stretch;
+    gap: 10px;
+}
+
+.product-suggest-item p {
+    margin: 0;
+}
+.side-search-tool .product-suggest-item .item-category {
+    font-size: .8em;
+}
+
+.side-search-tool .product-card-review {
+    justify-content: flex-start;
+    pointer-events: none;
+}
+.side-search-tool .item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 5px;
+}
+.side-search-tool .item-title {
+    font-size: .85em;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: left;
+    line-height: 1;
+    margin: 2px 0;
+}
+.side-search-tool .item-subtitle {
+    font-weight: 200;
+    font-size: .9em;
+    line-height: 1;
+}
+.side-search-tool .item-price {
+    font-size: 1em;
+    font-weight: 600;
+}
+.side-search-tool .product-card-list {
+    margin: 0 4px;
+}
+.side-search-tool .product-card-list-item {
+    font-size: .75em;
+}
+
+.side-search-tool .item-img {
+    width: 90px;
+    height: 90px;
+}
+

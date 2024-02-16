@@ -1,0 +1,136 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+
+    <div class="breadcrumb">
+        <a href="{{ path('admin_home') }}" class="breadcrumb-home-link">Administration</a>
+        >
+        <a href="{{ path('admin_vendor_index') }}" class="breadcrumb-link">Vendeurs ({{count_vendors}})</a>
+        >
+        <span class="breadcrumb-item">{{ vendor.company.usualName }} - {{ vendor.email }}</a>
+    </div>
+
+    <div class="admin-product-show user-show lang-switch-wrapper">
+        
+        <h1>{{ vendor.company.usualName }} - {{ vendor.email }}</h1>
+
+        
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.id, label: '#ID', name: 'id'}) }}
+        
+        {% if is_restricted(vendor) %}
+            <p>COMPTE SUSPENDU</p>
+        {% endif %}
+
+        <h2>Informations de contact</h2>
+
+        <div>
+            <div class="capitalize admin-product-show-row inline">{{ vendor.civility | trans({}, 'configs', 'fr') }} {{ vendor.firstName }} {{ vendor.lastName }}</div>
+            <div class="admin-product-show-row inline">{{ vendor.email }}</div>
+            {% if vendor.phone %}
+                <div class="admin-product-show-row inline">{{ vendor.phone }}</div>
+            {% endif %}
+        </div>
+        
+        <h2>Entreprise</h2>
+
+        {% if vendor.company.logo %}
+            <div class="admin-product-show-row inline">
+                <div class="admin-product-show-row-label">Logo</div>
+                <img width="100px" height="100px" src="{{ vendor.company.logo | picture_path_resolver('small_index') }}" alt="logo {{ vendor.company.usualName }}">
+            </div>
+        {% else %}
+            <div class="admin-empty-logo" style="height: 100px; width: 100px; border-radius: 8px; border: dashed 2px; margin-bottom: 10px; opacity: .5; display:flex; align-items:center; justify-content: center;">
+                Logo
+            </div>
+        {% endif %}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.company.socialName, label: 'Désignation sociale', name: 'socialName'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.company.commercialName, label: 'Nom commercial', name: 'commercialName'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.company.identificationNumber, label: 'N° Siret ou équivalent', name: 'identificationNumber'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.company.vatNumber, label: 'N° de TVA intracommunautaire', name: 'vatNumber'}) }}
+
+
+        <h2>Adresse du siège social</h2>
+
+        {% set address = vendor.company.socialAddress %}
+        <div>
+            <div class="admin-product-show-row inline">{{ address.lineOne }}</div>
+            {% if address.lineTwo %}
+                <div class="admin-product-show-row inline">{{ address.lineTwo }}</div>
+            {% endif %}
+            <div class="admin-product-show-row inline">{{ address.postcode }} {{ address.city }}</div>
+            <div class="admin-product-show-row inline">{{ address.country | trans({}, 'countries', 'fr') }} {{ address.country }} {% if address.state %}({{ address.state }}){% endif %}</div>
+        </div>
+
+
+        <h2>Adresse d'expédition</h2>
+
+        {% set address = vendor.company.senderAddress %}
+        <div>
+            <div class="admin-product-show-row inline">{{ address.lineOne }}</div>
+            {% if address.lineTwo %}
+                <div class="admin-product-show-row inline">{{ address.lineTwo }}</div>
+            {% endif %}
+            <div class="admin-product-show-row inline">{{ address.postcode }} {{ address.city }}</div>
+            <div class="admin-product-show-row inline">{{ address.country | trans({}, 'countries', 'fr') }} {{ address.country }} {% if address.state %}({{ address.state }}){% endif %}</div>
+        </div>
+
+
+        <h2>Lien boutique vendeur</h2>
+
+        {% if vendor.company.slug %}
+            <a style="text-decoration: underline;" target="_blank" href="{{ path('vendorShop', {companySlug: vendor.company.slug, _locale: 'fr'}) }}">{{ url('vendorShop', {companySlug: vendor.company.slug, _locale: 'fr'}) }}</a>
+        {% endif %}
+
+
+        <h2>Présentation de l'entreprise (visible sur la boutique vendeur)</h2>
+
+        {% if vendor.company.description %}
+            {{ include('admin/parts/_html_show_row.html.twig', {value: (vendor.company.description.en | parse_master_tags('en')), label: 'Description (EN)', name: 'enDescription', lang: 'en'}) }}
+            {{ include('admin/parts/_html_show_row.html.twig', {value: (vendor.company.description.fr | parse_master_tags('fr')), label: 'Description (FR)', name: 'frDescription', lang: 'fr'}) }}
+            {{ include('admin/parts/_html_show_row.html.twig', {value: (vendor.company.description.es | parse_master_tags('es')), label: 'Description (ES)', name: 'esDescription', lang: 'es'}) }}
+            {{ include('admin/parts/_html_show_row.html.twig', {value: (vendor.company.description.it | parse_master_tags('it')), label: 'Description (IT)', name: 'itDescription', lang: 'it'}) }}
+        {% endif %}
+
+
+        
+        <h2>Soumis à commission</h2>
+
+        <div>{{ vendor.commissionFree ? 'NON': 'OUI' }}
+
+
+        
+        <h2>Stripe</h2>
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.stripeConnectId, label: '#ID connect account', name: 'stripeConnectId'}) }}
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.stripeConfirmed ? 'OUI': 'NON', label: 'Vérification à jour', name: 'stripeConnectId'}) }}
+
+        
+        <h2>Sendcloud</h2>
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendor.sendcloudId, label: '#ID sender_address', name: 'sendcloudId'}) }}
+
+
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href={{ path('admin_vendor_update', {id: vendor.id}) }}>Modifier</a>
+            <form action={{ path('admin_vendor_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-vendor') }}">
+                <button class="admin-button secondary-color" type="submit" name="id" value={{ vendor.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le vendeur "' ~ vendor.company.usualName ~ ' - ' ~ vendor.email ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

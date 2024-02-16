@@ -1,0 +1,101 @@
+<footer class="{{ footerClass ?? 'footer' }}">
+    <div class="container">
+        <div class="footer-wrapper">
+            <div class="footer-block footer-menu">
+                <h3 class="footer-block-title">{{ "links" | trans }}</h3>
+                <ul class="footer-block-list">
+                     <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('recipe_index', {_locale: app.request.locale}) }}">{{ 'our_recipes' | trans }}</a>
+                    </li>
+                    <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('article_index', {_locale: app.request.locale}) }}">{{ 'newspaper' | trans }}</a>
+                    </li>
+                    <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('static_aPropos', {_locale: app.request.locale}) }}">{{ 'who_are_we' | trans }}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-block footer-menu-bis">
+                <h3 class="footer-block-title">{{ 'contact' | trans }}</h3>
+                <ul class="footer-block-list">
+                   
+                    <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('contact_becomeVendor', {_locale: app.request.locale}) }}">{{ 'become_vendor' | trans }}</a>
+                    </li>
+                    <li class="footer-block-list-item">
+                        <a class="footer-link i-text" href="{{ path('contact_index', {_locale: app.request.locale}) }}">
+                            <svg class="icon">
+                                <use xlink:href="/img/icons/sprite.svg#chat"></use>
+                            </svg>
+                            <span>{{ 'contact_us' | trans }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-block legal-menu">
+                <h3 class="footer-block-title">{{ 'legal' | trans }}</h3>
+                <ul class="footer-block-list">
+                    <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('static_legal', {_locale: app.request.locale}) }}">{{ 'legal_notice' | trans }}</a>
+                    </li>
+                    <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('static_cgu', {_locale: app.request.locale}) }}">{{ 'terms_of_use' | trans }}</a>
+                    </li>
+                    {# <li class="footer-block-list-item">
+                        <a class="footer-link" href="{{ path('static_cgv', {_locale: app.request.locale}) }}">{{ 'terms_of_sales' | trans }}</a>
+                    </li> #}
+                </ul>
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-block">
+                <h3 class="footer-block-title">{{ 'social_networks' | trans }}</h3>
+                <ul class="footer-block-list social-icon-list">
+                    <li class="footer-block-list-item social-icon-item">
+                        <a 
+                            class="social-icon-link" 
+                            href="https://m.facebook.com/people/Cocktailissimo/100094160658832/"
+                            aria-label="{{ 'follow_us_on_facebook' | trans }}"
+                            title="{{ 'follow_us_on_facebook' | trans }}"
+                            >
+                            <svg class="icon i-social i-facebook i-footer-social">
+                                <use xlink:href="/img/icons/sprite.svg#facebook"></use>
+                            </svg>
+                        </a>
+                    </li>
+                    <li class="footer-block-list-item social-icon-item">
+                        <a 
+                            class="social-icon-link" 
+                            href="https://www.instagram.com/cocktaillissimo/"
+                            aria-label="{{ 'follow_us_on_instagram' | trans }}"
+                            title="{{ 'follow_us_on_instagram' | trans }}"
+                            >
+                            <svg class="icon i-social i-instagram i-footer-social">
+                                <use xlink:href="/img/icons/sprite.svg#instagram"></use>
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-separator"></div>
+            <div class="footer-block line-block">
+                <div class="footer-sub-block">
+                    <h3 class="footer-block-title">{{ 'language' | trans }}</h3>
+                    <ul class="lang-choices">
+                        {{ include('layouts/parts/_lang_choice_item.html.twig', {lang: 'en'}) }}
+                        {{ include('layouts/parts/_lang_choice_item.html.twig', {lang: 'fr'}) }}
+                        {{ include('layouts/parts/_lang_choice_item.html.twig', {lang: 'es'}) }}
+                        {{ include('layouts/parts/_lang_choice_item.html.twig', {lang: 'it'}) }}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="copyright align-center">© Cocktailissimo 2023, {{ 'all_rights_reserved' | trans }}</div>
+    </div>
+</footer>
+
+
+<div class="footer-bottom-warning">
+    {{ 'warning.alcohol_danger' | trans }}    
+</div>

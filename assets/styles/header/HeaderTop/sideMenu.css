@@ -1,0 +1,112 @@
+.side-menu-container {
+    animation: fadeIn .2s forwards;
+}
+.side-menu-container.close {
+    animation: fadeOut .2s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+}
+@keyframes fadeOut {
+    from {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0);
+    }
+}
+
+.side-menu {
+    height: 100%;
+    background-color: white;
+    animation: slideOpen ease-in-out .2s forwards;
+    position: relative;
+    padding-top: 5px;
+}
+.side-menu.right {
+    margin-left: auto;
+}
+.side-menu-container.close .side-menu {
+    animation: slideClose ease-in-out .2s forwards;
+}
+
+
+@keyframes slideOpen {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+@keyframes slideClose {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+
+.side-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    position: relative;
+}
+
+.side-menu.right .modal-closer {
+    left: auto;
+    right: 20px;
+}
+
+
+.side-menu-body {
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.side-menu-footer-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    width: 100%;
+    padding: 0 25px;
+    font-size: .85em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background-color: var(--color-bordeaux);
+    color: #FFF;
+    transition: all .3s;
+}
+.side-menu-footer-button:hover {
+    background-color: var(--color-bordeaux-flash);
+}
+.side-menu-footer-button.disabled {
+    background-color: var(--color-bordeaux);
+    opacity: .3;
+    cursor: default;
+}
+
+
+
+@media screen and (min-width: 600px)
+{
+    .side-menu {
+        max-width: 460px;
+    }
+}
+
+
+

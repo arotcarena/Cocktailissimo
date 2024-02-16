@@ -1,0 +1,59 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_ingredient_index') }} class="breadcrumb-link">Ingrédients ({{count_ingredient}})</a>
+        >
+        <a href={{ path('admin_ingredient_show', {id: ingredient.id}) }} class="breadcrumb-link">{{ ingredient.name.fr }}</a>
+        >
+        <span class="breadcrumb-item">Modifier</span>
+    </div>
+
+    <h1>Modifier l'ingrédient "{{ ingredient.name.fr }}"</h1>
+
+    {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+        
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+        
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+
+        <div class="admin-form-row">
+            <div 
+                class="admin-picture-upload mini" 
+                data-name="ingredient[picture]" 
+                data-label="Photo (minimum 100 x 100 pixels)"
+                data-value="{{ form.picture.vars.value }}"
+                data-resizewidth="100"
+                data-resizeheight="100"
+                >
+                {{ form_widget(form.picture) }}
+            </div>
+
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'enAlt', label: 'Balise alt (EN)', field: form.enAlt, lang: 'en'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'frAlt', label: 'Balise alt (FR)', field: form.frAlt, lang: 'fr'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'esAlt', label: 'Balise alt (ES)', field: form.esAlt, lang: 'es'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'itAlt', label: 'Balise alt (IT)', field: form.itAlt, lang: 'it'}) }}
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enName', label: 'Nom (EN) *', field: form.enName, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frName', label: 'Nom (FR) *', field: form.frName, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esName', label: 'Nom (ES) *', field: form.esName, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itName', label: 'Nom (IT) *', field: form.itName, lang: 'it'}) }}
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Modifier</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

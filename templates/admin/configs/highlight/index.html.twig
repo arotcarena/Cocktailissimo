@@ -1,0 +1,92 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">A la une</span>
+    </div>
+
+    <h1>A la une</h1>
+
+    <div class="admin-product-show admin-form lang-switch-wrapper">
+    
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+
+        {% for highlight in highlights %}
+            <div class="admin-highlight-index-block">
+                <h2 class="admin-highlight-index-block-title">{{ highlight.name == 'homepage' ? 'Page d\'accueil': highlight.name }}</h2>
+                <div class="admin-product-show-row" style="margin: 40px 0;">
+                    <div class="admin-product-show-row-label uppercase">Produit à la une</div>
+                    {% if highlight.product %}
+                        <ul class="admin-product-list">
+                            {% set product = highlight.product %}
+                            {% set firstPicture = product_picture_position_resolver(product, 1) %}
+                            <li class="admin-suggestedProducts-item">
+                                <img class="admin-suggest-img" src="{{ firstPicture | picture_path_resolver('small_index') }}" alt="{{ firstPicture | picture_alt_resolver('fr') }}">
+                                <div class="admin-suggest-text">
+                                    <div>{{ product.designation.fr }}</div>
+                                    <div>{{ product.basePublicRef }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="admin-product-show-row" style="margin: 40px 0;">
+                    <div class="admin-product-show-row-label uppercase">Article à la une</div>
+                    {% if highlight.article %}
+                        <ul class="admin-product-list">
+                            {% set article = highlight.article %}
+                            <li class="admin-suggestedProducts-item">
+                                <img class="admin-suggest-img" src="{{ article.picture | picture_path_resolver('small_index') }}" alt="{{ article.picture | picture_alt_resolver('fr') }}">
+                                <div class="admin-suggest-text">
+                                    <div>{{ article.title.fr }}</div>
+                                    <div>{{ article.ref }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="admin-product-show-row" style="margin: 40px 0;">
+                    <div class="admin-product-show-row-label uppercase">Recette à la une</div>
+                    {% if highlight.recipe %}
+                        <div style="margin: 20px 0;">
+                            {% if highlight.recipeTitle %}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeTitle.en, label: 'Titre (EN)', name: 'enRecipeTitle', lang: 'en'}) }}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeTitle.fr, label: 'Titre (FR)', name: 'frRecipeTitle', lang: 'fr'}) }}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeTitle.es, label: 'Titre (ES)', name: 'esRecipeTitle', lang: 'es'}) }}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeTitle.it, label: 'Titre (IT)', name: 'itRecipeTitle', lang: 'it'}) }}
+                            {% endif %}
+                            <div style="margin: 15px 0;"></div>
+                            {% if highlight.recipeDescription %}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeDescription.en, label: 'Description (EN)', name: 'enRecipeDescription', lang: 'en'}) }}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeDescription.fr, label: 'Description (FR)', name: 'frRecipeDescription', lang: 'fr'}) }}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeDescription.es, label: 'Description (ES)', name: 'esRecipeDescription', lang: 'es'}) }}
+                                {{ include('admin/parts/_show_row.html.twig', {value: highlight.recipeDescription.it, label: 'Description (IT)', name: 'itRecipeDescription', lang: 'it'}) }}
+                            {% endif %}
+                        </div>
+
+                        <ul class="admin-product-list">
+                            {% set recipe = highlight.recipe %}
+                            <li class="admin-suggestedProducts-item">
+                                <img class="admin-suggest-img" src="{{ recipe.picture | picture_path_resolver('small_index') }}" alt="{{ recipe.picture | picture_alt_resolver('fr') }}">
+                                <div class="admin-suggest-text">
+                                    <div>{{ recipe.title.fr }}</div>
+                                    <div>{{ recipe.ref }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    {% endif %}
+                </div>
+
+                <div class="admin-form-submit">
+                    <a class="admin-button" href="{{ path('admin_highlight_update', {id: highlight.id}) }}">Modifier</a>
+                </div>
+            </div>
+        {% endfor %} 
+    </div>
+
+{% endblock %}

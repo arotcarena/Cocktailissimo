@@ -1,0 +1,45 @@
+{
+    "assert": {
+        "invalid": "Champ invalide",
+        "choice": "Veuillez choisir parmis les options proposées",
+        "choice_country": "Veuillez choisir parmis les pays proposés",
+        "notBlank": {
+            "civility": "La civilité est obligatoire",
+            "firstName": "Le prénom est obligatoire",
+            "lastName": "Le nom est obligatoire",
+            "email": "L'adresse email est obligatoire",
+            "phone": "Le numéro de téléphone est obligatoire",
+            "password": "Le mot de passe est obligatoire",
+            "password_confirm": "La confirmation du mot de passe est obligatoire",
+            "address_lineOne": "L'adresse est obligatoire",
+            "postcode": "Le code postal est obligatoire",
+            "city": "La ville est obligatoire",
+            "country": "Le pays est obligatoire",
+            "address_state": "L'état / province est obligatoire",
+            "social_name": "La raison sociale est obligatoire",
+            "identification_number": "Le n° Siret est obligatoire",
+            "social_address": "L'adresse du siège social est obligatoire",
+            "sender_address": "L'adresse d'expédition est obligatoire",
+            "answer": "Une réponse est obligatoire",
+            "message": "Le message est obligatoire",
+            "category": "La catégorie est obligatoire",
+            "subCategory": "La sous-catégorie est obligatoire"
+        },
+        "file": {
+            "format": "Format incorrect. Les formats acceptés sont : {{accepted_formats}}" 
+        },
+        "notUnique": {
+            "email": "Cette adresse email est déjà utilisée."
+        },
+        "length": {
+            "min": "{{min}} caractères minimum",
+            "max": "{{max}} caractères maximum"
+        },
+        "email": "Adresse email invalide",
+        "phone": "Numéro de téléphone invalide",
+        "checkbox": {
+            "true": "Vous devez cocher cette case"
+        },
+        "not_same_passwords": "Les deux mots de passe ne sont pas identiques"
+      }
+}

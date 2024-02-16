@@ -1,0 +1,18 @@
+{% set rest = 5 - rate %}
+
+<div class="admin-review-card-stars">
+    <div class="stars">
+        {% for i in 1..rate %}
+                <svg class="icon admin-i-star">
+                    <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                </svg>
+        {% endfor %}
+        {% if rest != 0 %}
+            {% for i in 1..rest %}
+                <svg class="icon admin-i-star">
+                    <use xlink:href="/img/icons/sprite.svg#star-empty"></use>
+                </svg>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="admin-form-img-container">
+    <img class="admin-form-img" src="{{ picture | picture_path_resolver('index') }}" alt="{{ picture | picture_alt_resolver('fr') }}">
+    <span class="admin-form-img-alt en-group">
+        Balise alt (EN) : "{{ picture | picture_alt_resolver('en') }}"
+    </span>
+    <span class="admin-form-img-alt fr-group">
+        Balise alt (FR) : "{{ picture | picture_alt_resolver('fr') }}"
+    </span>
+    <span class="admin-form-img-alt es-group">
+        Balise alt (ES) : "{{ picture | picture_alt_resolver('es') }}"
+    </span>
+    <span class="admin-form-img-alt it-group">
+        Balise alt (IT) : "{{ picture | picture_alt_resolver('it') }}"
+    </span>
+
+    {% if isFirst is not defined %}
+        <a class="admin-form-img-remover" href={{ path('admin_picture_delete', {id: picture.id, token: csrf_token('delete-picture')}) }} title='Supprimer la photo'>
+            <svg class="icon i-trash">
+                <use xlink:href="/svg/sprite.svg#delete"></use>
+            </svg>
+        </a>
+    {% endif %}
+</div>

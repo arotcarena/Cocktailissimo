@@ -1,0 +1,21 @@
+<div  class="admin-review-card-header">
+    <a href="{{ path('admin_article_show', {id: article.id}) }}">
+        <img class="admin-review-card-header-img" src="{{ article.picture | picture_path_resolver('small_index') }}" alt="{{ article.picture | picture_alt_resolver('fr') }}">
+    </a>
+    <div class="admin-review-card-header-content">
+        <div class="header-title">
+            <span>
+                <a href="{{ path('admin_article_show', {id: article.id}) }}">{{ article.title.fr }}</a>
+            </span>
+            <span class="admin-review-card-text-mute ml">{{ article.ref }}</span>
+        </div>
+        <div class="header-text">
+            <span class="capitalize">{{ article.author.firstName }} {{ article.author.lastName }}</span>
+            <span class="admin-review-card-text-mute ml">
+                <a href="{{ path('admin_user_show', {id: article.author.id}) }}">{{ article.author.email }}</a>
+            </span>
+        </div>
+        <div class="header-text">{{ article.createdAt.format('d/m/Y H:i') }}</div>
+    </div>
+    <div class="admin-review-card-header-type">Article</div>
+</div>

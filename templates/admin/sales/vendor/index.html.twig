@@ -1,0 +1,153 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_vendor_index') }} class="breadcrumb-link">Vendeurs ({{count_vendors}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Vendeurs</h1>
+
+        {% include "admin/sales/vendor/parts/_filters.html.twig" %}
+
+        {% if vendorsWithoutSendcloudId_count > 0 %}
+            {% set suffix = (vendorsWithoutSendcloudId_count | length) > 1 ? 's': '' %}
+            <div class="center-wrapper">
+                <div class="admin-line-badge admin-badge alert-badge">
+                    <div class="alert-badge-text">Attention, {{ vendorsWithoutSendcloudId_count }} vendeur{{ suffix }} non synchronisé{{ suffix }} avec sendcloud</div>
+                    <a href="{{ path('admin_vendor_needSendcloudSync') }}" class="admin-button danger-color admin-small-button">Résoudre</a>
+                </div>
+            </div>
+        {% endif %}
+
+        
+        <div style="margin-bottom: 20px; text-align: center; font-style: italic;">
+            Les vendeurs ayant vérifié leur identité auprès de Stripe portent la mention <span class="admin-active-account-badge" style="font-style: normal; margin: 0 2px;">Vérifié</span>.
+            Pour les vendeurs qui ne sont pas à jour de cette vérification, les produits sont invisibles du public
+        </div>
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+
+
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Coordonnées de contact</th>
+                    <th>Entreprise</th>
+                    <th>Adresse du siège social</th>
+                    <th>Adresse d'expédition</th>
+                    <th>#sendcloud</th>
+                    <th>#stripe</th>
+                    <th>Date d'inscription</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vendor in pagination %}
+                    <tr {% if is_restricted(vendor) %}style="background-color: rgba(255, 80, 80, .2);"{% endif %}>
+                        <td>{{ vendor.id }}</td>
+                        <td>
+                            <span class="capitalize">{{ vendor.civility | trans({}, 'configs', 'fr') }} {{ vendor.firstName }} {{ vendor.lastName }}</span>
+                            <br>
+                            <span>{{ vendor.email }}</span>
+                        </td>
+                        <td>
+                            {% if vendor.company %}
+                                    <strong>Raison sociale :</strong> {{ vendor.company.socialName }}
+                                    <br>
+                                    {% if vendor.company.commercialName %}
+                                        <strong>Nom commercial :</strong> {{ vendor.company.commercialName }}
+                                        <br>
+                                    {% endif %}
+                                    <strong>N° Siret ou équivalent :</strong> {{ vendor.company.identificationNumber }}
+                                    <br>
+                                    {% if vendor.company.vatNumber %}
+                                        <strong>N° TVA intracom :</strong> {{ vendor.company.vatNumber }}
+                                        <br>
+                                    {% endif %}
+                                        <strong>Pays :</strong> {{ vendor.company.country | trans({}, 'countries', 'fr') }} ({{ vendor.company.country }})
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if vendor.company.socialAddress %}
+                                {% set address = vendor.company.socialAddress %}
+                                {{ address.lineOne }}<br>
+                                {% if address.lineTwo %}
+                                    {{ address.lineTwo }}<br>
+                                {% endif %}
+                                {{ address.postcode }} {{ address.city }}<br>
+                                {{ address.country | trans({}, 'countries', 'fr') }} ({{ address.country }})<br>
+                                {{ address.state }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if vendor.company.senderAddress %}
+                                {% set address = vendor.company.senderAddress %}
+                                {{ address.lineOne }}<br>
+                                {% if address.lineTwo %}
+                                    {{ address.lineTwo }}<br>
+                                {% endif %}
+                                {{ address.postcode }} {{ address.city }}<br>
+                                {{ address.country | trans({}, 'countries', 'fr') }} ({{ address.country }})<br>
+                                {{ address.state }}
+                            {% endif %}
+                        </td>
+                        <td>{{ vendor.sendcloudId }}</td>
+                        <td>{{ vendor.stripeConnectId }}</td>
+                        <td>{{ vendor.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>
+                            {% if vendor.stripeConfirmed %}
+                                <span class="admin-active-account-badge">Vérifié</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_vendor_show', {id: vendor.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_vendor_update', {id: vendor.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_vendor_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-vendor') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ vendor.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le vendeur "' ~ vendor.company.usualName ~ ' - ' ~ vendor.email ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_vendor_create') }}">Ajouter un vendeur</a>
+        </div>
+   </div>
+
+{% endblock %}

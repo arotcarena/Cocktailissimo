@@ -1,0 +1,41 @@
+{% set locale = app.request.locale %}
+{% set target = path('article_show', {
+    ref: article.ref,
+    slug: attribute(article.slug, locale),
+    subCategorySlug: attribute(article.subCategory.slug, locale),
+    _locale: locale
+}) %}
+
+<section class="highlighted-article highlighted-item">
+    <div class="highlighted-article-wrapper">
+        <div class="highlighted-article-img-wrapper">
+            <a href="{{ target }}">
+                <img 
+                    class="highlighted-article-img" 
+                    src="{{ article.picture | picture_path_resolver('landscape') }}" 
+                    alt="{{ article.picture | picture_alt_resolver(locale) }}"
+                >
+            </a>
+        </div>
+        <div class="highlighted-article-content">
+            {# titre #}
+            <h3 class="highlighted-article-title highlighted-title">
+                <a href="{{ target }}">
+                    <span>{{ attribute(article.title, locale) }}</span>
+                    {% if attribute(article.subtitle, locale) %}
+                        <span class="highlighted-article-subtitle"> - {{ attribute(article.subtitle, locale) }}</span>
+                    {% endif %}
+                </a>
+            </h3>
+            {# extrait du texte #}
+            <div class="highlighted-article-text link-underline">
+                {{ ((attribute(article.htmlContent, locale) | parse_master_tags(locale)) | excerpt(15)) | raw }}
+            </div>
+            <div class="center-wrapper highlighted-article-link-wrapper">
+                <a href="{{ target }}" class="home-cta-link">
+                    {{ 'read_more' | trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

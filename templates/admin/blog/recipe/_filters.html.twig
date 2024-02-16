@@ -1,0 +1,20 @@
+{{ form_start(filter_form) }}
+    <div class="admin-filters-container">
+        <div class="admin-filters">
+            <div class="admin-filters-row">            
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'q', label: 'Recherche par texte', field: filter_form.q}) }}
+            </div>
+            <div class="admin-filters-row">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'subCategory', label: 'Sous-catégorie', field: filter_form.subCategory}) }}
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'ingredient', label: 'Ingrédient', field: filter_form.ingredient}) }}
+            </div>
+            
+            <div class="admin-filters-row">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'sortBy', label: 'tri', field: filter_form.sortBy}) }}
+            </div>
+        </div>
+        <div class="admin-filters-submit">
+            <button type="submit" class="admin-button">Recherche</button>
+        </div>
+    </div>
+{{ form_end(filter_form) }}

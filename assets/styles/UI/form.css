@@ -1,0 +1,683 @@
+.form-group {
+    margin: 36px 0;
+}
+.checkbox-group {
+    margin: 28px 0;
+}
+.link-group {
+    margin: 20px 0;
+}
+.submit-group {
+    margin-top: 28px;
+}
+.submit-group.double {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin: 40px 0;
+}
+
+.form-control {
+    width: 100%;
+    height: 100%;
+    padding: 0 4px;
+    border: none;
+    border-bottom: solid 1px var(--color-lightgrey);
+    outline: none;
+    font-size: 1.1em;
+    font-family: var(--font-family-cocktailissimo);
+}
+.form-control.with-loader {
+    padding-right: 30px;
+}
+.form-control:focus, .form-control.is-focus {
+    border-bottom: solid 3px var(--color-bordeaux-flash);
+}
+
+.submit-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.light-button {
+    height: 40px;
+    width: 100%;
+    border-radius: 10px;
+    border: solid 1px var(--color-black);
+    color: var(--color-black);
+    font-size: 0.8em;
+    text-transform: uppercase;
+}
+
+.form-button {
+    min-height: 45px;
+    width: 100%;
+    background-color: var(--color-button-light);
+    font-size: 0.9em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.form-button:hover {
+    background-color: var(--color-button);
+    color: #FFF;
+}
+.form-button.disabled:hover {
+    background-color: var(--color-button-light);
+    color: inherit;
+}
+
+.form-button.small {
+    width: auto;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.form-button.disabled {
+    opacity: 0.3;
+    pointer-events: none;
+    height: 45px;
+}
+.form-button.under-button {
+    margin-top: 5px;
+}
+
+.form-button.bordeaux, .form-button.bordeaux.disabled:hover {
+    background-color: var(--color-bordeaux);
+    border: none;
+    color: #FFF;
+}
+.form-button.bordeaux:hover {
+    background-color: var(--color-bordeaux-flash);
+}
+.form-button.bordeaux.outline, .form-button.bordeaux.outline.disabled:hover {
+    background-color: transparent;
+    border: solid 1px var(--color-bordeaux-veryflash);
+    color: var(--color-bordeaux-veryflash);
+}
+.form-button.bordeaux.outline:hover {
+    border: solid 1px var(--color-bordeaux-flash);
+    background-color: var(--color-bordeaux-flash);
+    color: #FFF;
+}
+
+.form-button.bordeaux-grey, .form-button.bordeaux-grey.disabled:hover {
+    background-color: var(--color-bordeaux-grey);
+    border: solid 1px var(--color-bordeaux-grey);
+    color: #FFF;
+}
+.form-button.bordeaux-grey:hover {
+    background-color: transparent;
+    color: var(--color-bordeaux-grey);
+}
+
+.form-button.bordeaux-black.outline, .form-button.bordeaux-black.outline.disabled:hover {
+    background-color: transparent;
+    border: solid 1px var(--color-black);
+    color: var(--color-black);
+}
+.form-button.bordeaux-black.outline:hover {
+    background-color: var(--color-bordeaux);
+    border: solid 1px var(--color-bordeaux);
+    color: #FFF;
+}
+
+.form-button.grey, .form-button.grey.disabled:hover {
+    background-color: var(--color-grey);
+    border: solid 1px var(--color-grey);
+    color: #FFF;
+}
+.form-button.grey:hover {
+    background-color: transparent;
+    color: var(--color-grey);
+}
+
+.form-button.grey.outline, .form-button.grey.outline.disabled:hover {
+    background-color: #FFF;
+    border: solid 1px var(--color-grey);
+    color: var(--color-grey);
+}
+.form-button.grey.outline:hover {
+    background-color: var(--color-grey);
+    color: #FFF;
+}
+
+.form-button.secondary, .form-button.secondary.disabled:hover {
+    background-color: transparent;
+    border: solid 1px var(--color-black);
+    color: var(--color-black);
+}
+.form-button.secondary:hover {
+    background-color: var(--color-black);
+    color: #FFF;
+}
+
+.form-button.third, .form-button.third.disabled:hover {
+    background-color: transparent;
+    border: solid 1px var(--color-button);
+    color: var(--color-button);
+}
+.form-button.third:hover {
+    background-color: var(--color-button);
+    color: #FFF;
+}
+
+.form-button.fourth, .form-button.fourth.disabled:hover {
+    background-color: var(--color-black);
+    border: solid 1px var(--color-black);
+    color: #FFF;
+}
+.form-button.fourth:hover {
+    background-color:#FFF;
+    color: var(--color-black);
+}
+
+.form-button.fifth, .form-button.fifth.disabled:hover {
+    background-color: var(--color-cocktailissimo-light);
+    border: solid 1px var(--color-cocktailissimo-light);
+    color: inherit;
+}
+.form-button.fifth:hover {
+    background-color: var(--color-cocktailissimo-dark);
+    color: #FFF;
+}
+.form-button.sixth, .form-button.sixth.disabled:hover {
+    color: var(--color-cocktailissimo-dark);
+    border: solid 1px var(--color-cocktailissimo-dark);
+    background-color: transparent;
+}
+.form-button.sixth:hover {
+    background-color: var(--color-cocktailissimo-dark);
+    color: #FFF;
+}
+
+.form-button.seventh, .form-button.seventh.disabled:hover {
+    background-color: var(--color-cocktailissimo-dark);
+    border: solid 1px var(--color-cocktailissimo-dark);
+    color: #FFF;
+}
+.form-button.seventh:hover {
+    background-color: transparent;
+    color: var(--color-cocktailissimo-dark);
+}
+
+
+
+.form-button.cancel, .form-button.cancel.disabled:hover {
+    border: solid 1px rgb(230, 230, 230);
+    background-color: transparent;
+    color: var(--color-black);
+    opacity: .7;
+}
+.form-button.cancel:hover {
+    border: solid 1px var(--color-black);
+    background-color: transparent;
+    color: var(--color-black);
+    opacity: 1;
+}
+
+
+
+
+.form-button.no-react .loader {
+    display: none;
+}
+
+.form-button.no-react.loading .loader {
+    display: block;
+}
+.form-button.no-react.loading span {
+    display: none;
+}
+a.form-button.no-react.loading {
+    pointer-events: none;
+    cursor: default;
+}
+
+.form-button-loader {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+
+.input-wrapper {
+    height: 40px;
+    position: relative;
+}
+.input-wrapper label {
+    font-size: 0.7em;
+    position: absolute;
+    top: -12px;
+    left: 4px;
+    font-weight: 200;
+    cursor: text;
+    transition: all ease-in-out .15s;
+}
+
+.input-wrapper.down label {
+    font-size: 1.05em;
+    top: 5px;
+    pointer-events: none;
+    font-weight: 400;
+}
+
+.input-wrapper .input-loader {
+    position: absolute;
+    right: 5px;
+    top: calc(50% - .55em);
+    width: 1em;
+    height: 1em;
+}
+.form-group .input-wrapper .input-loader {
+    margin: 0;
+}
+.input-wrapper .input-icon {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - .9em);
+}
+.input-wrapper .input-icon .icon {
+    width: 1.8em;
+    height: 1.8em;
+    opacity: .7;
+}
+input[type=password] {
+    padding-right: 35px;
+}
+
+.form-link {
+    font-weight: 200;
+}
+.form-link:hover {
+    text-decoration: underline;
+}
+
+
+.checkbox-group label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    cursor: pointer;
+}
+.checkbox-label-wrapper {
+    display: flex;
+    justify-content: flex-start;
+}
+.checkbox-group .form-checkbox {
+    opacity: 0;
+    position: relative;
+    left: -10000px;
+}
+.form-checkbox:checked + label .custom-checkbox {
+    background-color: var(--color-bordeaux-flash);
+    border: solid 1px var(--color-bordeaux-flash);
+}
+.form-checkbox:checked + .checkbox-label-wrapper label .custom-checkbox {
+    background-color: var(--color-bordeaux-flash);
+    border: solid 1px var(--color-bordeaux-flash);
+}
+.form-checkbox:focus + label .custom-checkbox {
+    outline: solid 2px var(--color-black);
+}
+.form-checkbox:focus + .checkbox-label-wrapper label .custom-checkbox {
+    outline: solid 2px var(--color-black);
+}
+.custom-checkbox {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: solid 1px var(--color-lightgrey);
+    transition: background-color .3s;
+    position: relative;
+    top: 4px;
+}
+.custom-checkbox .icon {
+    width: 100%;
+    height: 100%;
+    color: #FFF;
+}
+
+/*radio*/
+.radio-group-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 1.1em;
+}
+.civility-group .radio-group {
+    flex: none;
+}
+.radio-group {
+    margin: 10px 0;
+}
+.radio-group.margin {
+    margin: 20px 0;
+}
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+}
+.radio-group.is-invalid label {
+    color: var(--color-danger);
+}
+.radio-group .form-radio {
+    opacity: 0;
+    position: relative;
+    left: -10000px;
+}
+.radio-group-asterix {
+    position: relative;
+    bottom: -6px;
+}
+.form-group.is-invalid .radio-group-asterix {
+    color: var(--color-danger);
+}
+.custom-radio {
+    flex: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 1000px;
+    border: solid 1px var(--color-lightgrey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color .3s;
+}
+.radio-group.is-invalid .custom-radio {
+    border: solid 1px var(--color-danger);
+}
+.custom-radio-core {
+    width: 0;
+    height: 0;
+    border-radius: 1000px;
+    background-color: var(--color-bordeaux-flash);
+    transition: all .2s;
+}
+.form-radio:checked + label .custom-radio {
+    border: solid 2px var(--color-bordeaux-flash);
+}
+.form-radio:checked + label .custom-radio-core {
+    width: 50%;
+    height: 50%;
+}
+.form-radio:focus + label .custom-radio {
+    outline: solid 1px var(--color-black);
+}
+
+
+.form-main-success {
+    font-size: 1em;
+    color: var(--color-success);
+    margin: 10px 0;
+}
+.form-success {
+    color: var(--color-success);
+    margin: 4px;
+    font-size: 0.8em;
+}
+.form-main-error {
+    font-size: 1em;
+    color: var(--color-danger);
+    margin: 10px 0;
+}
+.form-error {
+    color: var(--color-danger);
+    margin: 2px;
+    font-size: 0.8em;
+}
+
+.form-group.is-invalid label, .checkbox-group.is-invalid label {
+    color: var(--color-danger);
+}
+.checkbox-group.is-invalid .custom-checkbox {
+    border: solid 1px var(--color-danger);
+}
+
+
+
+
+/*q filter*/
+.q-filter-group {
+    position: relative;
+}
+.q-filter-input {
+    width: 100%;
+    padding-left: calc(14px + 1.3em);
+    padding-right: calc(13px + 1.1em);
+    height: 35px;
+    border-radius: 1000px;
+    border: none;
+    box-shadow: 0 0 4px rgb(230, 230, 230);
+    font-size: 1em;
+}
+.q-filter-input::placeholder {
+    font-weight: 300;
+}
+.q-filter-input:focus {
+    border: none;
+    box-shadow: 0 0 4px rgb(185, 185, 185);
+    outline: none;
+}
+.q-filter-group .i-search {
+    position: absolute;
+    left: 10px;
+    width: 1.3em;
+    height: 1.3em;
+    top: calc(50% - .65em);
+    opacity: .5;
+}
+.q-filter-input:focus + .icon.i-search {
+    opacity: 1;
+}
+.q-filter-group .icon-button {
+    position: absolute;
+    right: 13px;
+    top: calc(50% - .5em);
+}
+.q-filter-group .i-close {
+    width: 1.1em;
+    height: 1.1em;
+}
+
+
+.form-select-wrapper {
+    position: relative;
+}
+.form-select {
+    display: block;
+    height: 45px;
+    width: 100%;
+    font-size: .95em;
+    padding: 0 10px;
+    padding-right: calc(20px + 1.2em);
+    border: solid 1px var(--color-lightgrey);
+    font-weight: 500;
+    appearance: none;
+    cursor: pointer;
+}
+
+.select-group .form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 200;
+}
+.select-group .form-select-arrow {
+    position: absolute;
+    right: 15px;
+    bottom: calc(22.5px - 0.6em);
+    width: 1.2em;
+    height: 1.2em;
+    pointer-events: none;
+}
+
+
+
+/* style de form avec cases */
+.box-form .form-group {
+    margin: 25px 0;
+}
+.box-form textarea {
+    width: 100%;
+    height: 80px;
+    max-width: 100%;
+}
+.box-form .form-control {
+    border: solid 1px rgb(230, 230, 230);
+    padding: 5px 10px 0;
+}
+.box-form textarea.form-control {
+    padding-top: 12px;
+}
+.box-form .input-wrapper {
+    height: 45px;
+}
+
+.box-form .input-wrapper label {
+    background-color: #FFF;
+    left: 10px;
+    max-width: calc(100% - 20px);
+    padding: 0 5px;
+    font-size: .9em;
+    top: 0;
+    transform: translateY(calc(-100% + 9px));
+}
+.box-form .input-wrapper.down label {
+    left: 5px;
+    top: 10px;
+    font-size: 1.05em;
+    transform: translateY(0);
+}
+.box-form .input-wrapper.textarea {
+    height: auto;
+}
+.box-form .form-control:focus {
+    border-bottom: solid 3px var(--color-bordeaux-flash);
+    border-left: solid 1px var(--color-bordeaux-flash);
+    border-right: solid 1px var(--color-bordeaux-flash);
+}
+
+
+/*upload field*/
+.form-upload-wrapper {
+    border: dashed 2px var(--color-lightgrey);
+    height: 110px;
+    width: 110px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.form-upload-img.light {
+    opacity: .4;
+}
+.form-upload-wrapper .icon, .form-upload-wrapper .loader {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+.form-upload-wrapper .icon {
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+}
+.form-upload-wrapper .loader {
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    width: 30px;
+    height: 30px;
+}
+.form-upload-wrapper .icon.i-plus {
+    color: var(--color-lightgrey);
+}
+
+.form-upload-label {
+    display: block;
+    margin-bottom: 7px;
+    margin-left: 5px;
+}
+.form-upload-img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.form-upload-trash-button {
+    position: absolute;
+    top: 115px;
+    left: 120px;
+}
+
+.form-upload-trash-button .icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+.form-upload-opener.loading {
+    pointer-events: none;
+}
+
+/*phone input*/
+.PhoneInput input {
+    border: none;
+    font-size: 1em;
+}
+.PhoneInput input:focus {
+    outline: none;
+}
+.input-wrapper.down .form-label.phone {
+    left: 55px;
+}
+
+
+
+/*show row*/
+.show-row {
+    display: flex;
+    gap: 25px;
+    margin: 15px 0;
+}
+.show-row-label {
+    font-size: .8em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.show-row-value {
+    line-height: .8;
+}
+.show-row-value div {
+    margin: 5px 0;
+}
+.show-row-value div:first-child {
+    margin-top: 0;
+}
+
+
+@media only screen and (min-width: 750px) {
+    /*form-row*/
+    .form-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        margin: 36px 0;
+    }
+    .form-row .form-group {
+        margin: 0;
+    }
+    .form-row .form-group {
+        width: calc(50% - 20px);
+        flex: none;
+    }
+}

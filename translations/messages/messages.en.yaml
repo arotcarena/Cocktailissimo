@@ -1,0 +1,154 @@
+warning:
+  need_login: To perform this action, you must log in or create an account.
+  delete_vendor_account: >
+    We're sorry to hear that you want to leave us. As a vendor, you cannot directly delete your account, but you just need to request it by email at <a target="_blank" href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, specifying the email address associated with your account. Your request will be processed as soon as possible.
+  alcohol_danger: Excessive alcohol consumption is dangerous to your health, consume with moderation
+  
+error:
+  temporary_failure: An error occurred. Please try again later.
+  max_addresses: You cannot add more than {max} addresses.
+  invalid_input: The entered value is invalid.
+  invalid_form: The form is invalid.
+  invalid_credentials: Invalid credentials.
+  purchase_payment: 
+    no_stock: >
+      An error occurred. The transaction has been canceled, and no amount will be debited. If the problem persists, <a target="_blank" href="/en?contact">contact us</a>.
+    updated_purchase: Due to a stock issue, your cart has been updated. The transaction has been canceled, and no amount will be debited. If the updated cart suits you, you can validate the order again. In case of any issue, <a target="_blank" href="/en?contact">contact us</a>.
+    already_paid: The order is already paid. The current transaction has been canceled, and no additional amount will be debited. In case of any issue, <a target="_blank" href="/en?contact">contact us</a>.
+  review:
+    same_email: This email address has already been used to leave a review for this product. If this is not you, please update the email address.
+    unique: You have already left your review for this product, thank you.
+  empty_cart: Your cart is empty.
+  show_payment_success: Due to an error, it is impossible to display the order summary. You can access it in the order confirmation email we just sent you. In case of any problem, or if you haven't received this email within an hour, <a target="_blank" href="/en?contact">contact us</a>.
+  unknown_email: This email address does not correspond to any account.
+  invalid_link: This link is invalid or has expired.
+  invalid_password: Invalid password.
+  delete_account:
+    having_purchases_in_progress: You cannot delete your account at the moment because you have orders in progress.
+  email_not_confirmed: >
+    <div>You have not confirmed your email address. Click on the link received at "{email}".</div>
+    <div style="font-style: italic; margin-top: 10px;">Didn't receive the link? <a href="{ask_new_link_path}">Receive a new confirmation link</a></div>
+  restricted_user: Your account has been restricted. For more information, <a target="_blank" href="/en?contact">contact us</a>.
+
+info:
+  incomplete_stripe_verification: The entered information has been saved, come back whenever you want to finish entering your information and start selling your products.
+  on_checkout_force_country: Following the change of delivery country, prices may have changed.
+
+success:
+  stripe_verification: Congratulations, your account is validated!
+  updated: The modifications have been successfully applied!
+  vendor_contact: Thank you, duly noted! We will now process your request and get back to you very soon.
+  payment: Thank you, we have received your payment of {amount}! An order confirmation has been sent to you by email.
+  link_sent: 
+    reset_password: A link to reset your password has been sent to you by email. Please note that the link is valid for 48 hours.
+    re_confirmation: A new link to verify your email address has been sent to the address "{email}". Please note that the link is valid for 48 hours.
+  reset_password: The password has been successfully reset!
+  register: Congratulations, your registration is recorded! To finalize it, simply verify your email address by clicking on the link received at "{email}". Please note that the link is valid for 48 hours.
+  email_confirmation: Your email address has been successfully verified! You can now log in.
+  all_in_one_init: Congratulations, your account is activated! You can now log in.
+  delete_account: Your account has been successfully deleted!
+  review_confirmation: Your review has been successfully confirmed!
+  login: Successful login!
+  logout: Successful logout!
+
+home: Home
+my_account: My account
+newspaper: Newspaper
+recipes: Recipes
+our_recipes: Our Recipes
+categories: Categories
+become_vendor: Become a vendor
+legal_notice: Legal notice
+legal: Legal
+social_networks: Social networks
+links: Links
+terms_of_use: Terms of use
+terms_of_sales: Terms of sales
+who_are_we: Who are we?
+cart: Cart
+checkout: Checkout
+search: Search
+forgotten_password: Forgotten password
+password_recovery: Password recovery
+change_password: Change password
+reset_password: Reset password
+login: Log in
+registration: Registration
+shop: Shop
+reviews: Reviews
+highlighted_recipe: Recipe of the month
+search_recipe_ingredient_article: Search for a Recipe, an Ingredient, an Article
+
+firstName: First name
+lastName: Last name
+email_address: Email address
+enter_account_email: Enter the email address associated with your account
+password: Password
+old_password: Old password
+new_password: New password
+password_confirm: Confirm password
+remember_me: Remember me
+agree_terms_of_use: I agree to the terms of use
+note: Note
+comment: Comment
+language: Language
+contact: Contact
+
+close: Close
+see_more: Show More
+see_less: Show Less
+read_more: Read More
+know_more: Know More
+see_recipe: View Recipe
+cancel: Cancel
+delete_account: Delete my account
+submit:
+  validate: Submit
+return_home: Return to home
+contact_us: Contact Us
+follow_us_on_facebook: Follow us on Facebook
+follow_us_on_instagram: Follow us on Instagram
+change_locale:
+  en: Version in English
+  fr: Version in French
+  es: Version in Spanish
+  it: Version in Italian
+
+question:
+  delete_account_confirm: Do you really want to delete your account?
+  forgotten_password: Forgotten password?
+  register: Don't have an account yet? Sign up
+
+flag:
+  en: United Kingdom flag
+  fr: French flag
+  es: Spanish flag
+  it: Italian flag
+
+cocktailissimo_logo: Cocktailissimo logo
+insufficient_stock: Insufficient stock
+all_rights_reserved: all rights reserved
+sent_by: Sent by
+delivery: Delivery
+secure_payment: Secure payment
+secure_payment_explanation: To ensure maximum security, financial transactions are processed by our partner Stripe, a leader in payment solutions. Your data is encrypted, ensuring absolute confidentiality throughout the transaction.
+product_details: Product details
+delivery_and_return: Delivery & return
+delivery_and_return_explanation: Explanation on delivery and returns (to be done)
+create_review: Leave a review on "{product}"
+ht: excluding VAT
+ttc: VAT included
+loading: Loading
+
+meta:
+  become_vendor_form: Join the Cocktailissimo adventure, the essential marketplace for aperitif and mixology enthusiasts, and give your products the visibility they deserve.
+
+error_template:
+  general_error: Oops... An error occurred.
+  page_not_found: Oops... the page is not found.
+
+title: 
+  home: Cocktailissimo - Mixology and Aperitif, Cocktail Recipes
+meta_description: 
+  home: Welcome to enthusiasts of aperitifs and mixology! Discover a wide selection of cocktail recipes, from trends to classics, with or without alcohol, and impress your guests.
+  become_vendor: Are you a mixology enthusiast, a manufacturer of tools or ingredients dedicated to this exquisite art? Join the world of creative mixology and showcase your products to the world.

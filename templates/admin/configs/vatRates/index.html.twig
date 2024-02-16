@@ -1,0 +1,52 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">Taux de TVA</span>
+    </div>
+
+   <div class="admin-container">
+        <h1>Taux de TVA</h1>
+
+        
+        <table style="max-width: 1000px;" class="admin-table ">
+            <thead>
+                <tr>
+                    <th>Pays</th>
+                    <th>code ISO</th>
+                    <th>Taux standard (%)</th>
+                    <th>Taux parking (%)</th>
+                    <th>Taux réduit 1 (%)</th>
+                    <th>Taux réduit 2 (%)</th>
+                    <th>Taux super-réduit (%)</th>
+                    <th>Taux zéro (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for country, rates in vatRates %}
+                    <tr {% if country == 'CH' or country == 'GB' %}style="color: rgb(204, 64, 29);"{% endif %}>
+                        <td>{{ country | trans({}, 'countries', 'fr') }}</td>
+                        <td>{{ country }}</td>
+                        <td>{{ rates.vat_level_standard }}</td>
+                        <td>{{ rates.vat_level_parking }}</td>
+                        <td>{{ rates.vat_level_reduce_1 }}</td>
+                        <td>{{ rates.vat_level_reduce_2 }}</td>
+                        <td>{{ rates.vat_level_super_reduce }}</td>
+                        <td>{{ rates.vat_level_zero }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_vatRates_update') }}">Modifier</a>
+        </div>
+   </div>
+
+{% endblock %}

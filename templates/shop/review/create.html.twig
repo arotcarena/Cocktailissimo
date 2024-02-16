@@ -1,0 +1,52 @@
+{% extends "base.html.twig" %}
+
+{% set firstPicture = (product | product_picture_position_resolver(1)) %}
+{% set firstPicturePath = (firstPicture | picture_path_resolver('show_first')) %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('create_review' | trans({'{product}': attribute(product.designation, app.request.locale)})),
+        image: firstPicturePath
+    }) }}
+{% endblock %}
+
+{% block body %}
+    {% include "shop/review/_review_breadcrumb.html.twig" %}
+
+    <h1>{{ 'create_review' | trans({'{product}': attribute(product.designation, app.request.locale)}) }}</h1>
+
+    <div class="product-show">
+        <div class="product-left-col">
+            <div class="product-img-block">
+                <div class="product-main-img-container" data-controller="mainimg">
+                    <img class="product-first-img" src="{{ firstPicturePath }}" alt="{{ firstPicture | picture_alt_resolver(app.request.locale) }}">
+                </div>
+                {% for picture in product.pictures %}
+                    {% if picture.listPosition is not same as 1 %}
+                        <img class="product-secondary-img" src="{{ picture | picture_path_resolver('show') }}" alt="{{ picture | picture_alt_resolver(app.request.locale) }}">
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="product-right-col">
+            <h2>{{ attribute(product.designation, app.request.locale) }}</h2>
+            <p>{{ product.price | price_format(app.request.locale) }}</p>
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+
+    {{ include('form/_form_row.html.twig', {name: 'fullName', label: ('firstName' | trans), field: form.fullName}) }}
+
+    {{ include('form/_form_row.html.twig', {name: 'rate', label: ('note' | trans), field: form.rate}) }}
+
+    {{ include('form/_form_row.html.twig', {name: 'comment', label: ('comment' | trans), field: form.comment}) }}
+
+    <button type="submit">{{ 'submit.validate' | trans }}</button>
+    {{ form_end(form) }}
+
+    
+{% endblock %}
+
+
+

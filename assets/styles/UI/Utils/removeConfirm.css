@@ -1,0 +1,60 @@
+.remove-confirm {
+    background-color: var(--color-danger-transparent);
+    position: relative;
+    padding-bottom: 60px!important;
+    padding-top: 10px!important;
+    transition: background-color .3s;
+}
+.remove-confirm.is-removing .remove-confirm-controls {
+    display: none;
+}
+.remove-confirm-controls {
+    text-transform: uppercase;
+    font-weight: 600;
+    position: absolute;
+    bottom: 7px;
+    left: 10px;
+    right: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: solid 1px var(--color-lightgrey);
+    padding-top: 7px;
+}
+.remove-confirm-controls span {
+    margin-left: 5px;
+}
+.remove-confirm-control {
+    height: 30px;
+    width: 60px;
+    margin: 0 2px;
+    border: solid 1px var(--color-black);
+    text-transform: uppercase;
+}
+.remove-confirm-control.yes {
+    background-color: var(--color-black);
+    color: #FFF;
+}
+
+.is-removing {
+    opacity: .3;
+    position: relative;
+}
+.is-removing .loader.remover-main-loader {
+    position: absolute;
+    width: 1.2em;
+    height: 1.2em;
+    top: calc(50% - .6em);
+    left: calc(50% - .6em);
+}
+
+
+@media only screen and (min-width: 600px) {
+    .remove-confirm-control {
+        height: 30px;
+        width: 200px;
+        margin: 0 2px;
+        border: solid 1px var(--color-black);
+        text-transform: uppercase;
+    }
+}

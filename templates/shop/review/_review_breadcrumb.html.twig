@@ -1,0 +1,31 @@
+<div class="breadcrumb">
+    <a href="{{ path('home', {_locale: app.request.locale}) }}" class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+    >
+    <a href="{{ path('category_show', {slug: attribute(product.category.slug, app.request.locale), _locale: app.request.locale}) }}" class="breadcrumb-link">
+        {{ attribute(product.category.name, app.request.locale) }}
+    </a>
+    >
+    <a 
+        href="{{ path('subCategory_show', {
+            categorySlug: attribute(product.category.slug, app.request.locale), 
+            subCategorySlug: attribute(product.subCategory.slug, app.request.locale),
+            _locale: app.request.locale
+        }) }}"
+        class="breadcrumb-link"
+        >
+        {{ attribute(product.subCategory.name, app.request.locale) }}
+    </a>
+    >
+    <a 
+        href="{{ path('product_show', {
+            _locale: app.request.locale, 
+            slug: attribute(product.slug, app.request.locale), 
+            publicRef: product.publicRef, 
+            categorySlug: attribute(product.category.slug, app.request.locale), 
+            subCategorySlug: attribute(product.subCategory.slug, app.request.locale)
+        }) }}" 
+        class="breadcrumb-link"
+        >
+        {{ attribute(product.designation, app.request.locale) }}
+    </a>
+</div>

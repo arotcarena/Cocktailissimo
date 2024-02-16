@@ -1,0 +1,54 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+
+    <div class="breadcrumb">
+        <a href="{{ path('admin_home') }}" class="breadcrumb-home-link">Administration</a>
+        >
+        <a href="{{ path('admin_vendor_index') }}" class="breadcrumb-link">Vendeurs ({{count_vendors}})</a>
+        >
+        <span class="breadcrumb-item">{{ vendor.company.usualName }} - {{ vendor.email }}</a>
+        >
+        <span class="breadcrumb-item">Synchronisation avec sendcloud</span>
+    </div>
+
+    <div class="admin-product-show large user-show">
+
+        <h1>Synchronisation sendcloud</h1>
+        
+        <p style="line-height: 1.5">
+            Pour finaliser l'ajout du vendeur <strong style="white-space: nowrap;">{{ vendor.company.usualName }} - {{ vendor.email }}</strong>, vous devez ajouter ses informations dans sendcloud.
+        </p>
+
+        <p>Suivez ces étapes :</p>
+
+        <ul class="admin-list">
+            <li class="admin-list-item">
+                <div class="admin-list-number">1.</div>
+                <div class="admin-list-text">
+                    Rendez-vous sur <a target="_blank" style="text-decoration: underline; font-weight: 600;" href="https://app.sendcloud.com/v2/settings/addresses/sender">sendcloud.com > Compte > réglages > Mes adresses</a> puis cliquez sur "Ajouter".
+                </div>
+            </li>
+            <li class="admin-list-item">
+                <div class="admin-list-number">2.</div>
+                <div class="admin-list-text">Entrez les informations ci-dessous et enregistrez</div>
+            </li>
+            <li>
+                {% include "admin/sales/vendor/sendcloud_synchronization/_form_guide.html.twig" %}
+            </li>
+            <li class="admin-list-item">
+                <div class="admin-list-number">3.</div>
+                <div class="admin-list-text" style="display: flex; align-items: center; gap: 20px;">
+                    <span>Une fois l'adresse ajoutée dans sendcloud, lancez la synchronisation</span>
+                    <form method="POST" action="{{ path('admin_vendor_synchronizeSendcloud', {id: vendor.id}) }}">
+                        <button class="admin-button" type="submit">Synchroniser</button>
+                    </form>
+                </div>
+            </li>
+        </ul>
+        
+        
+    </div>
+
+{% endblock %}

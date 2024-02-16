@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {title: ('my_account' | trans)}) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('customerAccount') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('customerAccount') }}
+{% endblock %}
+
+
+{% block body %}
+    <div id="customer-account" data-user="{{ user | json_encode }}">
+        <h1>{{ 'my_account' | trans }}</h1>
+    </div>
+{% endblock %}

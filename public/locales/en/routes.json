@@ -1,0 +1,88 @@
+{
+    "customerAccount": {
+        "base": {
+            "label": "My account",
+            "path": "/en/my-account"
+        },
+        "details": {
+            "label": "My Details",
+            "path": "/details"
+        },
+        "address": {
+            "label": "My addresses",
+            "path": "/addresses"
+        },
+        "purchase": {
+            "label": "My orders",
+            "path": "/orders"
+        }
+    },
+    "vendorAccount": {
+        "base": {
+            "label": "My vendor account",
+            "path": "/en/vendor/account"
+        },
+        "details": {
+            "index": {
+                "label": "My details",
+                "path": "/details"
+            },
+            "personal": {
+                "label": "Personal details",
+                "path": "/details/personal-details"
+            },
+            "company": {
+                "label": "Company",
+                "path": "/details/company"
+            },
+            "senderAddress": {
+                "label": "Send address",
+                "path": "/details/sender-address"
+            },
+            "payment": {
+                "label": "Receive payments",
+                "path": "/details/receive-payments"
+            }
+        },
+        "buyerSpace": {
+            "index": {
+                "label": "Buyer space",
+                "path": "/buyer-space"
+            },
+            "purchase": {
+                "label": "My orders",
+                "path": "/buyer-space/orders"
+            },
+            "deliveryAddress": {
+                "label": "My delivery addresses",
+                "path": "/buyer-space/delivery-addresses"
+            }
+        },
+        "vendorSpace": {
+            "index": {
+                "label": "Vendor space",
+                "path": "/vendor-space"
+            },
+            "shop": {
+                "label": "My shop",
+                "path": "/vendor-space/shop"
+            },
+            "product": {
+                "label": "My products",
+                "path": "/vendor-space/products"
+            },
+            "review": {
+                "label": "Reviews",
+                "path": "/vendor-space/reviews"
+            },
+            "purchase": {
+                "label": "Purchases",
+                "path": "/vendor-space/orders"
+            },
+            "question": {
+                "label": "Questions",
+                "path": "/vendor-space/questions"
+            }
+        }
+    }
+}

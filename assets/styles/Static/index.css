@@ -1,0 +1,40 @@
+.aPropos-title {
+    margin-bottom: 40px;
+}
+
+.aPropos-text {
+    line-height: 1.8;
+}
+
+.aPropos-conclusion {
+    font-size: 1.1em;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.aPropos-img-wrapper {
+    display: flex;
+    margin-top: 40px;
+    max-width: 600px;
+}
+.aPropos-img {
+    width: 50%;
+    height: auto;
+}
+
+.aPropos-legend {
+    margin: 10px 0;
+    font-weight: 200;
+}
+
+.legal-page {
+    margin-bottom: 80px;
+    min-height: 50vh;
+}
+.legal-page a {
+    text-decoration: underline;
+}
+.legal-page h2 {
+    text-align: left;
+    font-weight: 600;
+}

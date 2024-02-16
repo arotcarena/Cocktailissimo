@@ -1,0 +1,105 @@
+hello: Hello {name},
+see_you_soon: See you soon on Cocktailissimo! Cheers!
+
+prospect:
+  subject: Join the world of creative mixology!
+  title: Welcome to the world of creative mixology!
+  screenshot_alt: Cocktailissimo.com homepage
+  intro:
+    list:
+      one: Are you a mixology enthusiast, a manufacturer of tools or ingredients dedicated to this exquisite art?
+      two: Are you looking to expand your audience in B to B or B to C and introduce your exceptional products to the world?
+      three: Read on, as we have an exciting opportunity to share with you!
+    box:
+      one: >
+        We are <strong>Cocktailissimo</strong>, a marketplace specializing in mixology tools and ingredients. Our platform is the ultimate meeting place for cocktail enthusiasts, professional bartenders, and mixology enthusiasts worldwide. We firmly believe that quality products deserve quality visibility, which is why we offer you an opportunity to market your creations on our mixology-dedicated marketplace.
+      two:
+        a: If the technical features of your business prevent you from being a seller on our marketplace?
+        b: No problem, our hybrid distributive marketing model also allows us to support you as a distributor.
+
+  why_join_our_community: Why join our community?
+  arguments_list:
+    one:
+      label: Targeted Audience
+      content: Our platform is frequented by mixology professionals and enthusiasts looking for the latest innovations in tools and ingredients. Your products will be showcased in front of a captive and passionate audience.
+    two:
+      label: International Visibility
+      content: You have the opportunity to highlight your products globally. Our marketplace reaches potential customers worldwide, meaning your products can find a place on the virtual shelves of mixologists around the world.
+    three:
+      label: Personalized Promotion
+      content: We work closely with our sellers to implement targeted marketing campaigns, special highlights, and promotions to maximize the visibility of your products and boost your sales.
+    four:
+      label: Simplified Management
+      content: Our user-friendly seller interface makes managing your online store easy and transparent. You can track your sales, manage your inventory, and interact with your customers effortlessly.
+    five:
+      label: Continuous Support
+      content: We believe in mutual growth, which is why we are always here to answer your questions, share marketing advice, and support you in your success on our marketplace.
+    six:
+      label: Dedicated SEO Service
+      content: We take care of the web writing for your products to improve their web referencing. We write press articles, illustrated recipes, and videos incorporating your products to boost your sales.
+  conclusion:
+    top: 
+      one: Mixology is an art in constant evolution, and we look forward to collaborating with innovative manufacturers who share our passion for creating exceptional products. Join us in the mixology adventure and be part of our community dedicated to excellence in the world of cocktails.
+      two: >
+        If you are ready to give your products the visibility they deserve and partner with a leading mixology platform, feel free to contact us to discuss the exciting possibilities that await you at <a class="contact-link" href="mailto:contact@cocktailissimo.com" style="color: #FFF; font-weight: 700;">contact@cocktailissimo.com</a>.
+      three: Join us in the art of mixology, and together, let's create exceptional cocktail experiences for our customers worldwide!
+    hashtags: >
+      <span>#Mixology</span> 
+      <span>#Marketplace</span> 
+      <span>#Innovation</span> 
+      <span>#Cocktaillissimo</span> 
+      <span>#Excellence</span>
+  end:
+    one: Want to become a seller? Follow this link
+    two: See you very soon! Cheers!
+
+answer_notification:
+  subject: Reply to your question
+  text: "Someone has answered a question you asked! To see the answer, follow this link: {link}"
+  html:
+    title: Reply to your question
+    message: "Someone has answered a question you asked! To see the answer, click the button below:"
+    link: View the answer
+
+security:
+  confirmation_email:
+    subject: Confirm your email address
+    text: "To validate your account, please verify your email address by following this link: {link}"
+    html:
+      title: Confirm your email address
+      message: "To validate your account, please verify your email address by clicking the button below:"
+      link: Verify my email address
+  change_email:
+    subject: Your confirmation code
+    text: "To confirm your email address change, please enter the following code: {code}"
+    html:
+      title: Your confirmation code
+      message: "To confirm your email address change, please enter the code below:"
+  reset_password:
+    subject: Password reset
+    text: "You have requested a password reset. To create your new password, follow this link: {link}"
+    html:
+      title: Password reset
+      message: "You have requested a password reset. To create your new password, click the button below:"
+      link: Create a new password
+  review_confirmation:
+    subject: Confirm your review
+    text: 'You have left a review on "{product}". You gave a rating of {rate}/5. To confirm this review, follow this link: {link}'
+    html:
+      title: Confirm your review
+      message: >
+        <p>You have left a review on <strong>{product}</strong>.</p>
+        <p>
+          <div><strong>Rating:</strong> {rate}/5</div>
+          <div><strong>Review Title:</strong> {title}</div>
+          <div><strong>Comment:</strong> {comment}</div>
+        </p>
+        <p>To confirm this review, click the button below:</p>
+      link: Confirm my review
+  all_in_one_init:
+    subject: Create your password
+    text: "Your account is created! To access it, you need to initialize your password by following this link: {link}"
+    html:
+      title: Create your password
+      message: "Your account is created! To access it, you need to initialize your password by clicking the button below:" 
+      link: Create my password

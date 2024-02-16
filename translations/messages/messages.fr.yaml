@@ -1,0 +1,155 @@
+warning:
+  need_login: Pour effectuer cette action, vous devez vous connecter ou créer un compte.
+  delete_vendor_account: >
+    Nous sommes navrés d'apprendre que vous souhaitez nous quitter. En tant que vendeur, vous ne pouvez pas supprimer directement votre compte, mais il vous suffit d'en faire la demande par email à <a target="_blank" href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, en nous précisant l'adresse email associée à votre compte. Votre demande sera traitée dans les plus brefs délais.
+  alcohol_danger: L'abus d'alcool est dangereux pour la santé, à consommer avec modération
+
+error:
+  temporary_failure: Une erreur est survenue. Veuillez réessayer ultérieurement.
+  max_addresses: Vous ne pouvez pas ajouter plus de {max} adresses
+  invalid_input: La valeur entrée est invalide
+  invalid_form: Le formulaire est invalide
+  invalid_credentials: Identifiants invalides
+  purchase_payment: 
+    no_stock: >
+      Une erreur est survenue. La transaction a été annulée et aucune somme ne sera débitée. Si le problème persiste, <a target="_blank" href="/fr?contact">contactez-nous</a>.
+    updated_purchase: Suite à un problème de stock, votre panier a été mis à jour. La transaction a été annulée et aucune somme ne sera débitée. Si le panier mis à jour vous convient vous pouvez valider à nouveau la commande. En cas de problème, <a target="_blank" href="/fr?contact">contactez-nous</a>.
+    already_paid: La commande est déjà payée. La transaction actuelle a été annulée et aucune somme supplémentaire ne sera débitée. En cas de problème, <a target="_blank" href="/fr?contact">contactez-nous</a>.
+  review:
+    same_email: Cette adresse email a déjà été utilisée pour laisser un avis sur ce produit. S'il ne s'agit pas de vous, modifiez l'adresse email
+    unique: Vous avez déjà laissé votre avis sur ce produit, merci.
+  empty_cart: Votre panier est vide
+  show_payment_success: Suite à une erreur, impossible d'afficher le récapitulatif de la commande. Vous pouvez y accéder dans l'email de confirmation de commande que nous venons de vous envoyer. En cas de problème, ou si vous n'avez pas reçu cet email d'ici une heure, <a target="_blank" href="/fr?contact">contactez-nous</a>.
+  unknown_email: Cette adresse email ne correspond à aucun compte
+  invalid_link: Ce lien est invalide ou a expiré
+  invalid_password: Mot de passe invalide
+  delete_account:
+    having_purchases_in_progress: Vous ne pouvez pas supprimer votre compte pour le moment car vous avez des commandes en cours de traitement.
+  email_not_confirmed: >
+    <div>Vous n'avez pas confirmé votre adresse email. Cliquez sur le lien reçu à l'adresse "{email}".</div>
+    <div style="font-style: italic; margin-top: 10px;">Vous n\'avez pas reçu le lien ? <a href="{ask_new_link_path}">Recevoir un nouveau lien de confirmation</a></div>
+  restricted_user: Votre compte a été restreint. Pour plus d'informations, <a target="_blank" href="/fr?contact">contactez-nous</a>.
+
+info:
+  incomplete_stripe_verification: Les informations saisies ont été sauvegardées, revenez quand vous voulez pour finir d'entrer vos informations et pouvoir commencer à vendre vos produits.
+  on_checkout_force_country: Suite à la modification du pays de livraison, les prix sont susceptibles d'avoir changé.
+
+success:
+  stripe_verification: Félicitations, votre compte est validé !
+  updated: Les modifications ont bien été prises en compte !
+  vendor_contact: Merci, bien reçu ! Nous allons maintenant traiter votre demande et revenir vers vous très rapidement.
+  payment: Merci, nous avons bien reçu votre paiement d'un montant de {amount} ! Une confirmation de commande vous a été envoyée par email.
+  link_sent: 
+    reset_password: Un lien pour réinitialiser votre mot de passe vous a été envoyé par email. Attention, le lien est valable 48h.
+    re_confirmation: Un nouveau lien pour vérifier votre adresse email vous a été envoyé à l'adresse "{email}". Attention, le lien est valable 48h.
+  reset_password: Le mot de passe a été réinitialisé avec succès !
+  register: Félicitations, votre inscription est enregistrée ! Pour la finaliser, il vous suffit de vérifier votre adresse email en cliquant sur le lien reçu à l'adresse "{email}". Attention, le lien est valable 48h.
+  email_confirmation: Votre adresse email a été vérifiée avec succès ! Vous pouvez désormais vous connecter.
+  all_in_one_init: Félicitations, votre compte est activé ! Vous pouvez désormais vous connecter.
+  delete_account: Votre compte a bien été supprimé !
+  review_confirmation: Votre avis a été confirmé avec succès !
+  login: Connexion réussie !
+  logout: Déconnexion réussie !
+
+home: Accueil
+my_account: Mon compte
+newspaper: Gazette
+recipes: Recettes
+our_recipes: Nos recettes
+categories: Catégories
+become_vendor: Devenir vendeur
+legal_notice: Mentions légales
+legal: Légal
+social_networks: Réseaux sociaux
+links: Liens
+terms_of_use: Conditions générales d'utilisation
+terms_of_sales: Conditions générales de vente
+who_are_we: Qui sommes-nous ?
+cart: Panier
+checkout: Passer commande
+search: Recherche
+forgotten_password: Mot de passe oublié
+password_recovery: Récupération de mot de passe
+change_password: Changer de mot de passe
+reset_password: Réinitialiser le mot de passe
+login: Connexion
+registration: Inscription
+shop: Boutique
+reviews: Avis
+highlighted_recipe: Recette du mois
+search_recipe_ingredient_article: Rechercher une recette, un ingrédient, un article
+
+firstName: Prénom
+lastName: Nom
+email_address: Adresse email
+enter_account_email: Entrez l'adresse email associée à votre compte
+password: Mot de passse
+old_password: Ancien mot de passe
+new_password: Nouveau mot de passe
+password_confirm: Confirmez le mot de passe
+remember_me: Se souvenir de moi
+agree_terms_of_use: J'accepte les conditions générales d'utilisation
+note: Note
+comment: Commentaire
+language: Langue
+contact: Contact
+
+close: Fermer
+see_more: Voir plus
+see_less: Voir moins
+read_more: Lire plus
+know_more: En savoir plus
+see_recipe: Voir la recette
+cancel: Annuler
+delete_account: Supprimer mon compte
+submit:
+  validate: Valider
+return_home: Retour à l'accueil
+contact_us: Contactez-nous
+follow_us_on_facebook: Suivez-nous sur Facebook
+follow_us_on_instagram: Suivez-nous sur Instagram
+change_locale:
+  en: Version en anglais
+  fr: Version en français
+  es: Version en espagnol
+  it: Version en italien
+
+question:
+  delete_account_confirm: Voulez-vous vraiment supprimer votre compte ?
+  forgotten_password: Mot de passe oublié ?
+  register: Pas encore de compte ? Inscrivez-vous
+
+flag:
+  en: Drapeau du Royaume-Uni
+  fr: Drapeau français
+  es: Drapeau espagnol
+  it: Drapeau italien
+
+cocktailissimo_logo: Logo de Cocktailissimo
+insufficient_stock: Stock insuffisant
+all_rights_reserved: tous droits réservés
+sent_by: Expédié par
+delivery: Livraison
+secure_payment: Paiement sécurisé
+secure_payment_explanation: Pour garantir une sécurité maximale, les transactions financières sont traitées par notre partenaire Stripe, un leader en solutions de paiement. Vos données sont cryptées, garantissant ainsi une confidentialité absolue durant toute la transaction.
+product_details: Détails du produit
+delivery_and_return: Livraison & retour
+delivery_and_return_explanation: Explication sur la livraison et les retours (à faire)
+create_review: Donner mon avis sur "{product}"
+ht: HT
+ttc: TTC
+loading: Chargement
+
+meta:
+  become_vendor_form: Rejoignez l'aventure Cocktailissimo, la marketplace incontournable des amateurs de l'apéritif et de la mixologie, et offrez à vos produits la visibilité qu'ils méritent.
+
+error_template:
+  general_error: Oups... Une erreur est survenue.
+  page_not_found: Oups... la page est introuvable.
+
+
+title:
+  home: Cocktailissimo - Mixologie et apéritif, recettes de cocktails
+meta_description:
+  home: Bienvenue aux amateurs de l'apéritif et de la mixologie ! Retrouvez un très large choix de recettes de cocktails, des tendances aux classiques, avec ou sans alcool, et impressionnez vos invités.
+  become_vendor: Vous êtes un passionné de mixologie, un fabricant d'ustensiles ou d'ingrédients dédiés à cet art exquis ? Rejoignez le monde de la mixologie créative et faites connaître vos produits au monde entier.

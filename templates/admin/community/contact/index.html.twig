@@ -1,0 +1,72 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_contact_index') }} class="breadcrumb-link">Contacts public ({{contact_count}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Contacts public</h1>
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Coordonnées</th>
+                    <th>Message</th>
+                    <th>Langue de navigation</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in pagination %}
+                    <tr>
+                        <td>
+                            <span class="capitalize">{{ contact.civility | trans({}, 'configs', 'fr') }} {{ contact.firstName }} {{ contact.lastName }}</span>
+                            <br> 
+                            {{ contact.email }}
+                        </td>
+                        <td style="white-space: wrap; max-width: 400px;">{{ contact.message | excerpt }}</td>
+                        <td>{{ contact.lang }}</td>
+                        <td>{{ contact.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_contact_show', {id: contact.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_contact_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-contact') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ contact.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le contact de "' ~ contact.email ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+   </div>
+
+{% endblock %}

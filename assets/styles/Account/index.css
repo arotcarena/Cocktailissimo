@@ -1,0 +1,215 @@
+.account {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.account h1 {
+    margin: 15px 0;
+    font-size: 1.6em;
+    font-weight: 600;
+    text-transform: none;
+}
+.account .submit-group.double {
+    margin-bottom: 0;
+}
+
+.account-body {
+    padding: 0 15px;
+}
+
+.account-desktop-menu {
+    display: none;
+}
+
+.account-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 20px 0 40px;
+    border-top: solid 1px rgb(240, 240, 240);
+    border-bottom: solid 1px rgb(240, 240, 240);
+    position: relative;
+    height: 130px;
+    overflow: hidden;
+    transition: height .3s;
+}
+.account-menu.close {
+    cursor: pointer;
+    height: 60px;
+}
+.account-menu-opener {
+    position: absolute;
+    top: calc(30px - .7em);
+    right: 15px;
+}
+.account-menu-button {
+    font-size: 1em;
+    transition: color .3s;
+    color: var(--color-lightgrey);
+    text-transform: uppercase;
+}
+.account-menu-button.active {
+    font-size: 1.2em;
+    font-weight: 500;
+}
+.account-menu-button.active, .account-menu-button:hover {
+    color: var(--color-black);
+}
+.account-menu-button.active.badge-owner .badge {
+    font-size: 1em;
+    width: 30px;
+    height: 30px;
+}
+
+.account-footer {
+    margin: 50px 0;
+    display: flex;
+    justify-content: center;
+}
+.account-link.logout-link {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+.account-link.logout-link:hover {
+    text-decoration: underline;
+}
+
+.account .loader {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.account-menu .i-expand-more {
+    transition: transform .3s;
+    width: 1.4em;
+    height: 1.4em;
+}
+.account-menu .i-expand-more.expanded {
+    transform: rotate(180deg);
+}
+
+.account .i-edit, .account-body .i-edit {
+    width: 2em;
+    height: 2em;
+}
+.account .i-trash {
+    width: 1.3em;
+    height: 1.3em;
+}
+
+.account .radio-group-wrapper {
+    height: 30px;
+}
+.account .radio-group-wrapper + .form-error {
+    margin-top: 15px;
+}
+
+
+.account-info-text {
+    font-weight: 200;
+    margin: 15px 0;
+    font-size: .9em;
+    line-height: 1.6;
+}
+.account-info-block {
+    padding: 1px 15px 20px;
+    margin-top: 20px;
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+}
+.account-info-text .icon.i-info {
+    position: relative;
+    margin-right: 4px;
+    bottom: -2px;
+}
+.account-link {
+    text-decoration: underline;
+}
+.account-success {
+    color: var(--color-success);
+    margin: 15px 0;
+    font-size: .9em;
+}
+.account-success .icon {
+    margin-right: 4px;
+    position: relative;
+    bottom: -2px;
+}
+
+.account-info {
+    font-size: .9em;
+    font-weight: 200;
+    max-width: 700px;
+    margin: 40px auto;
+    line-height: 1.5;
+}
+.account-info a {
+    text-decoration: underline;
+    font-weight: 400;
+}
+.account-info .icon {
+    position: relative;
+    bottom: -3px;
+    margin-right: 3px;
+    opacity: .5;
+}
+
+.top-right-badge {
+    position: absolute;
+    font-size: .3em;
+    top: 10px;
+    transform: translateX(100%);
+    right: -10px;
+}
+
+.account .address-item {
+    color: var(--color-black);
+    box-shadow: none;
+    cursor: default;
+}
+.account .address-item:hover {
+    box-shadow: none;
+}
+
+@media only screen and (min-width: 800px) {
+    .account h1 {
+        font-size: 1.8em;
+    }
+    .account-menu {
+        display: none;
+    }
+    .account-desktop-menu {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        margin: 30px 0 40px;
+        background-color: rgb(250, 250, 250);
+    }
+    .account-desktop-menu .account-menu-button {
+        font-size: .95em;
+        position: relative;
+        transition: all .3s;
+        margin: 0 20px;
+        font-weight: 400;
+        color: var(--color-black);
+    }
+    .account-desktop-menu .account-menu-button:hover {
+        font-weight: 500;
+    }
+    .account-desktop-menu .account-menu-button.active {
+        font-size: 1.3em;
+        font-weight: 600;
+        letter-spacing: -.04em;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .account {
+        margin-top: 0;
+    }
+}

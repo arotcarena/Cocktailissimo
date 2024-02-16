@@ -1,0 +1,17 @@
+{% set countFullStars = ((note / 10) | round(0, 'floor')) %}
+{% set decimal = note % 10 %}
+{% set rest = 5 - countFullStars %}
+{% if decimal >= 5 %}
+    {% set rest = rest - 1 %}
+{% endif %}
+
+
+<div class="product-show-review-wrapper short index-review-stars">
+    <a href="#reviews" class="ws-nowrap">
+        <span>{{ note | review_note_format(app.request.locale) }}</span>
+        <svg class="icon i-star">
+            <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+        </svg>
+        <span>({{ count }} avis)</span>
+    </a>
+</div>

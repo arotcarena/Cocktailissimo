@@ -1,0 +1,46 @@
+
+{
+    "status_pending": "Pending",
+    "status_paid": "Paid",
+    "status_terminated": "Terminated",
+    "status_sent": "Sent",
+    "status_delivered": "Delivered",
+    "status_canceled": "Canceled",
+
+    "civility_m": "Mr.",
+    "civility_f": "Mrs.",
+
+    "ROLE_USER": "User",
+    "ROLE_ADMIN": "Admin",
+    "ROLE_PRO": "Professional",
+    "ROLE_VENDOR": "Vendor",
+    "ROLE_USER_RESTRICTED": "Suspended User",
+
+    "shipping_type": {
+        "home": "Home",
+        "relay": "Relay Point"
+    },
+
+    "sort": {
+        "createdAt_ASC": "Oldest first",
+        "createdAt_ASC_f": "Oldest first",
+        "createdAt_DESC": "Newest first",
+        "createdAt_DESC_f": "Newest first",
+        "stock_ASC": "Ascending stock",
+        "stock_DESC": "Descending stock",
+        "price_ASC": "Ascending price",
+        "price_DESC": "Descending price",
+        "note_DESC": "Best reviews first",
+        "note_ASC": "Worst reviews first"
+    },
+
+    "rate": {
+        "verybad": "Very Bad",
+        "bad": "Bad",
+        "medium": "Average",
+        "good": "Good",
+        "verygood": "Excellent"
+    },
+
+    "current_lang": "english"
+}

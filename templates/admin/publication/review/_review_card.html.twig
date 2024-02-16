@@ -1,0 +1,60 @@
+<li class="admin-review-card">
+    
+    {{ include('admin/publication/_owner_top_card/_product_top_card.html.twig', {product: review.product}) }}
+
+    <div class="admin-review-card-body">
+        <div class="admin-review-card-body-info">
+            <span>
+                {{ include('admin/publication/review/_stars.html.twig', {rate: review.rate}) }}
+            </span>
+            <span>{{ review.fullName }}</span>
+            <span class="admin-review-card-text-mute">
+                {% if review.user %}
+                    <a href="{{ path('admin_user_show', {id: review.user.id}) }}">{{ review.user.email }}</a>
+                {% else %}
+                    non inscrit
+                {% endif %}
+            </span>
+            <span class="admin-review-card-text-semi-mute">{{ review.createdAt.format('d/m/Y H:i') }}</span>
+            <div class="admin-review-card-body-info-end">
+                <span class="admin-review-card-chip{{review.bought ? ' success': ''}}">
+                    {% if review.bought %}
+                        <svg class="icon">
+                            <use xlink:href="/img/icons/sprite.svg#check"></use>
+                        </svg>
+                    {% else %}
+                        <svg class="icon">
+                            <use xlink:href="/img/icons/sprite.svg#close"></use>
+                        </svg>
+                    {% endif %}
+                    <span>Achat vérifié</span>
+                </span>
+            </div>
+        </div>
+        <div class="admin-review-card-body-title">
+            {{ review.title }}
+        </div>
+        <div class="admin-review-card-body-content">
+            {{ review.comment }}
+        </div>
+    </div>
+
+    {{ include('admin/publication/_answer_counter.html.twig', {answers: review.answers}) }}
+
+    <div class="admin-review-card-footer">
+        {% if review.answers | length > 0 %}
+            <ul class="admin-answer-list">
+                {% for answer in review.answers %}
+                    {{ include('admin/publication/answer/_answer_card.html.twig', {targetRoute: 'admin_review_index'}) }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="review-moderator" data-id="{{review.id}}" data-status="{{review.moderationStatus}}">
+    </div>
+
+    <div class="admin-answer-control" data-ownerclass="review" data-ownerid="{{review.id}}">
+    </div>
+</li>
+ 

@@ -1,0 +1,69 @@
+.admin-custom-table-row.header-row {
+    background-color: var(--color-admin);
+    color: #FFF;
+    font-weight: 600;
+    padding: 20px 0;
+}
+.admin-custom-table-row {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    border-top: solid 1px var(--color-admin-secondary);
+}
+.admin-custom-table-row:first-child, .admin-custom-table-row:nth-child(2) {
+    border-top: none;
+}
+
+.admin-custom-table-cell {
+    width: 20%;
+    flex: none;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+.admin-custom-table-cell.admin-custom-table-controls {
+    width: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.admin-custom-table-controls .icon {
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.admin-custom-table .toggle {
+    background-color: var(--color-admin-secondary);
+}
+
+.admin-custom-table-row.sub-row .admin-table-img {
+    width: 60px;
+    height: 60px;
+}
+
+.admin-custom-table-inter {
+    position: relative;
+}
+.admin-custom-table-inter .toggle-opener {
+    position: absolute;
+    right: 25px;
+    top: -77px;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: underline;
+    font-size: 1em;
+    transition: all .3s;
+}
+.admin-custom-table-inter .toggle-opener.expanded {
+    color: var(--color-admin);
+}
+.admin-custom-table-inter .toggle-opener .icon {
+    width: 1.2em;
+    height: 1.2em;
+    transition: all .3s;
+    margin-left: 5px;
+}
+.admin-custom-table-inter .toggle-opener.expanded .icon {
+    transform: rotate(180deg);
+}

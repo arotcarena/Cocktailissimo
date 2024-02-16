@@ -1,0 +1,64 @@
+{% extends "admin/email/base.html.twig" %}
+
+{% block title %}Contact vendeur{% endblock %}
+
+
+{% block body %}
+
+    <h1>Demande d'inscription comme vendeur</h1>
+
+    <div>
+        <h3>Informations contact</h3>
+        <p style="text-transform: capitalize;">Nom : {{ vendorContact.civility | trans({}, 'configs', 'fr') }} {{vendorContact.firstName}} {{vendorContact.lastName}}</p>
+        <p>Email : {{vendorContact.email}}</p>
+        <p>Téléphone : {{vendorContact.phone ?? 'non renseigné'}}</p>
+    </div>
+
+    <div>
+        <h3>Informations entreprise</h3>
+        <p>Nom : {{ vendorContact.companyName }}</p>
+        <p>N° siret ou équivalent : {{vendorContact.identificationNumber}}</p>
+        <p>N° de tva : {{vendorContact.vatNumber ?? 'non renseigné'}}</p>
+    </div>
+
+    <div>
+        <h3>Adresse du siège social</h3>
+        <p>{{ vendorContact.socialAddress.lineOne }}
+        <p>{{ vendorContact.socialAddress.lineTwo }}
+        <p>{{ vendorContact.socialAddress.postcode }} {{ vendorContact.socialAddress.city }}</p>
+        <p>{{ vendorContact.socialAddress.country }}</p>
+    </div>
+
+    <div>
+        <h3>Adresse d'expédition</h3>
+        <p>{{ vendorContact.senderAddress.lineOne }}
+        <p>{{ vendorContact.senderAddress.lineTwo }}
+        <p>{{ vendorContact.senderAddress.postcode }} {{ vendorContact.senderAddress.city }}</p>
+        <p>{{ vendorContact.senderAddress.country }}</p>
+    </div>
+
+    <div>
+        <h3>Présence en ligne</h3>
+        <p>Site web : {{ vendorContact.website ?? 'non renseigné' }}</p>
+        <p>Facebook : {{ vendorContact.facebook ?? 'non renseigné' }}</p>
+        <p>Instagram : {{ vendorContact.instagram ?? 'non renseigné' }}</p>
+    </div>
+
+    <div>
+        <h3>Activité</h3>
+        <p>Catégorie : {{ vendorContact.category.name.fr }}</p>
+        <p>Sous-catégorie : {{ vendorContact.subCategory.name.fr }}</p>
+    </div>
+
+    <div>
+        <h3>Pourquoi devenir vendeur ?</h3>
+        <p>Réponse : {{ vendorContact.whyBecomeVendor }}</p>
+    </div>
+
+    <div>
+        <h3>Autres informations</h3>
+        <p>Langue de navigation : {{vendorContact.lang}}</p>
+        <p>Date et heure : {{vendorContact.createdAt.format('d/m/Y H:i')}}</p>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "admin/email/base.html.twig" %}
+
+{% block title %}Contact reçu{% endblock %}
+
+
+{% block body %}
+
+    <h1>Contact reçu</h1>
+
+    <div>
+        <h3>Informations contact</h3>
+        <p style="text-transform: capitalize;">Nom : {{ contact.civility | trans({}, 'configs', 'fr') }} {{contact.firstName}} {{contact.lastName}}</p>
+        <p>Email : {{contact.email}}</p>
+        <p>Téléphone : {{contact.phone ?? 'non renseigné'}}</p>
+    </div>
+
+    <div>
+        <h3>Message</h3>
+        <p>{{ contact.message }}</p>
+    </div>
+
+    <div>
+        <h3>Autres informations</h3>
+        <p>Langue de navigation : {{contact.lang}}</p>
+        <p>Date et heure : {{contact.createdAt.format('d/m/Y H:i')}}</p>
+    </div>
+
+{% endblock %}

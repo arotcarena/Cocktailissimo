@@ -1,0 +1,129 @@
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    height: 70px;
+    position: relative;
+}
+
+.header-logo-link {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.header-top-left, .header-top-right, .header-top-left-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.header-top-left-links :first-child {
+    position: relative;
+    bottom: -1px;
+}
+
+.header-logo {
+    width: calc(100vw - 190px);
+    max-width: 220px;
+    height: auto;
+}
+
+.header-top-left-links, .right-search-link {
+    display: none;
+}
+
+.header-top .icon {
+    width: 26px;
+    height: 26px;
+}
+.header-top .icon.i-cart {
+    width: 32px;
+    height: 32px;
+}
+.header-top .icon.i-account {
+    width: 23px;
+    height: 23px;
+}
+.header-top-vendor-contact-button {
+    width: 250px;
+}
+.header-top-vendor-contact-button .icon.i-dashboard {
+    width: 1.4em;
+    height: 1.4em;
+    margin-right: 4px;
+}
+
+/*basic contact form*/
+.center-form-modal .submit-group.double {
+    margin-bottom: 0;
+}
+.center-form-modal h2 {
+    margin-bottom: -25px;
+}
+.center-form-modal .box-form textarea {
+    height: 100px;
+}
+
+@media only screen and (min-width: 580px) {
+    .header-top-right, .header-top-left {
+        gap: 15px;
+    }
+}
+
+@media only screen and (min-width: 1250px) {
+    .header-top-vendor-contact-button {
+        width: auto;
+        padding: 5px 8px;
+        min-height: auto;
+        font-size: .7em;
+    }
+    body.scroll-up .header-top-vendor-contact-button {
+        bottom: 103px;
+    }
+    .header-top-right {
+        gap: 18px;
+        transition: margin ease-in-out .5s;
+    }
+    .header-fixed.scroll-down .header-top-right {
+        margin-top: 140px;
+    }
+    @media only screen and (max-height: 800px) {
+        .header-fixed.scroll-up .header-top-right {
+            margin-top: 140px;
+        }
+    }
+    .header-top-left-links {
+        display: flex;
+        gap: 18px;
+    }
+    .mobile-menu-opener, .left-search-link {
+        display: none;
+    }
+    .right-search-link {
+        display: block;
+    }
+    .header-top-left-links .icon.i-social {
+        width: 21px;
+        height: 21px;
+    }
+    .header-top {
+        padding: 20px 0;
+        margin-top: 10px;
+    }
+    .header-logo {
+        max-width: 275px;
+    }
+}
+
+
+
+@media only screen and (min-width: 1450px) {
+    .header-fixed.scroll-down .header-top-right {
+        right: 30px;
+    }
+}
+
+

@@ -1,0 +1,24 @@
+{% extends "email/base.html.twig" %}
+
+{% block title %}{{ 'security.review_confirmation.html.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block h1 %}{{ 'security.review_confirmation.html.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block body %}
+
+    <p>{{ 'hello' | trans({'{name}': fullName}, 'emails', lang) }}</p>
+    
+    {{ ('security.review_confirmation.html.message' | trans({
+            '{product}': product,
+            '{rate}': rate,
+            '{title}': title,
+            '{comment}': comment
+        }, 'emails', lang)) | raw }}
+
+    <p style="margin: 40px 0;">
+        <a style="text-decoration: none; background-color: #872307; padding: 15px 23px; color: #FFF; font-weight: 600; font-size: 1em;" href={{ link }} target="_blank">
+            {{ 'security.review_confirmation.html.link' | trans({}, 'emails', lang) }}
+        </a>
+    </p>
+
+{% endblock %}

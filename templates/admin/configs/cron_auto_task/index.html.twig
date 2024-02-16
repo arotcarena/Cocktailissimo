@@ -1,0 +1,51 @@
+{% extends "admin/admin_base.html.twig" %}
+
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">Tâches auto</span>
+    </div>
+    
+    <h1>Tâches auto Cron</h1>
+
+    <div class="admin-product-show">
+
+        <div class="admin-product-show-row-group">
+            <div class="admin-product-show-row-label">Générer les sitemaps (tâche quotidienne - 01:00)</div>
+            <div class="admin-product-show-row-text">
+                <a style="text-decoration: underline" target="_blank" href="{{ site_url }}/auto/sitemap_dump.php">
+                    {{ site_url }}/auto/sitemap_dump.php
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-product-show-row-group">
+            <div class="admin-product-show-row-label">Supprimer les visiteurs de plus de 13 mois (tâche quotidienne - 02:00)</div>
+            <div class="admin-product-show-row-text">
+                <a style="text-decoration: underline" target="_blank" href="{{ site_url }}/auto/oldvisitors_remove.php">
+                    {{ site_url }}/auto/oldvisitors_remove.php
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-product-show-row-group">
+            <div class="admin-product-show-row-label">Supprimer les visiteurs robots (tâche quotidienne - 03:00)</div>
+            <div class="admin-product-show-row-text">
+                <a style="text-decoration: underline" target="_blank" href="{{ site_url }}/auto/robots_remove.php">
+                    {{ site_url }}/auto/robots_remove.php
+                </a>
+            </div>
+            <div style="margin-top: 10px; font-size: .8em;">
+                <div style="font-weight: 600;">App\AutoRemover\RobotsVisitorsRemover::ROBOTS_LIST</div>
+                {% for robot in robots %}
+                    <div>{{ robot }}</div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

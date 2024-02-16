@@ -1,0 +1,46 @@
+{{ form_start(filter_form) }}
+    <div class="admin-filters-container">
+        <div class="analytics-filters">
+            <div class="analytics-filters-row">
+                <div class="analytics-filters-col">
+                    <div class="analytics-filters-col-label">Page visitée</div>         
+                    <div class="analytics-filters-col-content">
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'recipe', label: 'Page recette', field: filter_form.recipe}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'article', label: 'Page article', field: filter_form.article}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'product', label: 'Page produit', field: filter_form.product}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vendor', label: 'Boutique vendeur', field: filter_form.vendor}) }}
+                    </div>
+                </div>
+                <div class="analytics-filters-col"> 
+                    <div class="analytics-filters-col-label">Catégorie visitée</div>             
+                    <div class="analytics-filters-col-content">
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'category', label: 'Page catégorie', field: filter_form.category}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'recipeSubCategory', label: 'Page sous-catégorie recette', field: filter_form.recipeSubCategory}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'articleSubCategory', label: 'Page sous-catégorie article', field: filter_form.articleSubCategory}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'productSubCategory', label: 'Page sous-catégorie produit', field: filter_form.productSubCategory}) }}
+                    </div>
+                </div>
+                <div class="analytics-filters-col">  
+                    <div class="analytics-filters-col-label">Visiteur</div>         
+                    <div class="analytics-filters-col-content">
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'origin', label: 'Origine', field: filter_form.origin}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'role', label: 'Rôle', field: filter_form.role}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'lang', label: 'Langue', field: filter_form.lang}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="analytics-filters-row">   
+                <div class="analytics-filters-col dual">
+                    <div class="analytics-filters-col-label">Période</div>         
+                    <div class="analytics-filters-col-line admin-form-date-time">
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'startAt', label: 'Début', field: filter_form.startAt}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'endAt', label: 'Fin', field: filter_form.endAt}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin-filters-submit">
+            <button type="submit" class="admin-button">Recherche</button>
+        </div>
+    </div>
+{{ form_end(filter_form) }}

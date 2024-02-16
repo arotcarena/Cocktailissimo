@@ -1,0 +1,126 @@
+{% extends "base.html.twig" %}
+
+{% block lang_alternate %}
+    {% for lang in ['en', 'fr', 'es', 'it'] %}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ url('recipe_show', {
+            _locale: lang, 
+            slug: attribute(recipe.slug, lang),
+            ref: recipe.ref
+        }) }}" />
+    {% endfor %}
+{% endblock %}
+
+{% set locale = app.request.locale %}
+{% set picturePath = (recipe.picture | picture_path_resolver('show_first')) %}
+
+ {% block metaDescription %}
+    {% if recipe.metaDescription %}
+        <meta name="description" content="{{ attribute(recipe.metaDescription, locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: attribute(recipe.title, locale),
+        type: 'article',
+        image: picturePath
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('recipeShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('recipeShow') }}
+{% endblock %}
+
+{% set headerClass = 'header product-page-header' %}
+
+
+
+{% block body %}
+
+    {% include "blog/recipe/_show_breadcrumb.html.twig" %}
+
+    <div class="recipe-show page-show">
+        <main class="recipe-show-wrapper">
+            <div class="recipe-show-row">
+                <div class="recipe-left-col">
+                    <div class="recipe-show-img-wrapper">
+                        <img 
+                            class="recipe-show-img" 
+                            src="{{ picturePath }}" 
+                            alt="{{ recipe.picture | picture_alt_resolver(locale) }}"
+                        >
+                    </div>
+                </div>
+                <div class="recipe-right-col">
+                    <h1 class="recipe-show-title">{{ attribute(recipe.title, locale) }} </h1>
+                    <ul class="product-card-list recipe-show-right-list">
+                        {% for iq in recipe.ingredientsQuantities %}
+                            <li class="product-card-list-item">
+                                <img 
+                                    class="list-item-img" 
+                                    src="{{ iq.ingredient.picture | picture_path_resolver }}" 
+                                    alt="{{ iq.ingredient.picture | picture_alt_resolver(locale) }}"
+                                    >
+                                <div class="list-item-text">
+                                    <span class="recipe-list-item-left">{{ attribute(iq.quantity, locale) }}</span>
+                                    <span class"recipe-list-item-right">{{ attribute(iq.ingredient.name, locale) }}</span>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="recipe-show-text link-underline">
+                {{ (attribute(recipe.htmlContent, locale) | parse_master_tags(app.request.locale)) | raw }}
+            </div>
+            <div class="recipe-show-footer">
+                {{ recipe.createdAt.format('d/m/Y') }}
+            </div>
+        </main>
+
+        <div class="recipe-show-subCategory-list-wrapper">
+            <h2 class="recipe-show-subCategory-list-title">{{ 'categories' | trans }}</h2>
+            {% set locale = app.request.locale %}
+            <ul class="recipe-show-subCategory-list">
+                {% for subCategory in recipe.subCategories %}
+                    <a 
+                        href="{{ path('recipe_subCategoryShow', {
+                                subCategorySlug: attribute(subCategory.slug, locale),
+                                _locale: locale
+                            }) }}"
+                        >
+                        <li class="recipe-show-subCategory-item">
+                            
+                                <img 
+                                    class="recipe-show-subCategory-img" 
+                                    src="/img/categories/{{ subCategory.smallPicture }}" 
+                                    alt="{{ attribute(subCategory.smallPictureAlt, locale) }}"
+                                >
+                                <span>{{ attribute(subCategory.name, locale) }}</span>
+                        </li>
+                    </a>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div 
+            id="recipe-show-sub-sections"
+            data-recipeid="{{ recipe.id }}"
+            data-recipetitle="{{ attribute(recipe.title, locale) | json_encode }}"
+            data-recipepicturepath="{{ picture_path_resolver(recipe.picture, 'small_index') | json_encode}}"
+            data-recipepicturealt="{{ picture_alt_resolver(recipe.picture, locale) | json_encode}}"
+        >
+        </div>
+    </div>
+
+
+    
+
+{% endblock %}
+

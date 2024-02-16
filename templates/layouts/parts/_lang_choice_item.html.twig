@@ -1,0 +1,10 @@
+<li class="lang-choice-item">
+    <a 
+        class="lang-choice{% if app.request.locale is same as lang %} selected{% endif %} {{ lang }}" 
+        href="{{ path('home', {_locale: lang}) }}"
+        aria-label="{{ ('change_locale.' ~ lang) | trans }}"
+        title="{{ ('change_locale.' ~ lang) | trans }}"
+        >
+        <img class="flag-icon" src="/img/icons/lang/{{lang}}.png" alt="{{ ('flag.'~ lang) | trans }}">
+    </a>
+</li>

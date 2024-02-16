@@ -1,0 +1,199 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_product_index') }} class="breadcrumb-link">Produits ({{count_products}})</a>
+        >
+        <span class="breadcrumb-item">{{ product.designation.fr }}</span>
+    </div>
+
+    <div class="admin-product-show lang-switch-wrapper">
+        
+        <h1>{{ product.designation.fr }}</h1>
+
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        <div class="admin-product-show-pictures">
+            {% if product_picture_position_resolver(product, 1) is not null %}
+            {{ include('admin/parts/_show_img.html.twig', {picture: product_picture_position_resolver(product, 1), label: 'Photo principale', name: 'pictureOne'}) }}  {# name utile seulement pour les tests #}
+            {% endif %}
+            {% if product_picture_position_resolver(product, 2) is not null %}
+            {{ include('admin/parts/_show_img.html.twig', {picture: product_picture_position_resolver(product, 2), label: 'Photo n°2', name: 'pictureTwo'}) }}
+            {% endif %}
+            {% if product_picture_position_resolver(product, 3) is not null %}
+            {{ include('admin/parts/_show_img.html.twig', {picture: product_picture_position_resolver(product, 3), label: 'Photo n°3', name: 'pictureThree'}) }}
+            {% endif %}
+        </div>
+
+        {{ include('admin/parts/_show_row.html.twig', {name: 'vendor', label: 'Vendeur', value: product.vendor.company}) }}
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: product.designation.en, label: 'Désignation (EN)', name: 'enDesignation', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.designation.fr, label: 'Désignation (FR)', name: 'frDesignation', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.designation.es, label: 'Désignation (ES)', name: 'esDesignation', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.designation.it, label: 'Désignation (IT)', name: 'itDesignation', lang: 'it'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: product.slug.en, label: 'Slug (EN)', name: 'enSlug', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.slug.fr, label: 'Slug (FR)', name: 'frSlug', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.slug.es, label: 'Slug (ES)', name: 'esSlug', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.slug.it, label: 'Slug (IT)', name: 'itSlug', lang: 'it'}) }}
+
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Conditionnements</div>
+            {% for packaging in product.packagingChoices %}
+                <div class="admin-show-card{{ packaging.listPosition == 1 ? ' active': '' }}">
+                    {% if packaging.listPosition == 1 %}
+                         <div class="center-wrapper">
+                            <div class="admin-select-card-badge">Conditionnement de base</div>
+                        </div>
+                    {% endif %}
+
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.publicRef, label: 'Réf. publique'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.privateRef, label: 'Réf. privée'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.eanCode, label: 'code EAN'}) }}
+
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.en: '', label: 'Label (EN)', lang: 'en'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.fr: '', label: 'Label (FR)', lang: 'fr'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.es: '', label: 'Label (ES)', lang: 'es'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.it: '', label: 'Label (IT)', lang: 'it'}) }}
+
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.consumerPriceHT | price_format), label: 'Prix public (HT)'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.businessPriceHT | price_format), label: 'Prix pro (HT)'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.weight, label: 'Poids (g)'}) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {
+                        value: packaging.exciseTax ? (packaging.exciseTax | price_format('fr')): '-', 
+                        label: 'Droits d\'accise'
+                    }) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {
+                        value: packaging.frSocialTax ? (packaging.frSocialTax | price_format('fr')): '-', 
+                        label: 'Cotisation Sécurité Sociale (France)'
+                    }) }}
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.stock, label: 'Stock'}) }}
+                </div>
+            {% endfor %}
+        </div>
+
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: product.brand, label: 'Marque', name: 'brand'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: product.category.name.fr ?? null, label: 'Catégorie', name: 'category'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: product.subCategory.name.fr ?? null, label: 'Sous-catégorie', name: 'subCategory'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: product.shortDescription.en, label: 'Description courte (EN)', name: 'enShortDescription', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.shortDescription.fr, label: 'Description courte (FR)', name: 'frShortDescription', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.shortDescription.es, label: 'Description courte (ES)', name: 'esShortDescription', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.shortDescription.it, label: 'Description courte (IT)', name: 'itShortDescription', lang: 'it'}) }}
+
+        {{ include('admin/parts/_html_show_row.html.twig', {value: (product.longHtmlDescription.en | parse_master_tags('en')), label: 'Description longue (EN)', name: 'enLongHtmlDescription', lang: 'en'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {value: (product.longHtmlDescription.fr | parse_master_tags('fr')), label: 'Description longue (FR)', name: 'frLongHtmlDescription', lang: 'fr'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {value: (product.longHtmlDescription.es | parse_master_tags('es')), label: 'Description longue (ES)', name: 'esLongHtmlDescription', lang: 'es'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {value: (product.longHtmlDescription.it | parse_master_tags('it')), label: 'Description longue (IT)', name: 'itLongHtmlDescription', lang: 'it'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: product.metaDescription.en, label: 'Méta-description (EN)', name: 'enMetaDescription', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.metaDescription.fr, label: 'Méta-description (FR)', name: 'frMetaDescription', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.metaDescription.es, label: 'Méta-description (ES)', name: 'esMetaDescription', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: product.metaDescription.it, label: 'Méta-description (IT)', name: 'itMetaDescription', lang: 'it'}) }}
+
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: product.hsCode, label: 'HS code', name: 'hsCode'}) }}
+        
+        {% set originCountry = (product.originCountry | trans({}, 'countries', 'fr')) ~ ' ('~ product.originCountry ~')' %}
+        {{ include('admin/parts/_show_row.html.twig', {value: originCountry, label: 'Pays d\'origine', name: 'originCountry'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: (product.vatLevel | trans({}, 'configs', 'fr')), label: 'Niveau de TVA', name: 'vatLevel'}) }}
+
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Avis</div>
+            <div class="admin-product-show-row-text reviews">
+                {% if product.reviewNote %}
+                    <a class="admin-clickable" href="{{ path('admin_product_reviews', {id: product.id}) }}">
+                        <strong>{{product.reviewNote | review_note_format('fr') }}</strong>
+                        <svg class="icon admin-i-star">
+                            <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                        </svg>
+                        <span>({{product.countReviews}} avis)</span>
+                    </a>     
+                {% else %}
+                    Aucun avis pour l'instant
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Stats</div>
+            <div class="admin-product-show-row-text">Vues : {{ product.countViews ?? 0 }}</div>
+            <div class="admin-product-show-row-text">Paniers : {{ product.countCarts ?? 0 }}</div>
+            <div class="admin-product-show-row-text">Ventes : {{ product.countSales ?? 0 }}</div>
+        </div>
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: product.createdAt.format('d/m/Y H:i'), label: 'Date de création', name: 'createdAt'}) }}
+        
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Produits suggérés</div>
+            <ul class="admin-product-list">
+                {% for suggestedProduct in product.suggestedProducts %}
+                    {% set firstPicture = product_picture_position_resolver(suggestedProduct, 1) %}
+                    <li class="admin-product-list-item suggestedProducts">
+                        <img class="admin-product-list-item-img" src={{ firstPicture | picture_path_resolver('index') }} alt={{ firstPicture | picture_alt_resolver('fr') }}>
+                        <div class="admin-product-list-item-text">
+                            <strong class="suggestedProduct">{{ suggestedProduct.designation.fr }}</strong>   {# la classe suggestedProduct sert pour les tests #}
+                            {{ suggestedProduct.category.name.fr }} / {{ suggestedProduct.subCategory.name.fr }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Recettes liées</div>
+            <ul class="admin-product-list">
+                {% for linkedRecipe in product.linkedRecipes %}
+                    <li class="admin-product-list-item suggestedProducts">
+                        <img class="admin-product-list-item-img" src={{ linkedRecipe.picture | picture_path_resolver('index') }} alt={{ linkedRecipe.picture | picture_alt_resolver('fr') }}>
+                        <div class="admin-product-list-item-text">
+                            <strong class="suggestedProduct">{{ linkedRecipe.title.fr }}</strong>   {# la classe suggestedProduct sert pour les tests #}
+                            {% for subCategory in linkedRecipe.subCategories %}
+                                / {{ subCategory.name.fr }}
+                            {% endfor %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Articles liés</div>
+            <ul class="admin-product-list">
+                {% for linkedArticle in product.linkedArticles %}
+                    <li class="admin-product-list-item suggestedProducts">
+                        <img class="admin-product-list-item-img" src={{ linkedArticle.picture | picture_path_resolver('index') }} alt={{ linkedArticle.picture | picture_alt_resolver('fr') }}>
+                        <div class="admin-product-list-item-text">
+                            <strong class="suggestedProduct">{{ linkedArticle.title.fr }}</strong>   {# la classe suggestedProduct sert pour les tests #}
+                            {{ linkedArticle.subCategory.name.fr }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href={{ path('admin_product_update', {id: product.id}) }}>Modifier</a>
+            <form action={{ path('admin_product_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-product') }}">
+                <button class="admin-button secondary-color" type="submit" name="id" value={{ product.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le produit "' ~ product.designation.fr ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

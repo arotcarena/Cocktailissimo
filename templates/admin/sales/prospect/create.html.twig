@@ -1,0 +1,64 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_prospect_index') }} class="breadcrumb-link">Emails de prospection ({{ prospectEmails_count }})</a>
+        >
+        <span class="breadcrumb-item">Envoyer</span>
+    </div>
+
+    <h1>Envoyer des emails de prospection</h1>
+
+    <form class="admin-form" method="POST">
+        <div class="admin-form-row" style="flex-direction: column;">
+            <div class="admin-form-group">
+                <input type="radio" name="lang" value="en" id="en" {% if lang is same as 'en' %}checked{% endif %}>
+                <label class="admin-form-label" for="en">EN</label>
+            </div>
+            <div class="admin-form-group">
+                <input type="radio" name="lang" value="fr" id="fr" {% if lang is same as 'fr' %}checked{% endif %}>
+                <label class="admin-form-label" for="fr">FR</label>
+            </div>
+            <div class="admin-form-group">
+                <input type="radio" name="lang" value="es" id="es" {% if lang is same as 'es' %}checked{% endif %}>
+                <label class="admin-form-label" for="es">ES</label>
+            </div>
+            <div class="admin-form-group">
+                <input type="radio" name="lang" value="it" id="it" {% if lang is same as 'it' %}checked{% endif %}>
+                <label class="admin-form-label" for="it">IT</label>
+            </div>
+            {% if errors and errors.lang %}
+                <div class="admin-form-error">
+                    <ul>
+                        {% for error in errors.lang %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            
+        </div>
+        <div class="admin-form-group">
+            <label class="admin-form-label" id="emails">Entrez les adresses email des destinataires</label>
+            <textarea for="emails" name="emails" class="admin-form-control" placeholder="adresse1@mail.fr, adresse2@mail.fr, etc...">{{ emails }}</textarea>
+            {% if errors and errors.emails %}
+                <div class="admin-form-error">
+                    <ul>
+                        {% for error in errors.emails %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Envoyer</button>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,133 @@
+<div class="admin-sendcloud-form-guide">
+
+    <div class="guide-header">
+        <img class="guide-header-logo" src="/img/admin/icon/sendcloud.png" alt="logo sendcloud">
+    </div>
+
+    <h3 class="guide-title">Ajouter une adresse</h3>
+
+    <!-- Adresse -->
+    <div class="guide-block">
+        {% set address = vendor.company.senderAddress %}
+        <div class="guide-block-title">Adresse</div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Adresse</div>
+                <div class="guide-box">{{ address.lineOne }}</div>
+                <div class="guide-block-group-info">Dans la ligne ci-dessus, enlever le numéro de la voie</div>
+            </div>
+            <div class="guide-block-group">
+                <div class="guide-label">Numéro de la voie</div>
+                <div class="guide-box">
+                    <span class="guide-block-group-info">--- à renseigner ---</span>
+                </div>
+            </div>
+        </div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Complément d'adresse (facultatif)</div>
+                <div class="guide-box">{{ address.lineTwo }}</div>
+            </div>
+            <div class="guide-block-group">
+                <div class="guide-label">Code postal</div>
+                <div class="guide-box">{{ address.postcode }}</div>
+            </div>
+        </div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Ville</div>
+                <div class="guide-box">{{ address.city }}</div>
+            </div>
+            {% if address.state %}
+                <div class="guide-block-group">
+                    <div class="guide-label">Etat</div>
+                    <div class="guide-box">{{ address.state }}</div>
+                </div>
+            {% else %}
+                <div class="guide-block-group">
+                    <div class="guide-label">Pays</div>
+                    <div class="guide-box">{{ address.country | trans({}, 'countries', 'fr') }}</div>
+                </div>   
+            {% endif %}
+        </div>
+        {% if address.state %}
+            <div class="guide-block-row">
+                <div class="guide-block-group">
+                    <div class="guide-label">Pays</div>
+                    <div class="guide-box">{{ address.country | trans({}, 'countries', 'fr') }}</div>
+                </div>   
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Coordonnées -->
+    <div class="guide-block">
+        <div class="guide-block-title">Coordonnées</div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Raison sociale</div>
+                <div class="guide-box">{{ vendor.company.socialName }}</div>
+            </div>
+            <div class="guide-block-group">
+                <div class="guide-label">Personne à contacter</div>
+                <div class="guide-box">Nina Sandin</div>
+                <div class="guide-block-group-info">En cas de problème c'est cocktailissimo qui sera contacté et pas le vendeur</div>
+            </div>
+        </div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Email</div>
+                <div class="guide-box">contact@cocktailissimo.com</div>
+            </div>
+            <div class="guide-block-group">
+                <div class="guide-label">Téléphone</div>
+                <div class="guide-box">+33647232520</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Détails de l'entreprise -->
+    <div class="guide-block">
+        <div class="guide-block-title">Détails de l'entreprise</div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Numéro EORI (facultatif)</div>
+                <div class="guide-box">
+                    <span class="guide-block-group-info">--- à renseigner si possible ---</span>
+                </div>
+            </div>
+            <div class="guide-block-group">
+                <div class="guide-label">Numéro TVA</div>
+                <div class="guide-box">{{ vendor.company.vatNumber ?? 'Je n\'ai pas de numéro de TVA' }}</div>
+            </div>
+        </div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Numéro IOSS (facultatif)</div>
+                <div class="guide-box">
+                    <span class="guide-block-group-info">--- à renseigner si possible ---</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Autres -->
+    <div class="guide-block">
+        <div class="guide-block-title">Autres</div>
+        <div class="guide-block-row">
+            <div class="guide-block-group">
+                <div class="guide-label">Adresse (facultatif)</div>
+                <div class="guide-box">{{ vendor.id }}</div>
+                <div class="guide-block-group-info">#ID du vendeur. Ce champ est obligatoire pour faire la liaison entre l'adresse sur sendcloud et le vendeur sur cocktailissimo.</div>
+            </div>
+            <div class="guide-block-group">
+                <div class="guide-label">Marque</div>
+                <div class="guide-box">Cocktailissimo</div>
+                <div class="guide-block-group-info">C'est le logo de cocktailissimo qui apparaîtra sur les colis</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="guide-button">Enregistrer</div>
+</div>
+

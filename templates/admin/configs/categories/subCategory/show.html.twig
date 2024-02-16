@@ -1,0 +1,74 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_category_index') }} class="breadcrumb-link">Catégories / Sous-catégories</a>
+        >
+        <span class="breadcrumb-item">{{ subCategory.name.fr }}</span>
+    </div>
+
+    <div class="admin-product-show lang-switch-wrapper">
+            
+        <h1>{{ subCategory.name.fr }}</h1>
+
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        <div class="admin-product-show-pictures">
+            <div>
+                <div class="admin-form-img-container">
+                    <img class="picture" src="/img/categories/{{subCategory.picture}}" alt="{{subCategory.pictureAlt.fr}}">
+                    <div class="admin-form-img-alt en-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (EN) : {{ subCategory.pictureAlt.en }}
+                    </div>
+                    <div class="admin-form-img-alt fr-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (FR) : {{ subCategory.pictureAlt.fr }}
+                    </div>
+                    <div class="admin-form-img-alt es-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (ES) : {{ subCategory.pictureAlt.es }}
+                    </div>
+                    <div class="admin-form-img-alt it-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (IT) : {{ subCategory.pictureAlt.it }}
+                    </div>
+                </div>
+                <div class="admin-show-img-label">Photo</div>
+            </div>
+        </div>
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.name.en, label: 'Nom (EN)', name: 'enName', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.name.fr, label: 'Nom (FR)', name: 'frName', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.name.es, label: 'Nom (ES)', name: 'esName', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.name.it, label: 'Nom (IT)', name: 'itName', lang: 'it'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.slug.en, label: 'Slug (EN)', name: 'enSlug', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.slug.fr, label: 'Slug (FR)', name: 'frSlug', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.slug.es, label: 'Slug (ES)', name: 'esSlug', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.slug.it, label: 'Slug (IT)', name: 'itSlug', lang: 'it'}) }}
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.metaDescription.en, label: 'Méta-description (EN)', name: 'enMetaDescription', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.metaDescription.fr, label: 'Méta-description (FR)', name: 'frMetaDescription', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.metaDescription.es, label: 'Méta-description (ES)', name: 'esMetaDescription', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.metaDescription.it, label: 'Méta-description (IT)', name: 'itMetaDescription', lang: 'it'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.shortDescription.en, label: 'Description courte (EN)', name: 'enShortDescription', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.shortDescription.fr, label: 'Description courte (FR)', name: 'frShortDescription', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.shortDescription.es, label: 'Description courte (ES)', name: 'esShortDescription', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: subCategory.shortDescription.it, label: 'Description courte (IT)', name: 'itShortDescription', lang: 'it'}) }}
+    
+
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'enLongHtmlDescription', label: 'Description longue (EN)', value: ((subCategory.longHtmlDescription.en ?? '') | parse_master_tags('en')), lang: 'en'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'frLongHtmlDescription', label: 'Description longue (FR)', value: ((subCategory.longHtmlDescription.fr ?? '') | parse_master_tags('fr')), lang: 'fr'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'esLongHtmlDescription', label: 'Description longue (ES)', value: ((subCategory.longHtmlDescription.es ?? '') | parse_master_tags('es')), lang: 'es'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'itLongHtmlDescription', label: 'Description longue (IT)', value: ((subCategory.longHtmlDescription.it ?? '') | parse_master_tags('it')), lang: 'it'}) }}
+        
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href={{ path('admin_subCategory_update', {id: subCategory.id}) }}>Modifier</a>
+        </div>
+
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,12 @@
+shipping_type:
+  home: home
+  relay: service point
+
+status_pending: Pending
+status_paid: Paid
+status_sent: Sent
+status_delivered: Delivered
+status_canceled: Canceled
+
+civility_m: Mr.
+civility_f: Mrs.

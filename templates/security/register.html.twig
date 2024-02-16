@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('registration' | trans)
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('securityForm') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent()}}
+    {{ encore_entry_link_tags('securityForm') }}
+{% endblock %}
+
+
+{% block body %}
+    <main class="security form">
+
+        <div id="security-form" class="security-form-wrapper" data-logincsrftoken="{{ csrf_token('authenticate') }}" data-registercsrftoken="{{ csrf_token('register') }}">
+            <h1>{{ 'registration' | trans }}</h1>
+
+            <div data-csrftoken="{{ csrf_token('register') }}" class="security-form register-form">
+                {{ form_start(registrationForm) }}
+                    
+                    {% if registrationForm.vars.valid is same as false %}
+                        <div class="form-main-error">{{ 'error.invalid_form' | trans }}</div>
+                    {% endif %}
+
+                    {{ include('form/_form_row.html.twig', {name: 'civility', label: '', field: registrationForm.civility}) }}
+                
+                    {{ include('form/_form_row.html.twig', {name: 'firstName', label: ('firstName' | trans), field: registrationForm.firstName}) }}
+
+                    {{ include('form/_form_row.html.twig', {name: 'lastName', label: ('lastName' | trans), field: registrationForm.lastName}) }}
+
+                    {{ include('form/_form_row.html.twig', {name: 'email', label: ('email_address' | trans), field: registrationForm.email}) }}
+                    
+                    {{ include('form/_form_row.html.twig', {name: 'plainPassword', label: ('password' | trans), field: registrationForm.plainPassword}) }}
+                    
+                    {{ include('form/_form_row.html.twig', {name: 'passwordConfirm', label: ('password_confirm' | trans), field: registrationForm.passwordConfirm}) }}
+                    
+                    {{ include('form/_form_checkbox_row.html.twig', {id: 'agreeTerms', name: 'agreeTerms', label: ('agree_terms_of_use' | trans), field: registrationForm.agreeTerms}) }}
+
+                    <div class="submit-group">
+                        <button class="form-button bordeaux no-react security-button" type="submit">
+                            <svg class="loader form-button-loader" aria-label="{{ 'loading' | trans }}">
+                                <use xlink:href="/img/icons/sprite.svg#loader"></use>
+                            </svg>
+                            <span>{{ 'registration' | trans }} </span>
+                        </button>
+                    </div>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </main>
+{% endblock %}

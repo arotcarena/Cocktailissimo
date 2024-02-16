@@ -1,0 +1,15 @@
+{% extends "email/base.html.twig" %}
+
+{% block title %}{{ 'security.change_email.html.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block h1 %}{{ 'security.change_email.html.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block body %}
+
+    <p>{{ 'security.change_email.html.message' | trans({}, 'emails', lang) }}</p>
+
+    <p style="margin: 40px 15px; font-size: 2em; letter-spacing: .1em;">
+        {{ code }}
+    </p>
+ 
+{% endblock %}

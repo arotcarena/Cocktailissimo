@@ -1,0 +1,55 @@
+{
+  
+  "url": {
+    "security": {
+      "change_password": "/it/cambiare-la-password",
+      "account_delete": "/it/cancella-il-mio-account",
+      "login": "/it/login",
+      "register": "/it/creare-un-account",
+      "ask_reset_password": "/it/dimenticato-password"
+    },
+    "account": "/it/conto",
+    "customerAccount": {
+        "index": "/it/conto",
+        "details": "/it/conto/dati-personali",
+        "address": "/it/conto/indirizzi",
+        "purchase": "/it/conto/ordini"
+    },
+    "vendorAccount": {
+        "index": "/it/venditore/conto",
+        "details": {
+            "index": "/it/venditore/conto/dati",
+            "personal": "/it/venditore/conto/dati/dati-personali",
+            "company": "/it/venditore/conto/dati/azienda",
+            "senderAddress": "/it/venditore/conto/dati/indirizzo-di-spedizione",
+            "payment": "/it/venditore/conto/dati/ricevere-pagamenti"
+        },
+        "buyerSpace": {
+            "index": "/it/venditore/conto/spazio-acquirente",
+            "purchase": "/it/venditore/conto/spazio-acquirente/ordini",
+            "deliveryAddress": "/it/venditore/conto/spazio-acquirente/indirizzi-di-consegna"
+        },
+        "vendorSpace": {
+            "index": "/it/venditore/conto/spazio-venditore",
+            "shop": "/it/venditore/conto/spazio-venditore/il-mio-negozio",
+            "product": "/it/venditore/conto/spazio-venditore/prodotti",
+            "review": "/it/venditore/conto/spazio-venditore/recensioni",
+            "purchase": "/it/venditore/conto/spazio-venditore/ordini",
+            "question": "/it/venditore/conto/spazio-venditore/domande"
+        }
+    },
+    "checkout": {
+        "payment_success": "/it/ordine-convalidato",
+        "index": "/it/ordinare"
+    },
+    "search": {
+        "index": "/it/ricerca"
+    },
+    "contact": {
+      "become_vendor": "/it/iniziare-a-vendere"
+    },
+    "recipe": {
+      "index": "it/ricette.html"
+    }
+  }
+}

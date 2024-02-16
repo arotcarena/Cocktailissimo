@@ -1,0 +1,105 @@
+hello: ¡Hola {name}!,
+see_you_soon: ¡Hasta pronto en Cocktailissimo! ¡Salud!
+
+prospect:
+  subject: Únete al mundo de la mixología creativa.
+  title: ¡Bienvenido al mundo de la mixología creativa!
+  screenshot_alt: Página de inicio de cocktailissimo.com
+  intro:
+    list:
+      one: ¿Eres un apasionado de la mixología, fabricante de utensilios o ingredientes dedicados a este exquisito arte?
+      two: ¿Buscas ampliar tu audiencia en B to B o B to C y dar a conocer tus productos excepcionales en todo el mundo?
+      three: ¡Sigue leyendo, porque tenemos una oportunidad emocionante para compartir contigo!
+    box:
+      one: >
+        Somos <strong>Cocktailissimo</strong>, un mercado especializado en utensilios e ingredientes de mixología. Nuestra plataforma es el lugar de encuentro definitivo para aficionados a los cócteles, bartenders profesionales y amantes de la mixología de todo el mundo. Creemos firmemente que los productos de calidad merecen una visibilidad de calidad, por eso te ofrecemos la oportunidad de comercializar tus creaciones en nuestro mercado dedicado a la mixología.
+      two:
+        a: ¿Las características técnicas de tu empresa no te permiten ser vendedor en nuestro mercado?
+        b: No hay problema, nuestro modelo de comercialización distributiva híbrida también nos permite acompañarte como distribuidor.
+
+  why_join_our_community: ¿Por qué unirse a nuestra comunidad?
+  arguments_list:
+    one:
+      label: Audiencia Específica
+      content: Nuestra plataforma es visitada por profesionales y aficionados a la mixología en busca de las últimas innovaciones en utensilios e ingredientes. Tus productos serán presentados ante un público cautivo y apasionado.
+    two:
+      label: Visibilidad Internacional
+      content: Tienes la oportunidad de destacar tus productos a nivel mundial. Nuestro mercado alcanza a clientes potenciales en todo el mundo, lo que significa que tus productos pueden encontrar su lugar en las estanterías virtuales de mixólogos de todo el mundo.
+    three:
+      label: Promoción Personalizada
+      content: Trabajamos en estrecha colaboración con nuestros vendedores para establecer campañas de marketing dirigidas, destacados especiales y promociones para maximizar la visibilidad de tus productos y aumentar tus ventas.
+    four:
+      label: Gestión Simplificada
+      content: Nuestra interfaz amigable para vendedores facilita la gestión de tu tienda en línea. Puedes seguir tus ventas, gestionar tu inventario e interactuar con tus clientes con facilidad.
+    five:
+      label: Soporte Continuo
+      content: Creemos en el crecimiento mutuo, por eso siempre estamos aquí para responder a tus preguntas, compartir consejos de marketing y apoyarte en tu éxito en nuestro mercado.
+    six:
+      label: Servicio Dedicado al SEO
+      content: Nos encargamos de la redacción web de tus productos para mejorar su posicionamiento web. Redactamos artículos de prensa, recetas ilustradas y videos que incorporan tus productos para impulsar tus ventas.
+  conclusion:
+    top: 
+      one: La mixología es un arte en constante evolución, y estamos ansiosos de colaborar con fabricantes innovadores que compartan nuestra pasión por la creación de productos excepcionales. Únete a nosotros en la aventura de la mixología y forma parte de nuestra comunidad dedicada a la excelencia en el mundo de los cócteles.
+      two: >
+        Si estás listo para darle a tus productos la visibilidad que merecen y asociarte con una plataforma líder en mixología, no dudes en contactarnos para discutir las emocionantes oportunidades que te esperan en <a class="contact-link" href="mailto:contacto@cocktailissimo.com" style="color: #FFF; font-weight: 700;">contacto@cocktailissimo.com</a>.
+      three: ¡Únete a nosotros en el arte de la mixología y juntos, creemos experiencias de cócteles excepcionales para nuestros clientes de todo el mundo!
+    hashtags: >
+      <span>#Mixología</span> 
+      <span>#Marketplace</span> 
+      <span>#Innovación</span> 
+      <span>#Cocktaillissimo</span> 
+      <span>#Excelencia</span>
+  end:
+    one: ¿Quieres convertirte en vendedor? Sigue este enlace
+    two: ¡Hasta muy pronto! ¡Salud!
+
+answer_notification:
+  subject: Respuesta a tu pregunta
+  text: "¡Alguien ha respondido a una pregunta que hiciste! Para ver la respuesta, sigue este enlace: {link}"
+  html:
+    title: Respuesta a tu pregunta
+    message: "¡Alguien ha respondido a una pregunta que hiciste! Para ver la respuesta, haz clic en el botón a continuación:"
+    link: Ver la respuesta
+
+security:
+  confirmation_email:
+    subject: Confirma tu dirección de correo electrónico
+    text: "Para validar tu cuenta, verifica tu dirección de correo electrónico siguiendo este enlace: {link}"
+    html:
+      title: Confirma tu dirección de correo electrónico
+      message: "Para validar tu cuenta, verifica tu dirección de correo electrónico haciendo clic en el botón a continuación:"
+      link: Verificar mi dirección de correo electrónico
+  change_email:
+    subject: Tu código de confirmación
+    text: "Para confirmar el cambio de tu dirección de correo electrónico, ingresa el siguiente código: {code}"
+    html:
+      title: Tu código de confirmación
+      message: "Para confirmar el cambio de tu dirección de correo electrónico, ingresa el código a continuación:"
+  reset_password:
+    subject: Restablecimiento de contraseña
+    text: "Has solicitado el restablecimiento de la contraseña. Para crear tu nueva contraseña, sigue este enlace: {link}"
+    html:
+      title: Restablecimiento de contraseña
+      message: "Has solicitado el restablecimiento de la contraseña. Para crear tu nueva contraseña, haz clic en el botón a continuación:"
+      link: Crear una nueva contraseña
+  review_confirmation:
+    subject: Confirma tu reseña
+    text: 'Has dejado una reseña sobre "{product}". Has dado una calificación de {rate}/5. Para confirmar esta reseña, sigue este enlace: {link}'
+    html:
+      title: Confirma tu reseña
+      message: >
+        <p>Has dejado una reseña sobre <strong>{product}</strong>.</p>
+        <p>
+          <div><strong>Calificación:</strong> {rate}/5</div>
+          <div><strong>Título de la reseña:</strong> {title}</div>
+          <div><strong>Comentario:</strong> {comment}</div>
+        </p>
+        <p>Para confirmar esta reseña, haz clic en el botón a continuación:</p>
+      link: Confirmar mi reseña
+  all_in_one_init:
+    subject: Crea tu contraseña
+    text: "¡Tu cuenta está creada! Para acceder a ella, debes inicializar tu contraseña siguiendo este enlace: {link}"
+    html:
+      title: Crea tu contraseña
+      message: "¡Tu cuenta está creada! Para acceder a ella, debes inicializar tu contraseña haciendo clic en el botón a continuación:" 
+      link: Crear mi contraseña

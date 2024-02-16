@@ -1,0 +1,11 @@
+{% extends "email/base.html.twig" %}
+
+{% block title %}Informations supplémentaires demandées{% endblock %}
+
+{% block body %}
+    <h1 style="font-size: 1.4em;">Nous avons besoin d'informations supplémentaires</h1>
+    
+    <p>Les exigences en matière de sécurité de votre compte ont évolué. Veuillez vous connecter à votre tableau de bord vendeur pour fournir les informations nécessaires.</p>
+
+    <p>{{ 'seeYouSoon' | trans }}</p>
+{% endblock %}

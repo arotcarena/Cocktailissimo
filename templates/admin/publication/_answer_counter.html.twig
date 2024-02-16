@@ -1,0 +1,5 @@
+{% if answers | length > 0 %}
+    <div class="admin-review-card-answer-count">
+        {{ answers | length }} réponse{% if answers | length > 1 %}s{% endif %}
+    </div>
+{% endif %}

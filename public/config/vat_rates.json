@@ -1,0 +1,234 @@
+{
+    "AT": {
+        "vat_level_standard": 20,
+        "vat_level_parking": 13,
+        "vat_level_reduce_1": 13,
+        "vat_level_reduce_2": 10,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "BE": {
+        "vat_level_standard": 21,
+        "vat_level_parking": 12,
+        "vat_level_reduce_1": 12,
+        "vat_level_reduce_2": 6,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "BG": {
+        "vat_level_standard": 20,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": 9,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "HR": {
+        "vat_level_standard": 25,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 13,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "CY": {
+        "vat_level_standard": 19,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 9,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": null
+    },
+    "CZ": {
+        "vat_level_standard": 21,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 15,
+        "vat_level_reduce_2": 10,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "DK": {
+        "vat_level_standard": 25,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": null,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "EE": {
+        "vat_level_standard": 20,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": 9,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "FI": {
+        "vat_level_standard": 24,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 14,
+        "vat_level_reduce_2": 10,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "FR": {
+        "vat_level_standard": 20,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 10,
+        "vat_level_reduce_2": 5.5,
+        "vat_level_super_reduce": 2.1,
+        "vat_level_zero": 0
+    },
+    "DE": {
+        "vat_level_standard": 19,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": 7,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "GR": {
+        "vat_level_standard": 24,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 13,
+        "vat_level_reduce_2": 6,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "HU": {
+        "vat_level_standard": 27,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 18,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "IE": {
+        "vat_level_standard": 23,
+        "vat_level_parking": 13.5,
+        "vat_level_reduce_1": 9,
+        "vat_level_reduce_2": 13.5,
+        "vat_level_super_reduce": 4.8,
+        "vat_level_zero": 0
+    },
+    "IT": {
+        "vat_level_standard": 22,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 10,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": 4,
+        "vat_level_zero": 0
+    },
+    "LV": {
+        "vat_level_standard": 21,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": 12,
+        "vat_level_super_reduce": 5,
+        "vat_level_zero": 0
+    },
+    "LT": {
+        "vat_level_standard": 21,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 9,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "LU": {
+        "vat_level_standard": 17,
+        "vat_level_parking": 14,
+        "vat_level_reduce_1": 14,
+        "vat_level_reduce_2": 8,
+        "vat_level_super_reduce": 3,
+        "vat_level_zero": 0
+    },
+    "MT": {
+        "vat_level_standard": 18,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 7,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "NL": {
+        "vat_level_standard": 21,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 9,
+        "vat_level_reduce_2": null,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "PL": {
+        "vat_level_standard": 23,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 8,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "PT": {
+        "vat_level_standard": 23,
+        "vat_level_parking": 13,
+        "vat_level_reduce_1": 13,
+        "vat_level_reduce_2": 6,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "RO": {
+        "vat_level_standard": 19,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 9,
+        "vat_level_reduce_2": 5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "SK": {
+        "vat_level_standard": 20,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": 10,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "SI": {
+        "vat_level_standard": 22,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 5,
+        "vat_level_reduce_2": 9.5,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "ES": {
+        "vat_level_standard": 21,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": null,
+        "vat_level_reduce_2": 10,
+        "vat_level_super_reduce": 4,
+        "vat_level_zero": 0
+    },
+    "SE": {
+        "vat_level_standard": 25,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 12,
+        "vat_level_reduce_2": 6,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": 0
+    },
+    "CH": {
+        "vat_level_standard": 8.1,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 3.8,
+        "vat_level_reduce_2": 2.6,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": null
+    },
+    "GB": {
+        "vat_level_standard": 20,
+        "vat_level_parking": null,
+        "vat_level_reduce_1": 5,
+        "vat_level_reduce_2": null,
+        "vat_level_super_reduce": null,
+        "vat_level_zero": null
+    }
+}

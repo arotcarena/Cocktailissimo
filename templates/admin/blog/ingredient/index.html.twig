@@ -1,0 +1,88 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_product_index') }} class="breadcrumb-link">Ingrédients ({{count_ingredient}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Ingrédients</h1>
+
+        {{ form_start(filter_form) }}
+            <div class="admin-filters-container">
+                <div class="admin-filters">
+                    <div class="admin-filters-row">            
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'q', label: 'Recherche par texte', field: filter_form.q}) }}
+                    </div>
+                </div>
+                <div class="admin-filters-submit">
+                    <button type="submit" class="admin-button">Recherche</button>
+                </div>
+            </div>
+        {{ form_end(filter_form) }}
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Nom</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for ingredient in pagination %}
+                    <tr>
+                        <td class="admin-table-td-img">
+                            <img class="admin-table-img" src={{ ingredient.picture | picture_path_resolver }} alt={{ ingredient.picture | picture_alt_resolver('fr') }}>
+                        </td>
+                        <td>{{ ingredient.name.fr }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_ingredient_show', {id: ingredient.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_ingredient_update', {id: ingredient.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_ingredient_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-ingredient') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ ingredient.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement l\'ingrédient "' ~ ingredient.name.fr ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_ingredient_create') }}">Ajouter un ingrédient</a>
+        </div>
+   </div>
+
+{% endblock %}

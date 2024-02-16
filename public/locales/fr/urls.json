@@ -1,0 +1,60 @@
+{
+    "url": {
+        "security": {
+            "change_password": "/fr/changer-de-mot-de-passe",
+            "account_delete": "/fr/supprimer-mon-compte",
+            "login": "/fr/connexion",
+            "register": "/fr/creer-un-compte",
+            "ask_reset_password": "/fr/mot-de-passe-oublié"
+        },
+        "account": {
+            "label": "Mon compte",
+            "path": "/fr/mon-compte"
+        },
+        "customerAccount": {
+            "index": "/fr/mon-compte",
+            "details": "/fr/mon-compte/mes-informations",
+            "address": "/fr/mon-compte/mes-adresses",
+            "purchase": "/fr/mon-compte/mes-commandes"
+        },
+        "vendorAccount": {
+            "index": "/fr/vendeur/mon-compte",
+            "details": {
+                "index": "/fr/vendeur/mon-compte/mes-informations",
+                "personal": "/fr/vendeur/mon-compte/mes-informations/informations-personnelles",
+                "company": "/fr/vendeur/mon-compte/mes-informations/entreprise",
+                "senderAddress": "/fr/vendeur/mon-compte/mes-informations/adresse-d-expedition",
+                "payment": "/fr/vendeur/mon-compte/mes-informations/recevoir-des-paiements"
+            },
+            "buyerSpace": {
+                "index": "/fr/vendeur/mon-compte/espace-acheteur",
+                "purchase": "/fr/vendeur/mon-compte/espace-acheteur/mes-commandes",
+                "deliveryAddress": "/fr/vendeur/mon-compte/espace-acheteur/mes-adresses-de-livraison"
+            },
+            "vendorSpace": {
+                "index": "/fr/vendeur/mon-compte/espace-vendeur",
+                "shop": "/fr/vendeur/mon-compte/espace-vendeur/ma-boutique",
+                "product": "/fr/vendeur/mon-compte/espace-vendeur/mes-produits",
+                "review": "/fr/vendeur/mon-compte/espace-vendeur/avis",
+                "purchase": "/fr/vendeur/mon-compte/espace-vendeur/commandes",
+                "question": "/fr/vendeur/mon-compte/espace-vendeur/questions"
+            }
+        },
+        "checkout": {
+            "payment_success": "/fr/commande-validee",
+            "index": "/fr/passer-commande"
+        },
+        "search": {
+            "index": "/fr/recherche"
+        },
+        "contact": {
+            "become_vendor": "/fr/devenir-vendeur"
+        },
+        "recipe": {
+            "index": "/fr/recettes.html"
+        }
+    }
+}
+
+
+    

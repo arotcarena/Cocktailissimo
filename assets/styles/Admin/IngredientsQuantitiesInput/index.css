@@ -1,0 +1,57 @@
+.iq-list {
+    margin: 20px 0;
+}
+.iq-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 10px 0;
+    padding-right: calc(8px + 1.8em);
+    position: relative;
+    box-shadow: 0 0 2px var(--color-admin-black);
+}
+.iq-card img {
+    width: 70px;
+    height: 70px;
+}
+.iq-card .close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.iq-card .edit-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+.iq-card .i-close {
+    width: 1.4em;
+    height: 1.4em;
+}
+.iq-card .i-edit {
+    width: 1.7em;
+    height: 1.7em;
+}
+
+.iq-show-row-label {
+    display: flex;
+    gap: 5px;
+}
+
+
+
+.ingredient-quantity-form .iq-card .edit-button {
+    top: calc(50% - .9em);
+    right: 10px;
+    height: 1.8em;
+}
+.ingredient-quantity-form .iq-card .i-edit {
+    width: 1.8em;
+    height: 1.8em;
+}
+
+.ingredient-quantity-form .admin-suggest-img {
+    width: 50px;
+    height: 50px;
+}
+

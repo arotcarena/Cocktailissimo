@@ -1,0 +1,214 @@
+.right-search-link {
+    opacity: 1;
+    transition: .3s;
+}
+.right-search-link.hidden {
+    opacity: 0;
+}
+.inline-search-tool-wrapper {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .8);
+    animation: fadeIn .1s forwards;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 25px;
+}
+.inline-search-tool-wrapper.closing {
+    animation: fadeOut .1s forwards;
+}
+
+.inline-search-tool-wrapper .i-close {
+    color: #FFF;
+}
+
+.inline-search-tool {
+    display: none;
+    margin-left: 30px;
+}
+.inline-search-tool .product-card {
+    width: calc(16.5% - 15px);
+}
+
+.inline-search-tool .search-tool-header {
+    display: flex;
+    gap: 10px;
+}
+
+.inline-search-tool .q-group {
+    height: 40px;
+    width: 0;
+    position: relative;
+    flex: 1 0;
+    animation: inlineSearchToolOpening .1s forwards;
+}
+@keyframes inlineSearchToolOpening {
+    from {
+        width: 0;
+    } to {
+        width: 450px;
+    }
+}
+.inline-search-tool-wrapper.closing .inline-search-tool .q-group {
+    animation: inlineSearchToolClosing .1s forwards;
+}
+@keyframes inlineSearchToolClosing {
+    from {
+        width: 450px;
+    } to {
+        width: 0;
+    }
+}
+
+.inline-search-tool .q-input {
+    height: 100%;
+    width: 100%;
+    border: none;
+    border-radius: 1000px;
+    outline: none;
+    font-size: 1.1em;
+    padding-left: 44px;
+    background-color: #FFF;
+    padding-bottom: 4px;
+    padding-right: calc(13px + 1.1em);
+}
+.inline-search-tool .q-input::placeholder {
+    color: var(--color-black);
+    font-weight: 300;
+}
+.inline-search-tool .q-icon {
+    position: absolute;
+    left: 15px;
+    width: 1.4em;
+    height: 1.4em;
+    top: calc(50% - 0.7em);
+}
+.inline-search-tool .empty-control {
+    position: absolute;
+    right: 13px;
+    top: calc(50% - .55em);
+}
+.inline-search-tool .empty-control .i-close {
+    width: 1.1em;
+    height: 1.1em;
+    color: var(--color-black);
+}
+.inline-search-tool-expand {
+    position: fixed;
+    top: 85px;
+    left: 30px;
+    right: 30px;
+    border-radius: 18px;
+    background-color: #FFF;
+    padding: 25px;
+}
+
+
+.inline-search-tool .product-suggest-list {
+    flex: 1 0;
+    overflow: auto;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 15px;
+}
+
+
+.inline-search-tool .product-suggest-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 160px;
+    flex: none;
+}
+
+
+.inline-search-tool .product-suggest-item p, .product-suggest-item h2 {
+    margin: 5px 0;
+}
+
+.inline-search-tool .item-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+.inline-search-tool .item-title {
+    text-transform: uppercase;
+    font-size: 1.1em;
+    font-weight: 400;
+    position: relative;
+}
+.inline-search-tool .item-category {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: var(--color-grey);
+}
+.inline-search-tool .item-price {
+    font-size: 1.2em;
+}
+
+
+.inline-search-tool .item-img {
+    width: 160px;
+    height: 160px;
+}
+.inline-search-tool .item-title {
+    transition: all .3s;
+}
+.inline-search-tool .product-suggest-item-link:hover .item-title, .inline-search-tool .product-suggest-item-link:hover + .item-text .item-title {
+    text-decoration: underline;
+    color: var(--color-cocktailissimo-secondary);
+    font-weight: 500;
+}
+
+
+
+.inline-search-tool .loader {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.inline-search-tool .search-link {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.inline-search-tool .form-button.bordeaux {
+    padding: 0 25px;
+}
+.inline-search-tool .search-link .form-button {
+    width: auto;
+}
+.inline-search-tool .form-button .loader {
+    margin: 0;
+}
+
+
+@media only screen and (min-width: 1250px) {
+    .inline-search-tool {
+        display: flex;
+    }
+}
+
+@media only screen and (min-width: 1450px) {
+    .inline-search-tool-expand {
+        left: 160px;
+        right: 160px;
+    }
+}
+@media only screen and (min-width: 1700px) {
+    .inline-search-tool-expand {
+        left: 300px;
+        right: 300px;
+    }
+}

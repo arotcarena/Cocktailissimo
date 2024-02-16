@@ -1,0 +1,45 @@
+    {
+        "assert": {
+            "invalid": "Invalid field",
+            "choice": "Please choose from the provided options",
+            "choice_country": "Please choose from the available countries",
+            "notBlank": {
+                "civility": "Civility is required",
+                "firstName": "First name is required",
+                "lastName": "Last name is required",
+                "email": "Email address is required",
+                "phone": "Phone number is required",
+                "password": "Password is required",
+                "password_confirm": "Password confirmation is required",
+                "address_lineOne": "Address is required",
+                "postcode": "Postal code is required",
+                "city": "City is required",
+                "country": "Country is required",
+                "address_state": "State/province is required",
+                "social_name": "Business name is required",
+                "identification_number": "Identification number is required",
+                "social_address": "Business headquarters address is required",
+                "sender_address": "Shipping address is required",
+                "answer": "An answer is required",
+                "message": "Message is required",
+                "category": "Category is required",
+                "subCategory": "Sub-category is required"
+            },
+            "file": {
+                "format": "Incorrect format. Accepted formats are: {{accepted_formats}}"
+            },
+            "notUnique": {
+                "email": "This email address is already in use."
+            },
+            "length": {
+                "min": "{{min}} minimum characters",
+                "max": "{{max}} maximum characters"
+            },
+            "email": "Invalid email address",
+            "phone": "Invalid phone number",
+            "checkbox": {
+                "true": "You must check this box"
+            },
+            "not_same_passwords": "The two passwords do not match"
+        }
+    }

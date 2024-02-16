@@ -1,0 +1,12 @@
+shipping_type:
+  home: domicilio
+  relay: punto de relevo
+
+status_pending: Pendiente
+status_paid: Pagado
+status_sent: Enviado
+status_delivered: Entregado
+status_canceled: Cancelado
+
+civility_m: Señor
+civility_f: Señora

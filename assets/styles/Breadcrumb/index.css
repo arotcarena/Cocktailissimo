@@ -1,0 +1,46 @@
+.breadcrumb {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 3px 15px;
+    font-size: .9em;
+    line-height: 1.1;
+    letter-spacing: .9;
+}
+.breadcrumb-link, .breadcrumb-home-link {
+    font-weight: 600;
+}
+.breadcrumb-home-link:hover, .breadcrumb-link:hover {
+    text-decoration: underline;
+}   
+.breadcrumb-home-link {
+    font-size: .8em;
+    text-transform: uppercase;
+}
+
+
+@media only screen and (min-width: 900px) {
+    .breadcrumb {
+        padding: 0 20px;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .breadcrumb {
+        padding: 0 50px;
+        font-size: 1em;
+    }
+}
+
+@media only screen and (min-width: 1130px) {
+    .breadcrumb {
+        margin-bottom: 25px;
+        margin-top: 10px;
+    }
+}
+
+@media only screen and (min-width: 1250px) {
+    .breadcrumb {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+}

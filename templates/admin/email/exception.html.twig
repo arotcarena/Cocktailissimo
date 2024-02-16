@@ -1,0 +1,42 @@
+{% extends "admin/email/base.html.twig" %}
+
+{% block title %}Erreur non capturée{% endblock %}
+
+{% block body %}
+
+    <h1>Uncaught Exception</h1>
+
+    <div style="margin: 20px 0;">
+        <div style="font-weight: 600;">Code</div>
+        <p>{{ error.code }}</p>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <div style="font-weight: 600;">Message</div>
+        <p>{{ error.message }}</p>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <div style="font-weight: 600;">Trace as string</div>
+        <p>{{ error.traceAsString }}</p>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <div style="font-weight: 600;">Some details</div>
+        {% for traceLine in error.trace %}
+            <p>
+                {% if traceLine.class is defined %}
+                    <div><strong style="font-size: .9em;">class</strong> {{ traceLine.class }}</div>
+                {% endif %}
+                {% if traceLine.function is defined %}
+                    <div><strong style="font-size: .9em;">function</strong> {{ traceLine.function }}</div>
+                {% endif %}
+                {% if traceLine.args[0].requestUri is defined %}
+                    <div><strong style="font-size: .9em;">requestUri</strong> {{ traceLine.args[0].requestUri }}</div>
+                {% endif %}
+            </p>
+        {% endfor %}
+    </div>
+
+
+{% endblock %}

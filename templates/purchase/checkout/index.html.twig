@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('checkout' | trans)
+    }) }}
+{% endblock %}
+
+
+{% block javascript %}
+    {{ encore_entry_script_tags('app') }}
+    {{ encore_entry_script_tags('checkout') }}
+{% endblock %}
+
+{% block style %}
+    {{ encore_entry_link_tags('app') }}
+    {{ encore_entry_link_tags('checkout') }}
+{% endblock %}
+
+{% block header %}
+    {% include "purchase/checkout/_checkout_header.html.twig" %}
+{% endblock %}
+
+
+{% block body %}
+    <div id="checkout">
+        <h1>{{ 'checkout' | trans }}</h1>
+    </div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">Taux de TVA</span>
+    </div>
+
+   <div class="admin-container">
+        <h1>Taux de TVA</h1>
+
+        {{ form_start(form) }}
+        
+        <table style="max-width: 1000px;" class="admin-table admin-table-vatrates">
+            <thead>
+                <tr>
+                    <th>Pays</th>
+                    <th>code ISO</th>
+                    <th>Taux standard (%)</th>
+                    <th>Taux parking (%)</th>
+                    <th>Taux réduit 1 (%)</th>
+                    <th>Taux réduit 2 (%)</th>
+                    <th>Taux super-réduit (%)</th>
+                    <th>Taux zéro (%)</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for country in countries %}
+                    <tr {% if country == 'CH' or country == 'GB' %}style="color: rgb(204, 64, 29);"{% endif %}>
+                        <td>{{ country | trans({}, 'countries', 'fr') }}</td>
+                        <td>{{ country }}</td>
+                        <td>
+                            {{ form_widget(form[country ~ ':vat_level_standard'], {attr: {class: 'admin-form-control'}}) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form[country ~ ':vat_level_parking'], {attr: {class: 'admin-form-control'}}) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form[country ~ ':vat_level_reduce_1'], {attr: {class: 'admin-form-control'}}) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form[country ~ ':vat_level_reduce_2'], {attr: {class: 'admin-form-control'}}) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form[country ~ ':vat_level_super_reduce'], {attr: {class: 'admin-form-control'}}) }}
+                        </td>
+                        <td>
+                            {{ form_widget(form[country ~ ':vat_level_zero'], {attr: {class: 'admin-form-control'}}) }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <div class="admin-buttons-fixed-wrapper">
+            <button type="submit" class="admin-button">Valider</button>
+        </div>
+
+        {{ form_end(form) }}
+   </div>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a class="breadcrumb-link" href="{{ path('admin_trafficAnalytics_index') }}">Web analytics</a>
+        >
+        <a href={{ path('admin_visit_index') }} class="breadcrumb-link">Visites ({{count_visits}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Visites *</h1>
+
+        <div class="admin-table-info-group">
+            <div class="admin-table-info">* Une visite est comptabilisée pour chaque page différente vue lors d'une même session. Les visites des admins ne sont pas comptabilisées.</div>
+        </div>
+
+
+        {% include "admin/traffic_analytics/_filters.html.twig" %}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Visiteur</th>
+                    <th>Page</th>
+                    <th>Url</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for visit in pagination %}
+                    <tr>
+                        <td style="text-align: left; max-width: 450px;">
+                            <div style="margin-bottom: 5px;" title="Voir le visiteur #{{ visit.visitor.cookieId }}">
+                                <a href="{{ path('admin_visitor_show', {id: visit.visitor.id}) }}" style="text-decoration: underline;">
+                                    #{{ visit.visitor.cookieId }}
+                                </a>
+                            </div>
+                            <div><strong>Langue :</strong> {{ visit.visitor.lang }}</div>
+                            <div><strong>Rôle :</strong> {{ (action.visitor.role ?? '') | trans({}, 'configs', 'fr') }}</div>
+                            <div><strong>Origine :</strong> {{ (visit.visitor.origin ?? '') | trans({}, 'configs', 'fr') }}</div>
+                            <div style="cursor: help;" title="{{ visit.visitor.userAgent }}">
+                                <strong>User-Agent :</strong> {{ visit.visitor.userAgent | user_agent_excerpt }}
+                            </div>
+                        </td>
+                        <td>{{ visit.route }}</td>
+                        <td>{{ visit.url }}</td>
+                        <td>{{ visit.createdAt.format('d/m/Y H:i:s') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+   </div>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a class="breadcrumb-link" href="{{ path('admin_trafficAnalytics_index') }}">Web analytics</a>
+        >
+        <a href={{ path('admin_visitor_index') }} class="breadcrumb-link">Visiteurs ({{count_visitors}})</a>
+        >
+        <span class="breadcrumb-item">#{{ visitor.cookieId }}</span>
+    </div>
+
+    <div class="admin-container">
+        
+        <h1>Visiteur #{{ visitor.cookieId }}</h1>
+        <div style="display: flex; flex-direction: column; gap: 30px; margin: 0 auto; max-width: 1000px;">
+            <div class="admin-form-row">
+                {{ include('admin/parts/_show_row.html.twig', {name: 'cookieId', label: 'Cookie #ID', value: visitor.cookieId}) }}
+            </div>
+            <div class="admin-form-row" style="gap: 50px;">
+                {{ include('admin/parts/_show_row.html.twig', {name: 'lang', label: 'Langue', value: visitor.lang}) }}
+
+                {{ include('admin/parts/_show_row.html.twig', {name: 'origin', label: 'Origine', value: (visitor.origin | trans({}, 'configs', 'fr'))}) }}
+
+                {{ include('admin/parts/_show_row.html.twig', {name: 'role', label: 'Rôle', value: (visitor.role | trans({}, 'configs', 'fr'))}) }}
+            </div>
+            <div class="admin-form-row">
+                {{ include('admin/parts/_show_row.html.twig', {name: 'userAgent', label: 'User-Agent', value: visitor.userAgent}) }}
+            </div>
+            <div class="admin-form-row">
+                {{ include('admin/parts/_show_row.html.twig', {name: 'createdAt', label: 'Date 1ère visite', value: visitor.createdAt.format('d/m/Y H:i:s')}) }}
+            </div>
+        </div>
+
+        
+        <div style="margin: 60px 0;">
+            <h2 style="text-align: center;">Visites</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Visiteur</th>
+                        <th>Page</th>
+                        <th>Url</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for visit in visitsPagination %}
+                        <tr>
+                            <td>#{{ visit.visitor.cookieId }}</td>
+                            <td>{{ visit.route }}</td>
+                            <td>{{ visit.url }}</td>
+                            <td>{{ visit.createdAt.format('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="admin-navigation">
+                {{ knp_pagination_render(visitsPagination, 'admin/layouts/_admin_pagination.html.twig', {}, {pageParameterName: 'visits_page'}) }}
+            </div>
+        </div>
+
+        <div style="margin: 60px 0;">
+            <h2 style="text-align: center;">Actions</h2>
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Visiteur</th>
+                        <th>Type</th>
+                        <th>Détail</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for action in actionsPagination %}
+                        <tr>
+                            <td>#{{ action.visitor.cookieId }}</td>
+                            <td>{{ action.type | trans({}, 'configs', 'fr') }}</td>
+                            <td>{{ action.detail | show_va_detail(action.type) }}</td>
+                            <td>{{ action.createdAt.format('d/m/Y H:i:s') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="admin-navigation">
+                {{ knp_pagination_render(actionsPagination, 'admin/layouts/_admin_pagination.html.twig', {}, {pageParameterName: 'actions_page'}) }}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

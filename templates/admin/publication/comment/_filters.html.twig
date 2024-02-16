@@ -1,0 +1,26 @@
+{{ form_start(filter_form) }}
+    <div class="admin-filters-container">
+        <div class="admin-filters">
+            <div class="admin-filters-row">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'q', label: 'Recherche par texte', field: filter_form.q}) }}
+            </div>
+            <div class="admin-filters-row admin-checkbox-group-wrapper" style="flex-direction: column; gap: 0; align-items: flex-start; margin: 0 30px;">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'aboutArticle', label: 'A propos d\'un article', field: filter_form.aboutArticle}) }}
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'aboutRecipe', label: 'A propos d\'une recette', field: filter_form.aboutRecipe}) }}
+            </div>
+            
+            <div class="admin-filters-row admin-checkbox-group-wrapper" style="flex-direction: column; gap: 0; align-items: flex-start; margin: 0 30px;">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'withoutAdminAnswer', label: 'Sans réponse de l\'admin', field: filter_form.withoutAdminAnswer}) }}
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'withoutVendorAnswer', label: 'Sans réponse du vendeur', field: filter_form.withoutVendorAnswer}) }}
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'withoutAnswer', label: 'Sans aucune réponse', field: filter_form.withoutAnswer}) }}
+            </div>
+            
+            <div class="admin-filters-row">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'sortBy', label: 'tri', field: filter_form.sortBy}) }}
+            </div>
+        </div>
+        <div class="admin-filters-submit">
+            <button type="submit" class="admin-button">Recherche</button>
+        </div>
+    </div>
+{{ form_end(filter_form) }}

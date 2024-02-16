@@ -1,0 +1,17 @@
+<div class="admin-review-card-header">
+    <a href="{{ path('admin_recipe_show', {id: recipe.id}) }}">
+        <img class="admin-review-card-header-img" src="{{ recipe.picture | picture_path_resolver('small_index') }}" alt="{{ recipe.picture | picture_alt_resolver('fr') }}">
+    </a>
+    <div class="admin-review-card-header-content">
+        <div class="header-title">
+            <span>
+                <a href="{{ path('admin_recipe_show', {id: recipe.id}) }}">{{ recipe.title.fr }}</a>
+            </span>
+            <span class="admin-review-card-text-mute ml">{{ recipe.ref }}</span>
+        </div>
+        <div class="header-text">
+            <span>{{ recipe.createdAt.format('d/m/Y H:i') }}</span>
+        </div>
+    </div>
+    <div class="admin-review-card-header-type">Recette</div>
+</div>

@@ -1,0 +1,8 @@
+#payment-form {
+    max-width: 700px;
+    margin-top: 25px;
+}
+  
+#payment-form .checkbox-group {
+    padding-left: 5px;
+}

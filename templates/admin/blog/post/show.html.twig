@@ -1,0 +1,65 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_post_index') }} class="breadcrumb-link">Publications ({{count_post}})</a>
+        >
+        <span class="breadcrumb-item">{{ post.title.fr }}</span>
+    </div>
+
+    <div class="admin-product-show lang-switch-wrapper">
+            
+        <h1>{{ post.title.fr }}</h1>
+
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        
+        <div class="admin-form-row">
+            <div class="admin-post-show-iframe-wrapper">
+                {{ post.iframe | raw }}
+            </div>
+        </div>
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: post.title.en, label: 'Titre (EN)', name: 'enName', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: post.title.fr, label: 'Titre (FR)', name: 'frName', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: post.title.es, label: 'Titre (ES)', name: 'esName', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: post.title.it, label: 'Titre (IT)', name: 'itName', lang: 'it'}) }}
+
+
+        {{ include('admin/parts/_show_row.html.twig', {value: post.createdAt.format('d/m/Y H:i'), label: 'Date de publication', name: 'createdAt'}) }}
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Produits associés</div>
+            <ul class="admin-product-list">
+                {% for product in post.linkedProducts %}
+                {% set firstPicture = product_picture_position_resolver(product, 1) %}
+                    <li class="admin-product-list-item suggestedProducts">
+                        <img class="admin-product-list-item-img" src={{ firstPicture | picture_path_resolver('index') }} alt={{ firstPicture | picture_alt_resolver('fr') }}>
+                        <div class="admin-product-list-item-text">
+                            <strong class="linkedProduct">{{ product.designation.fr }}</strong>   {# la classe linkedProduct sert pour les tests #}
+                            {{ product.category.name.fr }} / {{ product.subCategory.name.fr }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href={{ path('admin_post_update', {id: post.id}) }}>Modifier</a>
+            <form action={{ path('admin_post_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-post') }}">
+                <button class="admin-button secondary-color" type="submit" name="id" value={{ post.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement la publication "' ~ post.title.fr ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

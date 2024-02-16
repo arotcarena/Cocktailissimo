@@ -1,0 +1,164 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_product_index') }} class="breadcrumb-link">Produits ({{count_products}})</a>
+        >
+        <a href={{ path('admin_product_show', {id: product.id}) }} class="breadcrumb-link">{{ product.designation.fr }}</a>
+        >
+        <span class="breadcrumb-item">Modifier</span>
+    </div>
+
+    <h1>Modifier "{{ product.designation.fr }}"</h1>
+
+   {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+        
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+
+        <div class="admin-form-row">
+            <div 
+                class="admin-picture-upload" 
+                data-name="product[pictureOne]" 
+                data-label="Photo principale * (minimum 500 x 500 pixels)" 
+                data-value="{{ form.pictureOne.vars.value }}"
+                >
+                {# on le met ici pour qu'il ne soit pas affiché puisque c'est géré en dans React #}
+                {{ form_widget(form.pictureOne) }}
+            </div>
+
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'enAltOne', label: 'Balise alt (EN)', field: form.enAltOne, lang: 'en'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'frAltOne', label: 'Balise alt (FR)', field: form.frAltOne, lang: 'fr'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'esAltOne', label: 'Balise alt (ES)', field: form.esAltOne, lang: 'es'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'itAltOne', label: 'Balise alt (IT)', field: form.itAltOne, lang: 'it'}) }}
+        </div>
+
+        <div class="admin-form-row">
+            <div class="admin-picture-upload" data-name="product[pictureTwo]" data-label="Photo n°2" data-value="{{ form.pictureTwo.vars.value }}">
+                {# on le met ici pour qu'il ne soit pas affiché puisque c'est géré en dans React #}
+                {{ form_widget(form.pictureTwo) }}
+            </div>
+
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'enAltTwo', label: 'Balise alt (EN)', field: form.enAltTwo, lang: 'en'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'frAltTwo', label: 'Balise alt (FR)', field: form.frAltTwo, lang: 'fr'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'esAltTwo', label: 'Balise alt (ES)', field: form.esAltTwo, lang: 'es'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'itAltTwo', label: 'Balise alt (IT)', field: form.itAltTwo, lang: 'it'}) }}
+        </div>
+        
+        <div class="admin-form-row">
+            <div class="admin-picture-upload" data-name="product[pictureThree]" data-label="Photo n°3" data-value="{{ form.pictureThree.vars.value }}">
+                {# on le met ici pour qu'il ne soit pas affiché puisque c'est géré en dans React #}
+                {{ form_widget(form.pictureThree) }}
+            </div>
+
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'enAltThree', label: 'Balise alt (EN)', field: form.enAltThree, lang: 'en'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'frAltThree', label: 'Balise alt (FR)', field: form.frAltThree, lang: 'fr'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'esAltThree', label: 'Balise alt (ES)', field: form.esAltThree, lang: 'es'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'itAltThree', label: 'Balise alt (IT)', field: form.itAltThree, lang: 'it'}) }}
+        </div>
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vendor', label: 'Vendeur *', field: form.vendor}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enDesignation', label: 'Désignation (EN) *', field: form.enDesignation, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frDesignation', label: 'Désignation (FR) *', field: form.frDesignation, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esDesignation', label: 'Désignation (ES) *', field: form.esDesignation, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itDesignation', label: 'Désignation (IT) *', field: form.itDesignation, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enSlug', label: 'Slug (EN) *', field: form.enSlug, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frSlug', label: 'Slug (FR) *', field: form.frSlug, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esSlug', label: 'Slug (ES) *', field: form.esSlug, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itSlug', label: 'Slug (IT) *', field: form.itSlug, lang: 'it'}) }}
+
+
+        <div 
+            id="packaging-choices-input"
+            data-productid="{{ product.id }}"
+            data-name="product[packagingChoices]"
+            data-value="{{ form.packagingChoices.vars.value }}"
+            >
+            {# crée des packagingChoices en local et place un array de packagingChoices stringifié dans input type=hidden name="packagingChoices" #}
+            {{ form_widget(form.packagingChoices) }}
+        </div>
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'brand', label: 'Marque', field: form.brand}) }}
+
+        
+        <div class="admin-form-part"  data-controller="categoryselect">
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'category', label: 'Catégorie', field: form.category}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'subCategory', label: 'Sous-catégorie', field: form.subCategory}) }}
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enShortDescription', label: 'Description courte (EN)', field: form.enShortDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frShortDescription', label: 'Description courte (FR)', field: form.frShortDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esShortDescription', label: 'Description courte (ES)', field: form.esShortDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itShortDescription', label: 'Description courte (IT)', field: form.itShortDescription, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enLongHtmlDescription', label: 'Description longue (EN) (balises de liens et BB code acceptés)', field: form.enLongHtmlDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frLongHtmlDescription', label: 'Description longue (FR) (balises de liens et BB code acceptés)', field: form.frLongHtmlDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esLongHtmlDescription', label: 'Description longue (ES) (balises de liens et BB code acceptés)', field: form.esLongHtmlDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itLongHtmlDescription', label: 'Description longue (IT) (balises de liens et BB code acceptés)', field: form.itLongHtmlDescription, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enMetaDescription', label: 'Méta-description (EN)', field: form.enMetaDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frMetaDescription', label: 'Méta-description (FR)', field: form.frMetaDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esMetaDescription', label: 'Méta-description (ES)', field: form.esMetaDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itMetaDescription', label: 'Méta-description (IT)', field: form.itMetaDescription, lang: 'it'}) }}
+        
+          
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'hsCode', label: 'HS code *', field: form.hsCode}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'originCountry', label: 'Pays d\'origine *', field: form.originCountry}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vatLevel', label: 'Niveau de TVA *', field: form.vatLevel}) }}
+
+        {# géré en react #}
+        {# suggestedProducts #}
+        <div 
+            id="select-products-input" 
+            data-indexendpoint="{{ path('admin_api_product_suggestedProducts', {id: product.id}) }}" 
+            data-searchendpoint="{{ path('admin_api_product_search') }}"
+            data-title="Produits à suggérer"
+            data-name="product[suggestedProducts][]"
+            >
+            {# si js désactivé, le champ classique s'affiche #}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'suggestedProducts', label: 'Produits à suggérer', field: form.suggestedProducts}) }}
+        </div>
+        {# linkedRecipes #}
+        <div 
+            id="select-recipes-input" 
+            data-title="Recettes liées"
+            data-name="product[linkedRecipes][]"
+            data-indexendpoint="{{ path('admin_api_product_linkedRecipes', {id: product.id}) }}" 
+            data-searchendpoint="{{ path('admin_api_recipe_search') }}"
+            >
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'linkedRecipes', label: 'Recettes liées', field: form.linkedRecipes}) }}
+        </div>
+        {# linkedArticles #}
+        <div 
+            id="select-articles-input" 
+            data-title="Articles liés"
+            data-name="product[linkedArticles][]"
+            data-indexendpoint="{{ path('admin_api_product_linkedArticles', {id: product.id}) }}" 
+            data-searchendpoint="{{ path('admin_api_article_search') }}"
+            >
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'linkedArticles', label: 'Articles liés', field: form.linkedArticles}) }}
+        </div>
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Modifier</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

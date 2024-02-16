@@ -1,0 +1,50 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_contact_index') }} class="breadcrumb-link">Contacts vendeurs ({{contact_count}})</a>
+        >
+        <span class="breadcrumb-item">{{ contact.email }}</span>
+    </div>
+
+    <div class="admin-product-show lang-switch-wrapper">
+        
+        <h1>Contact public</h1>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Coordonnées</div>
+            <div class="admin-product-show-row-text">
+                <div class="capitalize"><strong>Nom : </strong>{{ contact.civility | trans({}, 'configs', 'fr') }} {{ contact.firstName }} {{ contact.lastName }}</div>
+                <div><strong>Adresse email : </strong>{{ contact.email }}</div>
+                <div><strong>Numéro de téléphone : </strong>{{ contact.phone ?? 'Non renseigné' }}</div>
+            </div>
+        </div>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Message</div>
+            <div class="admin-product-show-row-text">
+                {{ contact.message }}
+            </div>
+        </div>
+
+
+
+
+        <div class="admin-buttons-wrapper">
+            <form action={{ path('admin_contact_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-contact') }}">
+                <button class="admin-button secondary-color" type="submit" name="id" value={{ contact.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le contact public de "' ~ contact.email ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

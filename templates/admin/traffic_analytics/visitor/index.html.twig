@@ -1,0 +1,82 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a class="breadcrumb-link" href="{{ path('admin_trafficAnalytics_index') }}">Web analytics</a>
+        >
+        <a href={{ path('admin_visitor_index') }} class="breadcrumb-link">Visiteurs ({{count_visitors}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Visiteurs *</h1>
+
+        <div class="admin-table-info-group">
+            <div class="admin-table-info">* Un "visiteur" correspond à un appareil utilisé pour visiter le site (Cookie avec durée de vie de 13 mois). <br>Les visiteurs ainsi que leurs visites et actions sont automatiquement supprimés de la base de données après 13 mois</div>
+        </div>
+
+
+        {% include "admin/traffic_analytics/_filters.html.twig" %}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Cookie #ID</th>
+                    <th>Langue</th>
+                    <th>Origine</th>
+                    <th>Rôle</th>
+                    <th>User-Agent</th>
+                    <th>Visites</th>
+                    <th>Actions</th>
+                    <th>Date 1ère visite</th>
+                    <th>Date dernière visite</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for visitor in pagination %}
+                    <tr>
+                        <td>#{{ visitor.cookieId }}</td>
+                        <td>{{ visitor.lang }}</td>
+                        <td>{{ (visitor.origin ?? '') | trans({}, 'configs', 'fr') }}</td>
+                        <td>{{ (visitor.role ?? '') | trans({}, 'configs', 'fr') }}</td>
+                        <td>
+                            <div style="cursor: help;" title="{{ visitor.userAgent }}">
+                                {{ visitor.userAgent | user_agent_excerpt }}
+                            </div>
+                        </td>
+                        <td>{{ visitor.visits | length }}</td>
+                        <td>{{ visitor.actions | length }}</td>
+                        <td>{{ visitor.createdAt.format('d/m/Y H:i:s') }}</td>
+                        <td>{{ visitor.visits[(visitor.visits | length) - 1].createdAt.format('d/m/Y H:i:s') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_visitor_show', {id: visitor.id}) }}" title="Voir le détail">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+   </div>
+
+{% endblock %}

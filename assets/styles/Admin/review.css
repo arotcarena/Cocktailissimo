@@ -1,0 +1,188 @@
+.admin-review-list {
+    margin: 0 15px;
+}
+.admin-review-card {
+    padding: 15px 0;
+    border-top: solid 1px var(--color-admin-lightgrey);
+    position: relative;
+}
+.admin-review-card:first-child {
+    border-top: none;
+}
+
+.admin-review-card-header {
+    display: flex;
+    gap: 10px;
+    position: relative;
+}
+.admin-review-card-header-type {
+    position: absolute;
+    top: 8px;
+    left: 5px;
+    padding: 1px 4px;
+    border-radius: 1000px;
+    background-color: rgba(255, 255, 255, .3);
+    font-size: .75em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.admin-review-card-header-img {
+    width: 100px;
+    height: 100px;
+}
+.admin-review-card-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: .9em;
+    margin-top: 5px;
+}
+.admin-review-card-header .header-stars {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.admin-review-card-text-mute {
+    opacity: .7;
+}
+.admin-review-card-text-mute.ml {
+    margin-left: 10px;
+} 
+.admin-review-card-text-semi-mute {
+    font-size: .8em;
+} 
+
+.admin-review-card-body {
+    margin-top: 15px;
+}
+.admin-review-card-body-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.admin-review-card-body-info.comment {
+    margin-bottom: 10px;
+}
+.admin-review-card-body-info.comment span:first-child {
+    font-weight: 600;
+}
+.admin-review-card-body-info-end {
+    margin-left: auto;
+}
+.admin-review-card-chip {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: .7;
+    font-size: .9em;
+}
+.admin-review-card-chip.success {
+    opacity: 1;
+    color: var(--color-admin);
+    font-size: 1em;
+}
+.admin-review-card-chip.success .icon {
+    color: var(--color-admin);
+}
+.admin-review-card-chip span {
+    font-size: .85em;
+}
+
+.admin-review-card-stars .stars {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+.admin-i-star {
+    color: var(--color-admin);
+}
+.admin-review-card-body-title {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin: 10px 0;
+}
+
+.admin-review-card .review-moderator {
+    position: absolute;
+    top: 10px;
+    right: 0;
+}
+.admin-review-card .admin-review-deletor {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    opacity: .7;
+}
+.admin-review-deletor button {
+    text-decoration: underline;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1em;
+}
+.admin-review-deletor button span {
+    text-decoration: underline;
+}
+.admin-review-card .review-moderator .admin-form-control {
+    margin-left: auto;
+    margin-bottom: 8px;
+    font-size: 1em;
+    height: 40px;
+    cursor: pointer;
+}
+
+.admin-review-card-answer-count {
+    margin: 40px 20px 10px;
+    font-weight: 600;
+    font-size: .9em;
+}
+.admin-review-card-footer {
+    max-height: 40vh;
+    overflow: auto;
+}
+
+.admin-answer-list {
+    margin: 0 20px;
+}
+
+.admin-answer-card {
+    margin: 15px 0;
+    font-size: .9em;
+}
+.admin-answer-card-info {
+    margin-bottom: 4px;
+}
+.admin-answer-card-info strong {
+    font-weight: 600;
+}
+.admin-answer-card-chip {
+    color: var(--color-admin);
+    border: solid 2px;
+    padding: 1px 5px;
+    text-transform: uppercase;
+    font-size: .75em;
+    font-weight: 600;
+    border-radius: 5px;
+}
+.admin-review-card textarea.admin-form-control {
+    width: 100%;
+    height: 50px;
+}
+.admin-answer-control {
+    margin: 20px 20px 0;
+}
+.admin-answer-control .admin-button {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+.admin-answer-footer {
+    margin-top: 7px;
+}
+.admin-answer-footer button {
+    opacity: .7;
+}
+.admin-answer-footer button span {
+    text-decoration: underline;
+}
+

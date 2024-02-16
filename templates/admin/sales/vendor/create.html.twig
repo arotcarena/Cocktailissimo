@@ -1,0 +1,119 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_vendor_index') }} class="breadcrumb-link">Vendeurs ({{count_vendors}})</a>
+        >
+        <span class="breadcrumb-item">Ajouter</span>
+    </div>
+
+    <h1>Ajouter un vendeur</h1>
+    
+
+    {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper" data-controller="vendorform">
+        
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+        
+
+        <h2>Informations de contact</h2>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'civility', label: 'Civilité *', field: form.civility}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'firstName', label: 'Prénom *', field: form.firstName}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'lastName', label: 'Nom *', field: form.lastName}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'email', label: 'Adresse email *', field: form.email}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'phone', label: 'Téléphone', field: form.phone}) }}
+
+
+        <h2>Entreprise</h2>
+
+        <div class="admin-form-row">
+            <div 
+                class="admin-picture-upload small" 
+                data-name="vendor[logo]" 
+                data-value="{{ form.logo.vars.value }}" 
+                data-label="Logo (minimum 200 x 200 pixels)"
+                data-resizewidth="200"
+                data-resizeheight="200"
+                >
+                {# on le met ici pour qu'il ne soit pas affiché puisque c'est géré en dans React #}
+                {{ form_widget(form.logo) }}
+            </div>
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialName', label: 'Désignation sociale *', field: form.socialName}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'commercialName', label: 'Nom commercial *', field: form.commercialName}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'identificationNumber', label: 'N° Siret ou équivalent *', field: form.identificationNumber}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vatNumber', label: 'N° de TVA intracommunautaire', field: form.vatNumber}) }}
+
+
+        <h2>Adresse du siège social</h2>
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialAddress_lineOne', label: 'Numéro et voie *', field: form.socialAddress_lineOne}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialAddress_lineTwo', label: 'Complément', field: form.socialAddress_lineTwo}) }}
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialAddress_postcode', label: 'Code postal *', field: form.socialAddress_postcode}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialAddress_city', label: 'Ville *', field: form.socialAddress_city}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialAddress_country', label: 'Pays *', field: form.socialAddress_country}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialAddress_state', label: 'Etat / Province', field: form.socialAddress_state}) }}
+
+
+        <h2>Adresse d'expédition</h2>
+
+        <button type="button" class="admin-copy-button" id="js-copy">Copier l'adresse du siège social</button>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'senderAddress_lineOne', label: 'Numéro et voie *', field: form.senderAddress_lineOne}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'senderAddress_lineTwo', label: 'Complément', field: form.senderAddress_lineTwo}) }}
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'senderAddress_postcode', label: 'Code postal *', field: form.senderAddress_postcode}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'senderAddress_city', label: 'Ville *', field: form.senderAddress_city}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'senderAddress_country', label: 'Pays *', field: form.senderAddress_country}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'senderAddress_state', label: 'Etat / Province', field: form.senderAddress_state}) }}
+
+
+        <h2>Présentation de l'entreprise (visible sur la boutique vendeur)</h2>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enDescription', label: 'Présentation (EN) (balises de liens et BB code acceptés)', field: form.enDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frDescription', label: 'Présentation (FR) (balises de liens et BB code acceptés)', field: form.frDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esDescription', label: 'Présentation (ES) (balises de liens et BB code acceptés)', field: form.esDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itDescription', label: 'Présentation (IT) (balises de liens et BB code acceptés)', field: form.itDescription, lang: 'it'}) }}
+
+
+        <h2>Commission</h2>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'commissionFree', label: 'Le vendeur doit-il payer la commission ?', field: form.commissionFree}) }}
+
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Ajouter</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

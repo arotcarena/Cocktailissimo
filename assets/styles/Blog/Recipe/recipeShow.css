@@ -1,0 +1,212 @@
+.recipe-show-wrapper {
+    padding: 0 15px;
+}
+.recipe-show-img-wrapper {
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.recipe-show-img {
+    width: 100%;
+    height: auto;
+    max-width: calc(100vh - 103px - 140px); /*140 pour la hauteur du titre*/
+    margin: 0 auto;
+}
+.recipe-show .recipe-show-title {
+    text-align: left;
+    font-size: 1.3em;
+    margin: 0;
+    font-weight: 600;
+}
+.recipe-right-col {
+    margin-top: 10px;
+}
+
+.recipe-show-right-list.product-card-list {
+    margin: 30px 0;
+    margin-left: 10px;
+}
+.recipe-show-right-list .product-card-list-item {
+    line-height: 1.6;
+    font-size: 1em;
+    margin: 10px 0;
+}
+.recipe-show-right-list .list-item-img {
+    width: 60px;
+    height: 60px;
+}
+.recipe-show-right-list .list-item-text {
+    margin-left: 5px;
+}
+.recipe-show-right-list .product-card-list-item::before {
+    width: 6px;
+    height: 6px;
+    position: relative;
+    top: 2px;
+    margin-right: 10px; 
+}
+.recipe-list-item-right {
+    font-weight: 600;
+}
+.recipe-list-item-left {
+    font-weight: 200;
+}
+
+.recipe-show-text {
+    margin-top: 30px;
+}
+.recipe-show-footer {
+    font-weight: 200;
+    font-size: .85em;
+    text-align: right;
+    margin-top: 40px;
+}
+
+
+/*subCategories list*/
+.recipe-show-subCategory-list-wrapper {
+    padding: 0 15px;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+.recipe-show-subCategory-list-title {
+    text-align: left;
+    text-transform: none;
+    font-weight: 600;
+}
+.recipe-show-subCategory-list {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.recipe-show-subCategory-item {
+    flex: none;
+    box-shadow: 0 0 2px var(--color-lightgrey);
+    padding-right: 15px;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    font-size: .85em;
+}
+.recipe-show-subCategory-item:hover {
+    box-shadow: 0 0 2px var(--color-grey);
+}
+.recipe-show-subCategory-img {
+    width: 50px;
+    height: auto;
+    display: block;
+}
+
+
+.article-show-img-wrapper {
+    margin: 0 -15px;
+}
+.article-show-img {
+    width: 100%;
+    max-width: 90vh;
+    height: auto;
+}
+.recipe-show-text.article {
+    margin-top: 10px;
+}
+.recipe-show-title.article-show-title {
+    font-weight: 500;
+}
+.article-show-subtitle {
+    text-align: left;
+    font-weight: 700;
+    font-size: 1.2em;
+    text-transform: none;
+}
+
+@media only screen and (min-width: 500px) {
+    .recipe-show .recipe-show-title {
+        font-size: 1.8em;
+    }
+}
+
+@media only screen and (min-width: 700px) {
+    .article-show-img-wrapper {
+        margin-top: -30px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .recipe-show-wrapper {
+        max-width: 1000px;
+        margin: 0 auto 40px;
+    }
+    .recipe-show-row {
+        display: flex;
+        gap: 20px;
+    }
+    .recipe-left-col {
+        width: 50%;
+        max-width: 500px;
+    }
+    .recipe-show-wrapper {
+        margin-bottom: 40px;
+    }
+    .recipe-show-img {
+        margin-right: 0;
+    }
+    .recipe-show-img-wrapper {
+        margin: 0;
+        position: sticky;
+        top: 20px;
+    }
+    body.scroll-up .recipe-show-img-wrapper {
+        top: 80px;
+    }
+
+    .recipe-right-col {
+        margin-top: 0;
+    }
+    .recipe-show .recipe-show-title {
+        font-size: 1.6em;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+    .recipe-show-wrapper {
+        padding: 0 20px;
+    }
+}
+
+@media only screen and (min-width: 950px) {
+    .recipe-show .recipe-show-title {
+        font-size: 2em;
+        margin-bottom: 25px;
+    }
+}
+
+@media only screen and (min-width: 1150px) {
+    .recipe-left-col {
+        width: 500px;
+        flex: none;
+    }
+    .recipe-show-right-list .list-item-text {
+        font-size: 1.1em;
+    }
+    .article-show-img-wrapper {
+        margin-top: -45px;
+    }
+}
+
+@media only screen and (min-width: 1250px) and (min-height: 800px) {
+    .recipe-show-img-wrapper {
+        top: 90px;
+    }
+    body.scroll-up .recipe-show-img-wrapper {
+        top: 180px;
+    }
+}
+
+@media only screen and (min-width: 1350px) {
+    .recipe-show .recipe-show-title {
+        font-size: 2.5em;
+        margin-bottom: 25px;
+    }
+}

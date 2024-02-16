@@ -1,0 +1,45 @@
+{
+  "assert": {
+    "invalid": "Campo no válido",
+    "choice": "Por favor, elija entre las opciones proporcionadas",
+    "choice_country": "Por favor, elija entre los países propuestos",
+    "notBlank": {
+      "civility": "La civilité es obligatoria",
+      "firstName": "El nombre es obligatorio",
+      "lastName": "El apellido es obligatorio",
+      "email": "La dirección de correo electrónico es obligatoria",
+      "phone": "El número de teléfono es obligatorio",
+      "password": "La contraseña es obligatoria",
+      "password_confirm": "La confirmación de la contraseña es obligatoria",
+      "address_lineOne": "La dirección es obligatoria",
+      "postcode": "El código postal es obligatorio",
+      "city": "La ciudad es obligatoria",
+      "country": "El país es obligatorio",
+      "address_state": "El estado/provincia es obligatorio",
+      "social_name": "La razón social es obligatoria",
+      "identification_number": "NIF es obligatorio",
+      "social_address": "La dirección de la sede social es obligatoria",
+      "sender_address": "La dirección de envío es obligatoria",
+      "answer": "Una respuesta es obligatoria",
+      "message": "El mensaje es obligatorio",
+      "category": "La categoría es obligatoria",
+      "subCategory": "La subcategoría es obligatoria"
+    },
+    "file": {
+      "format": "Formato incorrecto. Los formatos aceptados son: {{accepted_formats}}"
+    },
+    "notUnique": {
+      "email": "Esta dirección de correo electrónico ya está en uso."
+    },
+    "length": {
+      "min": "{{min}} caracteres como mínimo",
+      "max": "{{max}} caracteres como máximo"
+    },
+    "email": "Dirección de correo electrónico no válida",
+    "phone": "Número de teléfono no válido",
+    "checkbox": {
+      "true": "Debe marcar esta casilla"
+    },
+    "not_same_passwords": "Las dos contraseñas no son idénticas"
+  }
+}

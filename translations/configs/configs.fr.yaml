@@ -1,0 +1,45 @@
+shipping_type:
+  home: domicile
+  relay: point relais
+
+status_pending: En attente
+status_paid: Payée
+status_sent: Envoyée
+status_delivered: Livrée
+status_canceled: Annulée
+
+civility_m: Monsieur
+civility_f: Madame
+
+ROLE_USER: Utilisateur
+ROLE_ADMIN: Admin
+ROLE_PRO: Pro
+ROLE_VENDOR: Vendeur
+ROLE_USER_RESTRICTED: Utilisateur suspendu
+
+visitor_action:
+  pre_register: Inscription (non confirmée)
+  register_confirm: Confirmation inscription
+  delete_account: Suppression du compte
+  cart_create: Création d'un panier
+  cart_change: Modification du panier
+  checkout_start: Checkout - arrivée sur le formulaire
+  checkout_prepare_payment: Checkout - affichage module paiement
+  checkout_payment_attempt: Checkout - tentative de paiement
+  purchase_paid: Commande payée
+  comment: Commentaire
+  question: Question
+  review: Avis produit
+  answer: Réponse
+
+
+insta: Instagram
+fb: Facebook
+social: Réseau social
+
+vat_level_standard: Taux standard
+vat_level_parking: Taux parking 
+vat_level_reduce_1: Taux réduit 1
+vat_level_reduce_2: Taux réduit 2
+vat_level_super_reduce: Taux super-réduit
+vat_level_zero: Taux zéro

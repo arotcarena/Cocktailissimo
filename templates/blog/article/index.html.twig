@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+
+{% block metaDescription %}
+    {% if articlesCategory.metaDescription %}
+        <meta name="description" content="{{ attribute(articlesCategory.metaDescription, app.request.locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: attribute(articlesCategory.name, app.request.locale),
+        type: 'article.group',
+        image: '/img/categories/' ~ articlesCategory.picture
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('articleCategoryShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('articleCategoryShow') }}
+{% endblock %}
+
+
+{% set headerClass = 'header product-page-header' %}
+
+{% block body %}
+
+    <div class="product-index-banner">
+        <img class="product-index-banner-img" src="/img/categories/{{ articlesCategory.picture }}" alt="{{ attribute(articlesCategory.pictureAlt, app.request.locale) }}" />
+        <div class="product-index-banner-text">
+            <h1 class="product-index-banner-title">{{ attribute(articlesCategory.name, app.request.locale) }}</h1>
+            <p class="product-index-banner-subtitle">
+                {{ attribute(articlesCategory.shortDescription, app.request.locale) }}
+            </p>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <span class="breadcrumb-item">{{ attribute(articlesCategory.name, app.request.locale) }}</span>
+    </div>
+
+    <div id="article-category-show">
+    </div>
+
+    <div class="product-index-footer link-underline">
+        {{ attribute(articlesCategory.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale) | raw }}
+    </div>
+
+{% endblock %}

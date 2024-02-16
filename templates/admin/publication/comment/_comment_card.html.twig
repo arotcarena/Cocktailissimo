@@ -1,0 +1,57 @@
+<li class="admin-review-card">
+
+    {% if comment.recipe %}
+        {{ include('admin/publication/_owner_top_card/_recipe_top_card.html.twig', {recipe: comment.recipe}) }}
+    {% elseif comment.article %}
+        {{ include('admin/publication/_owner_top_card/_article_top_card.html.twig', {article: comment.article}) }}
+    {% endif %}
+
+    <div class="admin-review-card-body">
+        <div class="admin-review-card-body-info comment">
+            <span>{{ comment.fullName }}</span>
+            <span class="admin-review-card-text-mute">
+                {% if comment.user %}
+                    <a href="{{ path('admin_user_show', {id: comment.user.id}) }}">{{ comment.user.email }}</a>
+                {% else %}
+                    non inscrit    
+                {% endif %}
+            </span>
+            <span class="admin-review-card-text-semi-mute">{{ comment.createdAt.format('d/m/Y H:i') }}</span>
+        </div>
+        <div class="admin-review-card-body-content">
+            {{ comment.content }}
+        </div>
+    </div>
+
+    
+    {{ include('admin/publication/_answer_counter.html.twig', {answers: comment.answers}) }}
+
+    <div class="admin-review-card-footer">
+        {% if comment.answers | length > 0 %}
+            <ul class="admin-answer-list">
+                {% for answer in comment.answers %}
+                    {{ include('admin/publication/answer/_answer_card.html.twig', {targetRoute: 'admin_comment_index'}) }}
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+
+    <div class="admin-review-deletor">
+        <form action="{{ path('admin_comment_delete') }}" method="POST">
+            <input type="hidden" name="token" value="{{ csrf_token('delete-comment') }}">
+            <button class="admin-table-button danger" name="id" value="{{ comment.id }}" type="submit"
+                    data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le commentaire "' ~ comment.content | excerpt ~ '" ?' }}"
+            >
+                <svg class="icon">
+                    <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                </svg>
+                <span>Supprimer</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="admin-answer-control" data-ownerclass="comment" data-ownerid="{{comment.id}}">
+    </div>
+</li>
+ 
+

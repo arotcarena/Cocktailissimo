@@ -1,0 +1,85 @@
+{% extends "base.html.twig" %}
+
+{% set vendorLogo = vendor.company.logo %}
+{% set vendorLogoPath = vendorLogo | picture_path_resolver('small_index') %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: vendor.company.usualName,
+        type: 'product.group',
+        image: vendorLogoPath
+    }) }}
+{% endblock %}
+
+{# Il faudra faire une meta description personnalisée pour chaque vendeur (à stocker dans company.metaDescription) #}
+{# {% block metaDescription %}
+    <meta name="description" content="{{ 'meta_description.vendor_shop' | trans }}">
+{% endblock %} #}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('vendorShop') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('vendorShop') }}
+{% endblock %}
+
+
+{% set headerClass = 'header product-page-header' %}
+
+{% block body %}
+    <div class="product-index-banner vendor-shop-banner mobile">
+        <div class="vendor-shop-banner-row">
+            {% if vendorLogo %}
+                <img class="product-index-banner-img vendor-shop-banner-img" src="{{ vendorLogoPath }}" alt="{{ attribute(vendorLogo.alt, app.request.locale) }}" />
+            {% endif %}
+            <div class="vendor-shop-banner-text">
+                <h1 class="product-index-banner-title">{{ vendor.company.usualName }}</h1>
+                {{ include('UI/_review_note_show.html.twig', {note: vendor.reviewNote, count: vendor.countReviews}) }}
+            </div>
+        </div>
+        <div class="vendor-shop-banner-row">
+            {% if vendor.company.description %}
+                <p class="product-index-banner-subtitle">{{ attribute(vendor.company.description, app.request.locale) }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <div class="product-index-banner vendor-shop-banner desktop">
+        {% if vendorLogo %}
+            <img class="product-index-banner-img vendor-shop-banner-img" src="{{ vendorLogoPath }}" alt="{{ attribute(vendorLogo.alt, app.request.locale) }}" />
+        {% endif %}
+        <div class="product-index-banner-text">
+            <h1 class="product-index-banner-title">{{ vendor.company.usualName }}</h1>
+            {{ include('UI/_review_note_show.html.twig', {note: vendor.reviewNote, count: vendor.countReviews}) }}
+            {% if vendor.company.description %}
+                <p class="product-index-banner-subtitle">{{ attribute(vendor.company.description, app.request.locale) }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <span class="breadcrumb-item">{{ 'shop' | trans }}</span>
+        >
+        <a href="{{ path('vendorShop', {companySlug: vendor.company.slug}) }}" class="breadcrumb-link">{{ vendor.company.usualName }}</a>
+    </div>
+
+    <div id="vendor-shop" data-vendorid="{{ vendor.id }}">
+    </div>
+
+
+    <div class="product-show page-show">
+        <section id="reviews" class="product-show-sub-block review-block">
+            <h2 class="border-title">
+                <span>{{ 'reviews' | trans }}</span>
+            </h2>
+            <div id="vendor-shop-reviews">
+            </div>
+        </section>
+    </div>
+    
+
+{% endblock %}

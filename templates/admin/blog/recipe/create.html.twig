@@ -1,0 +1,78 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_recipe_index') }} class="breadcrumb-link">Recettes ({{count_recipe}})</a>
+        >
+        <span class="breadcrumb-item">Ajouter</span>
+    </div>
+
+    <h1>Ajouter une recette</h1>
+    
+
+    {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+        
+        <div class="admin-form-row">
+            <div class="admin-picture-upload" data-name="recipe[picture]" data-label="Photo * (minimum 500 x 500 pixels)" data-value="{{ form.picture.vars.value }}">
+                {{ form_widget(form.picture) }}
+            </div>
+            
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'enAlt', label: 'Balise alt (EN)', field: form.enAlt, lang: 'en'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'frAlt', label: 'Balise alt (FR)', field: form.frAlt, lang: 'fr'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'esAlt', label: 'Balise alt (ES)', field: form.esAlt, lang: 'es'}) }}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'itAlt', label: 'Balise alt (IT)', field: form.itAlt, lang: 'it'}) }}
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enTitle', label: 'Titre (EN) *', field: form.enTitle, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frTitle', label: 'Titre (FR) *', field: form.frTitle, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esTitle', label: 'Titre (ES) *', field: form.esTitle, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itTitle', label: 'Titre (IT) *', field: form.itTitle, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enSlug', label: 'Slug (EN) *', field: form.enSlug, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frSlug', label: 'Slug (FR) *', field: form.frSlug, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esSlug', label: 'Slug (ES) *', field: form.esSlug, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itSlug', label: 'Slug (IT) *', field: form.itSlug, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enMetaDescription', label: 'Méta-description (EN)', field: form.enMetaDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frMetaDescription', label: 'Méta-description (FR)', field: form.frMetaDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esMetaDescription', label: 'Méta-description (ES)', field: form.esMetaDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itMetaDescription', label: 'Méta-description (IT)', field: form.itMetaDescription, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'subCategories', label: 'Sous-catégories * (sél. multiple : ctr + clic)', field: form.subCategories}) }}
+
+        
+        <div id="ingredients-quantities-input" data-name="recipe[ingredientsQuantities]" data-value="{{ form.ingredientsQuantities.vars.value }}">
+            {{ form_widget(form.ingredientsQuantities) }}
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enHtmlContent', label: 'Contenu (EN) (balises de liens et BB code acceptés) *', field: form.enHtmlContent, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frHtmlContent', label: 'Contenu (FR) (balises de liens et BB code acceptés) *', field: form.frHtmlContent, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esHtmlContent', label: 'Contenu (ES) (balises de liens et BB code acceptés) *', field: form.esHtmlContent, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itHtmlContent', label: 'Contenu (IT) (balises de liens et BB code acceptés) *', field: form.itHtmlContent, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'ref', label: 'Réf. *', field: form.ref}) }}
+        
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Ajouter</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

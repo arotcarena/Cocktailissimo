@@ -1,0 +1,54 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_prospect_index') }} class="breadcrumb-link">Prospection ({{ prospectEmails_count }})</a>
+    </div>
+
+    <div class="admin-container">
+        <h1>Prospection</h1>
+
+        <a style="width: 270px; margin: 0 auto;" href="{{ path('admin_prospect_show') }}" target="_blank" class="admin-button secondary-color">Voir l'email de prospection</a>
+        
+        {% include "admin/sales/prospect/_filters.html.twig" %}
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Destinataire</th>
+                    <th>Langue</th>
+                    <th>Date d'envoi</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prospectEmail in pagination %}
+                    <tr>
+                        <td>{{ prospectEmail.email }}</td>
+                        <td>{{ prospectEmail.lang }}</td>
+                        <td>{{ prospectEmail.sentAt.format('d/m/Y H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_prospect_create') }}">Envoyer des emails</a>
+        </div>
+    </div>
+
+{% endblock %}

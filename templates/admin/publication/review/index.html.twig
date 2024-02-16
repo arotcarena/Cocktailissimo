@@ -1,0 +1,54 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_review_index') }} class="breadcrumb-link">Avis ({{ reviews_pending_count }})</a>
+    </div>
+
+
+    <div class="admin-container">
+        <h1>Avis</h1>
+
+        {# filtres #}
+        {{ form_start(form) }}
+            <div class="admin-filters-container">
+                <div class="admin-filters">
+                    <div class="admin-filters-row">            
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'rate', label: 'Note', field: form.rate}) }}
+                    </div>
+                    <div class="admin-filters-row">            
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'moderationStatus', label: 'Modération', field: form.moderationStatus}) }}
+                    </div>
+                    <div class="admin-filters-row">   
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'sortBy', label: 'Tri', field: form.sortBy}) }}
+                    </div>
+                </div>
+                <div class="admin-filters-submit">
+                    <button type="submit" class="admin-button">Recherche</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+
+
+        <ul class="admin-review-list">
+            {% for review in pagination %}
+                {% include "admin/publication/review/_review_card.html.twig" %}
+            {% endfor %}
+        </ul>
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+   </div>
+{% endblock %}

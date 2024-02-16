@@ -1,0 +1,92 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">Catégories</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Catégories</h1>
+        
+        <div class="admin-custom-table">
+            <div class="admin-custom-table-row header-row">
+                <div class="admin-custom-table-cell">Photo</div>
+                <div class="admin-custom-table-cell">Nom</div>
+                <div class="admin-custom-table-cell">Slug</div>
+                <div class="admin-custom-table-cell">Description courte</div>
+                <div class="admin-custom-table-cell"></div>
+            </div>
+            {% for category in categories %}
+                <div class="admin-custom-table-row master-row">
+                    <div class="admin-custom-table-img admin-custom-table-cell">
+                        {% if category.picture is not null %}
+                            <img class="admin-table-img" src="/img/categories/{{ category.picture }}" alt="{{ category.pictureAlt.fr }}">
+                        {% endif %}
+                    </div>
+                    <div class="admin-custom-table-cell">{{ category.name.fr }}</div>
+                    <div class="admin-custom-table-cell">{{ category.slug.fr }}</div>
+                    <div class="admin-custom-table-cell">
+                        {% if category.shortDescription %}
+                            {{ category.shortDescription.fr | excerpt(10) }}
+                        {% endif %}
+                    </div>
+                    <div class="admin-custom-table-controls admin-custom-table-cell">
+                        <a class="admin-table-button success" href="{{ path('admin_category_show', {id: category.id}) }}" title="Voir">
+                            <svg class="icon">
+                                <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                            </svg>
+                        </a>
+                        <a class="admin-table-button success" href="{{ path('admin_category_update', {id: category.id}) }}" title="Modifier">
+                            <svg class="icon">
+                                <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="admin-custom-table-inter master-row" data-controller="toggleshow">
+                    <button type="button" class="toggle-opener">
+                        <span>Sous-catégories</span>
+                        <svg class="icon">
+                            <use xlink:href="/img/icons/sprite.svg#expand-more"></use>
+                        </svg>
+                    </button>
+                    <div class="toggle invisible">
+                        {% for subCategory in category.subCategories %}
+                            <div class="admin-custom-table-row sub-row">
+                                <div class="admin-table-td-img admin-custom-table-cell">
+                                    {% if subCategory.picture is not null %}
+                                        <img class="admin-table-img" src="/img/categories/{{ subCategory.picture }}" alt="{{ subCategory.pictureAlt.fr }}">
+                                    {% endif %}
+                                </div>
+                                <div class="admin-custom-table-cell">{{ subCategory.name.fr }}</div>
+                                <div class="admin-custom-table-cell">{{ subCategory.slug.fr }}</div>
+                                <div class="admin-custom-table-cell">
+                                    {% if subCategory.shortDescription %}
+                                        {{ subCategory.shortDescription.fr | excerpt(10) }}
+                                    {% endif %}
+                                </div>
+                                <div class="admin-table-controls admin-custom-table-cell">
+                                    <a class="admin-table-button success" href="{{ path('admin_subCategory_show', {id: subCategory.id}) }}" title="Voir">
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                        </svg>
+                                    </a>
+                                    <a class="admin-table-button success" href="{{ path('admin_subCategory_update', {id: subCategory.id}) }}" title="Modifier">
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+   </div>
+
+{% endblock %}

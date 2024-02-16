@@ -1,0 +1,118 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_product_index') }} class="breadcrumb-link">Produits ({{count_products}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Produits</h1>
+
+        {% include "admin/shop/product/parts/_filters.html.twig" %}
+
+        <div class="admin-table-info-group">
+            <div class="admin-table-info">* MOQ = Minimum Order Quantity (le plus petit conditionnement)</div>
+            <div class="admin-table-info">* Stock total = tous conditionnements confondus</div>
+        </div>
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Photo principale</th>
+                    <th>Désignation</th>
+                    <th>Catégorie / sous-catégorie</th>
+                    <th>Prix public MOQ * (HT)</th>
+                    <th>Prix pro MOQ * (HT)</th>
+                    <th>Stock total *</th>
+                    <th>Avis</th>
+                    <th>Stats</th>
+                    <th>Vendeur</th>
+                    <th>Réf. publique MOQ *</th>
+                    <th>Date de création</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in pagination %}
+                    <tr>
+                        <td class="admin-table-td-img">
+                            <img class="admin-table-img" src={{ product.firstPicture | picture_path_resolver('index') }} alt={{ product.firstPicture | picture_alt_resolver('fr') }}>
+                        </td>
+                        <td>{{ product.designation.fr }}</td>
+                        <td>
+                            {% if product.category %}{{product.category.name.fr}}{% endif %}
+                            {% if product.subCategory %} / {{product.subCategory.name.fr}}{% endif %}
+                        </td>
+                        <td class="no-white-space-wrap">{{ product.basePackaging.consumerPriceHT | price_format('fr') }}</td>
+                        <td class="no-white-space-wrap">{{ product.basePackaging.businessPriceHT | price_format('fr') }}</td>
+                        <td>{{ product.mainStock }}</td>
+                        <td>
+                            {% if product.reviewNote %}
+                                <a class="admin-clickable" href="{{ path('admin_product_reviews', {id: product.id}) }}">
+                                    <strong>{{product.reviewNote | review_note_format('fr') }}</strong>
+                                    <svg class="icon admin-i-star">
+                                        <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                                    </svg>
+                                    <div style="font-size: .8em; margin-top: 4px;">{{product.countReviews}} avis</div>
+                                </a>                          
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div>vues : {{ product.countViews ?? 0 }}</div>
+                            <div>paniers : {{ product.countCarts ?? 0 }}</div>
+                            <div>ventes : {{ product.countSales ?? 0 }}</div>
+                        </td>
+                        <td>{{ product.vendor.company.usualName }}</td>
+                        <td>{{ product.basePackaging.publicRef }}</td>
+                        <td>{{ product.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_product_show', {id: product.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_product_update', {id: product.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_product_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-product') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ product.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le produit "' ~ product.designation.fr ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_product_create') }}">Ajouter un produit</a>
+        </div>
+   </div>
+
+{% endblock %}

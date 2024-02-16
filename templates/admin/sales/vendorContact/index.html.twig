@@ -1,0 +1,78 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_vendorContact_index') }} class="breadcrumb-link">Contacts vendeurs ({{vendorContact_count}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Contacts vendeurs</h1>
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Coordonnées</th>
+                    <th>Entreprise</th>
+                    <th>Pays</th>
+                    <th>Catégorie/Sous-catégorie</th>
+                    <th>Statut</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vendorContact in pagination %}
+                    <tr {% if vendorContact.status == 'vendor_contact_status_pending' %}style="font-weight: 600;"{% endif %}>
+                        <td>
+                            <span class="capitalize">{{ vendorContact.civility | trans({}, 'configs', 'fr') }} {{ vendorContact.firstName }} {{ vendorContact.lastName }}</span>
+                            <br> 
+                            {{ vendorContact.email }}
+                        </td>
+                        <td>{{ vendorContact.companyName }}</td>
+                        <td>{{ vendorContact.socialAddress.country | trans({}, 'countries', 'fr') }} ({{ vendorContact.socialAddress.country }})</td>
+                        <td>{{ vendorContact.category.name.fr }} / {{ vendorContact.subCategory.name.fr }}</td>
+                        <td>
+                            {{ vendorContact.statusLabel }}
+                        </td>                       
+                        <td>{{ vendorContact.createdAt.format('d/m/Y H:i') }}</td>  
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_vendorContact_show', {id: vendorContact.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_vendorContact_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-vendorContact') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ vendorContact.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le vendorContact de "' ~ vendorContact.email ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+   </div>
+
+{% endblock %}

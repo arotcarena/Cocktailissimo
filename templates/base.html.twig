@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <meta name="theme-color" content="#872307" />
+
+
+        {% block viewport %}
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% endblock %}
+        
+        {% block metaDescription %}{% endblock %}
+
+        {# contient les balises title et meta og:title, og:url, og:image, og:type, etc... #}
+        {% block page_head %}{% endblock %}
+        <meta name="og:site_name" content="Cocktailissimo">
+        
+        <link rel="icon" href="/img/logo/favicon.png">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+        {# balises alternate (langue) #}
+        {% block lang_alternate %}
+            {% for lang in ['en', 'fr', 'es', 'it'] %}
+                {% set route = app.request.get('_route') %}
+                {% set params = app.request.get('_route_params') | route_params_locale_changer(lang) %}
+                <link rel="alternate" hreflang="{{ lang }}" href="{{ url(route, params) }}" />
+            {% endfor %}
+        {% endblock %}
+
+        {% block canonical %}
+            <link rel="canonical" href="{{ app.request.uri }}" />
+        {% endblock %}
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Ysabeau+Infant:ital,wght@0,1;0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+        {# main js and css entrypoint #}
+        {% block javascript %}
+            {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('header') }}
+        {% endblock %}
+
+        {% block style %}
+            {{ encore_entry_link_tags('app') }}
+            {{ encore_entry_link_tags('header') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% block header %}
+            {% include "layouts/_header.html.twig" %}
+        {% endblock %}
+
+        {% include "layouts/_flashes.html.twig" %}
+        
+        <div class="{% block pageClass %}page{% endblock %}">
+            {% block body %}{% endblock %}
+        </div>
+
+        {% block footer %}
+            {% include "layouts/_footer.html.twig" %}
+        {% endblock %}
+
+        <div id="top-scroll-arrow"></div>
+    </body>
+</html>

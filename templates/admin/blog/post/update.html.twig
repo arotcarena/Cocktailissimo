@@ -1,0 +1,68 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href="{{ path('admin_home') }}" class="breadcrumb-home-link">Administration</a>
+        >
+        <a href="{{ path('admin_post_index') }}" class="breadcrumb-link">Publications ({{count_post}})</a>
+        >
+        <a href="{{ path('admin_post_show', {id: post.id}) }}" class="breadcrumb-link">{{ post.title.fr }}</a>
+        >
+        <span class="breadcrumb-item">Modifier</span>
+    </div>
+
+    <h1>Modifier une publication</h1>
+    
+
+    {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+        
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+
+        <div class="admin-form-row">
+            <div class="admin-post-show-iframe-wrapper">
+                {{ post.iframe | raw }}
+            </div>
+        </div>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enTitle', label: 'Titre (EN) *', field: form.enTitle, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frTitle', label: 'Titre (FR) *', field: form.frTitle, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esTitle', label: 'Titre (ES) *', field: form.esTitle, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itTitle', label: 'Titre (IT) *', field: form.itTitle, lang: 'it'}) }}
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'iframe', label: 'Code intégré (ne pas inclure la légende) *', field: form.iframe}) }}
+
+        <div class="admin-form-date-time">
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'createdAt', label: 'Date de la publication *', field: form.createdAt}) }}
+        </div>
+
+
+        {# géré en react #}
+        <div 
+            id="select-products-input" 
+            data-title="Produits associés"
+            data-name="post[linkedProducts][]"
+            data-indexendpoint="{{ path('admin_api_post_linkedProducts', {id: post.id}) }}" 
+            data-searchendpoint="{{ path('admin_api_product_search') }}"
+            >
+            {# si js désactivé, le champ classique s'affiche #}
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'linkedProducts', label: 'Produits associés', field: form.linkedProducts}) }}
+        </div>
+        
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Modifier</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

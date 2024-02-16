@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('become_vendor' | trans)
+    }) }}
+{% endblock %}
+
+{% block metaDescription %}
+    <meta name="description" content="{{ 'meta_description.become_vendor' | trans }}">
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('becomeVendorForm') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('becomeVendorForm') }}
+{% endblock %}
+
+{% block body %}
+    
+    <div class="contact-page">
+        <div id="become-vendor-form">
+        </div>
+    </div>
+
+{% endblock %}

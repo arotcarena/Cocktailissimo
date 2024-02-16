@@ -1,0 +1,103 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_product_index') }} class="breadcrumb-link">Recettes ({{count_recipe}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Recettes</h1>
+
+        {% include "admin/blog/recipe/_filters.html.twig" %}
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Titre</th>
+                    <th>Sous-catégories</th>
+                    <th>Ingrédients</th>
+                    <th>Vues</th>
+                    <th>Réf.</th>
+                    <th>Date de création</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for recipe in pagination %}
+                    <tr>
+                        <td class="admin-table-td-img">
+                            {% if recipe.picture is not null %}
+                                <img class="admin-table-img" src={{ recipe.picture | picture_path_resolver('index') }} alt={{ recipe.picture | picture_alt_resolver('fr') }}>
+                            {% endif %}
+                        </td>
+                        <td>{{ recipe.title.fr }}</td>
+                        <td style="text-align: left;">
+                            <ul style="padding-left: 20px; margin: 0 auto;">
+                                {% for subCategory in recipe.subCategories %}
+                                    <li style="list-style-type: disc; margin: 5px 0;{% if filter_form.subCategory.vars.value == subCategory.id %} font-weight: 600;{% endif %}">
+                                        {{ subCategory.name.fr }}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        <td>
+                            <ul>
+                                {% for ingredientQuantity in recipe.ingredientsQuantities %}
+                                    <li>{{ ingredientQuantity.quantity.fr }} <strong>{{ ingredientQuantity.ingredient.name.fr }}</strong></li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td>{{ recipe.countViews ?? 0 }}</td>
+                        <td>{{ recipe.ref }}</td>
+                        <td>{{ recipe.createdAt.format('d/m/Y H:i') }}</td>
+
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_recipe_show', {id: recipe.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_recipe_update', {id: recipe.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_recipe_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-recipe') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ recipe.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement la recette "' ~ recipe.title.fr ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_recipe_create') }}">Ajouter une recette</a>
+        </div>
+   </div>
+
+{% endblock %}

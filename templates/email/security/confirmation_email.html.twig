@@ -1,0 +1,18 @@
+{% extends "email/base.html.twig" %}
+
+{% block title %}{{ 'security.confirmation_email.html.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block h1 %}{{ 'security.confirmation_email.html.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block body %}
+
+    <p>{{ 'hello' | trans({'{name}': firstName}, 'emails', lang) }}</p>
+    <p>{{ 'security.confirmation_email.html.message' | trans({}, 'emails', lang) }}</p>
+
+    <p style="margin: 40px 0;">
+        <a style="text-decoration: none; background-color: #872307; padding: 15px 23px; color: #FFF; font-weight: 600; font-size: 1em;" href={{ link }} target="_blank">
+            {{ 'security.confirmation_email.html.link' | trans({}, 'emails', lang) }}
+        </a>
+    </p>
+
+{% endblock %}

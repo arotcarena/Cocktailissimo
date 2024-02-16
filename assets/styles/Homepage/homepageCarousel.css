@@ -1,0 +1,248 @@
+#home-recipe {
+    margin: 75px 0 90px;
+    min-height: 60px;
+}
+#home-recipe .main-loader {
+    display: block;
+    margin: calc(30px - .8em) auto;
+}
+.home-recipe-carousel-img {
+    width: 100%;
+    height: auto;
+    transition: all .8s ease-in-out;
+}
+.home-recipe-carousel .product-card-img {
+    max-height: calc(100vh - 180px);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    transition: transform .8s;
+}
+.home-recipe-carousel .product-card-img-wrapper {
+    overflow: hidden;
+}
+.home-recipe-carousel .product-card-img-link:hover .product-card-img {
+    transform: scale(1.2);
+}
+
+.home-recipe-carousel .product-card-img-link:hover + .product-card-body .product-card-title a, .home-recipe-carousel a:hover {
+    color: var(--color-bordeaux-flash);
+    opacity: 1;
+}
+
+
+.home-recipe-carousel .product-card {
+    width: 100vw;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*arrows (le reste est dans custom carousel */
+.home-recipe-carousel-wrapper.custom-carousel-wrapper .carousel-arrow .icon {
+    width: 25px;
+    height: 25px;
+}
+.home-recipe-carousel-wrapper.custom-carousel-wrapper .carousel-arrow {
+    padding: 15px;
+    opacity: .3;
+    pointer-events: none;
+}
+.home-recipe-carousel-wrapper.custom-carousel-wrapper .carousel-arrow.active {
+    opacity: 1;
+    pointer-events: all;
+}
+.home-recipe-carousel-wrapper .carousel-arrow.prev {
+    left: 10px;
+}
+.home-recipe-carousel-wrapper .carousel-arrow.prev {
+    left: 10px;
+}
+
+
+.carousel-dots {
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.home-recipe-carousel-wrapper .carousel-dot {
+    background-color: var(--color-bordeaux-veryflash);
+}
+
+.home-recipe-carousel-wrapper .carousel-loader {
+    position: absolute;
+    top: calc(50% - 15px);
+    right: 10px;
+}
+.home-recipe-carousel-wrapper .carousel-loader .icon {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+/* pour éviter le bug sur prod avec retour à la ligne un bref instant au moment de charger de nouvelles recipes */
+.home-recipe-carousel .slick-track {
+    display: flex;
+    flex-wrap: nowrap;
+}
+.home-recipe-carousel .slick-slide {
+    flex: none;
+}
+
+
+
+/*responsive*/
+
+.home-recipe-carousel-wrapper {
+    /*WITHOUT_SHOP */
+    margin-top: 50px;
+    margin-bottom: 80px;
+    /****************/
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.home-recipe-carousel-item {
+    width: calc(50vw - 30px);
+    margin: 0 auto;
+}
+.home-recipe-carousel .product-card {
+    width: calc(50vw - 30px);
+}
+
+
+@media only screen and (min-width: 530px) {
+    .home-recipe-carousel .product-card {
+        width: calc(33.33vw - 30px);
+    }
+}
+@media only screen and (min-width: 670px) {
+    .home-recipe-carousel-wrapper {
+        margin-left: 13px;
+        margin-right: 13px;
+    }
+    .home-recipe-carousel .product-card {
+        font-size: 1.1em;
+        width: calc(33.33vw - 45px);
+    }
+}
+@media only screen and (min-width: 770px) {
+    .home-recipe-carousel-wrapper {
+        margin-left: 60px;
+        margin-right: 60px;
+    }
+    .home-recipe-carousel .product-card {
+        width: calc(33.33vw - 70px);
+    }
+    .home-recipe-carousel-wrapper .carousel-arrow.prev {
+        left: -55px;
+    }
+    .home-recipe-carousel-wrapper .carousel-arrow.next {
+        right: -55px;
+    }
+    .home-recipe-carousel-wrapper .carousel-loader {
+        right: -50px;
+    }
+}
+
+
+@media only screen and (max-height: 800px) {
+    @media only screen and (min-width: 850px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 16px;
+            margin-right: 16px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(25vw - 37px);
+        }
+    }
+    @media only screen and (min-width: 1000px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 100px;
+            margin-right: 100px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(25vw - 75px);
+        }
+    }
+    @media only screen and (min-width: 1250px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 180px;
+            margin-right: 180px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(25vw - 115px);
+        }
+    }
+    @media only screen and (min-width: 1450px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 190px;
+            margin-right: 190px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(20vw - 100px);
+        }
+    }
+    @media only screen and (min-width: 1530px) {
+        .home-recipe-carousel-wrapper {
+            width: 1120px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .home-recipe-carousel .product-card {
+            width: 200px;
+        }
+    }
+}
+
+
+
+@media only screen and (min-height: 800px) {
+    @media only screen and (min-width: 1100px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 120px;
+            margin-right: 120px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(33.33vw - 100px);
+        }
+    }
+    @media only screen and (min-width: 1250px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 90px;
+            margin-right: 90px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(25vw - 75px);
+        }
+    }
+    @media only screen and (min-width: 1350px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 120px;
+            margin-right: 120px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(25vw - 85px);
+        }
+    }
+    @media only screen and (min-width: 1500px) {
+        .home-recipe-carousel-wrapper {
+            margin-left: 120px;
+            margin-right: 120px;
+        }
+        .home-recipe-carousel .product-card {
+            width: calc(20vw - 85px);
+        }
+    }
+    @media only screen and (min-width: 1600px) {
+        .home-recipe-carousel-wrapper {
+            width: 1360px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .home-recipe-carousel .product-card {
+            width: 240px;
+        }
+    }
+}

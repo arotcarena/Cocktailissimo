@@ -1,0 +1,44 @@
+{
+    "status_pending": "En attente",
+    "status_paid": "Payée",
+    "status_terminated": "Terminée",
+    "status_sent": "Envoyée",
+    "status_delivered": "Livrée",
+    "status_canceled": "Annulée",
+
+    "civility_m": "Monsieur",
+    "civility_f": "Madame",
+
+    "ROLE_USER": "Utilisateur",
+    "ROLE_ADMIN": "Admin",
+    "ROLE_PRO": "Pro",
+    "ROLE_VENDOR": "Vendeur",
+    "ROLE_USER_RESTRICTED": "Utilisateur suspendu",
+
+    "shipping_type": {
+        "home": "domicile",
+        "relay": "point relais"
+    },
+
+    "sort": {
+        "createdAt_ASC": "Plus anciens d'abord",
+        "createdAt_ASC_f": "Plus anciennes d'abord",
+        "createdAt_DESC": "Plus récents d'abord",
+        "createdAt_DESC_f": "Plus récentes d'abord",
+        "stock_ASC": "Stock croissant",
+        "stock_DESC": "Stock décroissant",
+        "price_ASC": "Prix croissant",
+        "price_DESC": "Prix décroissant",
+        "note_DESC": "Meilleurs avis d'abord",
+        "note_ASC": "Plus mauvais avis d'abord"
+    },
+    "rate": {
+        "verybad": "Mauvais",
+        "bad": "Passable",
+        "medium": "Moyen",
+        "good": "Bon",
+        "verygood": "Excellent"
+    },
+
+    "current_lang": "français"
+}

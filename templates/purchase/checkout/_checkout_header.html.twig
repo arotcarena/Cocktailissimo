@@ -1,0 +1,13 @@
+<header class="checkout-header">
+    <div class="checkout-header-top">
+        <a class="checkout-header-link" href="{{ path('home', {_locale: app.request.locale}) }}?{{ 'cart' | trans }}">
+            <svg class="icon left-arrow-icon">
+                <use xlink:href="/img/icons/sprite.svg#arrow-left"></use>
+            </svg>
+            <span class="capitalize">{{ 'cart' | trans }}</span>
+        </a>
+        <a class="checkout-header-logo-link" href="{{ path('home', {_locale: app.request.locale}) }}">
+            <img class="checkout-header-logo" src="/img/logo/logo.png" alt="{{ 'cocktailissimo_logo' | trans }}" />
+        </a>
+    </div>
+</header>

@@ -1,0 +1,115 @@
+.side-menu.mobile-menu {
+    padding-top: 0;
+}
+.mobile-menu-header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    background-color: #FFF;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 2px var(--color-lightgrey);
+}
+.mobile-menu .modal-closer {
+    position: fixed;
+}
+.mobile-menu-main {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.mobile-menu-link {
+    width: 100%;
+    font-size: 1em;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .3s;
+    text-transform: uppercase;
+}
+.mobile-menu-link:hover {
+    background-color: var(--color-cocktailissimo-verylight);
+    border-left: solid 4px var(--color-cocktailissimo-dark);
+}
+.mobile-menu-link:hover span {
+    margin-left: -4px;
+}
+.mobile-menu-link .i-chevron-right {
+    transition: transform .3s;
+}
+.mobile-menu-link:hover .i-chevron-right {
+    transform: translateX(-3px);
+}
+
+
+.mobile-menu-nav {
+    margin-bottom: 10px;
+    width: 100%;
+    flex: none;
+    transition: transform .3s;
+}
+.mobile-menu-nav.left {
+    margin-top: 20px;
+}
+.side-menu-body.is-expanded .mobile-menu-nav.left, .side-menu-body.is-expanded .mobile-menu-nav.right {
+    transform: translateX(-100%);
+}
+.mobile-menu-nav-header.mobile-menu-link {
+    justify-content: flex-start;
+    gap: 20px;
+    background-color: var(--color-cocktailissimo-verylight);
+    padding: 20px;
+    height: 70px;
+}
+
+.mobile-menu-subitem {
+    padding: 10px;
+    border-top: solid 1px rgb(240, 240, 240);
+}
+.mobile-menu-subitem:first-of-type {
+    border-top: none;
+}
+.mobile-menu-sublink {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    font-size: 1em;
+    text-transform: uppercase;
+    transition: color .3s;
+}
+.mobile-menu-subitem-img-wrapper {
+    width: 110px;
+    height: 110px;
+    margin: -10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: none;
+}
+.mobile-menu-subitem-img {
+    display: block;
+    width: 90px;
+    height: 90px;
+    transition: all ease-in-out .3s;
+}
+.mobile-menu-sublink:hover {
+    color: var(--color-cocktailissimo-dark);
+}
+.mobile-menu-sublink:hover .mobile-menu-subitem-img {
+    width: 110px;
+    height: 110px;
+}
+
+.side-menu-body .form-button.bordeaux {
+    margin: 30px 10px 0;
+    padding: 9px 15px;
+    width: auto;
+    height: auto;
+    line-height: 1.6;
+    text-align: center;
+}
+

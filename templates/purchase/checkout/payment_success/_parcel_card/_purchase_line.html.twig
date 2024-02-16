@@ -1,0 +1,40 @@
+{% set packaging = purchaseLine.packaging %}
+{% set product = packaging.product %}
+{% set locale = app.request.locale %}
+
+
+{% set packagingTarget = path('product_show', {
+        _locale: locale,
+        categorySlug: attribute(product.category.slug, locale),
+        subCategorySlug: attribute(product.subCategory.slug, locale),
+        slug: attribute(product.slug, locale),
+        publicRef: packaging.publicRef
+}) %}
+
+{% set firstPicture = product_picture_position_resolver(product, 1) %}
+
+
+<li class="cart-summary-line">
+    
+    <a class="cart-summary-line-img-block" href="{{ packagingTarget }}" target="_blank">
+        <img class="cart-summary-line-img" src={{ firstPicture | picture_path_resolver }} alt={{ firstPicture | picture_alt_resolver(locale) }} />
+    </a>
+    <div class="cart-summary-line-text">
+        <p class="designation">
+            <a href="{{ packagingTarget }}">{{ attribute(product.designation, locale) }}</a> 
+        </p>      
+        <p class="price">
+            {{ include('UI/_price_show.html.twig', {
+                price: purchaseLine.unitPrice
+            }) }}
+        </p>
+        {% if purchaseLine.quantity > 1 %}
+            <div class="cart-line-quantity-row">
+                <span class="cart-line-quantity cart-summary-line-quantity">{{ purchaseLine.quantity }}</span>
+                {{ include('UI/_price_show.html.twig', {
+                    price: purchaseLine.totalPrice
+                }) }}
+            </div>
+        {% endif %}
+    </div>
+</li>

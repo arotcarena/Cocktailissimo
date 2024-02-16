@@ -1,0 +1,154 @@
+warning:
+  need_login: Per effettuare questa azione, devi effettuare l'accesso o creare un account.
+  delete_vendor_account: >
+    Siamo spiacenti di apprendere che desideri lasciarci. Come venditore, non puoi eliminare direttamente il tuo account, ma è sufficiente richiederlo via e-mail a <a target="_blank" href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, specificando l'indirizzo e-mail associato al tuo account. La tua richiesta verrà elaborata nel più breve tempo possibile.
+  alcohol_danger: L'abuso di alcol è pericoloso per la salute, consumare con moderazione
+
+error:
+  temporary_failure: Si è verificato un errore. Riprova più tardi.
+  max_addresses: Non puoi aggiungere più di {max} indirizzi
+  invalid_input: Il valore inserito non è valido
+  invalid_form: Il modulo non è valido
+  invalid_credentials: Credenziali non valide
+  purchase_payment: 
+    no_stock: >
+      Si è verificato un errore. La transazione è stata annullata e non verrà addebitato alcun importo. Se il problema persiste, <a target="_blank" href="/it?contact">contattaci</a>.
+    updated_purchase: A causa di un problema di stock, il tuo carrello è stato aggiornato. La transazione è stata annullata e non verrà addebitato alcun importo. Se il carrello aggiornato ti soddisfa, puoi confermare nuovamente l'ordine. In caso di problemi, <a target="_blank" href="/it?contact">contattaci</a>.
+    already_paid: L'ordine è già stato pagato. La transazione attuale è stata annullata e non verrà addebitato alcun importo aggiuntivo. In caso di problemi, <a target="_blank" href="/it?contact">contattaci</a>.
+  review:
+    same_email: Questo indirizzo email è già stato utilizzato per lasciare una recensione su questo prodotto. Se non sei tu, modifica l'indirizzo email
+    unique: Hai già lasciato la tua recensione su questo prodotto, grazie.
+  empty_cart: Il tuo carrello è vuoto
+  show_payment_success: A causa di un errore, non è possibile visualizzare il riepilogo dell'ordine. Puoi trovarlo nell'e-mail di conferma dell'ordine appena inviata. In caso di problemi, o se non hai ricevuto questa e-mail entro un'ora, <a target="_blank" href="/it?contact">contattaci</a>.
+  unknown_email: Questo indirizzo email non corrisponde a nessun account
+  invalid_link: Questo link non è valido o è scaduto
+  invalid_password: Password non valida
+  delete_account:
+    having_purchases_in_progress: Non puoi eliminare il tuo account al momento perché hai degli ordini in corso di elaborazione.
+  email_not_confirmed: >
+    <div>Non hai confermato il tuo indirizzo email. Clicca sul link ricevuto all'indirizzo "{email}".</div>
+    <div style="font-style: italic; margin-top: 10px;">Non hai ricevuto il link? <a href="{ask_new_link_path}">Richiedi un nuovo link di conferma</a></div>
+  restricted_user: Il tuo account è stato limitato. Per ulteriori informazioni, <a target="_blank" href="/it?contact">contattaci</a>.
+
+info:
+  incomplete_stripe_verification: Le informazioni inserite sono state salvate, torna quando vuoi per completare l'inserimento delle informazioni e iniziare a vendere i tuoi prodotti.
+  on_checkout_force_country: A seguito della modifica del paese di consegna, i prezzi potrebbero essere cambiati.
+
+success:
+  stripe_verification: Congratulazioni, il tuo account è stato convalidato!
+  updated: Le modifiche sono state apportate con successo!
+  vendor_contact: Grazie, ricevuto! Ora elaboreremo la tua richiesta e ti risponderemo al più presto.
+  payment: Grazie, abbiamo ricevuto con successo il tuo pagamento di {amount}! Una conferma dell'ordine ti è stata inviata via e-mail.
+  link_sent: 
+    reset_password: Ti è stato inviato un link per reimpostare la tua password via e-mail. Attenzione, il link è valido per 48 ore.
+    re_confirmation: Un nuovo link per verificare il tuo indirizzo email ti è stato inviato all'indirizzo "{email}". Attenzione, il link è valido per 48 ore.
+  reset_password: La password è stata reimpostata con successo!
+  register: Congratulazioni, la tua registrazione è stata registrata! Per completarla, devi verificare il tuo indirizzo email cliccando sul link ricevuto all'indirizzo "{email}". Attenzione, il link è valido per 48 ore.
+  email_confirmation: Il tuo indirizzo email è stato verificato con successo! Ora puoi effettuare l'accesso.
+  all_in_one_init: Congratulazioni, il tuo account è attivo! Ora puoi effettuare l'accesso.
+  delete_account: Il tuo account è stato eliminato con successo!
+  review_confirmation: La tua recensione è stata confermata con successo!
+  login: Accesso riuscito!
+  logout: Disconnessione riuscita!
+
+home: Home
+my_account: Il mio account
+newspaper: Gazzetta
+recipes: Ricette
+our_recipes : Le nostre ricette
+categories: Categorie
+become_vendor: Diventa venditore
+legal_notice: Avviso legale
+legal: Legale
+social_networks: Reti sociali
+links: Link
+terms_of_use: Termini di utilizzo
+terms_of_sales: Termini di vendita
+who_are_we: Chi siamo
+cart: Carrello
+checkout: Checkout
+search: Ricerca
+forgotten_password: Password dimenticata
+password_recovery: Recupero password
+change_password: Cambia password
+reset_password: Reimposta la password
+login: Accesso
+registration: Registrazione
+shop: Negozio
+reviews: Recensioni
+highlighted_recipe: Ricetta del mese
+search_recipe_ingredient_article: Cercare una ricetta, un ingrediente, un articolo
+
+firstName: Nome
+lastName: Cognome
+email_address: Indirizzo email
+enter_account_email: Inserisci l'indirizzo email associato al tuo account
+password: Password
+old_password: Vecchia password
+new_password: Nuova password
+password_confirm: Conferma password
+remember_me: Ricordami
+agree_terms_of_use: Accetto i termini di utilizzo
+note: Nota
+comment: Commento
+language: Lingua
+contact: Contatti
+
+close: Chiudi
+see_more: Mostra di più
+see_less: Mostra meno
+read_more: Leggi di più
+know_more: Saperne di più
+see_recipe: Vedi la ricetta
+cancel: Annulla
+delete_account: Elimina il mio account
+submit:
+  validate: Conferma
+return_home: Torna alla home
+contact_us: Contattaci
+follow_us_on_facebook: Seguici su Facebook
+follow_us_on_instagram: Seguici su Instagram
+change_locale:
+  en: Versione in inglese
+  fr: Versione in francese
+  es: Versione in spagnolo
+  it: Versione in italiano
+
+question:
+  delete_account_confirm: Vuoi davvero eliminare il tuo account?
+  forgotten_password: Password dimenticata?
+  register: Non hai ancora un account? Registrati
+
+flag:
+  en: Bandiera del Regno Unito
+  fr: Bandiera francese
+  es: Bandiera spagnola
+  it: Bandiera italiana
+
+cocktailissimo_logo: Logo di Cocktailissimo
+insufficient_stock: Stock insufficiente
+all_rights_reserved: tutti i diritti riservati
+sent_by: Inviato da
+delivery: Consegna
+secure_payment: Pagamento sicuro
+secure_payment_explanation: Per garantire la massima sicurezza, le transazioni finanziarie sono elaborate dal nostro partner Stripe, un leader nelle soluzioni di pagamento. I tuoi dati sono crittografati, garantendo la massima riservatezza durante l'intera transazione.
+product_details: Dettagli del prodotto
+delivery_and_return: Consegna & reso
+delivery_and_return_explanation: Spiegazione su consegna e resi (da fare)
+create_review: Lascia la tua recensione su "{product}"
+ht: IVA esclusa
+ttc: IVA inclusa
+loading: Caricamento
+
+meta:
+  become_vendor_form: Unisciti all'avventura di Cocktailissimo, il marketplace di riferimento per gli appassionati di aperitivi e mixologia, e offri ai tuoi prodotti la visibilità che meritano.
+
+error_template:
+  general_error: Ops... Si è verificato un errore.
+  page_not_found: Ops... pagina non trovata.
+
+title: 
+  home: Cocktailissimo - Mixologia e aperitivo, ricette di cocktail
+meta_description: 
+  home: Benvenuti agli appassionati di aperitivi e mixologia! Trova un'ampia selezione di ricette di cocktail, dalle tendenze ai classici, con o senza alcol, e stupisci i tuoi ospiti.
+  become_vendor: Sei un appassionato di mixologia, un produttore di utensili o ingredienti dedicati a questa squisita arte? Unisciti al mondo della mixologia creativa e fai conoscere i tuoi prodotti a tutto il mondo.

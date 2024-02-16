@@ -1,0 +1,105 @@
+hello: Bonjour {name},
+see_you_soon: À bientôt sur Cocktailissimo ! Cheers !
+
+prospect:
+  subject: Rejoignez le monde de la mixologie créative !
+  title: Bienvenue dans le monde de la mixologie créative !
+  screenshot_alt: Page d'accueil cocktailissimo.com
+  intro:
+    list:
+      one: Vous êtes un passionné de mixologie, un fabricant d'ustensiles ou d'ingrédients dédiés à cet art exquis ?
+      two: Vous cherchez à élargir votre public en B to B ou en B to C et à faire connaître vos produits exceptionnels au monde entier ?
+      three: Lisez la suite, car nous avons une opportunité passionnante à partager avec vous !
+    box:
+      one: >
+        Nous sommes <strong>Cocktailissimo</strong>, une marketplace spécialisée dans les ustensiles et les ingrédients de mixologie. Notre plateforme est le lieu de rendez-vous ultime pour les amateurs de cocktails, les barmen professionnels, et les passionnés de mixologie du monde entier. Nous croyons fermement que les produits de qualité méritent une visibilité de qualité, c'est pourquoi nous vous offrons une opportunité de commercialiser vos créations sur notre marketplace dédiée à la mixologie.
+      two:
+        a: Les caractéristiques techniques de votre entreprise ne vous permettent pas d'être vendeur sur notre marketplace ?
+        b: Pas de problème, notre modèle de commercialisation distributif hybride nous permet aussi de vous accompagner en tant que distributeur.
+
+  why_join_our_community: Pourquoi rejoindre notre communauté ?
+  arguments_list:
+    one:
+      label: Une Audience Ciblée
+      content: Notre plateforme est fréquentée par des professionnels et des amateurs de mixologie à la recherche des dernières innovations en matière d'ustensiles et d'ingrédients. Vos produits seront présentés devant un public captif et passionné.
+    two:
+      label: Visibilité Internationale
+      content: Vous avez la possibilité de mettre en avant vos produits à l'échelle mondiale. Notre marketplace atteint des clients potentiels dans le monde entier, ce qui signifie que vos produits pourront trouver leur place sur les étagères virtuelles de mixologues du monde entier.
+    three:
+      label: Promotion Personnalisée
+      content: Nous travaillons en étroite collaboration avec nos vendeurs pour mettre en place des campagnes marketing ciblées, des mises en avant spéciales et des promotions pour maximiser la visibilité de vos produits et booster vos ventes.
+    four:
+      label: Gestion Simplifiée
+      content: Notre interface vendeur conviviale rend la gestion de votre boutique en ligne facile et transparente. Vous pouvez suivre vos ventes, gérer votre inventaire et interagir avec vos clients en toute simplicité.
+    five:
+      label: Soutien Continu
+      content: Nous croyons en la croissance mutuelle, c'est pourquoi nous sommes toujours là pour répondre à vos questions, partager des conseils en marketing, et vous soutenir dans votre succès sur notre marketplace.
+    six:
+      label: Un service dédié au SEO
+      content: Nous nous chargeons de la rédaction web de vos produits pour améliorer le référencement web de ses derniers. Nous rédigeons des articles de presse, des recettes illustrées et des vidéos intégrants vos produits afin de booster vos ventes.
+  conclusion:
+    top: 
+      one: La mixologie est un art en constante évolution, et nous sommes impatients de collaborer avec des fabricants innovants qui partagent notre passion pour la création de produits exceptionnels. Rejoignez-nous dans l'aventure de la mixologie et faites partie de notre communauté dédiée à l'excellence dans le monde des cocktails.
+      two: >
+        Si vous êtes prêt à donner à vos produits la visibilité qu'ils méritent et à vous associer à une plateforme de mixologie de premier plan, n'hésitez pas à nous contacter pour discuter des possibilités passionnantes qui vous attendent sur <a class="contact-link" href="mailto:contact@cocktailissimo.com" style="color: #FFF; font-weight: 700;">contact@cocktailissimo.com</a>.
+      three: Rejoignez-nous dans l'art de la mixologie et ensemble, créons des expériences de cocktail exceptionnelles pour nos clients du monde entier !
+    hashtags: >
+      <span>#Mixologie</span> 
+      <span>#Marketplace</span> 
+      <span>#Innovation</span> 
+      <span>#Cocktaillissimo</span> 
+      <span>#Excellence</span>
+  end:
+    one: Vous voulez devenir vendeur ? Suivez ce lien
+    two: À très bientôt ! Cheers !
+
+answer_notification:
+  subject: Réponse à votre question
+  text: "Quelqu'un a répondu à une question que vous avez posée ! Pour voir la réponse, suivez ce lien : {link}"
+  html:
+    title: Réponse à votre question
+    message: "Quelqu'un a répondu à une question que vous avez posée ! Pour voir la réponse, cliquez sur le bouton ci-dessous :"
+    link: Voir la réponse
+
+security:
+  confirmation_email:
+    subject: Confirmez votre adresse email
+    text: "Afin de valider votre compte, veuillez vérifier votre adresse email en suivant ce lien : {link}"
+    html:
+      title: Confirmez votre adresse email
+      message: "Afin de valider votre compte, veuillez vérifier votre adresse email en cliquant sur le bouton ci-dessous :"
+      link: Vérifier mon adresse email
+  change_email:
+    subject: Votre code de confirmation
+    text: "Afin de confirmer votre changement d'adresse email, veuillez entrer le code suivant : {code}"
+    html:
+      title: Votre code de confirmation
+      message: "Afin de confirmer votre changement d'adresse email, veuillez entrer le code ci-dessous :"
+  reset_password:
+    subject: Réinitialisation du mot de passe
+    text: "Vous avez demandé la réinitialisation du mot de passe. Pour créer votre nouveau mot de passe, suivez ce lien : {link}"
+    html:
+      title: Réinitialisation du mot de passe
+      message: "Vous avez demandé la réinitialisation du mot de passe. Pour créer votre nouveau mot de passe, cliquez sur le bouton ci-dessous :"
+      link: Créer un nouveau mot de passe
+  review_confirmation:
+    subject: Confirmez votre avis
+    text: 'Vous avez laissé un avis sur "{product}". Vous avez donné la note de {rate}/5. Pour confirmer cet avis, suivez ce lien : {link}'
+    html:
+      title: Confirmez votre avis
+      message: >
+        <p>Vous avez laissé votre avis sur <strong>{product}</strong>.</p>
+        <p>
+          <div><strong>Note :</strong> {rate}/5</div>
+          <div><strong>Titre de l'avis :</strong> {title}</div>
+          <div><strong>Commentaire :</strong> {comment}</div>
+        </p>
+        <p>Pour confirmer cet avis, cliquez sur le bouton ci-dessous :</p>
+      link: Je confirme mon avis
+  all_in_one_init:
+    subject: Créez votre mot de passe
+    text: "Votre compte est créé ! Pour pouvoir y accéder vous devez initialiser votre mot de passe en suivant ce lien : {link}"
+    html:
+      title: Créez votre mot de passe
+      message: "Votre compte est créé ! Pour pouvoir y accéder vous devez initialiser votre mot de passe en cliquant sur le bouton ci-dessous :" 
+      link: Créer mon mot de passe

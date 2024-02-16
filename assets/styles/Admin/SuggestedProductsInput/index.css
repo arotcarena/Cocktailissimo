@@ -1,0 +1,44 @@
+.suggestedProducts-group {
+    position: relative;
+}
+.suggestedProducts-group .admin-form-control {
+    padding-right: 25px;
+}
+
+
+.admin-suggestedProducts-input-closer {
+    position: absolute;
+    right: 8px;
+    bottom: 7px;
+}
+.admin-suggestedProducts-input-closer .icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+.admin-suggestedProducts-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    position: relative;
+    margin: 10px 0;
+    padding-right: 40px;
+    box-shadow: 0 0 2px var(--color-admin-black);
+    width: 375px;
+}
+.admin-suggest-text div {
+    margin: 5px 0;
+}
+
+.admin-suggestedProducts-closer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.admin-suggestedProducts-closer .i-close {
+    width: 1.4em;
+    height: 1.4em;
+}
+
+

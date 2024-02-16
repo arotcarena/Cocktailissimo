@@ -1,0 +1,25 @@
+.product-show-sub-block {
+    margin: 70px 0;
+    padding: 0 15px;
+}
+
+.product-show-sub-block .text-block-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+}
+
+.product-show-sub-block .product-list {
+    display: block;
+}
+
+.suggestedProducts-wrapper .main-loader {
+    display: block;
+    margin: 40px auto;
+}
+
+@media only screen and (min-width: 600px) {
+    .product-show-sub-block {
+        padding: 0 20px;
+    }
+}

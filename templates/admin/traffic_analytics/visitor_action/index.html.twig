@@ -1,0 +1,70 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a class="breadcrumb-link" href="{{ path('admin_trafficAnalytics_index') }}">Web analytics</a>
+        >
+        <a href={{ path('admin_visitorAction_index') }} class="breadcrumb-link">Actions ({{count_visitorActions}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Actions *</h1>
+
+        <div class="admin-table-info-group">
+            <div class="admin-table-info">* Les actions des admins sont comptabilisées.</div>
+        </div>
+
+
+        {% include "admin/traffic_analytics/visitor_action/_va_filters.html.twig" %}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Visiteur</th>
+                    <th>Type</th>
+                    <th>Détail</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for action in pagination %}
+                    <tr>
+                        <td style="text-align: left; max-width: 450px;">
+                            <div style="margin-bottom: 5px;" title="Voir le visiteur #{{ action.visitor.cookieId }}">
+                                <a href="{{ path('admin_visitor_show', {id: action.visitor.id}) }}" style="text-decoration: underline;">
+                                    #{{ action.visitor.cookieId }}
+                                </a>
+                            </div>
+                            <div><strong>Langue :</strong> {{ action.visitor.lang }}</div>
+                            <div><strong>Rôle :</strong> {{ (action.visitor.role ?? '') | trans({}, 'configs', 'fr') }}</div>
+                            <div><strong>Origine :</strong> {{ (visit.visitor.origin ?? '') | trans({}, 'configs', 'fr') }}</div>
+                            <div style="cursor: help;" title="{{ action.visitor.userAgent }}">
+                                <strong>User-Agent :</strong> {{ action.visitor.userAgent | user_agent_excerpt }}
+                            </div>
+                        </td>
+                        <td>{{ action.type | trans({}, 'configs', 'fr') }}</td>
+                        <td>{{ action.detail | show_va_detail(action.type) }}</td>
+                        <td>{{ action.createdAt.format('d/m/Y H:i:s') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+   </div>
+
+{% endblock %}

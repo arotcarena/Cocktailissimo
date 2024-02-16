@@ -1,0 +1,38 @@
+
+{% for type, messages in app.flashes %}
+    {% if type is same as 'auth_event' %}
+        {# sers à avertir app.js d'un auth event (pour suppression des items session storage) #}
+        <div id="auth-event" data-type="{{ messages[0] }}"></div>
+    {% elseif type is same as 'c_iso' %}
+        {# geoloc country #}
+        <div id="c-iso" data-value="{{ messages[0] }}"></div>
+    {% else %}
+        <div class="js-flash-wrapper {{ type }}" data-controller="flash">
+            {% for message in messages %}
+                {# ici il s'agit de vrais messages #}
+                <div class="js-flash">
+                    {% if type is same as 'success' %}
+                        <svg class="icon i-success">
+                            <use xlink:href="/img/icons/sprite.svg#success"></use>
+                        </svg>
+                    {% elseif type is same as 'danger' %}
+                        <svg class="icon i-danger">
+                            <use xlink:href="/img/icons/sprite.svg#danger"></use>
+                        </svg>
+                    {% else %}
+                        <svg class="icon i-info">
+                            <use xlink:href="/img/icons/sprite.svg#info"></use>
+                        </svg>    
+                    {% endif %}
+                    <span>{{ message | raw }}</span>
+                </div>
+            {% endfor %}
+            <button type="button" class="flash-closer icon-button close-button" arial-label="{{ 'close' | trans }}">
+                <svg class="i-close">
+                    <use xlink:href="/img/icons/sprite.svg#close"></use>
+                </svg>
+            </button>
+        </div>
+    {% endif %}
+    
+{% endfor %}

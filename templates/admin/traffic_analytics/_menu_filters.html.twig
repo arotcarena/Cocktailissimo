@@ -1,0 +1,28 @@
+{{ form_start(filter_form) }}
+    <div class="admin-filters-container">
+        <div class="analytics-filters">
+            <div class="analytics-filters-row">
+                <div class="analytics-filters-col" style="max-width: 600px;">  
+                    <div class="analytics-filters-col-label">Filtrer par visiteur</div> 
+                    <div class="analytics-filters-col-content" style="flex-direction: row;">
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'origin', label: 'Origine', field: filter_form.origin}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'role', label: 'Rôle', field: filter_form.role}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'lang', label: 'Langue', field: filter_form.lang}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="analytics-filters-row">
+                <div class="analytics-filters-col dual">
+                    <div class="analytics-filters-col-label">Filtrer par période</div>         
+                    <div class="analytics-filters-col-line admin-form-date-time">
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'startAt', label: 'Début', field: filter_form.startAt}) }}
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'endAt', label: 'Fin', field: filter_form.endAt}) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="admin-filters-submit">
+            <button type="submit" class="admin-button">Recherche</button>
+        </div>
+    </div>
+{{ form_end(filter_form) }}

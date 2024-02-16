@@ -1,0 +1,113 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_user_index') }} class="breadcrumb-link">Utilisateurs ({{count_users}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Utilisateurs</h1>
+
+        {% include "admin/community/user/parts/_filters.html.twig" %}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Informations personnelles</th>
+                    <th>Email vérifié</th>
+                    <th>Entreprise</th>
+                    <th>Rôle</th>
+                    <th>Date d'inscription</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in pagination %}
+                    <tr {% if is_restricted(user) %}style="background-color: rgba(255, 80, 80, .2);"{% endif %}>
+                        <td>
+                            <div>{{ user.id }}</div>
+                            {% if is_restricted(user) %}
+                                <div class="admin-danger" style="margin-top: 10px;">COMPTE SUSPENDU</div>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <div class="capitalize" style="margin-bottom: 4px;">{{ user.civility | trans({}, 'configs', 'fr') }} {{ user.firstName }} {{ user.lastName }}</div>
+                            <div>{{ user.email }}</div>
+                        </td>
+                        <td>{{ user.confirmed ? 'OUI': 'NON' }}</td>
+                        <td>
+                            {% if user.company %}
+                                    <strong>Raison sociale :</strong> {{ user.company.socialName }}
+                                    <br>
+                                    {% if user.company.commercialName %}
+                                        <strong>Nom commercial :</strong> {{ user.company.commercialName }}
+                                        <br>
+                                    {% endif %}
+                                    <strong>N° Siret ou équivalent :</strong> {{ user.company.identificationNumber }}
+                                    <br>
+                                    {% if user.company.vatNumber %}
+                                        <strong>N° TVA intracom :</strong> {{ user.company.vatNumber }}
+                                        <br>
+                                    {% endif %}
+                                        <strong>Pays :</strong> {{ user.company.country | trans({}, 'countries', 'fr') }} ({{ user.company.country }})
+                            {% endif %}
+                        </td>
+                        <td>{{ (user.roles | main_role_resolver) | trans({}, 'configs', 'fr') }}</td>
+                        <td>{{ user.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_user_show', {id: user.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                {% if is_restricted(user) %}
+                                    <form action="{{ path('admin_user_unrestrict') }}" method="POST">
+                                        <input type="hidden" name="token" value="{{ csrf_token('restrict-user') }}">
+                                        <button class="admin-table-button danger" name="id" value="{{ user.id }}" type="submit" title="Débloquer"
+                                                data-controller="deleteconfirm" data-deletemessage="{{ 'Débloquer le compte de l\'utilisateur "'~ user.email ~'" ?' }}"
+                                        >
+                                            <svg class="icon">
+                                                <use xlink:href="/img/icons/sprite.svg#unlock"></use>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <form action="{{ path('admin_user_restrict') }}" method="POST">
+                                        <input type="hidden" name="token" value="{{ csrf_token('restrict-user') }}">
+                                        <button class="admin-table-button danger" name="id" value="{{ user.id }}" type="submit" title="Bloquer"
+                                                data-controller="deleteconfirm" data-deletemessage="{{ 'Suspendre momentanément le compte de l\'utilisateur "'~ user.email ~'" ?' }}"
+                                        >
+                                            <svg class="icon">
+                                                <use xlink:href="/img/icons/sprite.svg#lock"></use>
+                                            </svg>
+                                        </button>
+                                    </form>
+                                {% endif %}
+                                
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+   </div>
+
+{% endblock %}

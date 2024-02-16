@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('search_recipe_ingredient_article' | trans)
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('searchIndex') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('searchIndex') }}
+{% endblock %}
+
+
+{% set headerClass = 'header product-page-header' %}
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <span class="breadcrumb-item">{{ 'search' | trans }}</span>
+    </div>
+    <h1 class="product-index-banner-title search-title">{{ 'search' | trans }}</h1>
+    <div id="search-index">
+    </div>
+{% endblock %}

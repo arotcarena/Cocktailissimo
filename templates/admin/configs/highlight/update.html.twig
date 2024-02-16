@@ -1,0 +1,81 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_highlight_index') }} class="breadcrumb-link">A la une</a>
+        >
+        <span class="breadcrumb-item">Modifier {{ highlight.name == 'homepage' ? 'page d\'accueil': highlight.name }}</span>
+    </div>
+
+    <h1>Modifier "à la une" {{ highlight.name == 'homepage' ? 'page d\'accueil': highlight.name }}</h1>
+
+   {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
+        
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+
+
+
+        <h2>Produit à la une</h2>
+
+        <div 
+            class="select-unique-item-input" 
+            data-itemid="{{ highlight.product ? highlight.product.id: '' }}"
+            data-type="product"
+            data-name="highlight[product]"
+            >
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'highlight[product]', label: '', field: form.product}) }}
+        </div>
+
+        
+        <h2>Article à la une</h2>
+        <div 
+            class="select-unique-item-input" 
+            data-itemid="{{ highlight.article ? highlight.article.id: '' }}"
+            data-type="article"
+            data-name="highlight[article]"
+            >
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'highlight[article]', label: '', field: form.article}) }}
+        </div>
+
+
+        <h2>Recette à la une</h2>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enRecipeTitle', label: 'Titre de la rubrique (ex: Recette du mois) (EN)', field: form.enRecipeTitle, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frRecipeTitle', label: 'Titre de la rubrique (ex: Recette du mois) (FR)', field: form.frRecipeTitle, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esRecipeTitle', label: 'Titre de la rubrique (ex: Recette du mois) (ES)', field: form.esRecipeTitle, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itRecipeTitle', label: 'Titre de la rubrique (ex: Recette du mois) (IT)', field: form.itRecipeTitle, lang: 'it'}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enRecipeDescription', label: 'Description (EN) - 80 caractères max. conseillés (pour design mobile)', field: form.enRecipeDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frRecipeDescription', label: 'Description (FR) - 80 caractères max. conseillés (pour design mobile)', field: form.frRecipeDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esRecipeDescription', label: 'Description (ES) - 80 caractères max. conseillés (pour design mobile)', field: form.esRecipeDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itRecipeDescription', label: 'Description (IT) - 80 caractères max. conseillés (pour design mobile)', field: form.itRecipeDescription, lang: 'it'}) }}
+
+        <div 
+            class="select-unique-item-input" 
+            data-itemid="{{ highlight.recipe ? highlight.recipe.id: '' }}"
+            data-type="recipe"
+            data-name="highlight[recipe]"
+            data-title="Recette"
+            >
+            {{ include('admin/form/_admin_form_row.html.twig', {name: 'highlight[recipe]', label: '', field: form.recipe}) }}
+        </div>
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Modifier</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<li class="admin-answer-card">
+    <div class="admin-answer-card-info">
+        {% if answer.type == 'vendor' %}
+            <span class="admin-answer-card-chip">Vendeur</span>
+        {% elseif answer.type == 'admin' %}
+            <span class="admin-answer-card-chip">Admin</span>
+        {% endif %}
+        <span><strong>{{ answer.fullName }}</strong></span>
+        <span class="admin-review-card-text-mute">{{ answer.email }}</span>
+        <span>{{ answer.createdAt.format('d/m/Y H:i') }}</span>
+    </div>
+    <div class="admin-answer-body">
+        {{ answer.content }}
+    </div>
+    <div class="admin-answer-footer">
+        <form action="{{ path('admin_answer_delete') }}" method="POST">
+            <input type="hidden" name="token" value="{{ csrf_token('delete-answer') }}">
+            <input type="hidden" name="targetRoute" value="{{ targetRoute }}">
+            <button 
+                data-controller="deleteconfirm"  
+                data-deletemessage="{{ 'Supprimer définitivement la réponse "' ~ answer.content | excerpt ~ '" ?' }}" 
+                name="id" 
+                value="{{ answer.id }}"
+                >
+                <svg class="icon">
+                    <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                </svg>
+                <span>Supprimer</span>
+            </button>
+        </form>
+    </div>
+</li>

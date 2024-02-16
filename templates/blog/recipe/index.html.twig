@@ -1,0 +1,55 @@
+{% extends "base.html.twig" %}
+ 
+{% block metaDescription %}
+    {% if recipesCategory.metaDescription %}
+        <meta name="description" content="{{ attribute(recipesCategory.metaDescription, app.request.locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('recipes' | trans),
+        type: 'article.group',
+        image: '/img/categories/' ~ recipesCategory.picture
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('recipeCategoryShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('recipeCategoryShow') }}
+{% endblock %}
+
+
+
+{% set headerClass = 'header product-page-header' %}
+
+{% block body %}
+    <div class="product-index-banner">
+        <img class="product-index-banner-img" src="/img/categories/{{ recipesCategory.picture }}" alt="{{ attribute(recipesCategory.pictureAlt, app.request.locale) }}" />
+        <div class="product-index-banner-text">
+            <h1 class="product-index-banner-title">{{ 'recipes' | trans }}</h1>
+            <p class="product-index-banner-subtitle">
+                {{ attribute(recipesCategory.shortDescription, app.request.locale) }}
+            </p>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <span class="breadcrumb-item">{{ 'recipes' | trans }}</span>
+    </div>
+    
+    <div id="recipe-category-show">
+    </div>
+
+    <div class="product-index-footer link-underline">
+        {{ attribute(recipesCategory.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale) | raw }}
+    </div>
+    
+{% endblock %}

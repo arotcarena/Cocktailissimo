@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('aPropos.title' | trans({}, 'static')),
+    }) }}
+{% endblock %}
+
+{% block body %}
+
+    <div class="container legal-page">
+        <h1 class="aPropos-title bold">{{ 'aPropos.title' | trans({}, 'static') }}</h1>
+
+        {{ 'aPropos.text' | trans({}, 'static') | raw }}
+
+        <div class="aPropos-conclusion">
+            {{ 'aPropos.conclusion' | trans({}, 'static') | raw }}
+        </div>
+        
+        <div class="aPropos-img-wrapper">
+            <img class="aPropos-img" src="/img/aPropos/nina.jpg" alt="{{ 'aPropos.img.nina' | trans }}">
+            <img class="aPropos-img" src="/img/aPropos/ibai.jpg" alt="{{ 'aPropos.img.ibai' | trans }}">
+        </div>
+        <div class="aPropos-legend">{{ 'aPropos.legend' | trans({}, 'static') }}</div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% set locale = app.request.locale %}
+{% set recipe = highlight.recipe %}
+{% set target = path('recipe_show', {
+    ref: recipe.ref,
+    slug: attribute(recipe.slug, locale),
+    _locale: locale
+}) %}
+
+
+<section class="highlighted-recipe highlighted-item">
+    <h2 class="highlighted-recipe-top-title border-title">
+        <span>{{ attribute(highlight.recipeTitle, locale) }}</span>
+    </h2>
+    <div class="highlighted-recipe-wrapper">
+        <div class="highlighted-recipe-img-wrapper">
+            <a href="{{ target }}">
+                <img 
+                    class="highlighted-recipe-img" 
+                    src="{{ recipe.picture | picture_path_resolver('show_first') }}" 
+                    alt="{{ recipe.picture | picture_alt_resolver(locale) }}"
+                >
+            </a>
+        </div>
+        <div class="highlighted-recipe-content">
+            <h3 class="highlighted-recipe-title">
+                <a href="{{ target }}">{{ attribute(recipe.title, locale) }}</a>
+            </h3>
+            <div class="highlighted-recipe-text">
+                {{ attribute(highlight.recipeDescription, locale) }}
+            </div>
+            <div class="highlighted-recipe-text recipe-list">
+                {{ recipe.ingredientsQuantities | ingredients_quantities_excerpt(locale, 12) }}
+            </div>
+            <div class="highlighted-recipe-link-wrapper">
+                <a href="{{ target }}" class="home-cta-link">
+                    {{ 'see_recipe' | trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,91 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_article_index') }} class="breadcrumb-link">Articles ({{count_article}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Articles</h1>
+
+        {% include "admin/blog/article/_filters.html.twig" %}
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Titre / Sous-titre</th>
+                    <th>Sous-catégorie</th>
+                    <th>Auteur</th>
+                    <th>Vues</th>
+                    <th>Réf.</th>
+                    <th>Date de création</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for article in pagination %}
+                    <tr>
+                        <td class="admin-table-td-img">
+                            {% if article.picture is not null %}
+                                <img class="admin-table-img" src={{ article.picture | picture_path_resolver('index') }} alt={{ article.picture | picture_alt_resolver('fr') }}>
+                            {% endif %}
+                        </td>
+                        <td style="max-width: 400px;">
+                            <div style="overflow: hidden; text-overflow: ellipsis;"><strong>{{ article.title.fr }}</strong></div>
+                            <div style="margin-top: 5px; overflow: hidden; text-overflow: ellipsis;">{{ article.subtitle.fr }}</div>  
+                        </td>
+                        <td>{{ article.subCategory.name.fr }}</td>
+                        <td class="capitalize">{{ article.author.firstName }} {{ article.author.lastName }}</td>
+                        <td>{{ article.countViews ?? 0 }}</td>
+                        <td>{{ article.ref }}</td>
+                        <td>{{ article.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_article_show', {id: article.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_article_update', {id: article.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_article_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-article') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ article.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement l\'article "' ~ article.title.fr ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_article_create') }}">Ajouter un article</a>
+        </div>
+   </div>
+
+{% endblock %}

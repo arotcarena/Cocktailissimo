@@ -1,0 +1,80 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    {% set fullName = (user.civility | trans({}, 'configs', 'fr')) ~ ' ' ~ user.firstName ~ ' ' ~ user.lastName %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_user_index') }} class="breadcrumb-link">Utilisateurs ({{count_users}})</a>
+        >
+        <span class="breadcrumb-item">{{ user.company ? user.company.usualName: fullName }}</span>
+    </div>
+
+    <div class="admin-product-show user-show">
+        
+        <h1>{{ user.company ? user.company.usualName: fullName }}</h1>
+                
+        {% if is_restricted(user) %}
+            <p style="font-weight: 600;" class="admin-danger">COMPTE SUSPENDU</p>
+        {% endif %}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: user.id, label: '#ID', name: 'id'}) }}
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: user.confirmed ? 'OUI': 'NON', label: 'Adresse email vérifiée', name: 'confirmed'}) }}
+
+
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: user.countPasswordFailures ?: 0, label: 'Échecs d\'authentification', name: 'countPasswordFailures'}) }}
+
+        <div style="margin: 10px 0;">
+            <div class="admin-product-show-row inline">
+                <div class="admin-product-show-row-label">Rôle principal</div>
+                <div class="admin-product-show-row-text">{{ (user.roles | main_role_resolver) | trans({}, 'configs', 'fr') }}</div>
+            </div>
+            <div class="admin-product-show-row inline">
+                <div class="admin-product-show-row-text">{{ user.roles | json_encode }}</div>
+            </div>
+        </div>
+
+        <h2>Informations personnelles</h2>
+
+        <div>
+            <div class="capitalize admin-product-show-row inline">{{ user.civility | trans({}, 'configs', 'fr') }} {{ user.firstName }} {{ user.lastName }}</div>
+            <div class="admin-product-show-row inline">{{ user.email }}</div>
+            {% if user.phone %}
+                <div class="admin-product-show-row inline">{{ user.phone }}</div>
+            {% endif %}
+        </div>
+        
+        {% if user.company %}
+            <h2>Entreprise</h2>
+
+            {% if user.company.logo %}
+                <div class="admin-product-show-pictures">
+                    {{ include('admin/parts/_show_img.html.twig', {picture: user.company.logo, label: 'Logo', name: 'logo'}) }}
+                </div>
+            {% else %}
+                <div class="admin-empty-logo" style="height: 100px; width: 100px; border-radius: 8px; border: dashed 2px; margin-bottom: 10px; opacity: .5; display:flex; align-items:center; justify-content: center;">
+                    Logo
+                </div>
+            {% endif %}
+
+            {{ include('admin/parts/_show_row_inline.html.twig', {value: user.company.socialName, label: 'Désignation sociale', name: 'socialName'}) }}
+
+            {{ include('admin/parts/_show_row_inline.html.twig', {value: user.company.commercialName, label: 'Nom commercial', name: 'commercialName'}) }}
+
+            {{ include('admin/parts/_show_row_inline.html.twig', {value: user.company.identificationNumber, label: 'N° Siret ou équivalent', name: 'identificationNumber'}) }}
+
+            {{ include('admin/parts/_show_row_inline.html.twig', {value: user.company.vatNumber, label: 'N° de TVA intracommunautaire', name: 'vatNumber'}) }}
+        {% endif %}
+
+
+        <h2>Stripe customer_id</h2>
+        <div>{{ user.stripeCustomerId }}</div>
+
+      
+    </div>
+
+
+{% endblock %}

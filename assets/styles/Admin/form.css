@@ -1,0 +1,564 @@
+
+
+/*admin-form*/
+.admin-form {
+    max-width: 450px;
+    margin: 50px auto;
+    padding: 0 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.admin-form-part {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.admin-form-control {
+    display: block;
+    height: 35px;
+    border: solid 1px var(--color-admin-lightgrey);
+    border-radius: 4px;
+    margin-top: 5px;
+    padding: 0 10px;
+}
+.admin-form .admin-form-control {
+    width: 100%;
+    font-size: 1.1em;
+}
+.admin-form-group.subCategories-group .admin-form-control {
+    height: 150px;
+}
+textarea.admin-form-control {
+    height: 100px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.admin-form-row {
+    display: flex;
+    gap: 20px;
+}
+.admin-form .admin-form-row .admin-form-control {
+    width: auto;
+}
+
+.admin-form-submit {
+    display: flex;
+    justify-content: center;
+}
+.admin-form-group.is-invalid .admin-form-control {
+    border: solid 1px red;
+}
+.admin-form-group.is-invalid label {
+    color: red;
+}
+.admin-form-error li {
+    margin: 4px 0;
+    color: red;
+    font-size: 0.8em;
+}
+.admin-form-info {
+    margin: 4px 0;
+    font-size: 0.8em;
+    color: var(--color-admin-lightgrey);
+}
+.admin-main-error {
+    margin: 20px 0;
+    color: red;
+}
+
+.admin-suggest-wrapper {
+    position: relative;
+}
+
+.admin-form-img-container {
+    position: relative;
+}
+.admin-form-img-container .admin-form-img-alt {
+    position: absolute;
+    background-color: #FFF;
+    padding: 10px 15px;
+    font-size: .7em;
+    bottom: 5px;
+    left: 5px;
+    border-radius: 4px;
+}
+.admin-form-img-container .admin-form-img-remover {
+    position: absolute;
+    bottom: 0;
+    left: calc(100% + 5px);
+}
+.admin-form-img-container .admin-form-img-remover .i-trash {
+    width: 2em;
+    height: 2em;
+}
+
+.admin-form-subCategory-item.current {
+    font-weight: 600;
+}
+
+
+
+.admin-form-field-with-button {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.admin-form-field-with-button-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.admin-form-field-with-button-controls .admin-button {
+    margin: 0;
+}
+
+.admin-product-show.large {
+    max-width: 800px;
+}
+.admin-product-show-row.full-width {
+    width: 100%;
+}
+.admin-product-show-row.inline {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 2px 0;
+}
+.admin-product-show-row.inline .admin-product-show-row-label {
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+
+.admin-form-date-time .admin-form-control {
+    border: none;
+    height: auto;
+    background-color: var(--color-admin-secondary);
+    padding: 5px 10px;
+}
+.admin-form-date-time select {
+    height: 40px;
+    min-width: 80px;
+    font-size: 1em;
+    margin: 5px;
+    border: none;
+    padding: 5px;
+}
+
+
+.enHtmlContent a, .frHtmlContent a, .esHtmlContent a, .itHtmlContent a {
+    text-decoration: underline;
+    color: var(--color-admin);
+}
+
+.admin-line-wrapper {
+    display: flex;
+    gap: 50px;
+}
+
+
+.admin-checkbox-group-wrapper .admin-form-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-direction: row-reverse;
+}
+
+
+.admin-submit-group.double {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+}
+.admin-submit-group.double .admin-button {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/*roles-select*/
+.admin-roles-select .i-edit {
+    width: 1.7em;
+    height: 1.7em;
+    margin-bottom: -5px;
+    margin-left: 50px;
+}
+.admin-roles-select select {
+    font-size: .9em;
+    text-transform: uppercase;
+    width: 230px;
+    height: 71px;
+}
+
+
+
+/*upload field*/
+.form-group {
+    position: relative;
+}
+.form-upload-wrapper {
+    border: dashed 2px var(--color-lightgrey);
+    height: 200px;
+    width: 200px;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.admin-picture-upload {
+    padding-right: 50px;
+}
+.admin-picture-upload.landscape .form-upload-wrapper {
+    width: 300px;
+    height: 204px;
+}
+.admin-picture-upload.mini .form-upload-wrapper {
+    width: 100px;
+    height: 100px;
+}
+.admin-picture-upload.small .form-upload-wrapper {
+    width: 140px;
+    height: 140px;
+}
+.form-upload-img.light {
+    opacity: .4;
+}
+.form-upload-wrapper .icon, .form-upload-wrapper .loader {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1;
+}
+.form-upload-wrapper .icon {
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    width: 50px;
+    height: 50px;
+}
+.form-upload-wrapper .loader {
+    top: calc(50% - 15px);
+    left: calc(50% - 15px);
+    width: 30px;
+    height: 30px;
+}
+.form-upload-wrapper .icon.i-plus {
+    color: var(--color-lightgrey);
+    width: 100px;
+    height: 100px;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+}
+
+.form-upload-label {
+    display: block;
+    margin-bottom: 7px;
+    margin-left: 5px;
+}
+.form-upload-img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+.form-upload-trash-button {
+    position: absolute;
+    bottom: 0;
+    right: -33px;
+}
+.form-upload-trash-button .icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+.form-upload-opener.loading {
+    pointer-events: none;
+}
+
+.admin-picture-upload.mini .icon.i-plus {
+    width: 50px;
+    height: 50px;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+}
+
+
+
+
+/*add button*/
+.admin-add-button {
+    width: 35px;
+    height: 35px;
+    border-radius: 1000px;
+    background-color: var(--color-admin-secondary);
+    padding: 6px;
+    margin-left: 5px;
+}
+.admin-add-button .icon.i-plus {
+    width: 100%;
+    height: 100%;
+} 
+
+/*admin-form-modal*/
+.admin-form-modal-container {
+    position: fixed;
+    z-index: 3;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.admin-form-modal {
+    background-color: #FFF;
+    padding: 25px;
+    box-shadow: 0 0 4px var(--color-black);
+    border-radius: 10px;
+    width: 450px;
+    max-height: 80vh;
+    overflow: auto;
+}
+.admin-form-modal .admin-form {
+    margin: 0;
+}
+.admin-form-modal-title {
+    margin: 0;
+    text-align: center;
+}
+.admin-form-modal .admin-submit-group.double {
+    justify-content: center;
+}
+.admin-form-modal .form-error {
+    color: var(--color-admin-danger);
+    font-size: .9em;
+    margin-top: 4px;
+}
+
+.admin-form-group .form-group.is-invalid .admin-form-control {
+    border: solid 1px var(--color-admin-danger);
+}
+
+.admin-form-modal .close-button.modal-closer {
+    display: none;
+}
+
+.admin-form-modal-apparted {
+    padding: 20px;
+    background-color: var(--color-admin-secondary);
+    margin: 10px -15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/*admin-select-card*/
+.admin-select-list {
+    margin: 15px 0;
+}
+.admin-select-card {
+    position: relative;
+    padding: 5px 10px;
+    border: solid 1px var(--color-admin-lightgrey);
+    margin: 10px 0;
+}
+.admin-select-card .admin-select-card-closer {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.admin-select-card .admin-select-card-edit-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.admin-select-card .admin-select-card-closer .i-close {
+    width: 1.4em;
+    height: 1.4em;
+}
+.admin-select-card .admin-select-card-edit-button .i-edit {
+    width: 1.7em;
+    height: 1.7em;
+}
+
+
+.admin-select-card.active {
+    border: solid 2px var(--color-admin);
+}
+.admin-select-card-badge {
+    color: var(--color-admin-secondary);
+    background-color: var(--color-admin);
+    padding: 2px 3px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: .7em;
+    margin-bottom: 4px;
+}
+
+.admin-select-card.admin-packaging-card {
+    cursor: pointer;
+}
+.admin-select-card.admin-packaging-card.active {
+    cursor: default;
+}
+
+.admin-form-checkbox {
+    width: 15px;
+    height: 15px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+
+/*admin vendor show*/
+.admin-product-show.user-show {
+    gap: 0;
+}
+.admin-product-show.user-show .admin-buttons-wrapper {
+    margin-top: 40px;
+}
+
+
+/*sendcloud form guide*/
+.admin-sendcloud-form-guide {
+    font-size: .8em;
+    background-color: rgb(242, 250, 253);
+    width: 710px;
+    margin-left: auto;
+    padding: 20px 70px;
+    border: solid 1px rgb(230, 230, 230);
+}
+.admin-sendcloud-form-guide .guide-header {
+    padding: 10px 30px;
+    margin: -20px -70px 10px;
+    background-color: #FFF;
+    border-bottom: rgb(230, 230, 230);
+}
+.admin-sendcloud-form-guide .guide-header-logo {
+    width: 140px;
+    height: auto;
+}
+.admin-sendcloud-form-guide h3 {
+    font-size: 1.2em;
+    margin-top: 30px;
+}
+.admin-sendcloud-form-guide .guide-block {
+    background-color: #FFF;
+    padding: 10px 15px;
+    border: solid 1px var(--color-admin-lightgrey);
+    border-radius: 6px;
+    margin: 15px 0;
+}
+.admin-sendcloud-form-guide .guide-block-title {
+    font-size: 1.2em;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+.admin-sendcloud-form-guide .guide-block-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+}
+.admin-sendcloud-form-guide .guide-block-group {
+    width: calc(50% - 5px);
+    flex: none;
+}
+.admin-sendcloud-form-guide .guide-label {
+    margin-bottom: 5px;
+}
+.admin-sendcloud-form-guide .guide-box {
+    width: 100%;
+    border: solid 1px;
+    border-radius: 4px;
+    padding: 5px 7px;
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+}
+.admin-sendcloud-form-guide .guide-block-group-info {
+    color: var(--color-admin);
+    margin: 5px 5px 0;
+    font-style: italic;
+}
+.admin-sendcloud-form-guide .guide-box .guide-block-group-info {
+    margin: 0;
+}
+
+.admin-sendcloud-form-guide .guide-button {
+    background-color: #112857;
+    color: #FFF;
+    border-radius: 4px;
+    margin: 20px 0;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 35px;
+}
+
+
+.analytics-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin: 20px 0;
+}
+.analytics-filters-row {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+}
+.analytics-filters-col {
+    flex: 1 0;
+    max-width: 300px;
+}
+.analytics-filters-col.dual {
+    max-width: 600px;
+}
+.analytics-filters-col-content, .analytics-filters-col-content .admin-form-group, .analytics-filters-col-content .admin-form-control {
+    width: 100%;
+}
+.analytics-filters-col-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.analytics-filters-col-line {
+    display: flex;
+    gap: 10px;
+}
+.analytics-filters-col-label {
+    font-weight: 600;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+
+.admin-suggestedProducts-item {
+    display: flex;
+}
+
+.admin-highlight-index-block {
+    margin: 40px -25px;
+    padding: 15px 25px;
+    border: solid 1px rgb(225, 225, 225);
+}
+.admin-highlight-index-block-title {
+    margin-top: 0;
+    font-size: 2em;
+    color: var(--color-admin);
+}
+
+.admin-table-vatrates .admin-form-control {
+    width: 75px;
+    margin: 0 auto;
+}

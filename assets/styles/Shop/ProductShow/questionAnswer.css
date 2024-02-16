@@ -1,0 +1,188 @@
+.questionAnswer-controls-top {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+.questionAnswer-controls .q-filter-group {
+    width: 100%;
+}
+.questionAnswer-block .create-form-button {
+    width: 50%;
+    min-width: 220px;
+    max-width: 250px;
+    font-size: .8em;
+    margin: 0 auto;
+}
+.create-form-small-button {
+    width: auto;
+    padding: 5px 11px;
+    font-size: .7em;
+    min-height: auto;
+    margin-left: 20px;
+    margin-top: 15px;
+    margin-bottom: -7px;
+}
+#question .review-card .create-form-small-button {
+    margin-left: auto;
+}
+.questionAnswer-block .qa-card-bottom-item .publication-remover-link {
+    margin-left: auto;
+}
+#comment .publication-remover-link {
+    margin-left: 0;
+}
+.create-form-small-button.left .i-trash {
+    margin-right: 4px;
+}
+
+.questionAnswer-block .review-card-body-title {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+.questionAnswer-block .review-card-body {
+    max-width: 900px;
+}
+.qa-card-bottom-item .review-card-infos {
+    font-weight: 600;
+}
+.qa-card-bottom-item .review-card-body {
+    margin-left: auto;
+}
+.qa-card-bottom-item.important .review-card-body {
+    margin-top: 5px;
+}
+
+.qa-card-bottom {
+    margin-top: 15px;
+    font-style: italic;
+}
+.qa-card-bottom .qa-card-bottom-content {
+    max-height: 50vh;
+    overflow: auto;
+    padding-right: 20px;
+}
+.qa-card-bottom .qa-card-info {
+    padding-right: 20px;
+}
+.qa-card-footer {
+    padding-right: 20px;
+}
+.review-card.remove-confirm .qa-card-footer {
+    display: none;
+}
+.qa-card-bottom-item {
+    text-align: right;
+    margin: 17px 0;
+    font-size: .9em;
+}
+
+.qa-card-bottom-item.important {
+    font-weight: 600;
+}
+.qa-card-bottom-item.remove-confirm {
+    padding: 10px;
+}
+.qa-card-bottom-item.important.admin .review-card-infos {
+    color: var(--color-bordeaux-veryflash);
+}
+.qa-card-bottom-item.important.vendor .review-card-infos {
+    color: var(--color-bordeaux-veryflash);
+}
+.qa-card-bottom-chip {
+    text-transform: uppercase;
+    padding: 0 3px;
+    border-radius: 4px;
+    font-size: .8em;
+    font-weight: 700;
+    border: solid 2px;
+}
+.qa-card-bottom-item .answer-admin-name, .qa-card-bottom-item .answer-vendor-link {
+    margin-right: 10px;
+}
+
+.qa-card-info {
+    text-align: right;
+    margin-top: 10px;
+    font-size: .9em;
+    font-weight: 300;
+}
+.qa-card-button.i-text {
+    margin-left: auto;
+    font-size: .85em;
+    font-weight: 500;
+    text-decoration: underline;
+    gap: 6px;
+}
+.qa-card-bottom .right-loader {
+    display: block;
+    margin-left: auto;
+    margin-top: 20px;
+}
+.qa-card-bottom .i-expand-more {
+    width: .7em;
+    height: .7em;
+}
+
+
+.questionAnswer-block .product-index-count{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+
+
+/*answer form*/
+.comment-form-modal.answer-form-modal .review-card-infos {
+    font-weight: 600;
+}
+.answer-create-wrapper .submit-group.double {
+    margin: 10px 0 0;
+}
+.answer-form-footer {
+    margin-top: 50px;
+}
+.answer-form-footer .form-group.textarea {
+    margin-bottom: 0;
+}
+.answer-form-footer .checkbox-group {
+    margin-top: 0;
+}
+
+
+
+
+
+/*specific to comments*/
+#comment .qa-card-button.i-text {
+    margin-left: 20px;
+}
+#comment .review-card-infos {
+    font-weight: 600;
+}
+#comment.questionAnswer-block .review-card-body {
+    max-width: none;
+}
+#comment .qa-card-bottom-item {
+    text-align: left;
+    margin-left: 20px;
+}
+#comment .review-form-product-card {
+    gap: 20px;
+    align-items: center;
+}
+#comment .qa-card-bottom .right-loader {
+    margin-left: 20px;
+}
+#comment .child-admin-name {
+    margin-right: 10px;
+}
+.qa-card-bottom .answer-vendor-link {
+    font-weight: 600;
+}
+.qa-card-bottom .answer-vendor-link:hover {
+    text-decoration: underline;
+}
+
+

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="GmZzUz6" resname="assert.logged">
+        <source>assert.logged</source>
+        <target>Conéctese para crear una dirección </target>
+      </trans-unit>
+      <trans-unit id="YvgVdZt" resname="assert.choice">
+        <source>assert.choice</source>
+        <target>Elija entre las distintas opciones</target>
+      </trans-unit>
+      <trans-unit id="s7Xiqvn" resname="assert.maxLength">
+        <source>assert.maxLength</source>
+        <target>{{ limit }} caracteres maximo</target>
+      </trans-unit>
+      <trans-unit id="RmoQmrL" resname="assert.notBlank.firstName">
+        <source>assert.notBlank.firstName</source>
+        <target>El nombre es obligatorio </target>
+      </trans-unit>
+      <trans-unit id="ZgOFauS" resname="assert.notBlank.lastName">
+        <source>assert.notBlank.lastName</source>
+        <target>El apellido es obligatorio</target>
+      </trans-unit>
+      <trans-unit id="AK5ugua" resname="assert.notBlank.streetAddress">
+        <source>assert.notBlank.streetAddress</source>
+        <target>La dirección es obligatoria</target>
+      </trans-unit>
+      <trans-unit id="I12sVvj" resname="assert.notBlank.city">
+        <source>assert.notBlank.city</source>
+        <target>La ciudad es obligatoria </target>
+      </trans-unit>
+      <trans-unit id="cHW5eOT" resname="assert.notBlank.postcode">
+        <source>assert.notBlank.postcode</source>
+        <target>El código postal es obligatorio </target>
+      </trans-unit>
+      <trans-unit id="9oajql7" resname="assert.notBlank.country">
+        <source>assert.notBlank.country</source>
+        <target>El país es Obligatorio </target>
+      </trans-unit>
+      <trans-unit id="SunInHr" resname="assert.notBlank.socialAddress">
+        <source>assert.notBlank.socialAddress</source>
+        <target>La dirección de la sede social es obligatoria</target>
+      </trans-unit>
+      <trans-unit id="YhsghIJ" resname="assert.notBlank.senderAddress">
+        <source>assert.notBlank.senderAddress</source>
+        <target>La dirección de envío es obligatoria</target>
+      </trans-unit>
+      <trans-unit id="P5W5NaY" resname="assert.email">
+        <source>assert.email</source>
+        <target>Dirección de correo electrónico no válida</target>
+      </trans-unit>
+      <trans-unit id="FS5T7Rq" resname="assert.notBlank.email">
+        <source>assert.notBlank.email</source>
+        <target>El correo electrónico es obligatorio</target>
+      </trans-unit>
+      <trans-unit id="JEF_bcc" resname="assert.notBlank.message">
+        <source>assert.notBlank.message</source>
+        <target>El mensaje es obligatorio</target>
+      </trans-unit>
+      <trans-unit id="XySseam" resname="assert.notBlank.fullName">
+        <source>assert.notBlank.fullName</source>
+        <target>El nombre es obligatorio</target>
+      </trans-unit>
+      <trans-unit id="45SIju8" resname="assert.range.rate">
+        <source>assert.range.rate</source>
+        <target>Elija una nota entre 1 y 5</target>
+      </trans-unit>
+      <trans-unit id="EBne0.W" resname="assert.notBlank.password">
+        <source>assert.notBlank.password</source>
+        <target>La contraseña es obligatoria</target>
+      </trans-unit>
+      <trans-unit id="RfHYKia" resname="assert.notBlank.oldPassword">
+        <source>assert.notBlank.oldPassword</source>
+        <target>La contraseña anterior es obligatoria</target>
+      </trans-unit>
+      <trans-unit id="EPGFEVW" resname="assert.minLength">
+        <source>assert.minLength</source>
+        <target>{{ limit }} caracteres mínimo</target>
+      </trans-unit>
+      <trans-unit id="q95Ip5L" resname="assert.samePasswords">
+        <source>assert.samePasswords</source>
+        <target>Las dos contraseñas son distintas</target>
+      </trans-unit>
+      <trans-unit id="QJAf9ns" resname="assert.notBlank.passwordConfirm">
+        <source>assert.notBlank.passwordConfirm</source>
+        <target>La confirmación de su contraseña es obligatoria</target>
+      </trans-unit>
+      <trans-unit id="y8mgik1" resname="assert.notUnique.email">
+        <source>assert.notUnique.email</source>
+        <target>La dirección de correo electrónico ya está utilizada</target>
+      </trans-unit>
+      <trans-unit id="yL.v5MK" resname="assert.true.agreeTerms">
+        <source>assert.true.agreeTerms</source>
+        <target>Tiene que aceptar las condiciones generales de uso</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

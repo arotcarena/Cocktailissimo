@@ -1,0 +1,211 @@
+{% extends "admin/admin_base.html.twig" %}
+
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <span class="breadcrumb-item">Web analytics</span>
+    </div>
+
+   <div class="admin-container">
+        <h1>Web analytics</h1>
+    </div>
+
+    {% include "admin/traffic_analytics/_menu_filters.html.twig" %}
+
+
+
+    <main class="admin-blocks-container">
+        <section class="admin-block">
+            <h2 class="admin-block-title">Performances</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    Taux de rebond <strong style="margin-left: 10px;">{{ bounceRate }}%</strong>
+                </p>
+                <p class="admin-block-text">
+                    Taux d'inscription <strong style="margin-left: 10px;">{{ registerRate }}%</strong>
+                </p>
+                <p class="admin-block-text">
+                    Taux d'engagement <strong style="margin-left: 10px;">{{ engagementRate }}%</strong>
+                </p>
+                <p class="admin-block-text">
+                    Taux de conversion <strong style="margin-left: 10px;">{{ conversionRate }}%</strong>
+                </p>
+                <p class="admin-block-text">
+                    taux d'avis <strong style="margin-left: 10px;">{% if reviewRate %}{{ reviewRate }}%{% else %}- - -{% endif %} </strong>
+                </p>
+                <p class="admin-block-text">
+                    Abandon de panier <strong style="margin-left: 10px;">{{ cartGiveUpRate }}%</strong>
+                </p>
+                <p class="admin-block-text text-small">
+                    Abandon dans form checkout <strong style="margin-left: 10px;">{% if checkoutGiveUpRate %}{{ checkoutGiveUpRate }}%{% else %}- - -{% endif %}</strong>
+                </p>
+                <p class="admin-block-text text-small">
+                    Abandon de paiement <strong style="margin-left: 10px;">{% if paymentGiveUpRate %}{{ paymentGiveUpRate }}%{% else %}- - -{% endif %}</strong>
+                </p>
+                <p class="admin-block-text text-small">
+                    Échec de paiement <strong style="margin-left: 10px;">{% if paymentFailureRate %}{{ paymentFailureRate }}%{% else %}- - -{% endif %}</strong>
+                </p>
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Visiteurs</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    <strong>{{ count_visitors }}</strong> visiteur{% if count_visitors > 1 %}s{% endif %}
+                </p>
+                <p class="admin-block-text text-small">
+                    dont <strong style="margin: 0 5px;">{{ count_registered }}</strong> membre{% if count_registered > 1 %}s{% endif %} inscrit{% if count_registered > 1 %}s{% endif %}
+                    <br>
+                    {% set count_notRegistered = count_visitors - count_registered %}
+                    et <strong style="margin: 0 5px;">{{ count_notRegistered }}</strong> non inscrit{% if count_notRegistered > 1 %}s{% endif %}
+                </p>
+                <p class="admin-block-text text-small">
+                    {% set count_roleUser = attribute(count_roles, 'ROLE_USER') ?? 0 %}
+                    <strong>{{ count_roleUser }}</strong> utilisateur{% if count_roleUser > 1 %}s{% endif %}
+                </p>
+                <p class="admin-block-text text-small">
+                    {% set count_rolePro = attribute(count_roles, 'ROLE_PRO') ?? 0 %}
+                    <strong>{{ count_rolePro }}</strong> pro{% if count_rolePro > 1 %}s{% endif %}
+                </p>
+                <p class="admin-block-text">
+                    <strong>{{ count_visitorVisitsAverage }}</strong> visites en moyenne
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_visitor_index') }}" class="admin-button">Voir les visiteurs</a>
+            </div>
+        </section>
+ 
+        <section class="admin-block">
+            <h2 class="admin-block-title">Visites</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    <strong>{{ count_visits }}</strong> visites
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_homeVisits }}</strong> pages d'accueil
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_recipeShowVisits }}</strong> fiches recettes
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_articleShowVisits }}</strong> fiches articles
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_productShowVisits }}</strong> fiches produits
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_searchIndexVisits }}</strong> pages de recherche
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_productCategoryVisits }}</strong> pages catégorie produit
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_recipeCategoryVisits }}</strong> pages catégorie recette
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_articleCategoryVisits }}</strong> pages catégorie article
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_articleCategoryVisits }}</strong> boutiques vendeurs
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_visit_index') }}" class="admin-button secondary-color">Voir les visites</a>
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Actions</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text">
+                    <strong>{{ count_visitorActions }}</strong> actions
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_registerConfirm }}</strong> inscriptions confirmées
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_cartCreate }}</strong> paniers créés
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_checkoutStart }}</strong> checkout
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_purchasePaids }}</strong> commandes payées
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_reviews }}</strong> avis postés
+                </p>
+                </p>
+                <p class="admin-block-text text-small">
+                    <strong>{{ count_userGeneratedContents }}</strong> ugc *
+                </p>
+            </div>
+            <p class="admin-block-text text-small">
+                * Questions / Commentaires / Réponses
+            </p>
+            <div class="admin-block-controls">
+                <a href="{{ path('admin_visitorAction_index') }}" class="admin-button secondary-color">Voir les actions</a>
+            </div>
+        </section>
+    </main>
+
+    <main class="admin-blocks-container">
+        <section class="admin-block">
+            <h2 class="admin-block-title">Rôles</h2>
+            <div class="admin-block-body">
+                {% for role, rate in roleRates %}
+                    <p class="admin-block-text text-small">
+                        {{role | trans({}, 'configs', 'fr') }} <strong style="margin-left: 10px;">{{ rate }}%</strong>
+                    </p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Origines</h2>
+            <div class="admin-block-body">
+                {% for origin, rate in originRates %}
+                    <p class="admin-block-text text-small">
+                        {{origin | trans({}, 'configs', 'fr') }} <strong style="margin-left: 10px;">{{ rate }}%</strong>
+                    </p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Langues</h2>
+            <div class="admin-block-body">
+                {% for lang, rate in langRates %}
+                    <p class="admin-block-text text-small">
+                        {{ lang }} <strong style="margin-left: 10px;">{{ rate }}%</strong>
+                    </p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <div style="max-width: 1000px; margin: 80px auto;">
+        <h3>Mode de calcul</h3>
+        <div style="margin: 20px 0; font-style: italic; font-weight: 600; line-height: 1.6;">
+            <div>- Les visiteurs comptabilisés sont ceux correspondant aux filtres de recherche et ayant une visite dans la période sélectionnée. (Les admins et les vendeurs sont systématiquement exclus)</div>
+            <div>- Les actions comptabilisées sont celles effectuées par ces même visiteurs dans la période sélectionnée (à l'exception du taux d'inscription qui ne prend pas en compte si l'inscription a eu lieu pendant la période ou non).</div>
+        </div>
+        <ul style="padding-left: 20px;">
+            <li style="list-style-type: disc; margin: 10px 0;">Taux de rebond = (Visiteurs ayant visité une seule page / Total des visiteurs) * 100</li> 
+            <li style="list-style-type: disc; margin: 10px 0;">Taux d'inscription = (Membres inscrits (peu importe quand) / Total des visiteurs) * 100</li> 
+            <li style="list-style-type: disc; margin: 10px 0;">Taux d'engagement = (Visiteurs ayant posté du contenu / Total des visiteurs) * 100</li> 
+            <li style="list-style-type: disc; margin: 10px 0;">Taux de conversion = (Total de commandes payées / Paniers créés) * 100</li> 
+            <li style="list-style-type: disc; margin: 10px 0;">Abandon form checkout (abandon durant le formulaire de checkout, avant l'affichage du form de paiement) = <br> 100 - ((Nombre d'événements affichage du form de paiement / Nb d'événements checkout) * 100)</li> 
+            <li style="list-style-type: disc; margin: 10px 0;">Abandon de paiement (abandon volontaire au moment de l'affichage du form de paiement ou échec de paiement) = <br> 100 - ((Total de commandes payées / Nb d'événements affichage du form de paiement) * 100)</li>
+            <li style="list-style-type: disc; margin: 10px 0;">Échec de paiement = 100 - ((Total de commandes payées / Nb de tentatives de paiement) * 100)</li> 
+            <li style="list-style-type: disc; margin: 10px 0;">Taux d'avis = (Avis postés / Total de commandes payées) * 100</li> 
+        </ul>
+    </div>
+
+
+
+{% endblock %}

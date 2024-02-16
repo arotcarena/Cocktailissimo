@@ -1,0 +1,42 @@
+<div class="admin-review-card-header">
+    {% set picture = product_picture_position_resolver(product, 1) %}
+    <a href="{{ path('admin_product_show', {id: product.id}) }}">
+        <img class="admin-review-card-header-img" src="{{ picture | picture_path_resolver('small_index') }}" alt="{{ picture | picture_alt_resolver('fr') }}">
+    </a>
+    <div class="admin-review-card-header-content">
+        <div class="header-title">
+            <span>
+                <a href="{{ path('admin_product_show', {id: product.id}) }}">{{ product.designation.fr }}</a>
+            </span>
+            <span class="admin-review-card-text-mute ml">{{ product.basePublicRef }}</span>
+        </div>
+        <div class="header-text header-stars">
+            {% if product.reviewNote %}
+                <span>{{ product.reviewNote | review_note_format('fr') }}</span>
+                <span>
+                    <svg class="icon admin-i-star">
+                        <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                    </svg>
+                </span>
+                <span>({{ product.countReviews }} avis)</span>
+            {% else %}
+                Aucune note
+            {% endif %}
+        </div>
+        <div class="header-text">
+            <span>
+                <a href="{{ path('vendorShop', {companySlug: product.vendor.company.slug, _locale: 'fr'}) }}">
+                    {{ product.vendor.company.usualName }}
+                </a>
+            </span>
+            <span class="admin-review-card-text-mute ml">
+                <a href="{{ path('admin_user_show', {id: product.vendor.id}) }}">{{ product.vendor.email }}</a>
+            </span>
+        </div>
+        <div class="header-text price">
+            <span>Prix public : {{ product.baseConsumerPriceHT | price_format('fr') }} HT</span>
+            <span style="margin-left: 20px; font-style: italic;">Prix pro : {{ product.baseBusinessPriceHT | price_format('fr') }} HT</span>
+        </div>
+    </div>
+    <div class="admin-review-card-header-type">Produit</div>
+</div>

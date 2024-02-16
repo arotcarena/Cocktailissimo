@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+
+
+{% block lang_alternate %}
+    {% for lang in ['en', 'fr', 'es', 'it'] %}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ url('category_show', {
+            _locale: lang, 
+            slug: attribute(category.slug, lang)
+        }) }}" />
+    {% endfor %}
+{% endblock %}
+
+{% block metaDescription %}
+    {% if category.metaDescription %}
+        <meta name="description" content="{{ attribute(category.metaDescription, app.request.locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: attribute(category.name, app.request.locale),
+        type: 'product.group',
+        image: '/img/categories/' ~ category.picture
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('categoryShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('categoryShow') }}
+{% endblock %}
+
+{% set headerClass = 'header product-page-header' %}
+
+
+{% block body %}
+    <div class="product-index-banner">
+        <img class="product-index-banner-img" src="/img/categories/{{ category.picture }}" alt="{{ attribute(category.pictureAlt, app.request.locale) }}" />
+        <div class="product-index-banner-text">
+            <h1 class="product-index-banner-title">{{ attribute(category.name, app.request.locale) }}</h1>
+            <p class="product-index-banner-subtitle">
+                {{ attribute(category.shortDescription, app.request.locale) }}
+            </p>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <span class="breadcrumb-item">{{ attribute(category.name, app.request.locale) }}</span>
+    </div>
+    <div id="category-show" data-categoryid="{{ category.id }}">
+    </div>
+
+    <div class="product-index-footer link-underline">
+        {{ attribute(category.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale) | raw }}
+    </div>
+{% endblock %}

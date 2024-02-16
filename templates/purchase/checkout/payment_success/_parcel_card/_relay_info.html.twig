@@ -1,0 +1,17 @@
+<div class="relay-card relay-light-card">
+    <div class="relay-card-body">
+        <div class="relay-card-header">
+            <div class="relay-card-text">
+                {% set address = relayInfo.address %}
+                <strong>{{ relayInfo.name }}</strong> {{ address.lineOne }}, {{ address.postcode }} {{ address.city }} ({{ address.country }})
+            </div>
+        </div>
+
+        <div 
+            id="relay-card-opening-times" 
+            data-openingtimes="{{ relayInfo.formattedOpeningTimes | json_encode }}"
+            class="relay-card-footer"
+            >
+        </div>
+    </div>
+</div>

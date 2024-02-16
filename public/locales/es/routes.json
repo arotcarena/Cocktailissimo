@@ -1,0 +1,88 @@
+{
+    "customerAccount": {
+        "base": {
+            "label": "Mi cuenta",
+            "path": "/es/mi-cuenta"
+        },
+        "details": {
+            "label": "Datos personales",
+            "path": "/datos-personales"
+        },
+        "address": {
+            "label": "Mis direcciones",
+            "path": "/mis-direcciones"
+        },
+        "purchase": {
+            "label": "Mis pedidos",
+            "path": "/mis-pedidos"
+        }
+    },
+    "vendorAccount": {
+        "base": {
+            "label": "Mi Cuenta de vendedor",
+            "path": "/es/vendedor/mi-cuenta"
+        },
+        "details": {
+            "index": {
+                "label": "Mis datos",
+                "path": "/es/vendedor/mi-cuenta/datos"
+            },
+            "personal": {
+                "label": "Datos personales",
+                "path": "/es/vendedor/mi-cuenta/datos/datos-personales"
+            },
+            "company": {
+                "label": "Empresa",
+                "path": "/es/vendedor/mi-cuenta/datos/empresa"
+            },
+            "senderAddress": {
+                "label": "Direccion de envio",
+                "path": "/es/vendedor/mi-cuenta/datos/direccion-de-envio"
+            },
+            "payment": {
+                "label": "Pagos",
+                "path": "/es/vendedor/mi-cuenta/datos/recibir-pagos"
+            }
+        },
+        "buyerSpace": {
+            "index": {
+                "label": "Espacio comprador",
+                "path": "/es/vendedor/mi-cuenta/espacio-comprador"
+            },
+            "purchase": {
+                "label": "Mis pedidos",
+                "path": "/es/vendedor/mi-cuenta/espacio-comprador/mis-pedidos"
+            },
+            "deliveryAddress": {
+                "label": "Mis Direcciones de entrega",
+                "path": "/es/vendedor/mi-cuenta/espacio-comprador/mis-direcciones-de-entrega"
+            }
+        },
+        "vendorSpace": {
+            "index": {
+                "label": "Espacio vendedor",
+                "path": "/es/vendedor/mi-cuenta/espacio-vendedor"
+            },
+            "shop": {
+                "label": "Mi tienda",
+                "path": "/es/vendedor/mi-cuenta/espacio-vendedor/mi-tienda"
+            },
+            "product": {
+                "label": "Mis productos",
+                "path": "/es/vendedor/mi-cuenta/espacio-vendedor/mis-productos"
+            },
+            "review": {
+                "label": "Reseñas",
+                "path": "/es/vendedor/mi-cuenta/espacio-vendedor/resenas"
+            },
+            "purchase": {
+                "label": "Pedidos",
+                "path": "/es/vendedor/mi-cuenta/espacio-vendedor/pedidos"
+            },
+            "question": {
+                "label": "Preguntas",
+                "path": "/es/vendedor/mi-cuenta/espacio-vendedor/preguntas"
+            }
+        }
+    }
+}

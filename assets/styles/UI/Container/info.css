@@ -1,0 +1,37 @@
+.info-opener {
+    position: relative;
+}
+.info-bubble {
+    position: absolute;
+    top: calc(100% + 10px);
+    left: -100px;
+    right: -100px;
+    background-color: #FFF;
+    box-shadow: 0 0 4px var(--color-lightgrey);
+    padding: 10px 15px;
+    padding-right: calc(12px + 1.3em);
+    border-radius: 6px;
+    text-align: left;
+}
+.info-bubble::before {
+    position: absolute;
+    top: -5px;
+    left: calc(50% - 5px);
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: #FFF;
+    transform: rotate(45deg);
+    border-left: solid 1px var(--color-lightgrey);
+    border-top: solid 1px var(--color-lightgrey);
+}
+.info-closer {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+}
+.info-closer .i-close {
+    width: 1.3em;
+    height: 1.3em;
+}

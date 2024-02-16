@@ -1,0 +1,37 @@
+aPropos:
+  title: Who We Are
+  text: >
+    <p class="aPropos-text">Welcome to Cocktailissimo, the marketplace dedicated to mixology and aperitifs, created with passion by Nina Sandin and Ibai Arotçarena, childhood friends. Nina, an expert buyer in the gastronomy and pastry sector, and Ibai, a strict advocate of quality in healthy food, share a common love for taste pleasures and convivial moments around a table.</p>
+    <p class="aPropos-text">Our story began with our shared passion for cocktails, the art of mixology, and the appreciation of refined flavors. We realized that it was challenging to find high-quality products and equipment worthy of the best professional bartenders, as well as educational resources to learn to create exceptional cocktails at home.</p>
+    <p class="aPropos-text">This is why we decided to create Cocktailissimo, a one-of-a-kind marketplace, offering a curated selection of products, utensils, and ingredients essential for crafting sophisticated cocktails. We are also committed to providing detailed recipes and educational techniques to enable everyone to become a mixology expert, exploring the art of mixonomy - a gastronomic approach to mixology that harmonizes cocktails with dishes.</p>
+    <p class="aPropos-text">At Cocktailissimo, we believe that crafting an exquisite cocktail is more than just preparing a simple drink; it's a unique culinary experience that perfectly complements the pleasures of the table. Whether you are a passionate enthusiast or a seasoned professional, our platform is designed to cater to all levels of expertise, offering a diverse and high-quality selection.</p>
+    <p class="aPropos-text">We aspire to make the art of mixology accessible to a wide audience, providing premium products, professional tips, and fostering the development of a community driven by the sharing of knowledge and gustatory discoveries.</p>
+    <p class="aPropos-text">Join us on Cocktailissimo and immerse yourself in a unique sensory adventure, where the pleasure of savoring a delicious cocktail blends with the joy of creating unforgettable memories around a table.</p>
+  conclusion: >
+      <p class="aPropos-text">To your success in the art of mixology!</p>
+      <p class="aPropos-text">Cheers!</p>
+  legend: 'Nina Sandin and Ibai Arotçarena, founders of Cocktailissimo'
+  img: 
+    nina: Photo of Nina Sandin
+    ibai: Photo of Ibai Arotçarena
+
+legal:
+  title: Legal Notice
+  text: >
+    <p class="legal-text">
+      The website cocktailissimo.com is published and operated by the company Cocktailissimo.
+    </p>
+    <p class="legal-text">
+      <div>SAS Cocktailissimo</div>
+      <div>101 bis rue Georges Lassalle</div>
+      <div>40220 Tarnos, France</div>
+      <div>RCS Dax - 978 536 415</div>
+      <div>VAT number: FR93978536415</div>
+    </p>
+    <p class="legal-text">
+      <div>Email address: <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a></div>
+      <div>Phone: +33647232520</div>
+    </p>
+    <p class="legal-text">
+      Hosted by: OVH SAS, 2 rue Kellerman 59100 Roubaix, France - <a href="https://www.ovhcloud.com">https://www.ovhcloud.com</a>
+    </p>

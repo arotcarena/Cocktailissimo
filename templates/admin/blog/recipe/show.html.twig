@@ -1,0 +1,135 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_recipe_index') }} class="breadcrumb-link">Recettes ({{count_recipe}})</a>
+        >
+        <span class="breadcrumb-item">{{ recipe.title.fr }}</span>
+    </div>
+
+    <div class="admin-product-show lang-switch-wrapper">
+            
+        <h1>{{ recipe.title.fr }}</h1>
+
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        <div class="admin-product-show-pictures">
+            {% if recipe.picture is not null %}
+            {{ include('admin/parts/_show_img.html.twig', {picture: recipe.picture, label: 'Photo', name: 'picture'}) }}  {# name utile seulement pour les tests #}
+            {% endif %}
+        </div>
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.title.en, label: 'Titre (EN)', name: 'enName', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.title.fr, label: 'Titre (FR)', name: 'frName', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.title.es, label: 'Titre (ES)', name: 'esName', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.title.it, label: 'Titre (IT)', name: 'itName', lang: 'it'}) }}
+
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.slug.en, label: 'Slug (EN)', name: 'enSlug', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.slug.fr, label: 'Slug (FR)', name: 'frSlug', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.slug.es, label: 'Slug (ES)', name: 'esSlug', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: recipe.slug.it, label: 'Slug (IT)', name: 'itSlug', lang: 'it'}) }}
+        
+        {% if recipe.metaDescription is not null %}
+            {{ include('admin/parts/_show_row.html.twig', {value: recipe.metaDescription.en, label: 'Méta-description (EN)', name: 'enMetaDescription', lang: 'en'}) }}
+            {{ include('admin/parts/_show_row.html.twig', {value: recipe.metaDescription.fr, label: 'Méta-description (FR)', name: 'frMetaDescription', lang: 'fr'}) }}
+            {{ include('admin/parts/_show_row.html.twig', {value: recipe.metaDescription.es, label: 'Méta-description (ES)', name: 'esMetaDescription', lang: 'es'}) }}
+            {{ include('admin/parts/_show_row.html.twig', {value: recipe.metaDescription.it, label: 'Méta-description (IT)', name: 'itMetaDescription', lang: 'it'}) }}
+        {% endif %}
+        
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Sous-catégories</div>
+            <ul style="padding-left: 20px;" class="admin-product-show-row-text">
+                {% for subCategory in recipe.subCategories %}
+                    <li style="list-style-type: disc; margin: 5px 0;">{{ subCategory.name.fr }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label iq-show-row-label">
+                Ingrédients <span class="en-group">(EN)</span><span class="fr-group">(FR)</span><span class="es-group">(ES)</span><span class="it-group">(IT)</span>
+            </div>
+            {% for iq in recipe.ingredientsQuantities %}
+                <li class="iq-card">
+                    <img src="{{ picture_path_resolver(iq.ingredient.picture, 'small_index') }}" alt="{{ picture_alt_resolver(iq.ingredient.picture, 'fr')}}" />
+                    <span class="en-group">
+                        {{iq.quantity.en}} <strong>{{iq.ingredient.name.en}}</strong>
+                    </span>
+                    <span class="fr-group">
+                        {{iq.quantity.fr}} <strong>{{iq.ingredient.name.fr}}</strong>
+                    </span>
+                    <span class="es-group">
+                        {{iq.quantity.es}} <strong>{{iq.ingredient.name.es}}</strong>
+                    </span>
+                    <span class="it-group">
+                        {{iq.quantity.it}} <strong>{{iq.ingredient.name.it}}</strong>
+                    </span>
+                </li>
+            {% endfor %}
+        </div>
+
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'enHtmlContent', label: 'Contenu (EN)', value: (recipe.htmlContent.en | parse_master_tags('en')), lang: 'en'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'frHtmlContent', label: 'Contenu (FR)', value: (recipe.htmlContent.fr | parse_master_tags('fr')), lang: 'fr'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'esHtmlContent', label: 'Contenu (ES)', value: (recipe.htmlContent.es | parse_master_tags('es')), lang: 'es'}) }}
+        {{ include('admin/parts/_html_show_row.html.twig', {name: 'itHtmlContent', label: 'Contenu (IT)', value: (recipe.htmlContent.it | parse_master_tags('it')), lang: 'it'}) }}
+
+
+        {{ include('admin/parts/_show_row.html.twig', {name: 'countViews', label: 'Vues', value: recipe.countViews ?? 0}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {name: 'ref', label: 'Réf.', value: recipe.ref}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {name: 'createdAt', label: 'Date de création', value: recipe.createdAt.format('d/m/Y H:i')}) }}
+
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Produits liés</div>
+            <ul class="admin-product-list">
+                {% for linkedProduct in recipe.linkedProducts %}
+                    {% set picture = product_picture_position_resolver(linkedProduct, 1) %}
+                    <li class="admin-product-list-item suggestedProducts">
+                        <img class="admin-product-list-item-img" src={{ picture | picture_path_resolver('index') }} alt={{ picture | picture_alt_resolver('fr') }}>
+                        <div class="admin-product-list-item-text">
+                            <strong class="suggestedProduct">{{ linkedProduct.designation.fr }}</strong> 
+                            {{ linkedProduct.subCategory.name.fr }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Articles liés</div>
+            <ul class="admin-product-list">
+                {% for linkedArticle in recipe.linkedArticles %}
+                    <li class="admin-product-list-item suggestedProducts">
+                        <img class="admin-product-list-item-img" src={{ linkedArticle.picture | picture_path_resolver('index') }} alt={{ linkedArticle.picture | picture_alt_resolver('fr') }}>
+                        <div class="admin-product-list-item-text">
+                            <strong class="suggestedProduct">{{ linkedArticle.title.fr }}</strong>  
+                            {{ linkedArticle.subCategory.name.fr }}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href={{ path('admin_recipe_update', {id: recipe.id}) }}>Modifier</a>
+            <form action={{ path('admin_recipe_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-recipe') }}">
+                <button class="admin-button secondary-color" type="submit" name="id" value={{ recipe.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement la recette "' ~ recipe.title.fr ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

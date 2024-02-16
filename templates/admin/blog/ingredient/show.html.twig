@@ -1,0 +1,45 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_ingredient_index') }} class="breadcrumb-link">Ingrédients ({{count_ingredient}})</a>
+        >
+        <span class="breadcrumb-item">{{ ingredient.name.fr }}</span>
+    </div>
+
+    <div class="admin-product-show lang-switch-wrapper">
+            
+        <h1>{{ ingredient.name.fr }}</h1>
+
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'fr'}) }}
+
+        <div class="admin-product-show-pictures">
+            {% if ingredient.picture is not null %}
+            {{ include('admin/parts/_show_img.html.twig', {picture: ingredient.picture, img_filter: null, label: 'Photo', name: 'picture'}) }}  {# name utile seulement pour les tests #}
+            {% endif %}
+        </div>
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: ingredient.name.en, label: 'Nom (EN)', name: 'enName', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: ingredient.name.fr, label: 'Nom (FR)', name: 'frName', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: ingredient.name.es, label: 'Nom (ES)', name: 'esName', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: ingredient.name.it, label: 'Nom (IT)', name: 'itName', lang: 'it'}) }}
+
+        <div class="admin-buttons-wrapper">
+            <a class="admin-button" href={{ path('admin_ingredient_update', {id: ingredient.id}) }}>Modifier</a>
+            <form action={{ path('admin_ingredient_delete') }} method="POST">
+                <input type="hidden" name="token" value="{{ csrf_token('delete-ingredient') }}">
+                <button class="admin-button secondary-color" type="submit" name="id" value={{ ingredient.id }}
+                        data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement l\'ingrédient "' ~ ingredient.name.fr ~ '" ?' }}"
+                >
+                    Supprimer
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

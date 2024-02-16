@@ -1,0 +1,17 @@
+.admin-badge {
+    padding: 10px;
+    border-radius: 8px;
+    font-size: .9em;
+    text-transform: uppercase;
+    font-weight: 600;
+    line-height: 1.4;
+}
+.alert-badge {
+    background-color: var(--color-admin-danger-light);
+    color: var(--color-admin-danger);
+}
+.admin-badge .admin-button {
+    margin-bottom: 0;
+    font-size: 1.2em;
+    text-transform: none;
+}

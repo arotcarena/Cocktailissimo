@@ -1,0 +1,105 @@
+{% extends "base.html.twig" %}
+{% set locale = app.request.locale %}
+
+{% block lang_alternate %}
+    {% for lang in ['en', 'fr', 'es', 'it'] %}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ url('product_show', {
+            _locale: lang, 
+            categorySlug: attribute(product.category.slug, lang),
+            subCategorySlug: attribute(product.subCategory.slug, lang),
+            slug: attribute(product.slug, lang),
+            publicRef: currentPackaging.publicRef
+        }) }}" />
+    {% endfor %}
+{% endblock %}
+
+{% block canonical %}
+    <link rel="canonical" href="{{ url('product_show', {
+            _locale: locale, 
+            categorySlug: attribute(product.category.slug, locale),
+            subCategorySlug: attribute(product.subCategory.slug, locale),
+            slug: attribute(product.slug, locale),
+            publicRef: product.basePublicRef
+        }) }}" />
+{% endblock %}
+
+{% block metaDescription %}
+    {% if product.metaDescription %}
+        <meta name="description" content="{{ attribute(product.metaDescription, app.request.locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% set firstPicture = (product | product_picture_position_resolver(1)) %}
+{% set firstPicturePath = (firstPicture | picture_path_resolver('show_first')) %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: attribute(product.designation, locale),
+        type: 'product',
+        image: firstPicturePath
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('productShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('productShow') }}
+{% endblock %}
+
+{% set headerClass = 'header product-page-header' %}
+
+
+{% block body %}
+    {% include "shop/product/_show_breadcrumb.html.twig" %}
+
+    <div class="product-show page-show">
+        <main class="product-show-wrapper">
+
+            <div class="product-left-col">
+                <div id="product-show-img-wrapper">
+                    {# ci-dessous data pour react #}
+                    {% if (product.pictures | length) > 0 %}
+                        {% for i in [1, 2, 3] %}
+                            {% set picture = product | product_picture_position_resolver(i) %}
+                            {% if picture is not null %}
+                                <div 
+                                    id="picture{{i}}"
+                                    data-id="{{picture.id}}"
+                                    data-src="{{ picture_path_resolver(picture, 'show_first') | json_encode }}" 
+                                    data-srcsmall="{{ picture_path_resolver(picture, 'small_index') | json_encode }}"
+                                    data-alt="{{ picture_alt_resolver(picture, locale) | json_encode }}">
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div 
+                            id="picture1"
+                            data-id="1"
+                            data-src="{{ '/img/default.jpg' | json_encode }}" 
+                            data-srcsmall="{{ '/img/default.jpg' | json_encode }}"
+                            data-alt="{{ 'image par défaut' | json_encode }}">
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% include "shop/product/_right_col/_right_col.html.twig" %}
+            
+        </main>
+
+        {% set picture = product | product_picture_position_resolver(1) %}
+        <div 
+            id="product-show-sub-sections"
+            data-productid="{{ product.id }}"
+            data-productdesignation="{{ attribute(product.designation, locale) | json_encode }}"
+            data-productpicturepath="{{ picture_path_resolver(picture, 'small_index') | json_encode }}"
+            data-productpicturealt="{{ picture_alt_resolver(picture, locale) | json_encode }}"
+            >
+        </div>
+    </div>
+{% endblock %}
+

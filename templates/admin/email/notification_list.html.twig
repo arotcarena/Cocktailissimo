@@ -1,0 +1,19 @@
+{% extends "admin/email/base.html.twig" %}
+
+{% block title %}Notification importante{% endblock %}
+
+{% block body %}
+
+    <h1>Notification importante</h1>
+
+    <div style="margin: 20px 0;">
+        <div style="font-weight: 600;">{{ message }}</div>
+    </div>
+
+    <div style="margin: 20px 0;">
+        {% for line in list %}
+            <div>{{ line }}</div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

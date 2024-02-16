@@ -1,0 +1,54 @@
+{
+    "url": {
+        "security": {
+            "change_password": "/en/change-my-password",
+            "account_delete": "/en/delete-my-account",
+            "login": "/en/login",
+            "register": "/en/create-an-account",
+            "ask_reset_password": "/en/forgotten-password"
+        },
+        "account": "/en/my-account",
+        "customerAccount": {
+            "index": "/en/my-account",
+            "details": "/en/my-account/details",
+            "address": "/en/my-account/addresses",
+            "purchase": "/en/my-account/orders"
+        },
+        "vendorAccount": {
+            "index": "/en/vendor/account",
+            "details": {
+                "index": "/en/vendor/account/details",
+                "personal": "/en/vendor/account/details/personal-details",
+                "company": "/en/vendor/account/details/company",
+                "senderAddress": "/en/vendor/account/details/sender-address",
+                "payment": "/en/vendor/account/details/receive-payments"
+            },
+            "buyerSpace": {
+                "index": "/en/vendor/account/buyer-space",
+                "purchase": "/en/vendor/account/buyer-space/orders",
+                "deliveryAddress": "/en/vendor/account/buyer-space/delivery-addresses"
+            },
+            "vendorSpace": {
+                "index": "/en/vendor/account/vendor-space",
+                "shop": "/en/vendor/account/vendor-space/shop",
+                "product": "/en/vendor/account/vendor-space/products",
+                "review": "/en/vendor/account/vendor-space/reviews",
+                "purchase": "/en/vendor/account/vendor-space/orders",
+                "question": "/en/vendor/account/vendor-space/questions"
+            }
+        },
+        "checkout": {
+            "payment_success": "/en/order-successfull",
+            "index": "/en/checkout"
+        },
+        "search": {
+            "index": "/en/search"
+        },
+        "contact": {
+            "become_vendor": "/en/become-vendor"
+        },
+        "recipe": {
+            "index": "/en/recipes.html"
+        }
+    }
+}

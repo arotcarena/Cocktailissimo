@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+
+{% block lang_alternate %}
+    {% for lang in ['en', 'fr', 'es', 'it'] %}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ url('subCategory_show', {
+            _locale: lang, 
+            categorySlug: attribute(category.slug, lang),
+            subCategorySlug: attribute(subCategory.slug, lang)
+        }) }}" />
+    {% endfor %}
+{% endblock %}
+ 
+{% block metaDescription %}
+    {% if subCategory.metaDescription %}
+        <meta name="description" content="{{ attribute(subCategory.metaDescription, app.request.locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% set categoryName = attribute(category.name, app.request.locale) %}
+{% set subCategoryName = attribute(subCategory.name, app.request.locale) %}
+{% set headerClass = 'header product-page-header' %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: subCategoryName,
+        type: 'product.group',
+        image: '/img/categories/' ~ subCategory.picture
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('categoryShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('categoryShow') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="product-index-banner">
+        <img class="product-index-banner-img" src="/img/categories/{{ subCategory.picture }}" alt="{{ attribute(subCategory.pictureAlt, app.request.locale) }}" />
+        <div class="product-index-banner-text">
+            <h1 class="product-index-banner-title">{{ subCategoryName }}</h1>
+            <p class="product-index-banner-subtitle">
+                {{ attribute(subCategory.shortDescription, app.request.locale) }}
+            </p>
+        </div>
+    </div>
+
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <a href={{ path('category_show', {slug: attribute(category.slug, app.request.locale), _locale: app.request.locale}) }} class="breadcrumb-link">{{ categoryName }}</a>
+        >
+        <span class="breadcrumb-item">{{ subCategoryName }}</span>
+    </div>
+
+    <div id="category-show" data-categoryid="{{ category.id }}" data-subcategoryid="{{ subCategory.id }}">
+    </div>
+
+    <div class="product-index-footer link-underline">
+        {{ attribute(subCategory.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale) | raw }}
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends "base.html.twig" %}
+
+{% block lang_alternate %}
+    {% for lang in ['en', 'fr', 'es', 'it'] %}
+        <link rel="alternate" hreflang="{{ lang }}" href="{{ url('article_show', {
+            _locale: lang, 
+            slug: attribute(article.slug, lang),
+            subCategorySlug: attribute(article.subCategory.slug, lang),
+            ref: article.ref
+        }) }}" />
+    {% endfor %}
+{% endblock %}
+
+{% set locale = app.request.locale %}
+{% set picturePath = (article.picture | picture_path_resolver('landscape')) %}
+
+{% block metaDescription %}
+    {% if article.metaDescription %}
+        <meta name="description" content="{{ attribute(article.metaDescription, locale) }}">
+    {% endif %}
+{% endblock %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: attribute(article.title, locale),
+        type: 'article',
+        image: picturePath
+    }) }}
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('articleShow') }}
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('articleShow') }}
+{% endblock %}
+
+{% set headerClass = 'header product-page-header' %}
+
+
+
+{% block body %}
+
+    {% include "blog/article/_show_breadcrumb.html.twig" %}
+
+    <div class="recipe-show page-show">
+        <main class="recipe-show-wrapper">
+            <div class="article-show-img-wrapper">
+                <img 
+                    class="article-show-img" 
+                    src="{{ picturePath }}" 
+                    alt="{{ article.picture | picture_alt_resolver(locale) }}"
+                >
+            </div>
+            <div class="recipe-show-text article link-underline">
+                <h1 class="recipe-show-title article-show-title">{{ attribute(article.title, locale) }}</h1>
+                <h2 class="article-show-subtitle">{{ attribute(article.subtitle, locale) }}</h2>
+                <div class="recipe-show-text link-underline">
+                    {{ attribute(article.htmlContent, locale) | parse_master_tags(locale) | raw }}
+                </div>
+            </div>
+            <div class="recipe-show-footer">
+                <p>{{ article.createdAt.format('d/m/Y') }}</p>
+                {% if article.author.firstName and article.author.lastName %}
+                    <p class="capitalize">{{ article.author.firstName }} {{ article.author.lastName }}</p>
+                {% endif %}
+            </div>
+        </main>
+
+        <div 
+            id="article-show-sub-sections"
+            data-articleid="{{ article.id }}"
+            data-articletitle="{{ attribute(article.title, locale) | json_encode }}"
+            data-articlepicturepath="{{ picture_path_resolver(article.picture, 'small_index') | json_encode}}"
+            data-articlepicturealt="{{ picture_alt_resolver(article.picture, locale) | json_encode}}"
+        >
+        </div>
+    </div>
+
+
+    
+
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: ('delete_account' | trans)
+    }) }}
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="security" data-controller="formdualloading">
+    
+        <div class="security-form-wrapper">
+            <h1 class="security-title-small">{{ 'delete_account' | trans }}</h1>
+
+
+            <form class="security-form" action="{{ path('security_accountDelete', {_locale: app.request.locale}) }}" method="POST" >
+                <div>{{ 'question.delete_account_confirm' | trans }}</div>
+                <input type="hidden" name="token" value="{{ csrf_token('delete-user') }}"/>
+                <div class="submit-group double">
+                    <button class="form-button bordeaux no-react security-button js-submit" type="submit">
+                        <svg class="icon loader form-button-loader" aria-label="{{ 'loading' | trans }}">
+                            <use xlink:href="/img/icons/sprite.svg#loader"></use>
+                        </svg>
+                        <span>{{ 'delete_account' | trans }}</span>
+                    </button>
+                    <a class="form-button cancel no-react security-button js-cancel" href="{{ path('account_index', {_locale: app.request.locale}) }}">
+                        <svg class="icon loader form-button-loader" aria-label="{{ 'loading' | trans }}">
+                            <use xlink:href="/img/icons/sprite.svg#loader"></use>
+                        </svg>
+                        <span>{{ 'cancel' | trans }}</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,94 @@
+.js-flash-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--color-admin-secondary);
+    z-index: 5;
+    padding: 30px;
+    padding-right: 47px;
+    min-height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+.js-flash-wrapper.closing {
+    animation: disappears ease-in-out .3s forwards;
+}
+@keyframes disappears {
+    from {
+        opacity: 1;
+    } to {
+        opacity: 0;
+    }
+}
+.js-flash {    
+    font-size: 1.3em;
+    line-height: 1.5;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    align-items: flex-start;
+}
+.js-flash strong, .js-flash a {
+    color: var(--color-admin-verydark);
+}
+.js-flash a {
+    text-decoration: underline;
+}
+.js-flash .admin-button {
+    color: #FFF;
+    text-decoration: none;
+}
+.js-flash .icon {
+    width: 1.4em;
+    height: 1.4em;
+    flex: none;
+}
+.js-flash-wrapper .close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.js-flash-wrapper .close-button .i-close {
+    width: 1.7em;
+    height: 1.7em;
+}
+
+.js-flash-wrapper.success {
+    background-color: var(--color-admin-secondary);
+}
+.js-flash-wrapper.success .js-flash {
+    color: var(--color-admin);
+}
+.js-flash-wrapper.success .i-success {
+    color: var(--color-admin);
+}
+
+.js-flash-wrapper.danger {
+    background-color: var(--color-admin-secondary);
+}
+.js-flash-wrapper.danger .js-flash {
+    color: var(--color-admin-danger);
+}
+
+@keyframes flashAppears {
+    from {
+        transform: translateY(-100%);
+    } to {
+        transform: translateY(0);
+    }
+}
+
+
+@media only screen and (min-width: 750px) {
+    .js-flash-wrapper {
+        padding: 40px 50px;
+    }
+}
+
+

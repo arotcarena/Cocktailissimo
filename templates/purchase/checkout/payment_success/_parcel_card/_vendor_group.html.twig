@@ -1,0 +1,22 @@
+{% set vendor = vendorGroup.vendor %}
+{% set vendorTarget = path('vendorShop', {
+    companySlug: vendor.company.slug,
+    _locale: app.request.locale
+}) %}
+
+<div class="cart-vendor-group">
+    <div class="cart-vendor-group-title">
+        <div class="left">
+            {{ 'sent_by' | trans }}
+        </div>
+        <div class="center">
+            <a class="cart-vendor-group-title-link ws-nowrap" href="{{ vendorTarget }}">{{ vendor.company.usualName }}</a>
+            {{ include('UI/_short_review_note_show.html.twig', {note: vendor.reviewNote, count: vendor.countReviews}) }}
+        </div>
+        <div class="right cart-vendor-group-separator">
+        </div>
+    </div>
+    {% for purchaseLine in vendorGroup.purchaseLines %}
+        {% include "purchase/checkout/payment_success/_parcel_card/_purchase_line.html.twig" %}
+    {% endfor %}
+</div>

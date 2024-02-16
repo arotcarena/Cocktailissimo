@@ -1,0 +1,35 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_question_index') }} class="breadcrumb-link">Questions/Réponses ({{count_questions}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Questions/Réponses</h1>
+
+        {% include "admin/publication/question/_filters.html.twig" %}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+
+        <ul class="admin-review-list">
+            {% for question in pagination %}
+                {% include "admin/publication/question/_question_card.html.twig" %}
+            {% endfor %}
+        </ul>
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+   </div>
+
+{% endblock %}

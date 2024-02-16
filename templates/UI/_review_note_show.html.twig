@@ -1,0 +1,34 @@
+{% set countFullStars = ((note / 10) | round(0, 'floor')) %}
+{% set decimal = note % 10 %}
+{% set rest = 5 - countFullStars %}
+{% if decimal >= 5 %}
+    {% set rest = rest - 1 %}
+{% endif %}
+
+
+<div class="product-show-review-wrapper">
+    <a href="#reviews" class="product-show-review ws-nowrap">
+        <span>{{ note | review_note_format(app.request.locale) }}</span>
+        <div class="stars">
+            {% for i in 1..countFullStars %}
+                    <svg class="icon i-star">
+                        <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                    </svg>
+            {% endfor %}
+            {% if decimal >= 5 %}
+                <svg class="icon i-star">
+                    <use xlink:href="/img/icons/sprite.svg#star-half"></use>
+                </svg>
+            {% endif %}
+            {% if rest != 0 %}
+                {% for i in 1..rest %}
+                    <svg class="icon i-star">
+                        <use xlink:href="/img/icons/sprite.svg#star-empty"></use>
+                    </svg>
+                {% endfor %}
+            {% endif %}
+            
+        </div>
+        <span>({{ count }} avis)</span>
+    </a>
+</div>

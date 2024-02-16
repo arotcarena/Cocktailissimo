@@ -1,0 +1,57 @@
+{
+    "url": {
+        "security": {
+            "change_password": "/es/cambiar-contraseña",
+            "account_delete": "/es/borrar-mi-cuenta",
+            "login": "/es/iniciar-sesión",
+            "register": "/es/crear-una-cuenta",
+            "ask_reset_password": "/es/contraseña-olvidada"
+        },
+        "account": "/es/mi-cuenta",
+        "customerAccount": {
+            "index": "/es/mi-cuenta",
+            "details": "/es/mi-cuenta/datos-personales",
+            "address": "/es/mi-cuenta/mis-direcciones",
+            "purchase": "/es/mi-cuenta/mis-pedidos"
+        },
+        "vendorAccount": {
+            "index": "/es/vendedor/mi-cuenta",
+            "details": {
+                "index": "/es/vendedor/mi-cuenta/datos",
+                "personal": "/es/vendedor/mi-cuenta/datos/datos-personales",
+                "company": "/es/vendedor/mi-cuenta/datos/empresa",
+                "senderAddress": "/es/vendedor/mi-cuenta/datos/direccion-de-envio",
+                "payment": "/es/vendedor/mi-cuenta/datos/recibir-pagos"
+            },
+            "buyerSpace": {
+                "index": "/es/vendedor/mi-cuenta/espacio-comprador",
+                "purchase": "/es/vendedor/mi-cuenta/espacio-comprador/mis-pedidos",
+                "deliveryAddress": "/es/vendedor/mi-cuenta/espacio-comprador/mis-direcciones-de-entrega"
+            },
+            "vendorSpace": {
+                "index": "/es/vendedor/mi-cuenta/espacio-vendedor",
+                "shop": "/es/vendedor/mi-cuenta/espacio-vendedor/mi-tienda",
+                "product": "/es/vendedor/mi-cuenta/espacio-vendedor/mis-productos",
+                "review": "/es/vendedor/mi-cuenta/espacio-vendedor/resenas",
+                "purchase": "/es/vendedor/mi-cuenta/espacio-vendedor/pedidos",
+                "question": "/es/vendedor/mi-cuenta/espacio-vendedor/preguntas"
+            }
+        },
+        "checkout": {
+            "payment_success": "/es/pedido-confirmado",
+            "index": "/es/hacer-un-pedido"
+        },
+        "search": {
+            "index": "/es/buscar"
+        },
+        "contact": {
+            "become_vendor": "/es/empezar-a-vender"
+        },
+        "recipe": {
+            "index": "/es/recetas.html"
+        }         
+    }
+}
+
+
+  

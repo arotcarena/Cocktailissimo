@@ -1,0 +1,11 @@
+<header 
+    id="header" 
+    class="{{ headerClass ?? 'header' }}"
+    >
+    <!-- HEADER SANS REACT -->
+    <div class="header-top" style="display: flex; justify-content: center;">
+        <a href={{ path('home', {_locale: app.request.locale}) }}>
+            <img class="header-logo" src="/img/logo/logo.png" alt="{{ 'cocktailissimo_logo' | trans }}" />
+        </a>
+    </div>
+</header>

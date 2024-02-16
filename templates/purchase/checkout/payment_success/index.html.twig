@@ -1,0 +1,130 @@
+{% extends "base.html.twig" %}
+
+{% block page_head %}
+    {{ include('layouts/head/_page_head_tags.html.twig', {
+        title: 'Commande validée !'
+    }) }}
+{% endblock %}
+    
+
+{% block javascript %}
+
+    {{ parent() }}
+    {{ encore_entry_script_tags('paymentSuccess') }}
+
+{% endblock %}
+
+{% block style %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('paymentSuccess') }}
+{% endblock %}
+
+
+
+{% block body %}
+    <div class="breadcrumb">
+        <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+        >
+        <span class="breadcrumb-item">Récapitulatif de la commande</span>
+    </div>
+
+    <div class="payment-success">
+        <h1>Votre commande</h1>
+
+        <div class="payment-success-wrapper">
+            <div class="payment-success-summary">
+                <div class="payment-success-subtitle">{{ purchase.countArticles }} article{% if purchase.countArticles > 1 %}s{% endif %}</div>
+                <div class="cart-summary-body">
+                    <ul>
+                        {% set countParcels = purchase.purchaseVendorGroups | length %}
+                        {% for key, vendorGroup in purchase.purchaseVendorGroups %}
+                            {{ include('purchase/checkout/payment_success/_parcel_card/index.html.twig', {
+                                vendorGroup: vendorGroup, 
+                                position: ((key + 1) ~ '/' ~ countParcels), 
+                            }) }}
+                        {% endfor %}
+                    </ul>
+                    <div class="cart-summary-footer">
+                        <div class="cart-total-line">
+                            <span>Total articles</span>
+                            <span class="totalPrice">
+                                {{ include('UI/_price_show.html.twig', {
+                                    price: purchase.articlesPrice
+                                }) }}
+                            </span>
+                        </div>
+                        <div class="cart-total-line">
+                            <span>Livraison</span>
+                            <span class="shippingCost">
+                                {{ include('UI/_price_show.html.twig', {
+                                    price: purchase.shippingCost
+                                }) }}
+                            </span>
+                        </div>
+                        <div class="cart-summary-separator"></div>
+                        <div class="cart-total-line main">
+                            <span>Total</span>
+                            <span class="totalPrice">
+                                {{ include('UI/_price_show.html.twig', {
+                                    price: purchase.totalPrice
+                                }) }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-success-footer">
+                    <div class="payment-success-footer-item">Votre paiement est validé.</div>
+                    <div class="payment-success-footer-item">Votre commande va être préparée.</div>
+                    <div class="payment-success-footer-item">Pour toute question ou information, veuillez nous contacter par email : <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, en indiquant la référence suivante : {{ purchase.ref }}</div>
+                </div>
+            </div>
+            <div class="payment-success-details">
+                <div class="payment-success-subtitle">Détails</div>
+                <ul class="payment-success-details-list">
+                    <li class="payment-success-details-item">Référence : {{ purchase.ref }}</li>
+
+                    <div class="payment-success-separator"></div>
+
+                    <li class="payment-success-details-item big-item">
+                        <div class="details-item-title">Vos informations</div>
+                        {% set customerDetail = purchase.customerDetail %}
+                        <div class="details-item-body">
+                            <div class="capitalize">{{ customerDetail.civility | trans({}, 'configs') }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}</div>
+                            <div>{{ customerDetail.email }}</div>
+                            <div>{{ customerDetail.phone }}</div>
+                        </div>
+                    </li>
+
+                    <div class="payment-success-separator"></div>
+
+                    <li class="payment-success-details-item big-item">
+                        <div class="details-item-title">Adresse de livraison</div>
+                        <div class="details-item-body">
+                            {{ include('UI/_address.html.twig', {address: purchase.deliveryDetail}) }}
+                        </div>
+                    </li>
+
+                    <div class="payment-success-separator"></div>
+
+                    <li class="payment-success-details-item big-item">
+                        <div class="details-item-title">Adresse de facturation</div>
+                        <div class="details-item-body">
+                            {{ include('UI/_address.html.twig', {address: purchase.invoiceDetail}) }}
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div 
+            id="payment-success-sub-sections"
+            data-purchaseid="{{ purchase.id }}"
+            >
+        </div>
+
+    </div>
+
+    
+    
+{% endblock %}

@@ -1,0 +1,28 @@
+.admin-suggest-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    background-color: #FFF;
+    box-shadow: 0 0 2px var(--color-admin-black);
+    margin-bottom: 30px;
+}
+
+.admin-suggest-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px;
+    cursor: pointer;
+}
+.admin-suggest-item:hover, .admin-suggest-item.selected {
+    background-color: var(--color-admin-secondary);
+}
+.admin-suggest-img {
+    height: 100px;
+    width: 100px;
+    flex: none;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}

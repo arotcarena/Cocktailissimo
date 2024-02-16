@@ -1,0 +1,25 @@
+{% set locale = app.request.locale %}
+
+<div class="breadcrumb">
+    <a href={{ path('home', {_locale: locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
+    >
+    <a 
+        href={{ path('category_show', {slug: attribute(product.category.slug, locale), _locale: locale}) }} 
+        class="breadcrumb-link"
+        >
+        {{ attribute(product.category.name, locale) }}
+    </a>
+    >
+    <a 
+        href={{ path('subCategory_show', {
+            categorySlug: attribute(product.category.slug, locale),
+            subCategorySlug: attribute(product.subCategory.slug, locale), 
+            _locale: locale
+        }) }} 
+        class="breadcrumb-link"
+        >
+        {{ attribute(product.subCategory.name, locale) }}
+    </a>
+    >
+    <span class="breadcrumb-item">{{ attribute(product.designation, locale) }}</span>
+</div>

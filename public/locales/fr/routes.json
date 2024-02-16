@@ -1,0 +1,88 @@
+{
+    "customerAccount": {
+        "base": {
+            "label": "Mon compte",
+            "path": "/fr/mon-compte"
+        },
+        "details": {
+            "label": "Mes informations",
+            "path": "/mes-informations"
+        },
+        "address": {
+            "label": "Mes adresses",
+            "path": "/mes-adresses"
+        },
+        "purchase": {
+            "label": "Mes commandes",
+            "path": "/mes-commandes"
+        }
+    },
+    "vendorAccount": {
+        "base": {
+            "label": "Compte vendeur",
+            "path": "/fr/vendeur/mon-compte"
+        },
+        "details": {
+            "index": {
+                "label": "Mes informations",
+                "path": "/mes-informations"
+            },
+            "personal": {
+                "label": "Informations personnelles",
+                "path": "/mes-informations/informations-personnelles"
+            },
+            "company": {
+                "label": "Entreprise",
+                "path": "/mes-informations/entreprise"
+            },
+            "senderAddress": {
+                "label": "Adresse d'expédition",
+                "path": "/mes-informations/adresse-d-expedition"
+            },
+            "payment": {
+                "label": "Paiements",
+                "path": "/mes-informations/recevoir-des-paiements"
+            }
+        },
+        "buyerSpace": {
+            "index": {
+                "label": "Espace acheteur",
+                "path": "/espace-acheteur"
+            },
+            "purchase": {
+                "label": "Mes commandes",
+                "path": "/espace-acheteur/mes-commandes"
+            },
+            "deliveryAddress": {
+                "label": "Mes adresses de livraison",
+                "path": "/espace-acheteur/mes-adresses-de-livraison"
+            }
+        },
+        "vendorSpace": {
+            "index": {
+                "label": "Espace vendeur",
+                "path": "/espace-vendeur"
+            },
+            "shop": {
+                "label": "Ma boutique",
+                "path": "/espace-vendeur/ma-boutique"
+            },
+            "product": {
+                "label": "Mes produits",
+                "path": "/espace-vendeur/mes-produits"
+            },
+            "review": {
+                "label": "Avis",
+                "path": "/espace-vendeur/avis"
+            },
+            "purchase": {
+                "label": "Commandes",
+                "path": "/espace-vendeur/commandes"
+            },
+            "question": {
+                "label": "Questions",
+                "path": "/espace-vendeur/questions"
+            }
+        }
+    }
+}

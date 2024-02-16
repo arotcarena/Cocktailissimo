@@ -1,0 +1,81 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_category_index') }} class="breadcrumb-link">Catégories</a>
+        >
+        <a href={{ path('admin_category_show', {id: category.id}) }} class="breadcrumb-link">{{ category.name.fr }}</a>
+        >
+        <span class="breadcrumb-item">Modifier</span>
+    </div>
+
+    <h1>Modifier "{{ category.name.fr }}"</h1>
+
+    {{ form_start(form) }}
+    <div class="admin-form lang-switch-wrapper">
+
+        {{ include('admin/shop/product/parts/_lang_controls.html.twig', {default: 'en'}) }}
+
+        <div class="admin-product-show-pictures">
+            <div>
+                <div class="admin-form-img-container">
+                    <img class="picture" src="/img/categories/{{category.picture}}" alt="{{category.pictureAlt.fr}}">
+                    <div class="admin-form-img-alt en-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (EN) : {{ category.pictureAlt.en }}
+                    </div>
+                    <div class="admin-form-img-alt fr-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (FR) : {{ category.pictureAlt.fr }}
+                    </div>
+                    <div class="admin-form-img-alt es-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (ES) : {{ category.pictureAlt.es }}
+                    </div>
+                    <div class="admin-form-img-alt it-group {% if name is defined %} {{name ~ 'Alt'}}{% endif %}">
+                        Balise alt (IT) : {{ category.pictureAlt.it }}
+                    </div>
+                </div>
+                <div class="admin-show-img-label">Photo</div>
+            </div>
+        </div>
+        
+        {{ include('admin/parts/_show_row.html.twig', {value: category.name.en, label: 'Nom (EN)', name: 'enName', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: category.name.fr, label: 'Nom (FR)', name: 'frName', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: category.name.es, label: 'Nom (ES)', name: 'esName', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: category.name.it, label: 'Nom (IT)', name: 'itName', lang: 'it'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: category.slug.en, label: 'Slug (EN)', name: 'enSlug', lang: 'en'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: category.slug.fr, label: 'Slug (FR)', name: 'frSlug', lang: 'fr'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: category.slug.es, label: 'Slug (ES)', name: 'esSlug', lang: 'es'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: category.slug.it, label: 'Slug (IT)', name: 'itSlug', lang: 'it'}) }}
+        
+        
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enMetaDescription', label: 'Méta-description (EN)', field: form.enMetaDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frMetaDescription', label: 'Méta-description (FR)', field: form.frMetaDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esMetaDescription', label: 'Méta-description (ES)', field: form.esMetaDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itMetaDescription', label: 'Méta-description (IT)', field: form.itMetaDescription, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enShortDescription', label: 'Description courte (EN)', field: form.enShortDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frShortDescription', label: 'Description courte (FR)', field: form.frShortDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esShortDescription', label: 'Description courte (ES)', field: form.esShortDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itShortDescription', label: 'Description courte (IT)', field: form.itShortDescription, lang: 'it'}) }}
+
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'enLongHtmlDescription', label: 'Description longue (EN) (balises de liens et BB code acceptés)', field: form.enLongHtmlDescription, lang: 'en'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'frLongHtmlDescription', label: 'Description longue (FR) (balises de liens et BB code acceptés)', field: form.frLongHtmlDescription, lang: 'fr'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'esLongHtmlDescription', label: 'Description longue (ES) (balises de liens et BB code acceptés)', field: form.esLongHtmlDescription, lang: 'es'}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'itLongHtmlDescription', label: 'Description longue (IT) (balises de liens et BB code acceptés)', field: form.itLongHtmlDescription, lang: 'it'}) }}
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Modifier</button>
+        </div>
+
+    </div>
+    {{ form_end(form) }}
+
+
+{% endblock %}

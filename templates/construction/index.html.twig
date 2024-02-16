@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Bienvenue sur la marketplace incontournable des amateurs de l'apéritif et de la mixologie. Site actuellement en construction...">
+        <title>Cocktailissimo - site en construction</title>
+
+        <!-- favicon -->
+        <link rel="icon" type="image/png" href="/img/logo/favicon.png">
+
+        <link rel="stylesheet" href="index.css">
+
+        <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&display=swap" rel="stylesheet">
+
+        <style>
+            /*
+            * Prefixed by https://autoprefixer.github.io
+            * PostCSS: v8.4.14,
+            * Autoprefixer: v10.4.7
+            * Browsers: last 4 version
+            */
+
+            * {
+                -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+            }
+            html, body {
+                margin: 0;
+                padding: 0;
+                color: rgb(25, 25, 25);
+                font-size: 20px;
+                font-family: 'Raleway', sans-serif;
+                height: 100%;
+            } 
+
+            a {
+                color: inherit;
+            }
+
+            .homepage {
+                background: -webkit-gradient(linear, left bottom, left top, from(rgba(255, 183, 100, 0.1)), to(rgba(255, 217, 174, 1))),
+                            url("/img/hero/gins_world_desktop.jpg") center center / cover no-repeat;
+                background: -o-linear-gradient(bottom, rgba(255, 183, 100, 0.1), rgba(255, 217, 174, 1)),
+                            url("/img/hero/gins_world_desktop.jpg") center center / cover no-repeat;
+                background: linear-gradient(to top, rgba(255, 183, 100, 0.1), rgba(255, 217, 174, 1)),
+                            url("/img/hero/gins_world_desktop.jpg") center center / cover no-repeat;
+                height: 100%;
+
+                display: -webkit-box;
+
+                display: -ms-flexbox;
+
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                    -ms-flex-direction: column;
+                        flex-direction: column;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                gap: 30px;
+                position: relative;
+            }
+
+            .header {
+                position: fixed;
+                z-index: 2;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 70px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                background-color: rgba(255, 255, 255, .7);
+                -webkit-box-shadow: 0 0 10px rgb(207, 158, 101);
+                        box-shadow: 0 0 10px rgb(207, 158, 101);
+            }
+
+            .logo {
+                height: 50px;
+                width: auto;
+            }
+
+            .message {
+                background-color: rgba(255, 255, 255, .7);
+                padding: 15px 20px;
+                letter-spacing: .08em;
+                font-size: .9em;
+                max-width: calc(100vw - 30px);
+                line-height: 1.5;
+            }
+            .message p {
+                margin: 0;
+            }
+            .sub-message-wrapper {
+                position: absolute;
+                bottom: 15px;
+                left: 0;
+                right: 0;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                    -ms-flex-pack: center;
+                        justify-content: center;
+                padding: 0 15px;
+            }
+            .sub-message {
+                padding: 10px 20px;
+                background-color: rgba(255, 255, 255, .7);
+                max-width: 800px;
+                line-height: 1.5;
+                font-size: .7em;
+            }
+            .sub-message p {
+                margin: 5px 0;
+            }
+            .sub-message a {
+                font-weight: 600;
+            }
+
+            @media only screen and (min-width: 750px) {
+                .message {
+                    font-size: 1em;
+                    padding: 30px 35px;
+                }
+                .logo {
+                    height: 70px;
+                }
+                .header {
+                    height: 90px;
+                }
+                .sub-message {
+                    font-size: .85em;
+                    max-width: 900px;
+                }
+                .sub-message-wrapper {
+                    bottom: 30px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header class="header">
+            <img class="logo" src="/img/logo/logo.png" alt="logo cocktailissimo">
+        </header>
+        <div class="homepage">
+            <div class="message">
+                <p>Site en construction... Rendez-vous en décembre.</p>
+            </div>
+            <div class="sub-message-wrapper">
+                <div class="sub-message">
+                    <p>Rejoignez notre marketplace incontournable pour les amateurs de l'apéritif et de la mixologie !</p>
+                    <p>
+                    <a href="mailto:contact@cocktailissimo.com" title="contact@cocktailissimo.com">Contactez-nous</a> dès maintenant pour en savoir plus, et devenez vendeur sur cocktailissimo !
+                    </p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

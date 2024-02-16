@@ -1,0 +1,118 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_product_index') }} class="breadcrumb-link">Produits ({{count_products}})</a>
+        >
+        <a href={{ path('admin_product_show', {id: product.id}) }} class="breadcrumb-link">{{ product.designation.fr }}</a>
+        >
+        <span class="breadcrumb-item">Avis</span>
+    </div>
+
+
+     <div class="admin-container">
+        <h1>Avis sur "{{product.designation.fr}}"</h1>
+
+        <div class="admin-review-product-card">
+            {% if product.pictures %}
+            {% set picture = product_picture_position_resolver(product, 1) %}
+                <a href="{{path('admin_product_show', {id: product.id}) }}">
+                    <img src={{ picture | picture_path_resolver('index') }} alt={{ picture | picture_alt_resolver('fr') }}>
+                </a>
+            {% endif %}
+            <div class="admin-review-product-card-text">
+                <div><a class="admin-clickable" href="{{path('admin_product_show', {id: product.id}) }}">{{ product.designation.fr }}</a></div>
+                {% if product.reviewNote %}
+                    <div>
+                        {{product.reviewNote | review_note_format('fr') }}
+                        <svg class="icon admin-i-star">
+                            <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                        </svg>
+                        <span>({{product.countReviews}} avis)</span>
+                    </div>     
+                {% endif %}
+                <div>{{ product.price | price_format('fr') }}</div>
+                <div>Réf. publique : {{ product.publicRef }}</div>
+            </div>
+        </div>
+
+        {# filtres #}
+        {{ form_start(form) }}
+            <div class="admin-filters-container">
+                <div class="admin-filters">
+                    <div class="admin-filters-row">            
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'rate', label: 'Note', field: form.rate}) }}
+                    </div>
+                    <div class="admin-filters-row">            
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'moderationStatus', label: 'Modération', field: form.moderationStatus}) }}
+                    </div>
+                    <div class="admin-filters-row">   
+                        {{ include('admin/form/_admin_form_row.html.twig', {name: 'sortBy', label: 'Tri', field: form.sortBy}) }}
+                    </div>
+                </div>
+                <div class="admin-filters-submit">
+                    <button type="submit" class="admin-button">Recherche</button>
+                </div>
+            </div>
+        {{ form_end(form) }}
+
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+        </div>
+
+        <p class="admin-text-center">* Un avis est confirmé d'office s'il est posté par un auteur connecté en tant que membre, sinon l'auteur doit le confirmer en cliquant sur un lien reçu par email</p>
+                            
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Pseudo</th>
+                    <th>Titre de l'avis</th>
+                    <th>Note</th>
+                    <th>Modération</th>
+                    <th>Confirmé *</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for review in pagination %}
+                    <tr data-id={{ review.id }}>  {# data-id pour les tests #}
+                        <td class="email">{{ review.email }}</td>
+                        <td class="fullName">{{ review.fullName }}</td>
+                        <td class="title">{{ review.title }}</td>
+                        <td class="rate color-admin">
+                            <span>{{ review.rate }}</span>
+                            <svg class="icon admin-i-star">
+                                <use xlink:href="/img/icons/sprite.svg#star-full"></use>
+                            </svg>
+                        </td>
+                        <td class="moderationStatus" value={{ review.moderationStatus }}>{{ review.moderationStatusLabel }}</td>
+                        <td class="confirmed" value={{ review.confirmed ? 'Oui': 'Pas encore' }}>{{ review.confirmed ? 'Oui': 'Pas encore' }}</td>
+                        <td class="createdAt" value={{ review.createdAt.timestamp }}>{{ review.createdAt.format('d/m/Y H:i') }}</td>
+                        <td class="controls">
+                            <a class="admin-table-button success" href={{ path('admin_review_show', {id: review.id}) }} title="Voir l'avis">
+                                <svg class="icon">
+                                    <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                </svg>
+                            </a>
+                        </td>
+
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+   </div>
+{% endblock %}
