@@ -1,6 +1,7 @@
 <?php
 namespace App\FinancialOperations;
 
+use App\Config\SiteConfig;
 use App\Entity\Purchase;
 use App\Service\Stripe\StripeService;
 
@@ -23,8 +24,11 @@ class PaymentVentilator
 
         foreach($purchase->getPurchaseVendorGroups() as $purchaseVendorGroup)
         {
-            $accountId = $purchaseVendorGroup->getVendorDetail()->getStripeConnectId();
+            $vendorDetail = $purchaseVendorGroup->getVendorDetail();
 
+            $accountId = $vendorDetail->getStripeConnectId();
+
+            //si le vendeur est cocktailissimo vendorRestAmount n'a pas été configuré donc = null donc aucun transfert
             if($amount = $purchaseVendorGroup->getVendorRestAmount())
             {
                 $this->stripeService->createTransfer($amount, $accountId, $transferGroup);

@@ -1,6 +1,7 @@
 <?php
 namespace App\PurchaseProcessing\PurchaseValidated;
 
+use App\Config\SiteConfig;
 use App\Email\Admin\Purchase\AdminPurchaseConfirmationEmail;
 use App\Email\Customer\CustomerPurchaseConfirmationEmail;
 use App\Email\Vendor\VendorPurchaseConfirmationEmail;
@@ -24,7 +25,10 @@ class PurchaseValidatedNotifier
 
         foreach($purchase->getPurchaseVendorGroups() as $vendorGroup)
         {
-            $this->vendorEmail->send($vendorGroup);
+            if($vendorGroup->getVendorDetail()->getIdentificationNumber() !== SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER)
+            {
+                $this->vendorEmail->send($vendorGroup);
+            }
         }
     }
 }

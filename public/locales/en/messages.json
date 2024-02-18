@@ -64,7 +64,8 @@
     },
     "not_logged": "You are not logged in",
     "empty_cart": "The cart is empty",
-    "shop_will_be_open_soon": "Excited to see our products ? Very soon, discover the gems we have selected for you... In the meantime, try our delicious cocktail recipes."
+    "shop_will_be_open_soon": "Excited to see our products ? Very soon, discover the gems we have selected for you... In the meantime, try our delicious cocktail recipes.",
+    "manual_order_cause_out_eu": "You have provided a delivery address outside the European Union. Click the button below to send us all the details of your order, and we will contact you as soon as possible to finalize it."
   },
   "success": {
     "link_regenerated": "The link has been successfully regenerated!",

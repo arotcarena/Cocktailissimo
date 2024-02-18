@@ -2,16 +2,19 @@
 namespace App\PurchaseProcessing\PurchaseValidated\Calculator;
 
 use App\Config\SiteConfig;
+use App\Config\VatLevels;
 use App\Config\VatRates;
 use App\Entity\CustomPrice;
 use App\Entity\Purchase;
 use App\Entity\PurchaseVendorGroup;
 use App\Price\PriceOperator;
+use App\Price\Vat\VatRatesStorage;
 
 class PurchaseAmountCalculator
 {
     public function __construct(
-        private PriceOperator $priceOperator 
+        private PriceOperator $priceOperator,
+        private VatRatesStorage $vatRatesStorage
     )
     {
         
@@ -28,18 +31,26 @@ class PurchaseAmountCalculator
 
     private function calculateVendorGroupSharing(PurchaseVendorGroup $vendorGroup)
     {
+        //si le vendeur est Cocktailissimo, pas besoin de calculer, on laisse vendorRestAmount à null
+        if($vendorGroup->getVendorDetail()->getIdentificationNumber() === SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER)
+        {
+            return;
+        }
+
         $articlesPrice = $vendorGroup->getArticlesPrice();
 
         $vendorRestAmount = $vendorGroup->getArticlesPrice()->getPriceToPay();
 
-        //si le vendeur n'en est pas exempté, on calcule la commission
+        //si le vendeur n'est pas exempté de commission, on la calcule
         if(!$vendorGroup->getVendor()->isCommissionFree())
         {
             $commissionHT = $articlesPrice->getPriceHT() * SiteConfig::COCKTAILISSIMO_COMMISSION;
             //on prend la tva systématiquement car en France les pros paient toujours la tva
-            $vatRate = VatRates::FR_STANDARD;
-            $commissionVat = $commissionHT * $vatRate / 1000;
+            $vatRate = $this->vatRatesStorage->get()['FR'][VatLevels::STANDARD];
+            $commissionVat = $commissionHT * $vatRate / 100;
             $commissionTTC = $commissionHT + $commissionVat;
+            //on arrondit à deux décimales au dessous
+            $commissionTTC = (int) floor($commissionTTC);
             
             $vendorGroup->setCommissionPrice(
                 (new CustomPrice)

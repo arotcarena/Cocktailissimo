@@ -1,14 +1,20 @@
 <?php
 namespace App\Tests\IntegrationOnly\PurchaseProcessing\PurchaseValidated\Calculator;
 
+use App\Config\SiteConfig;
+use App\Config\VatLevels;
+use App\Entity\Company;
 use App\Entity\CustomPrice;
 use App\Entity\Purchase;
 use App\Entity\PurchaseLine;
 use App\Entity\PurchaseVendorGroup;
 use App\Entity\ShippingInfo;
 use App\Entity\User;
+use App\Entity\VendorDetail;
 use App\Price\PriceOperator;
+use App\Price\Vat\VatRatesStorage;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -22,7 +28,15 @@ class PurchaseAmountCalculatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->purchaseAmountCalculator = new PurchaseAmountCalculator(new PriceOperator);
+        /** @var VatRatesStorage|MockObject */
+        $vatRatesStorage = $this->createMock(VatRatesStorage::class);
+        $vatRatesStorage->expects($this->any())->method('get')->willReturn([
+            'FR' => [
+                VatLevels::STANDARD => 20
+            ]
+        ]);
+
+        $this->purchaseAmountCalculator = new PurchaseAmountCalculator(new PriceOperator, $vatRatesStorage);
     }
 
     public function testVendorGroupArticlesPriceIsCorrectlySet()
@@ -130,6 +144,28 @@ class PurchaseAmountCalculatorTest extends TestCase
         $this->assertEquals(19760, $vendorGroup3->getVendorRestAmount());
     }
 
+    public function testVendorGroupWithVendorCocktailissimoVendorRestAmountIsNull()
+    {
+        $purchase = $this->createPurchase();
+        //on donne à chaque vendorGroup le vendor COCKTAILISSIMO
+        foreach($purchase->getPurchaseVendorGroups() as $vendorGroup)
+        {
+            $vendorGroup->getVendorDetail()->setIdentificationNumber(SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER);
+            $vendorGroup->getVendor()->getCompany()->setIdentificationNumber(SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER);
+        }
+
+        $this->purchaseAmountCalculator->calculateVendorGroupsAmounts($purchase);
+
+        /** @var PurchaseVendorGroup */
+        $vendorGroup1 = $purchase->getPurchaseVendorGroups()->get(0);
+        $vendorGroup2 = $purchase->getPurchaseVendorGroups()->get(1);
+        $vendorGroup3 = $purchase->getPurchaseVendorGroups()->get(2);
+
+        $this->assertNull($vendorGroup1->getVendorRestAmount());
+        $this->assertNull($vendorGroup2->getVendorRestAmount());
+        $this->assertNull($vendorGroup3->getVendorRestAmount());
+    }
+
     /**
      * Purchase avec juste les properties utiles pour les tests
      */
@@ -141,9 +177,17 @@ class PurchaseAmountCalculatorTest extends TestCase
         return $purchase
                     ->addPurchaseVendorGroup(
                         (new PurchaseVendorGroup)
+                        ->setVendorDetail(
+                            (new VendorDetail)
+                            ->setIdentificationNumber('0123456789')
+                        )
                         ->setVendor(
                             (new User)
                             ->setCommissionFree(false)
+                            ->setCompany(
+                                (new Company)
+                                ->setIdentificationNumber('0123456789')
+                            )
                         )
                         ->addPurchaseLine(
                             (new PurchaseLine)
@@ -181,9 +225,17 @@ class PurchaseAmountCalculatorTest extends TestCase
                     )
                     ->addPurchaseVendorGroup(
                         (new PurchaseVendorGroup)
+                        ->setVendorDetail(
+                            (new VendorDetail)
+                            ->setIdentificationNumber('0123456789')
+                        )
                         ->setVendor(
                             (new User)
                             ->setCommissionFree(true)
+                            ->setCompany(
+                                (new Company)
+                                ->setIdentificationNumber('0123456789')
+                            )
                         )
                         ->addPurchaseLine(
                             (new PurchaseLine)
@@ -221,9 +273,17 @@ class PurchaseAmountCalculatorTest extends TestCase
                     )
                     ->addPurchaseVendorGroup(
                         (new PurchaseVendorGroup)
+                        ->setVendorDetail(
+                            (new VendorDetail)
+                            ->setIdentificationNumber('0123456789')
+                        )
                         ->setVendor(
                             (new User)
                             ->setCommissionFree(false)
+                            ->setCompany(
+                                (new Company)
+                                ->setIdentificationNumber('0123456789')
+                            )
                         )
                         ->addPurchaseLine(
                             (new PurchaseLine)

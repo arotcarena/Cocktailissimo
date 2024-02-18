@@ -64,7 +64,8 @@
     },
     "not_logged": "Vous n'êtes pas identifié(e)",
     "empty_cart": "Le panier est vide",
-    "shop_will_be_open_soon": "Hâte de voir nos produits ? Très prochainement, retrouvez les pépites que nous avons sélectionnées pour vous. En attendant, essayez nos délicieuses recettes de cocktails."
+    "shop_will_be_open_soon": "Hâte de voir nos produits ? Très prochainement, retrouvez les pépites que nous avons sélectionnées pour vous. En attendant, essayez nos délicieuses recettes de cocktails.",
+    "manual_order_cause_out_eu": "Vous avez renseigné une adresse de livraison hors Union Européenne. Cliquez sur le bouton ci-dessous pour nous envoyer tous les détails de votre commande, nous vous recontacterons au plus vite pour la finaliser."
   },
   "success": {
     "link_regenerated": "Le lien a été correctement régénéré !",

@@ -64,7 +64,8 @@
     },
     "not_logged": "No has iniciado sesión",
     "empty_cart": "El carrito está vacío",
-    "shop_will_be_open_soon": "¿Emocionado por ver nuestros productos? Muy pronto, encuentra las joyas que hemos seleccionado para ti... Mientras tanto, prueba nuestras deliciosas recetas de cócteles."
+    "shop_will_be_open_soon": "¿Emocionado por ver nuestros productos? Muy pronto, encuentra las joyas que hemos seleccionado para ti... Mientras tanto, prueba nuestras deliciosas recetas de cócteles.",
+    "manual_order_cause_out_eu": "Ha proporcionado una dirección de entrega fuera de la Unión Europea. Haga clic en el botón a continuación para enviarnos todos los detalles de su pedido, y nos pondremos en contacto con usted lo antes posible para finalizarlo."
   },
   "success": {
     "link_regenerated": "¡El enlace se ha regenerado correctamente!",

@@ -51,17 +51,20 @@ class VatResolverTest extends TestCase
         $this->assertEquals(200, $this->vatResolver->getRate('FR', VatLevels::SUPER_REDUCE)); //le taux retourné est en %pour mille
     } 
 
-    public function testWithInExistantCountryVatLevelAndInexistantCountryStandardVatLevel()
+    public function testWithInExistantCountryVatLevelAndInexistantCountryStandardVatLevelDefaultValueIsFRStandardVatLevel()
     {
         $this->vatRatesStorage->expects($this->once())
                             ->method('get')
                             ->willReturn([
                                 'FR' => [
+                                    VatLevels::STANDARD => 20
+                                ],
+                                'ES' => [
                                     VatLevels::STANDARD => null,
                                     VatLevels::SUPER_REDUCE => null
                                 ]
                             ]);
 
-        $this->assertEquals(VatResolver::DEFAULT_VAT_RATE * 10, $this->vatResolver->getRate('FR', VatLevels::SUPER_REDUCE)); //le taux retourné est en %pour mille
+        $this->assertEquals(20 * 10, $this->vatResolver->getRate('ES', VatLevels::SUPER_REDUCE), 'ce test échouera si le taux fr de tva standard n\'est plus 20');// 20 = taux fr standard //le taux retourné est en %pour mille
     } 
 }

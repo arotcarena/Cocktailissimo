@@ -33,6 +33,7 @@ error:
 info:
   incomplete_stripe_verification: The entered information has been saved, come back whenever you want to finish entering your information and start selling your products.
   on_checkout_force_country: Following the change of delivery country, prices may have changed.
+  admin_manual_purchase_email_sent: We have received the details of your order and will contact you as soon as possible to finalize it.
 
 success:
   stripe_verification: Congratulations, your account is validated!

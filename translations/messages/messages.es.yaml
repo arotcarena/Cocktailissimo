@@ -33,6 +33,7 @@ error:
 info:
   incomplete_stripe_verification: Los datos ingresados se han guardado, vuelve cuando quieras para completar la entrada de tu información y empezar a vender tus productos.
   on_checkout_force_country: Tras el cambio del país de entrega, es posible que los precios hayan cambiado.
+  admin_manual_purchase_email_sent: Hemos recibido los detalles de su pedido y nos pondremos en contacto con usted lo antes posible para finalizarlo.
 
 success:
   stripe_verification: ¡Felicidades, tu cuenta está validada!

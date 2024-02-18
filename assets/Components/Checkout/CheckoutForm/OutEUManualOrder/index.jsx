@@ -38,7 +38,7 @@ export const OutEUManualOrder = ({checkoutData}) => {
                 loading={isLoading}
                 onClick={handleClick}
             >
-                {t('button.ask_manual_order')}
+                {t('submit.send')}
             </FormButton>
         </div>
     )

@@ -37,7 +37,7 @@ class PurchaseValidatedProcess extends AbstractController
         //envoyer la part de chaque vendeur (en déduisant la commission)
         $this->purchaseAmountCalculator->calculateVendorGroupsAmounts($purchase);
         $this->paymentVentilator->ventilate($purchase);
-        //ce qui reste sur le compte cocktailissimo correspond aux commissions TTC
+        //ce qui reste sur le compte cocktailissimo correspond aux commissions TTC, ou aux ventes de produits Cocktailissimo
         
         // $this->purchaseInvoicesCreator->create($purchase); <<<-----------  A FAIRE : CREATION FACTURE
         

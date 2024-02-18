@@ -1,20 +1,12 @@
 <?php
 namespace App\Tests\UnitAndIntegration\FinancialOperations;
 
-use App\Config\SiteConfig;
-use App\DataFixtures\Tests\PurchaseTestFixtures;
-use App\DataFixtures\Tests\VendorTestFixtures;
-use App\DataFixtures\Tests\VendorWithOneProductTestFixtures;
 use App\Entity\Purchase;
 use App\Entity\PurchaseVendorGroup;
 use App\Entity\User;
 use App\Entity\VendorDetail;
 use App\FinancialOperations\PaymentVentilator;
-use App\Repository\PackagingRepository;
-use App\Repository\PurchaseRepository;
-use App\Repository\UserRepository;
 use App\Service\Stripe\StripeService;
-use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -42,6 +34,22 @@ class PaymentVentilatorTest extends TestCase
         $this->paymentVentilator->ventilate(
             $this->createPurchase()
         );
+    }
+
+    public function testVentilateWithVendorGroupVendorRestAmountNull()
+    {
+        $purchase = $this->createPurchase();
+        foreach($purchase->getPurchaseVendorGroups() as $vendorGroup)
+        {
+            $vendorGroup->setVendorRestAmount(null);
+        }
+
+        
+        $this->stripeService->expects($this->never())
+                            ->method('createTransfer')
+                            ;
+
+        $this->paymentVentilator->ventilate($purchase);
     }
 
     private function createPurchase(): Purchase

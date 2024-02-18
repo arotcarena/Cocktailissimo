@@ -5,6 +5,7 @@ use App\Config\SiteConfig;
 use App\DataFixtures\Tests\PurchasePendingTestFixtures;
 use App\Entity\Product;
 use App\Entity\Purchase;
+use App\Entity\PurchaseLine;
 use App\FinancialOperations\PaymentVentilator;
 use App\Helper\DateTimeGenerator;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
@@ -85,9 +86,29 @@ class PurchaseValidatedProcessTest extends KernelTestCase
     public function testProcessUpdateProductsCountSales()
     {
         //on choisi une purchaseLine avec quantity >= 2 pour vérifier que le produit est bien compté 2 fois
-        $purchaseLine = $this->purchase->getPurchaseVendorGroups()->get(0)->getPurchaseLines()->get(0);
+        $vendorGroup = $this->purchase->getPurchaseVendorGroups()->get(0);
+        /** @var PurchaseLine */
+        $purchaseLine = $vendorGroup->getPurchaseLines()->get(0);
+        //on supprime les autres purchaseLines de ce vendorGroup pour éviter de fausser le test au cas ou le même produit serait présent sous un autre packaging
+        foreach($vendorGroup->getPurchaseLines() as $pl)
+        {
+            if($purchaseLine->getId() !== $pl->getId())
+            {
+                $this->em->remove($pl);
+            }
+        }
+        //on supprime les autres vendorGroups pour éviter de fausser le test au cas ou le même produit serait présent sous un autre packaging
+        foreach($this->purchase->getPurchaseVendorGroups() as $vg)
+        {
+            if($vendorGroup->getId() !== $vg->getId())
+            {
+                $this->em->remove($vg);
+            }
+        }
+        $this->em->flush();
+
         $quantity = $purchaseLine->getQuantity();
-        $this->assertEquals(2, $quantity, 'le test est faussé, il faut choisir une purchase avec une quantité de deux minimum');
+        $this->assertLessThanOrEqual($quantity, 2, 'le test est faussé, il faut choisir une purchase avec une quantité de deux minimum');
 
         /** @var Product */
         $product = $this->findEntity(PackagingRepository::class, ['publicRef' => $purchaseLine->getPublicRef()])->getProduct();
@@ -98,6 +119,6 @@ class PurchaseValidatedProcessTest extends KernelTestCase
         $this->purchaseValidatedProcess->process($this->purchase);
 
         $updatedProduct = $this->findEntity(ProductRepository::class, ['id' => $productId]);
-        $this->assertEquals($countSales + 2, $updatedProduct->getCountSales());
+        $this->assertEquals($countSales + $quantity, $updatedProduct->getCountSales());
     }
 }

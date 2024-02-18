@@ -5,8 +5,6 @@ use App\Config\VatLevels;
 
 class VatResolver
 {
-    public const DEFAULT_VAT_RATE = 20;
-
     public function __construct(
         private VatRatesStorage $vatRatesStorage
     )
@@ -34,10 +32,10 @@ class VatResolver
         {
             $rate = $countryRates[VatLevels::STANDARD];
         }
-        //si même le taux standard n'est pas renseigné, on met taux par défaut
+        //si même le taux standard n'est pas renseigné, on met taux français standard par défaut
         if(!$rate)
         {
-            $rate = self::DEFAULT_VAT_RATE;
+            $rate = $vatRates['FR'][VatLevels::STANDARD];
         }
 
         //retourner systématiquement un int (rate * 10) %pour mille
