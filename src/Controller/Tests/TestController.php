@@ -16,6 +16,7 @@ use App\Entity\ShippingInfo;
 use App\Entity\TranslatableString;
 use App\Entity\User;
 use App\Entity\VendorDetail;
+use App\Helper\PdfCreator;
 use App\Repository\ArticleRepository;
 use App\Repository\PackagingRepository;
 use App\Repository\ProductRepository;
@@ -31,6 +32,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Dompdf\Dompdf;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Twig\Environment;
 
 class TestController extends AbstractController
 {
@@ -67,20 +71,12 @@ class TestController extends AbstractController
     }
 
 
-    #[Route('/tests/vatLevelsUpdate')]
-    public function vatLevelsUpdate(ProductRepository $productRepository)
+    #[Route('/tests/pdfCreator')]
+    public function pdfCreator(Environment $twig, PdfCreator $pdfCreator)
     {
-        $products = $productRepository->findAll();
-        foreach($products as $product)
-        {
-            if($product->getVatLevel() === 'vat_level_normal')
-            {
-                $product->setVatLevel(VatLevels::STANDARD);
-            }
-        }
-        $this->em->flush();
-
-        return $this->json('ok');
+        $html = $twig->render('tests/pdf.html.twig');
+        $file = $pdfCreator->createFromHtml($html, 'mon_fichier_test');
+        return $this->json($file);
     }
 
     #[Route('/tests/findPurchases')]
