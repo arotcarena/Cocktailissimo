@@ -8,6 +8,8 @@ import { DeliveryAddress } from './DeliveryAddress';
 import { Phone } from './Phone';
 import { Shipping } from './Shipping';
 import { useTranslation } from 'react-i18next';
+import { Countries } from '../../../Config/Countries';
+import { OutEUManualOrder } from './OutEUManualOrder';
 
 
 export const STEP_CIVIL_STATE = 1;
@@ -22,7 +24,7 @@ export const STEP_PAYMENT = 6;
 export const CheckoutForm = () => {
     const {t} = useTranslation('messages');
 
-    const {step, userIsLogged} = useContext(CheckoutContext);
+    const {step, userIsLogged, data: checkoutData} = useContext(CheckoutContext);
 
     return (
         <div className="checkout-form">
@@ -57,33 +59,43 @@ export const CheckoutForm = () => {
                     <div className="form-block-closed">3. {t('delivery_address')}</div>
                 )
             }
-            
-            {
-                step >= 4 ? (
-                    <Shipping 
-                        edit={step === STEP_SHIPPING}
-                    />
-                ): (
-                    <div className="form-block-closed">4. {t('shipping_method')}</div>
-                )
-            }
 
             {
-                step >= 5 ? (
-                    <InvoiceAddress 
-                        edit={step === STEP_INVOICE_ADDRESS} 
-                    />
-                ): (
-                    <div className="form-block-closed">5. {t('invoice_address')}</div>
-                )
-            }
-
-
-            {
-                step >= 6 ? (
-                    <Payment />
-                ): (
-                    <div className="form-block-closed">6. {t('payment')}</div>
+                step >= 3 && (
+                    Countries.EU_ISO.includes(checkoutData.deliveryAddress.country) ? (
+                        <>
+                            {
+                                step >= 4 ? (
+                                    <Shipping 
+                                        edit={step === STEP_SHIPPING}
+                                    />
+                                ): (
+                                    <div className="form-block-closed">4. {t('shipping_method')}</div>
+                                )
+                            }
+                
+                            {
+                                step >= 5 ? (
+                                    <InvoiceAddress 
+                                        edit={step === STEP_INVOICE_ADDRESS} 
+                                    />
+                                ): (
+                                    <div className="form-block-closed">5. {t('invoice_address')}</div>
+                                )
+                            }
+                
+                
+                            {
+                                step >= 6 ? (
+                                    <Payment />
+                                ): (
+                                    <div className="form-block-closed">6. {t('payment')}</div>
+                                )
+                            }
+                        </>
+                    ): (
+                        <OutEUManualOrder checkoutData={checkoutData} />
+                    )
                 )
             }
 

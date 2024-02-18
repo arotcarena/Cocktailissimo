@@ -2,6 +2,7 @@
 namespace App\Controller\Tests;
 
 use App\Config\SiteConfig;
+use App\Config\VatLevels;
 use App\Email\Security\AllInOneInitEmail;
 use App\Entity\CustomerDetail;
 use App\Entity\CustomPrice;
@@ -17,6 +18,7 @@ use App\Entity\User;
 use App\Entity\VendorDetail;
 use App\Repository\ArticleRepository;
 use App\Repository\PackagingRepository;
+use App\Repository\ProductRepository;
 use App\Repository\PurchaseRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
@@ -65,6 +67,21 @@ class TestController extends AbstractController
     }
 
 
+    #[Route('/tests/vatLevelsUpdate')]
+    public function vatLevelsUpdate(ProductRepository $productRepository)
+    {
+        $products = $productRepository->findAll();
+        foreach($products as $product)
+        {
+            if($product->getVatLevel() === 'vat_level_normal')
+            {
+                $product->setVatLevel(VatLevels::STANDARD);
+            }
+        }
+        $this->em->flush();
+
+        return $this->json('ok');
+    }
 
     #[Route('/tests/findPurchases')]
     public function findPurchases()
