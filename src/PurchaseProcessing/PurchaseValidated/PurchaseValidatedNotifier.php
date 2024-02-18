@@ -1,7 +1,7 @@
 <?php
 namespace App\PurchaseProcessing\PurchaseValidated;
 
-use App\Email\Admin\AdminPurchaseConfirmationEmail;
+use App\Email\Admin\Purchase\AdminPurchaseConfirmationEmail;
 use App\Email\Customer\CustomerPurchaseConfirmationEmail;
 use App\Email\Vendor\VendorPurchaseConfirmationEmail;
 use App\Entity\Purchase;

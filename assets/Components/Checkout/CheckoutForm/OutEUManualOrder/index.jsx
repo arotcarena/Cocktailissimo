@@ -4,7 +4,7 @@ import { apiPreparedFetch } from '../../../../functions/api';
 import { useTranslation } from 'react-i18next';
 
 export const OutEUManualOrder = ({checkoutData}) => {
-    const {t} = useTranslation('messages');
+    const {t, i18n} = useTranslation('messages');
 
     const [isLoading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -17,9 +17,9 @@ export const OutEUManualOrder = ({checkoutData}) => {
 
         try {
             //création de la purchase
-            await apiPreparedFetch('/api', checkoutData, 'POST');
+            await apiPreparedFetch('/'+i18n.language+'/api/checkout/createManualPurchase', checkoutData, 'POST');
             //un flash de succès sera configuré dans le controller
-            location.href('/');
+            window.location.href = '/';
         } catch(e) {
             setError(t('error.temporary_failure'));
             setLoading(false);

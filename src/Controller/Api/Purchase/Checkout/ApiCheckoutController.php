@@ -4,6 +4,8 @@ namespace App\Controller\Api\Purchase\Checkout;
 use App\Cart\CartService;
 use App\Entity\Cart;
 use App\Convertor\ConstraintViolationsToArrayConvertor;
+use App\Email\Admin\Purchase\AdminManualPurchaseEmail;
+use App\Entity\Purchase;
 use App\Helper\ObjectHydrator;
 use App\Hydrator\CheckoutVendorGroupsHydrator;
 use App\PurchaseProcessing\Checkout\PaymentIntent\CheckoutPiResolver;
@@ -14,6 +16,7 @@ use App\PurchaseProcessing\Checkout\PurchasePreparation\PurchasePreparator;
 use App\Repository\PurchaseRepository;
 use App\Service\Stripe\StripeService;
 use App\TrafficAnalytics\VisitorAction\VisitorActionSaver;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -134,6 +137,25 @@ class ApiCheckoutController extends AbstractController
                 'errors' => $this->constraintViolationsToArrayConvertor->convert($violations)
             ], 500);
         }
+
+        return new JsonResponse('ok');
+    }
+
+    /**
+     * Utilisé pour les commandes depuis un pays hors UE
+     * On envoie un mail à l'admin pour qu'il gère cette commande manuellement en contactant l'acheteur
+     */
+    #[Route('/{_locale}/api/checkout/createManualPurchase', name: 'api_checkout_createManualPurchase', methods: ['POST'], requirements: [
+        '_locale' => '%app.supported_locales%'
+    ])]
+    public function createManualPurchase(Request $request, AdminManualPurchaseEmail $adminManualPurchaseEmail): JsonResponse 
+    {
+        //on extrait les données reçues
+        $checkoutData = json_decode($request->getContent());
+
+        $adminManualPurchaseEmail->send($checkoutData);
+
+        $this->addFlash('success', $this->translator->trans('info.admin_manual_purchase_email_sent', [], 'messages'));
 
         return new JsonResponse('ok');
     }

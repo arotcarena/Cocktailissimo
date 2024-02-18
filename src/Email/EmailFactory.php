@@ -26,10 +26,10 @@ abstract class EmailFactory
     public function sendEmail(Email $email, string $senderEmail = SiteConfig::EMAIL_NOREPLY)
     {
         //WITHOUT_SHOP // à suppr quand il n'y aura plus d'utilisateurs démo
-        if(in_array($email->getTo()[0]->getAddress(), ['consumer@email.com', 'pro@email.com', 'vendor@email.com']))
-        {
-            return;
-        }
+        // if(in_array($email->getTo()[0]->getAddress(), ['consumer@email.com', 'pro@email.com', 'vendor@email.com']))
+        // {
+        //     return;
+        // }
 
         $this->configureMailer($senderEmail);
 

@@ -1,5 +1,5 @@
 <?php
-namespace App\Email\Admin;
+namespace App\Email\Admin\Purchase;
 
 use App\Config\SiteConfig;
 use App\Email\EmailFactory;
@@ -21,7 +21,7 @@ class AdminPurchaseConfirmationEmail extends EmailFactory
         //         //->priority(Email::PRIORITY_HIGH)
         //         ->subject('Vous avez reçu une commande')
         //         ->text('Vous avez reçu une commande')
-        //         ->html($this->twig->render('admin/email/purchase_confirmation.html.twig', [
+        //         ->html($this->twig->render('admin/email/purchase/purchase_confirmation.html.twig', [
         //             'purchase' => $purchase,
         //             'isAtHomeDelivery' => $isAtHomeDelivery
         //         ]));

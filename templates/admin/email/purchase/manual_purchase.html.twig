@@ -1,0 +1,51 @@
+{% extends "admin/email/base.html.twig" %}
+
+{% block title %}Demande de commande hors UE à traiter manuellement{% endblock %}
+
+{% block body %}
+
+    <h1>Demande de commande hors UE à traiter manuellement</h1>
+
+    <div>
+        <h3>Client</h3>
+        {% set civilState = checkoutData.civilState %}
+        <p class="capitalize">{{ civilState.civility | trans({}, 'configs', 'fr') }} {{ civilState.firstName }} {{ civilState.lastName }}</p>
+
+        <h3>Adresse email</h3>
+        <p>{{civilState.email}}</p>
+
+        <h3>Numéro de téléphone</h3>
+        <p>{{ checkoutData.phone }}</p>
+
+        {% if checkoutData.company %}
+            <h3>Entreprise</h3>
+            <p>Entreprise : {{checkoutData.company}}</p>
+        {% endif %}
+    </div>
+
+    <div>
+        <h3>Adresse de livraison</h3>
+        {% set deliveryAddress = checkoutData.deliveryAddress %}
+        <p>{{ deliveryAddress.lineOne }}</p>
+        <p>{{ deliveryAddress.lineTwo }}</p>
+        <p>{{ deliveryAddress.postcode }} {{ deliveryAddress.city }}</p>
+        <p>{{ deliveryAddress.country | trans({}, 'countries', 'fr') }} {{ deliveryAddress.country }} {% if deliveryAddress.state %}({{deliveryAddress.state}}){% endif %}</p>
+
+    <div>
+        <h3>Détail de la commande</h3>
+        {% for vendorGroup in checkoutData.vendorGroups %}
+            <div style="margin: 20px 0;">
+                {% set vendor = vendorGroup.vendor %}
+                <p style="font-weight: 600;"><strong>Vendeur : #{{ vendor.id }} - {{ vendor.company.usualName }}</strong></p>
+                
+                {% for cartLine in vendorGroup.cartLines %}
+                    <p>{{ cartLine.packaging.product.designation }} {{ cartLine.packaging.label }} (public réf. {{ cartLine.packaging.publicRef }}) x {{ cartLine.quantity }}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div>
+        <p>Prenez contact avec le client pour finaliser manuellement la commande.</p>
+    </div>
+{% endblock %}
