@@ -1,6 +1,7 @@
 <?php
 namespace App\Tests\UnitAndIntegration\Price;
 
+use App\Config\VatLevels;
 use App\Entity\Company;
 use App\Entity\CustomPrice;
 use App\Entity\Packaging;
@@ -98,7 +99,7 @@ class PriceResolverTest extends TestCase
                             ;
         $this->vatResolver->expects($this->once())
                         ->method('getRate')
-                        ->with('IT', 'test_hs_code')
+                        ->with('IT', VatLevels::STANDARD)
                         ->willReturn(210);  // example rate in italy : 21% 
 
         $price = $this->priceResolver->resolve($this->createPackaging());
@@ -129,7 +130,7 @@ class PriceResolverTest extends TestCase
                             ;
         $this->vatResolver->expects($this->once())
                         ->method('getRate')
-                        ->with('IT', 'test_hs_code')
+                        ->with('IT', VatLevels::STANDARD)
                         ->willReturn(210);  // example rate in italy : 21% 
 
         $price = $this->priceResolver->resolve($this->createPackaging());
@@ -162,7 +163,7 @@ class PriceResolverTest extends TestCase
                             ;
         $this->vatResolver->expects($this->once())
                         ->method('getRate')
-                        ->with('IT', 'test_hs_code')
+                        ->with('IT', VatLevels::STANDARD)
                         ->willReturn(210);  // example rate in italy : 21% 
 
         $price = $this->priceResolver->resolve($this->createPackaging());
@@ -192,7 +193,7 @@ class PriceResolverTest extends TestCase
                             ;
         $this->vatResolver->expects($this->once())
                         ->method('getRate')
-                        ->with('FR', 'test_hs_code')
+                        ->with('FR', VatLevels::STANDARD)
                         ->willReturn(200);  // example rate in France : 20% 
 
         $price = $this->priceResolver->resolve($this->createPackaging());
@@ -225,7 +226,7 @@ class PriceResolverTest extends TestCase
                             ;
         $this->vatResolver->expects($this->once())
                         ->method('getRate')
-                        ->with('FR', 'test_hs_code')
+                        ->with('FR', VatLevels::STANDARD) // vat_level par défaut
                         ->willReturn(200);  // example rate in France : 20% 
 
         $price = $this->priceResolver->resolve($this->createPackaging());

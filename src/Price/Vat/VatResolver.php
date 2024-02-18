@@ -1,15 +1,14 @@
 <?php
 namespace App\Price\Vat;
 
-use App\Price\CountryLocation;
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Config\VatLevels;
 
 class VatResolver
 {
+    public const DEFAULT_VAT_RATE = 20;
 
     public function __construct(
-        private RequestStack $requestStack,
-        private CountryLocation $countryLocation
+        private VatRatesStorage $vatRatesStorage
     )
     {
         
@@ -19,20 +18,29 @@ class VatResolver
      * Undocumented function
      *
      * @param string|null $country
-     * @param string|null $codeHS
+     * @param string $vatLevel
      * @return integer rate %pour mille
      */
-    public function getRate(string $country = null, string $codeHS = null): int
+    public function getRate(string $country = null, string $vatLevel): int
     {
-        //récupérer le bon taux de tva selon pays et code HS
-        //si pas de country, on récupère country grace à $this->countryLocationè->getCountry();
-        //si pas de codeHS on prend le taux normal
-        $rate = 20;
+        $vatRates = $this->vatRatesStorage->get();
+        
+        $countryRates = $vatRates[$country];
 
-        //retourner systématiquement un int (rate * 10)
-        return $rate * 10;
+        $rate = $countryRates[$vatLevel];
+
+        //si le taux n'est pas renseigné pour ce vatLevel, on met taux standard du pays
+        if(!$rate)
+        {
+            $rate = $countryRates[VatLevels::STANDARD];
+        }
+        //si même le taux standard n'est pas renseigné, on met taux par défaut
+        if(!$rate)
+        {
+            $rate = self::DEFAULT_VAT_RATE;
+        }
+
+        //retourner systématiquement un int (rate * 10) %pour mille
+        return (int) ($rate * 10);
     }
-
- 
-
 }

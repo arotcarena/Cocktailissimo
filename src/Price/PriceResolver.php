@@ -17,7 +17,7 @@ class PriceResolver
 
     private ?string $vatNumber = null;
 
-    private ?string $customerCountry = SiteConfig::DEFAULT_GEOLOCATION_COUNTRY;
+    private string $customerCountry = SiteConfig::DEFAULT_GEOLOCATION_COUNTRY;
 
 
   
@@ -55,12 +55,12 @@ class PriceResolver
         //si dans UE on calcule la taxe
         if(in_array($this->customerCountry, Countries::EU_ISO))
         {
-            $rate = $this->vatResolver->getRate($this->customerCountry, $packaging->getProduct()->getHsCode());
-            $vatAmount = (int)($price->getPriceHT() * $rate / 1000);
+            $rate = $this->vatResolver->getRate($this->customerCountry, $packaging->getProduct()->getVatLevel());
+            $vatAmount = (int)($price->getPriceHT() * $rate / 1000);  // divise par 1000 car rate est en %pour mille
             $price->setVatRate($rate)
                     ->setVatAmount($vatAmount)
                     ->setPriceTTC(
-                        $price->getPriceHT() + $vatAmount // divise par 1000 car rate est en %pour mille
+                        $price->getPriceHT() + $vatAmount
                     );
         }
 
@@ -94,7 +94,7 @@ class PriceResolver
             }
         }
 
-        $this->customerCountry = $this->countryLocation->getCountry($user);
+        $this->customerCountry = $this->countryLocation->getCountry();
 
         //PRICE TO USE 
         if(!in_array($this->customerCountry, Countries::EU_ISO))
