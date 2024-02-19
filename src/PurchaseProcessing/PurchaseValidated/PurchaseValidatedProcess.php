@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Purchase;
 use App\FinancialOperations\PaymentVentilator;
 use App\Helper\DateTimeGenerator;
+use App\Invoice\InvoiceCreation\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\Service\Sendcloud\SendcloudService;
 use App\TrafficAnalytics\Counter\ProductSalesCounter;
@@ -20,7 +21,8 @@ class PurchaseValidatedProcess extends AbstractController
         private SendcloudService $sendcloudService,
         private PaymentVentilator $paymentVentilator,
         private PurchaseAmountCalculator $purchaseAmountCalculator,
-        private PurchaseValidatedNotifier $purchaseValidatedNotifier
+        private PurchaseValidatedNotifier $purchaseValidatedNotifier,
+        private PurchaseInvoicesHandler $purchaseInvoicesHandler
     )
     {
         
@@ -39,7 +41,7 @@ class PurchaseValidatedProcess extends AbstractController
         $this->paymentVentilator->ventilate($purchase);
         //ce qui reste sur le compte cocktailissimo correspond aux commissions TTC, ou aux ventes de produits Cocktailissimo
         
-        // $this->purchaseInvoicesCreator->create($purchase); <<<-----------  A FAIRE : CREATION FACTURE
+        $this->purchaseInvoicesHandler->createInvoices($purchase);
         
         //envoi des mails de confirmation de commande à customer, vendors, admin (contenant la facture en lien)
         //pour vendor : 2 factures, celle de la vente et celle de la commission

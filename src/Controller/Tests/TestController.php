@@ -17,6 +17,7 @@ use App\Entity\TranslatableString;
 use App\Entity\User;
 use App\Entity\VendorDetail;
 use App\Helper\PdfCreator;
+use App\Invoice\InvoiceCreation\PurchaseInvoicesHandler;
 use App\Repository\ArticleRepository;
 use App\Repository\PackagingRepository;
 use App\Repository\ProductRepository;
@@ -71,12 +72,12 @@ class TestController extends AbstractController
     }
 
 
-    #[Route('/tests/pdfCreator')]
-    public function pdfCreator(Environment $twig, PdfCreator $pdfCreator)
+    #[Route('/tests/purchaseInvoices')]
+    public function purchaseInvoices(PurchaseRepository $purchaseRepository, PurchaseInvoicesHandler $purchaseInvoicesHandler)
     {
-        $html = $twig->render('tests/pdf.html.twig');
-        $file = $pdfCreator->createFromHtml($html, 'mon_fichier_test');
-        return $this->json($file);
+        $purchase = $purchaseRepository->findOneBy([]);
+        $purchaseInvoicesHandler->createInvoices($purchase);
+        return $this->json('ok');
     }
 
     #[Route('/tests/findPurchases')]

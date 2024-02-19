@@ -4,7 +4,7 @@ namespace App\Helper;
 use Dompdf\Dompdf;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class PdfCreator
+class PdfManager
 {
     public function __construct(
         private KernelInterface $kernel
@@ -34,12 +34,16 @@ class PdfCreator
         // get pdf string
         $pdfContent = $dompdf->output();
 
-        $randomString = substr(str_shuffle(str_repeat('azertyuiopqsdfghjklmwxcvbn0123456789', 3)), 0, 10);
-        $filename = $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $name . '-' . $randomString . '.pdf';
+        $filename = $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $name . '.pdf';
 
         file_put_contents($filename, $pdfContent);
 
         return $filename;
+    }
+
+    public function getPath(string $name)
+    {
+        return $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $name . '.pdf';
     }
 
     private function getPdfDirectory(): string

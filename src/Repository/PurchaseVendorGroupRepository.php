@@ -21,6 +21,23 @@ class PurchaseVendorGroupRepository extends ServiceEntityRepository
         parent::__construct($registry, PurchaseVendorGroup::class);
     }
 
+    public function findLast(): ?PurchaseVendorGroup
+    {
+        $purchaseVendorGroups = $this->createQueryBuilder('pvg')
+                                    ->join('pvg.purchase', 'p')
+                                    ->orderBy('p.createdAt', 'DESC')
+                                    ->setMaxResults(1)
+                                    ->getQuery()
+                                    ->getResult()
+                                    ;
+
+        if(count($purchaseVendorGroups) === 0)
+        {
+            return null;
+        }
+        return $purchaseVendorGroups[0];
+    }
+
 //    /**
 //     * @return PurchaseVendorGroup[] Returns an array of PurchaseVendorGroup objects
 //     */
