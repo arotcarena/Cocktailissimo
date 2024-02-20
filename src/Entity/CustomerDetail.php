@@ -43,6 +43,9 @@ class CustomerDetail
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $company = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $vatNumber = null;
+
 
     public function getId(): ?int
     {
@@ -117,6 +120,18 @@ class CustomerDetail
     public function setPhone(string $phone): static
     {
         $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getVatNumber(): ?string
+    {
+        return $this->vatNumber;
+    }
+
+    public function setVatNumber(?string $vatNumber): static
+    {
+        $this->vatNumber = $vatNumber;
 
         return $this;
     }

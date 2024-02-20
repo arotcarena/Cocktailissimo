@@ -127,6 +127,7 @@ class PurchasePreparatorTest extends TestCase
         $this->assertEquals('civility_firstName', $purchase->getCustomerDetail()->getFirstName());
         $this->assertEquals('civility_lastName', $purchase->getCustomerDetail()->getLastName());
         $this->assertEquals('Enterprise', $purchase->getCustomerDetail()->getCompany());
+        $this->assertEquals('123456', $purchase->getCustomerDetail()->getVatNumber());
         $this->assertEquals('0601020304', $purchase->getCustomerDetail()->getPhone());
         $this->assertNull($purchase->getUser());
     }

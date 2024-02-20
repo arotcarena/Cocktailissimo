@@ -23,6 +23,7 @@ class CheckoutDataFactory
                 'lastName' => 'civility_lastName',
             ],
             'company' => 'Enterprise',
+            'vatNumber' => '123456',
             'phone' => '0601020304',
             'deliveryAddress' => (object)[
                 'civility' => SiteConfig::CIVILITY_M,

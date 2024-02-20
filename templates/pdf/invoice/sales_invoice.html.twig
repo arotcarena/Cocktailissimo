@@ -16,7 +16,9 @@
     {% if customerDetail.company %}
         <div style="margin: 40px 0;">
             <div><strong>Client :</strong> {{ customerDetail.company }}</div>
-            <div>N° de TVA : </div>
+            {% if customerDetail.vatNumber %}
+                <div>N° de TVA : {{ customerDetail.vatNumber }} </div>
+            {% endif %}
     {% endif %}
 
     <div style="margin: 40px 0;">
@@ -123,7 +125,7 @@
     </div>
 
 
-    <div style="margin-top: 40px; font-size: .7rem; text-align: center; vertical-align: bottom;">
+    <div style="margin-top: 80px; font-size: .7rem; text-align: center; vertical-align: bottom;">
         {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
         <div>
             <span>{{ vendorIsCocktailissimo ? 'Cocktailissimo': vendorDetail.socialName }}</span>
@@ -136,5 +138,6 @@
         <div>N° de TVA : {{ vendorDetail.identificationNumber }}</div>
         <div>N° siret : {{ vendorDetail.identificationNumber }}</div>
     </div>
+
 
 {% endblock %}

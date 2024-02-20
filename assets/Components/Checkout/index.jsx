@@ -21,6 +21,7 @@ const checkoutInitialData = {
         lastName: ''
     },
     company: null,
+    vatNumber: null,
     phone: '',
     deliveryAddress: {
         civility: '',
@@ -94,6 +95,7 @@ export const Checkout = () => {
                     lastName: user.lastName
                 },
                 company: user.company ? user.company.usualName: null,
+                vatNumber: user.company ? user.company.vatNumber: null,
                 phone: (user.phone !== null && user.phone !== '') ? user.phone: checkoutData.phone
             }));
             if(step <= STEP_PHONE) {

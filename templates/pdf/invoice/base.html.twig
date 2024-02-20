@@ -12,5 +12,13 @@
         <div style="width: 200mm; padding: 10px 20px;">
             {% block body %}{% endblock %}
         </div>
+        <script type="text/php">
+            if(isset($pdf)) 
+            {
+                $date = date("d/m/Y");
+                $pdf->page_text(20, 820, "$date", null, 6 , [0, 0, 0]);
+                $pdf->page_text(552, 820, "Page {PAGE_NUM} / {PAGE_COUNT}", null, 6, [0, 0, 0]);
+            }
+        </script>
     </body>
 </html>

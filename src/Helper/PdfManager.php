@@ -2,6 +2,7 @@
 namespace App\Helper;
 
 use Dompdf\Dompdf;
+use Dompdf\Options;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class PdfManager
@@ -25,7 +26,9 @@ class PdfManager
     public function createFromHtml(string $html, string $name, string $paperSize = 'A4', $orientation = 'portrait'): string
     {
         // instantiate and use the dompdf class
-        $dompdf = new Dompdf();
+        $options = new Options();
+        $options->set('isPhpEnabled', true);
+        $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html);
         // (Optional) Setup the paper size and orientation
         $dompdf->setPaper($paperSize, $orientation);

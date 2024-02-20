@@ -87,6 +87,7 @@ class PurchasePreparator
     {
         return (new CustomerDetail)
                 ->setCompany($checkoutData->company)
+                ->setVatNumber($checkoutData->vatNumber)
                 ->setEmail($checkoutData->civilState->email)
                 ->setCivility($checkoutData->civilState->civility)
                 ->setFirstName($checkoutData->civilState->firstName)
