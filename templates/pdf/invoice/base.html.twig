@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="margin: 0; height: 0;" lang="{{ app.request.locale }}">
+<html style="margin: 50px 25px;" lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +9,34 @@
         </title>
     </head>
     <body style="margin: 0; padding: 0;">
-        <div style="width: 200mm; padding: 10px 20px;">
+        <div style="width: 200mm;">
             {% block body %}{% endblock %}
         </div>
         <script type="text/php">
             if(isset($pdf)) 
             {
+                //date et page (en bas à gauche et à droite)
                 $date = date("d/m/Y");
-                $pdf->page_text(20, 820, "$date", null, 6 , [0, 0, 0]);
-                $pdf->page_text(552, 820, "Page {PAGE_NUM} / {PAGE_COUNT}", null, 6, [0, 0, 0]);
+                $pdf->page_text(20, 810, "$date", null, 10, [0, 0, 0]);
+                $pdf->page_text(550, 810, "{PAGE_NUM} / {PAGE_COUNT}", null, 10, [0, 0, 0]);
+
+                //numéro de facture (en haut à droite)
+                // il faut faire set invoiceNumber =   dans les blocks body
+                $invoiceNumberWidth = $pdf->get_text_width("Facture n° {{ invoiceNumber ?? '' }}", null, 15);
+                $pdf->page_text(585 - $invoiceNumberWidth, 15, "Facture n° {{ invoiceNumber ?? '' }}", null, 15, [0, 0, 0]);
+
+                //vendorDetail  (en bas)
+                // il faut faire set vendorDetail =   dans les blocks body
+                $firstLine = "{% if vendorIsCocktailissimo %}Cocktailissimo, 101 b rue Georges Lassalle 40220 Tarnos - France{% else %}{{ vendorDetail.socialName }} - {{ vendorDetail.socialAddress.lineOne }} {{ vendorDetail.socialAddress.postcode }} {{ vendorDetail.socialAddress.city }} - {{ vendorDetail.socialAddress.country | trans({}, 'countries', lang) }}{% if vendorDetail.socialAddress.state %} ({{ vendorDetail.socialAddress.state}}){% endif %}{% endif %}";
+                $pdf->page_text(60, 760, $firstLine, null, 8, [0, 0, 0]);
+
+                $pdf->page_text(60, 770, "Numéro siret : {{ vendorIsCocktailissimo ? '97853641500018': vendorDetail.identificationNumber }}" , null, 8, [0, 0, 0]);
+                $pdf->page_text(60, 780, "Numéro TVA : {{ vendorIsCocktailissimo ? 'FR93978536415': vendorDetail.vatNumber ?? '-' }}", null, 8, [0, 0, 0]);
+                
+                $lastLine = "{{ vendorIsCocktailissimo ? 'SAS Cocktailissimo, immatriculée au RCS de Dax sous le numéro 978 536 415, au capital social de 1 000,00 €': '' }}";
+                $pdf->page_text(60, 790, $lastLine, null, 8, [0, 0, 0]);
             }
         </script>
+        {% block additionalScript %}{% endblock %}
     </body>
 </html>

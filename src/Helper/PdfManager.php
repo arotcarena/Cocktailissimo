@@ -27,7 +27,8 @@ class PdfManager
     {
         // instantiate and use the dompdf class
         $options = new Options();
-        $options->set('isPhpEnabled', true);
+        $options->set('isPhpEnabled', true)
+                ;
         $dompdf = new Dompdf($options);
         $dompdf->loadHtml($html);
         // (Optional) Setup the paper size and orientation

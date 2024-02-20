@@ -1,0 +1,12 @@
+<div style="margin-top: 80px; font-size: .7rem; text-align: center; vertical-align: bottom;">
+    <div>
+        <span>{{ vendorIsCocktailissimo ? 'Cocktailissimo': vendorDetail.socialName }}</span>
+        <span> - </span>
+        {{ include('UI/_light_address_inline.html.twig', {address: vendorDetail.socialAddress}) }}
+    </div>
+    {% if vendorIsCocktailissimo %}
+        <div>SAS Cocktailissimo, immatriculée au RCS de Dax sous le numéro 978 536 415, au capital social de 1 000,00 €</div>
+    {% endif %}
+    <div>N° de TVA : {{ vendorDetail.identificationNumber }}</div>
+    <div>N° siret : {{ vendorDetail.identificationNumber }}</div>
+</div>

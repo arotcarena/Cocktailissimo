@@ -1,5 +1,11 @@
 {% extends 'pdf/invoice/base.html.twig' %}
 
+{# pour en-tête du pdf (dans base) #}
+{% set invoiceNumber = purchaseVendorGroup.commissionInvoiceNumber %}
+{# on force ce paramètre car pour une facture de commission, le vendeur sera toujours cocktailissimo #}
+{% set vendorIsCocktailissimo = true %}
+
+
 {% block body %}
     <div>commission_invoice : à faire</div>
 {% endblock %}

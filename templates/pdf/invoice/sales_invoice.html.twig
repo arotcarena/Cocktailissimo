@@ -1,13 +1,15 @@
 {% extends 'pdf/invoice/base.html.twig' %}
 
+{# pour en-tête standard du pdf (dans base) #}
+{% set invoiceNumber = purchaseVendorGroup.salesInvoiceNumber %}
+{% set vendorDetail = purchaseVendorGroup.vendorDetail %}
+
 
 {% set purchase = purchaseVendorGroup.purchase %}
 {% set customerDetail = purchase.customerDetail %}
 
-
 {% block body %}
     <div style="text-align: right">
-        <div style="font-size: 1.2rem; font-weight: 600; margin-top: 0;">Facture n° {{ purchaseVendorGroup.salesInvoiceNumber }}</div>
         <div>Date de facturation : {{ purchase.createdAt.format('d/m/Y') }}</div>
         <div>Référence de la commande : {{ purchase.ref }}</div>
         <div>Date de la commande : {{ purchase.createdAt.format('d/m/Y') }}</div>
@@ -72,6 +74,7 @@
                         {% endif %}
                     </tr>
                 {% endfor %}
+
                 {% set shippingPrice = purchaseVendorGroup.shippingInfo.price %}
                 <tr>
                     <td style="vertical-align: top; padding: 5px 10px;">Livraison</td>
@@ -123,21 +126,5 @@
     <div style="margin: 40px 0; font-size: .9em;">
         <p>Termes de paiement : Paiement au comptant date de facture</p>
     </div>
-
-
-    <div style="margin-top: 80px; font-size: .7rem; text-align: center; vertical-align: bottom;">
-        {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
-        <div>
-            <span>{{ vendorIsCocktailissimo ? 'Cocktailissimo': vendorDetail.socialName }}</span>
-            <span> - </span>
-            {{ include('UI/_light_address_inline.html.twig', {address: vendorDetail.socialAddress}) }}
-        </div>
-        {% if vendorIsCocktailissimo %}
-            <div>SAS Cocktailissimo, immatriculée au RCS de Dax sous le numéro 978 536 415, au capital social de 1 000,00 €</div>
-        {% endif %}
-        <div>N° de TVA : {{ vendorDetail.identificationNumber }}</div>
-        <div>N° siret : {{ vendorDetail.identificationNumber }}</div>
-    </div>
-
 
 {% endblock %}
