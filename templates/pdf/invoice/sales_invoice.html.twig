@@ -1,5 +1,153 @@
 {% extends 'pdf/invoice/base.html.twig' %}
 
+{# --color-admin: rgb(49 151 149);
+    --color-admin-dark: rgb(37, 116, 114);
+    --color-admin-verydark: rgb(4 87 85);
+    --color-admin-light: rgb(84, 145, 144);
+    --color-admin-verylight: rgb(121, 148, 147);
+    --color-admin-secondary: rgb(237 242 247);
+    --color-admin-secondary-dark: rgb(223, 228, 233);
+    --color-admin-secondary-light: rgb(244, 245, 247);
+    --color-admin-black: rgb(25, 25, 25);
+    --color-admin-lightgrey: rgb(185, 185, 185);
+    --color-admin-danger: rgb(204, 64, 29);
+    --color-admin-danger-flash: rgb(243, 49, 1);
+    --color-admin-danger-light: rgb(255, 214, 204); #}
+
+{% set purchase = purchaseVendorGroup.purchase %}
+{% set customerDetail = purchase.customerDetail %}
+
+
 {% block body %}
-    {{ purchaseVendorGroup | json_encode }}
+    <div style="text-align: right">
+        <div style="font-size: 1.2rem; font-weight: 600; margin-top: 0;">Facture n° {{ purchaseVendorGroup.salesInvoiceNumber }}</div>
+        <div>Date de facturation : {{ purchase.createdAt.format('d/m/Y') }}</div>
+        <div>Référence de la commande : {{ purchase.ref }}</div>
+        <div>Date de la commande : {{ purchase.createdAt.format('d/m/Y') }}</div>
+    </div>
+
+    {% if customerDetail.company %}
+        <div style="margin: 40px 0;">
+            <div><strong>Client :</strong> {{ customerDetail.company }}</div>
+            <div>N° de TVA : </div>
+    {% endif %}
+
+    <div style="margin: 40px 0;">
+        <div style="float: left; margin-right: 50px;">
+            <div style="font-size: 1.1rem; font-weight: 600;">Adresse de livraison</div>
+            <div style="margin: 10px 0;">
+                {% if purchaseVendorGroup.shippingInfo.type == 'shipping_type.relay' %}
+                    {% set relayInfo = purchaseVendorGroup.shippingInfo.relayInfo %}
+                    <div>{{ relayInfo.name }}</div>
+                    {{ include('UI/_light_address.html.twig', {address: relayInfo.address}) }}
+                {% else %}
+                    {{ include('UI/_address.html.twig', {address: purchase.deliveryDetail}) }}
+                {% endif %}
+            </div>
+        </div>
+        <div>
+            <div style="font-size: 1.1rem; font-weight: 600;">Adresse de facturation</div>
+            <div style="margin: 10px 0;">
+                {{ include('UI/_address.html.twig', {address: purchase.invoiceDetail}) }}
+            </div>
+        </div>
+    </div>
+    <div style="margin: 40px 0;">
+        <table style="margin-left: -10px;">
+            <thead>
+                <tr>
+                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Description</th>
+                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Quantité</th>
+                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Prix unitaire<br>HT</th>
+                    {% if purchaseVendorGroup.articlesPrice.payType == 'pay_price_ttc' %}
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Taux TVA</th>
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Prix unitaire<br>TTC</th>
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Total TTC</th>
+                    {% else %}
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Total HT</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for purchaseLine in purchaseVendorGroup.purchaseLines %}
+                    <tr>
+                        <td style="vertical-align: top; padding: 5px 10px;">{{ attribute(purchaseLine.designation, lang) }} {{ attribute(purchaseLine.packagingLabel, lang) }} - réf. {{ purchaseLine.publicRef }}</td>
+                        <td style="vertical-align: top; padding: 5px 10px;">{{ purchaseLine.quantity }}</td>
+                        <td style="vertical-align: top; padding: 5px 10px;">{{ purchaseLine.unitPrice.priceHT | price_format(lang) }}</td>
+                        {% if purchaseLine.unitPrice.payType == 'pay_price_ttc' %}
+                            <td style="vertical-align: top; padding: 5px 10px;">{{ purchaseLine.unitPrice.vatRate / 10 }}%</td>
+                            <td style="vertical-align: top; padding: 5px 10px;">{{ purchaseLine.unitPrice.priceTTC | price_format(lang) }}</td>
+                            <td style="vertical-align: top; padding: 5px 10px;">{{ purchaseLine.totalPrice.priceTTC | price_format(lang) }}</td>
+                        {% else %}
+                            <td style="vertical-align: top; padding: 5px 10px;">{{ purchaseLine.totalPrice.priceHT | price_format(lang) }}</td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                {% set shippingPrice = purchaseVendorGroup.shippingInfo.price %}
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 10px;">Livraison</td>
+                    <td style="vertical-align: top; padding: 5px 10px;"></td>
+                    <td style="vertical-align: top; padding: 5px 10px;">{{ shippingPrice.priceHT | price_format(lang) }}</td>
+                    {% if shippingPrice.payType == 'pay_price_ttc' %}
+                        <td style="vertical-align: top; padding: 5px 10px;">{{ shippingPrice.vatRate / 10 }}%</td>
+                        <td style="vertical-align: top; padding: 5px 10px;"></td>
+                        <td style="vertical-align: top; padding: 5px 10px;">{{ shippingPrice.priceTTC | price_format(lang) }}</td>
+                    {% else %}
+                        <td style="vertical-align: top; padding: 5px 10px;">{{ shippingPrice.priceHT | price_format(lang) }}</td>
+                    {% endif %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        {% set articlesPrice = purchaseVendorGroup.articlesPrice %}
+        {% set totalPrice = purchaseVendorGroup.totalPrice %}
+        <table style="padding: 10px; border: solid 1px; margin-left: auto; margin-right: auto;">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;">Total articles</td>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ totalPrice.priceToPay | price_format(lang) }}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;">Frais de livraison</td>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ shippingPrice.priceToPay | price_format(lang) }}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>Total HT</strong></td>
+                    <td style="vertical-align: top; padding: 5px 30px"><strong>{{ totalPrice.priceHT | price_format(lang) }}</strong></td>
+                </tr>
+                {% if totalPrice.payType == 'pay_price_ttc' %}
+                    <tr>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>Total TVA</strong></td>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.vatAmount | price_format(lang) }}</strong></td>
+                    </tr>   
+                {% endif %}
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>Facture Total</strong></td>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceToPay | price_format(lang) }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div style="margin: 80px 0; font-size: .9em;">
+        <p>Termes de paiement : Paiement au comptant date de facture</p>
+    </div>
+
+
+    <div style="margin-top: 80px; font-size: .7rem; text-align: center; vertical-align: bottom;">
+        {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
+        <div>
+            <span>{{ vendorIsCocktailissimo ? 'Cocktailissimo': vendorDetail.socialName }}</span>
+            <span> - </span>
+            {{ include('UI/_light_address_inline.html.twig', {address: vendorDetail.socialAddress}) }}
+        </div>
+        {% if vendorIsCocktailissimo %}
+            <div>SAS Cocktailissimo, immatriculée au RCS de Dax sous le numéro 978 536 415, au capital social de 1 000,00 €</div>
+        {% endif %}
+        <div>N° de TVA : {{ vendorDetail.identificationNumber }}</div>
+        <div>N° siret : {{ vendorDetail.identificationNumber }}</div>
+    </div>
+
 {% endblock %}

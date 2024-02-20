@@ -80,6 +80,18 @@ class TestController extends AbstractController
         return $this->json('ok');
     }
 
+    #[Route('/tests/templateInvoice')]
+    public function templateInvoice(PurchaseRepository $purchaseRepository)
+    {
+        $purchase = $purchaseRepository->findOneBy([]);
+        
+        return $this->render('pdf/invoice/sales_invoice.html.twig', [
+            'lang' => 'fr',
+            'purchaseVendorGroup' => $purchase->getPurchaseVendorGroups()->get(0),
+            'vendorIsCocktailissimo' => true
+        ]);
+    }
+
     #[Route('/tests/findPurchases')]
     public function findPurchases()
     {

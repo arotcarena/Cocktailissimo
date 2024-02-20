@@ -1,0 +1,9 @@
+<span>{{ address.lineOne }}</span>
+{% if address.lineTwo %}
+    <span> - </span>
+    <span>{{ address.lineTwo }}</span>
+{% endif %}
+<span> - </span>
+<span>{{ address.postcode }} {{ address.city }}</span>
+<span> - </span>
+<span>{{ address.country | trans({}, 'countries') }} {{ address.country }}{% if address.state %} ({{ address.state }}){% endif %}</span>
