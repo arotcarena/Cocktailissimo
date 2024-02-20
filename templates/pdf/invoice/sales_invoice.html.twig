@@ -1,18 +1,5 @@
 {% extends 'pdf/invoice/base.html.twig' %}
 
-{# --color-admin: rgb(49 151 149);
-    --color-admin-dark: rgb(37, 116, 114);
-    --color-admin-verydark: rgb(4 87 85);
-    --color-admin-light: rgb(84, 145, 144);
-    --color-admin-verylight: rgb(121, 148, 147);
-    --color-admin-secondary: rgb(237 242 247);
-    --color-admin-secondary-dark: rgb(223, 228, 233);
-    --color-admin-secondary-light: rgb(244, 245, 247);
-    --color-admin-black: rgb(25, 25, 25);
-    --color-admin-lightgrey: rgb(185, 185, 185);
-    --color-admin-danger: rgb(204, 64, 29);
-    --color-admin-danger-flash: rgb(243, 49, 1);
-    --color-admin-danger-light: rgb(255, 214, 204); #}
 
 {% set purchase = purchaseVendorGroup.purchase %}
 {% set customerDetail = purchase.customerDetail %}
@@ -131,12 +118,12 @@
         </table>
     </div>
 
-    <div style="margin: 80px 0; font-size: .9em;">
+    <div style="margin: 40px 0; font-size: .9em;">
         <p>Termes de paiement : Paiement au comptant date de facture</p>
     </div>
 
 
-    <div style="margin-top: 80px; font-size: .7rem; text-align: center; vertical-align: bottom;">
+    <div style="margin-top: 40px; font-size: .7rem; text-align: center; vertical-align: bottom;">
         {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
         <div>
             <span>{{ vendorIsCocktailissimo ? 'Cocktailissimo': vendorDetail.socialName }}</span>
