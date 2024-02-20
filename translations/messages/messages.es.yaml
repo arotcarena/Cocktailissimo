@@ -95,6 +95,29 @@ comment: Comentario
 language: Idioma
 contact: Contacto
 
+invoice_date: Fecha de factura
+purchase_date: Fecha de compra
+purchase_ref: Referencia de compra
+customer: Cliente
+vat_number: Número de IVA
+delivery_address: Dirección de entrega
+invoice_address: Dirección de factura
+description: Descripción
+unit_price: Precio unitario
+vat_rate: Tasa de IVA
+total_ttc: Total con IVA
+total_ht: Total sin IVA
+total_vat: Total de IVA
+total_articles: Total de artículos
+shipping_cost: Costo de envío
+total_invoice: Factura total
+invoice_payment_terms: 'Términos de pago: Pago en la fecha de factura'
+invoice: Factura
+invoice_number: Factura n.º {number}
+identification_number: NIF
+cocktailissimo_rcs_line: SAS Cocktailissimo, inscrita en el RCS de Dax con el número 978 536 415, con un capital social de 1.000,00 €
+
+
 close: Cerrar
 see_more: Ver más
 see_less: Ver menos

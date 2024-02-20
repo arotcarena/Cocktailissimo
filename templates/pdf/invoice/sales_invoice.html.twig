@@ -10,22 +10,22 @@
 
 {% block body %}
     <div style="text-align: right">
-        <div>Date de facturation : {{ purchase.createdAt.format('d/m/Y') }}</div>
-        <div>Référence de la commande : {{ purchase.ref }}</div>
-        <div>Date de la commande : {{ purchase.createdAt.format('d/m/Y') }}</div>
+        <div>{{ 'invoice_date' | trans({}, 'messages', lang) }} : {{ purchase.createdAt.format('d/m/Y') }}</div>
+        <div>{{ 'purchase_ref' | trans({}, 'messages', lang) }} : {{ purchase.ref }}</div>
+        <div>{{ 'purchase_date' | trans({}, 'messages', lang) }} : {{ purchase.createdAt.format('d/m/Y') }}</div>
     </div>
 
     {% if customerDetail.company %}
         <div style="margin: 40px 0;">
-            <div><strong>Client :</strong> {{ customerDetail.company }}</div>
+            <div><strong>{{ 'customer' | trans({}, 'messages', lang) }} :</strong> {{ customerDetail.company }}</div>
             {% if customerDetail.vatNumber %}
-                <div>N° de TVA : {{ customerDetail.vatNumber }} </div>
+                <div>{{ 'vat_number' | trans({}, 'messages', lang) }} : {{ customerDetail.vatNumber }} </div>
             {% endif %}
     {% endif %}
 
     <div style="margin: 40px 0;">
         <div style="float: left; margin-right: 50px;">
-            <div style="font-size: 1.1rem; font-weight: 600;">Adresse de livraison</div>
+            <div style="font-size: 1.1rem; font-weight: 600;">{{ 'delivery_address' | trans({}, 'messages', lang) }}</div>
             <div style="margin: 10px 0;">
                 {% if purchaseVendorGroup.shippingInfo.type == 'shipping_type.relay' %}
                     {% set relayInfo = purchaseVendorGroup.shippingInfo.relayInfo %}
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div>
-            <div style="font-size: 1.1rem; font-weight: 600;">Adresse de facturation</div>
+            <div style="font-size: 1.1rem; font-weight: 600;">{{ 'invoice_address' | trans({}, 'messages', lang) }}</div>
             <div style="margin: 10px 0;">
                 {{ include('UI/_address.html.twig', {address: purchase.invoiceDetail}) }}
             </div>
@@ -47,15 +47,15 @@
         <table style="margin-left: -10px;">
             <thead>
                 <tr>
-                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Description</th>
-                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Quantité</th>
-                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Prix unitaire<br>HT</th>
+                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'description' | trans({}, 'messages', lang) }}</th>
+                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'quantity' | trans({}, 'messages', lang) }}</th>
+                    <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'unit_price' | trans({}, 'messages', lang) }}<br>{{ 'ht' | trans({}, 'messages', lang) }}</th>
                     {% if purchaseVendorGroup.articlesPrice.payType == 'pay_price_ttc' %}
-                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Taux TVA</th>
-                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Prix unitaire<br>TTC</th>
-                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Total TTC</th>
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'vat_rate' | trans({}, 'messages', lang) }}</th>
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'unit_price' | trans({}, 'messages', lang) }}<br>{{ 'ttc' | trans({}, 'messages', lang) }}</th>
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'total_ttc' | trans({}, 'messages', lang) }}</th>
                     {% else %}
-                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">Total HT</th>
+                        <th style="text-align: left; padding: 5px 10px; vertical-align: top;">{{ 'total_ht' | trans({}, 'messages', lang) }}</th>
                     {% endif %}
                 </tr>
             </thead>
@@ -77,7 +77,7 @@
 
                 {% set shippingPrice = purchaseVendorGroup.shippingInfo.price %}
                 <tr>
-                    <td style="vertical-align: top; padding: 5px 10px;">Livraison</td>
+                    <td style="vertical-align: top; padding: 5px 10px;">{{ 'delivery' | trans({}, 'messages', lang) }}</td>
                     <td style="vertical-align: top; padding: 5px 10px;"></td>
                     <td style="vertical-align: top; padding: 5px 10px;">{{ shippingPrice.priceHT | price_format(lang) }}</td>
                     {% if shippingPrice.payType == 'pay_price_ttc' %}
@@ -98,25 +98,25 @@
         <table style="padding: 10px; border: solid 1px; margin-left: auto; margin-right: auto;">
             <tbody>
                 <tr>
-                    <td style="vertical-align: top; padding: 5px 30px;">Total articles</td>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ 'total_articles' | trans({}, 'messages', lang) }}</td>
                     <td style="vertical-align: top; padding: 5px 30px;">{{ totalPrice.priceToPay | price_format(lang) }}</td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top; padding: 5px 30px;">Frais de livraison</td>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ 'shipping_cost' | trans({}, 'messages', lang) }}</td>
                     <td style="vertical-align: top; padding: 5px 30px;">{{ shippingPrice.priceToPay | price_format(lang) }}</td>
                 </tr>
                 <tr>
-                    <td style="vertical-align: top; padding: 5px 30px;"><strong>Total HT</strong></td>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ 'total_ht' | trans({}, 'messages', lang) }}</strong></td>
                     <td style="vertical-align: top; padding: 5px 30px"><strong>{{ totalPrice.priceHT | price_format(lang) }}</strong></td>
                 </tr>
                 {% if totalPrice.payType == 'pay_price_ttc' %}
                     <tr>
-                        <td style="vertical-align: top; padding: 5px 30px;"><strong>Total TVA</strong></td>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ 'total_vat' | trans({}, 'messages', lang) }}</strong></td>
                         <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.vatAmount | price_format(lang) }}</strong></td>
                     </tr>   
                 {% endif %}
                 <tr>
-                    <td style="vertical-align: top; padding: 5px 30px;"><strong>Facture Total</strong></td>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ 'total_invoice' | trans({}, 'messages', lang) }}</strong></td>
                     <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceToPay | price_format(lang) }}</strong></td>
                 </tr>
             </tbody>
@@ -124,7 +124,7 @@
     </div>
 
     <div style="margin: 40px 0; font-size: .9em;">
-        <p>Termes de paiement : Paiement au comptant date de facture</p>
+        <p>{{ 'invoice_payment_terms' | trans({}, 'messages', lang) }}</p>
     </div>
 
 {% endblock %}

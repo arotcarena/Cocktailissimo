@@ -78,7 +78,7 @@ registration: Inscription
 shop: Boutique
 reviews: Avis
 highlighted_recipe: Recette du mois
-search_recipe_ingredient_article: Rechercher une recette, un ingrédient, un article
+search_recipe_ingredient_article: Rechercher une recette, un ingrédient, un 
 
 firstName: Prénom
 lastName: Nom
@@ -94,6 +94,28 @@ note: Note
 comment: Commentaire
 language: Langue
 contact: Contact
+
+invoice_date: Date de facturation
+purchase_date: Date de la commande
+purchase_ref: Référence de la commande
+customer: Client
+vat_number: Numéro de TVA
+delivery_address: Adresse de livraison
+invoice_address: Adresse de facturation
+description: Description
+unit_price: Prix unitaire
+vat_rate: Taux TVA
+total_ttc: Total TTC
+total_ht: Total HT
+total_vat: Total TVA
+total_articles: Total articles
+shipping_cost: Frais de livraison
+total_invoice: Facture Total
+invoice_payment_terms: 'Termes de paiement : Paiement au comptant date de facture'
+invoice: Facture
+invoice_number: Facture n° {number}
+identification_number: Numéro Siret
+cocktailissimo_rcs_line: SAS Cocktailissimo, immatriculée au RCS de Dax sous le numéro 978 536 415, au capital social de 1 000,00 €
 
 close: Fermer
 see_more: Voir plus

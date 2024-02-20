@@ -95,6 +95,29 @@ comment: Comment
 language: Language
 contact: Contact
 
+invoice_date: Invoice date
+purchase_date: Purchase date
+purchase_ref: Purchase reference
+customer: Customer
+vat_number: VAT number
+delivery_address: Delivery address
+invoice_address: Invoice address
+description: Description
+unit_price: Unit price
+vat_rate: VAT rate
+total_ttc: Total VAT included
+total_ht: Total excluding VAT
+total_vat: Total VAT
+total_articles: Total articles
+shipping_cost: Shipping cost
+total_invoice: Total invoice
+invoice_payment_terms: 'Payment terms: Payment on invoice date'
+invoice: Invoice
+invoice_number: Invoice No. {number}
+identification_number: Identification number
+cocktailissimo_rcs_line: SAS Cocktailissimo, registered with the RCS of Dax under number 978 536 415, with a share capital of €1,000.00
+
+
 close: Close
 see_more: Show More
 see_less: Show Less
