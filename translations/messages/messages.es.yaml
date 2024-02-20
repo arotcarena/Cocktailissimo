@@ -102,6 +102,7 @@ customer: Cliente
 vat_number: Número de IVA
 delivery_address: Dirección de entrega
 invoice_address: Dirección de factura
+quantity: Cantidad
 description: Descripción
 unit_price: Precio unitario
 vat_rate: Tasa de IVA

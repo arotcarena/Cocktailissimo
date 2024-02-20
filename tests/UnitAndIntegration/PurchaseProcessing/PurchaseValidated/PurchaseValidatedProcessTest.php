@@ -5,6 +5,7 @@ use App\Config\SiteConfig;
 use App\Entity\Purchase;
 use App\FinancialOperations\PaymentVentilator;
 use App\Helper\DateTimeGenerator;
+use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedNotifier;
 use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedProcess;
@@ -30,6 +31,7 @@ class PurchaseValidatedProcessTest extends TestCase
     private SendcloudService|MockObject $sendcloudService;
     private PurchaseAmountCalculator|MockObject $purchaseAmountCalculator;
     private PurchaseValidatedNotifier|MockObject $purchaseValidatedNotifier;
+    private PurchaseInvoicesHandler|MockObject $purchaseInvoicesHandler;
 
     private Purchase $purchase;
 
@@ -41,6 +43,7 @@ class PurchaseValidatedProcessTest extends TestCase
         $this->sendcloudService = $this->createMock(SendcloudService::class);
         $this->purchaseAmountCalculator = $this->createMock(PurchaseAmountCalculator::class);
         $this->purchaseValidatedNotifier = $this->createMock(PurchaseValidatedNotifier::class);
+        $this->purchaseInvoicesHandler = $this->createMock(PurchaseInvoicesHandler::class);
 
         $dateTimeGenerator = $this->createMock(DateTimeGenerator::class);
         $dateTimeGenerator->expects($this->any())->method('generate')->willReturn(new DateTime());
@@ -53,7 +56,8 @@ class PurchaseValidatedProcessTest extends TestCase
             $this->sendcloudService,
             $this->paymentVentilator,
             $this->purchaseAmountCalculator,
-            $this->purchaseValidatedNotifier
+            $this->purchaseValidatedNotifier,
+            $this->purchaseInvoicesHandler
         );
 
         $this->purchase = PurchasePendingFactory::create();

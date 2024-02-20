@@ -17,7 +17,7 @@ use App\Entity\TranslatableString;
 use App\Entity\User;
 use App\Entity\VendorDetail;
 use App\Helper\PdfCreator;
-use App\Invoice\InvoiceCreation\PurchaseInvoicesHandler;
+use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\Repository\ArticleRepository;
 use App\Repository\PackagingRepository;
 use App\Repository\ProductRepository;
@@ -89,6 +89,16 @@ class TestController extends AbstractController
             'lang' => 'fr',
             'purchaseVendorGroup' => $purchase->getPurchaseVendorGroups()->get(0),
             'vendorIsCocktailissimo' => true
+        ]);
+    }
+
+    #[Route('/tests/purchase_confirmation_email')]
+    public function purchaseConfirmationEmail(PurchaseRepository $purchaseRepository)
+    {
+        $purchase = $purchaseRepository->findOneBy([]);
+
+        return $this->render('admin/email/purchase/purchase_confirmation.html.twig', [
+            'purchase' => $purchase
         ]);
     }
 

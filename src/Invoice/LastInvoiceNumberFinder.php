@@ -26,7 +26,7 @@ class LastInvoiceNumberFinder
             return 0;
         }
 
-        //on prend le plus grand des deux numéros et on lui ajoute 1
+        //on prend le plus grand des deux numéros
         $invoiceNumber = 0;
         foreach([
             $lastVendorGroup->getCommissionInvoiceNumber(),

@@ -25,6 +25,7 @@ class PurchaseVendorGroupRepository extends ServiceEntityRepository
     {
         $purchaseVendorGroups = $this->createQueryBuilder('pvg')
                                     ->join('pvg.purchase', 'p')
+                                    ->where('pvg.salesInvoiceNumber IS NOT NULL')
                                     ->orderBy('p.createdAt', 'DESC')
                                     ->setMaxResults(1)
                                     ->getQuery()

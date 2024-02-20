@@ -1,8 +1,7 @@
 <?php
-namespace App\Invoice\InvoiceCreation;
+namespace App\Invoice\InvoiceManagement;
 
 use App\Entity\Purchase;
-use App\Invoice\InvoicePrefix;
 use App\Invoice\InvoiceTypes;
 use App\Invoice\LastInvoiceNumberFinder;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,7 +10,7 @@ class PurchaseInvoicesHandler
 {
     public function __construct(
         private LastInvoiceNumberFinder $lastInvoiceNumberFinder,
-        private InvoiceCreator $invoiceCreator,
+        private InvoiceManager $invoiceCreator,
         private EntityManagerInterface $em
     )
     {

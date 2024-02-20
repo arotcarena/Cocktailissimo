@@ -1,15 +1,15 @@
 <?php
-namespace App\Invoice\InvoiceCreation;
+namespace App\Invoice\InvoiceManagement;
 
 use App\Config\SiteConfig;
 use App\Entity\PurchaseVendorGroup;
 use App\Helper\PdfManager;
 use Twig\Environment;
 
-class InvoiceCreator 
+class InvoiceManager 
 {
     public function __construct(
-        private PdfManager $pdfCreator,
+        private PdfManager $pdfManager,
         private Environment $twig
     )
     {
@@ -23,6 +23,11 @@ class InvoiceCreator
             'purchaseVendorGroup' => $purchaseVendorGroup,
             'vendorIsCocktailissimo' => $purchaseVendorGroup->getVendorDetail()->getIdentificationNumber() === SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER
         ]);
-        $this->pdfCreator->createFromHtml($html, $type . '-' . $lang . '-' . $number);
+        $this->pdfManager->createFromHtml($html, $type . '-' . $lang . '-' . $number);
+    }
+
+    public function getPath(string $lang, string $type, int $number): string 
+    {
+        return $this->pdfManager->getPath($type . '-' . $lang . '-' . $number);
     }
 }

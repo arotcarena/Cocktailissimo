@@ -1,96 +1,119 @@
 {% extends "admin/email/base.html.twig" %}
 
-{% block title %}Commande reçue{% endblock %}
+{% block title %}Commande passée{% endblock %}
 
 {% block body %}
 
-    <h1>Vous avez reçu une commande</h1>
+    <h1>Une commande vient d'être passée</h1>
 
-
-    <div>
-        <h3>Réf.</h3>
+    <div style="margin: 20px 0;">
+        <h3>Référence de la commande</h3>
         <p>{{purchase.ref}}</p>
     </div>
-    <div>
-        
-        <h3>Client</h3>
-        <p class="capitalize">{{ purchase.civility | trans({}, 'configs', 'fr') }} {{ purchase.firstName }} {{ purchase.lastName }}</p>
-
-        <h3>Adresse email</h3>
-        <p>{{purchase.email}}</p>
-
-        <h3>Numéro de téléphone</h3>
-        <p>{{ purchase.phone }}</p>
-        
-    </div>
-    <div>
-        <h3>Mode de livraison</h3>
-        <p>{{ purchase.shippingInfo.name.fr }}
-    </div>
-    <div>
-        {% if isAtHomeDelivery %}
-            <h3>Livraison à domicile</h3>
-            {% set address = purchase.deliveryDetail %}
-            <p>
-                {{ address.civility | trans({}, 'configs', 'fr') }} {{ address.firstName }} {{ address.lastName }}
-                <br>{{ address.lineOne }}
-                {% if address.lineTwo is not null %}
-                    {% if address.lineTwo != '' %}<br>{{ address.lineTwo }}{% endif %} 
-                {% endif %}
-                <br>{{ address.postcode }} {{ address.city }}
-                <br>{{ address.country.fr }} ({{ address.iso }})
-            </p>
-        {% else %}
-            <h3>Livraison en point relais / locker</h3>
-            <p>
-                {{ purchase.shippingInfo.relay.name }}
-                <br>{{ purchase.shippingInfo.relay.lineOne }}
-                {% if purchase.shippingInfo.relay.lineTwo is not null %}<br>{{ purchase.shippingInfo.relay.lineTwo }}{% endif %} 
-                <br>{{ purchase.shippingInfo.relay.postcode }} {{  purchase.shippingInfo.relay.city }}
-                <br><br>Identifiant: <strong>{{ purchase.shippingInfo.relay.id }}</strong>
-            </p>
-        {% endif %}
-            
-
-        
-    </div>
-    <div>
-        <h3>Adresse de facturation</h3>
-        {% set address = purchase.invoiceDetail %}
-        <p>
-            {{ address.civility | trans({}, 'configs', 'fr') }} {{ address.firstName }} {{ address.lastName }}
-            <br>{{ address.lineOne }}
-            {% if address.lineTwo is not null %}
-                {% if address.lineTwo != '' %}<br>{{ address.lineTwo }}{% endif %} 
-            {% endif %}
-            <br>{{ address.postcode }} {{ address.city }}
-            <br>{{ address.country.fr }} ({{ address.iso }})
-        </p>
-    </div>
-    <div>
-        <h3>Détail de la commande</h3>
-        {% for purchaseLine in purchase.purchaseLines %}
-            <div>{{ purchaseLine.quantity }} x {{ purchaseLine.product.designation.fr }} (réf. publique : {{ purchaseLine.product.publicRef }}) = {{ purchaseLine.totalPrice | price_format('fr') }}</div>
-        {% endfor %}
-        <br>
-        <div>Total articles : {{ purchase.totalPrice | price_format('fr') }}</div>
-        <div>Livraison : {{ purchase.shippingInfo.price | price_format('fr') }}</div>
-        <div>Total : {{ (purchase.shippingInfo.price + purchase.totalPrice) | price_format('fr')}}</div>
-    </div>
-    <div>
+    <div style="margin: 20px 0;">
         <h3>Date de la commande</h3>
-        <div>{{ purchase.createdAt.format('d/m/Y H:h') }}</div>
+        <div>{{ purchase.createdAt.format('d/m/Y H:i:s') }}</div>
     </div>
-    <div>
-        <h3>Statut</h3>
-        <div>{{ purchase.status | trans({locale: 'fr'}, 'configs') }}</div>
-    </div>
-    <br>
-    <br>
-    <a href={{ url('admin_purchase_index') }}>Cliquez ici pour gérer les commandes</a>
 
-    <br>
-    <br>
-    <br>
+    <div>
+        <div style="margin: 40px 0;">
+            <h2 style="margin-top: 0;">Client</h3>
+            {% set customerDetail = purchase.customerDetail %}
+            <h3>Nom</h3>
+            <p class="capitalize">{{ customerDetail.civility | trans({}, 'configs', 'fr') }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}</p>
+
+            <h3>Adresse email</h3>
+            <p>{{customerDetail.email}}</p>
+
+            <h3>Numéro de téléphone</h3>
+            <p>{{ customerDetail.phone }}</p>
+            
+            {% if customerDetail.company %}
+                <h3>Entreprise</h3>
+                <p>{{ customerDetail.company }}</p>
+            {% endif %}
+
+            {% if customerDetail.vatNumber %}
+                <h3>Numéro TVA</h3>
+                <p>{{ customerDetail.vatNumber }}</p>
+            {% endif %}
+
+            <h3>Langue</h3>
+            <p>{{ purchase.lang }}</p>
+        </div>
+
+        <div style="margin: 40px 0;">
+            {% if purchase.deliveryDetail %}
+                <h3>Adresse de livraison</h3>
+                {{ include('/UI/_address.html.twig', {address: purchase.deliveryDetail}) }}
+            {% endif %}
+            {% if purchase.invoiceDetail %}
+                <h3>Adresse de facturation</h3>
+                {{ include('/UI/_address.html.twig', {address: purchase.invoiceDetail}) }}
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div style="margin: 50px 0;">
+        <h3>Détail de la commande</h3>
+        {% for purchaseVendorGroup in purchase.purchaseVendorGroups %}
+            <div style="margin: 40px 0 60px; padding-left: 20px; border-left: solid 4px;">
+                {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
+                <p style="font-weight: 600;">{{ vendorDetail.socialName }} - n° siret {{ vendorDetail.identificationNumber }}</p>
+                {% set shippingInfo = purchaseVendorGroup.shippingInfo %}
+                <p>
+                    <span>{{ shippingInfo.type | trans({}, 'configs', 'fr') }}</span>
+                    {% if shippingInfo.type == 'shipping_type.relay' %}
+                        {% set relayInfo = shippingInfo.relayInfo %}
+                        <span>
+                            - {{ relayInfo.name }} {{ relayInfo.address.lineOne }} {% if relayInfo.address.lineTwo %} {{ relayInfo.address.lineTwo }}{% endif %} {{ relayInfo.address.postcode }} {{ relayInfo.address.city }} {{ relayInfo.address.country | trans({}, 'countries', 'fr') }}
+                        </span>
+                    {% endif %}
+                </p>
+                <p>{{ shippingInfo.carrier }} - {{ shippingInfo.name }} - {{ shippingInfo.price.priceToPay | price_format('fr') }} - {{ shippingInfo.leadTimeHours }}h</p>
+                <p>Tracking : {{ shippingInfo.tracking }}</p>
+                <div style="margin: -20px 0;">
+                    {{ include('UI/invoice/_purchase_vendor_group.html.twig', {purchaseVendorGroup, lang: 'fr'}) }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div style="margin-top: 10px; margin-bottom: 20px;">
+        {% set articlesPrice = purchase.articlesPrice %}
+        {% set totalPrice = purchase.totalPrice %}
+        {% set shippingPrice = purchase.shippingCost %}
+        <table style="padding: 10px; border: solid 1px;">
+            <tbody>
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ 'total_articles' | trans({}, 'messages', 'fr') }}</td>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ totalPrice.priceToPay | price_format('fr') }}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ 'shipping_cost' | trans({}, 'messages', 'fr') }}</td>
+                    <td style="vertical-align: top; padding: 5px 30px;">{{ shippingPrice.priceToPay | price_format('fr') }}</td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ 'total_ht' | trans({}, 'messages', 'fr') }}</strong></td>
+                    <td style="vertical-align: top; padding: 5px 30px"><strong>{{ totalPrice.priceHT | price_format('fr') }}</strong></td>
+                </tr>
+                {% if totalPrice.payType == 'pay_price_ttc' %}
+                    <tr>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ 'total_vat' | trans({}, 'messages', 'fr') }}</strong></td>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.vatAmount | price_format('fr') }}</strong></td>
+                    </tr>   
+                {% endif %}
+                <tr>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>Total payé</strong></td>
+                    <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceToPay | price_format('fr') }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+ 
+    <div style="margin: 50px 0;">
+        <a href={{ url('admin_purchase_index') }}>Cliquez ici pour voir les commandes</a>
+    </div>
 
 {% endblock %}

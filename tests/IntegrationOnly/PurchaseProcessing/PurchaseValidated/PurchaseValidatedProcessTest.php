@@ -8,6 +8,7 @@ use App\Entity\Purchase;
 use App\Entity\PurchaseLine;
 use App\FinancialOperations\PaymentVentilator;
 use App\Helper\DateTimeGenerator;
+use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedNotifier;
 use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedProcess;
@@ -52,7 +53,8 @@ class PurchaseValidatedProcessTest extends KernelTestCase
             $this->createMock(SendcloudService::class),
             $this->createMock(PaymentVentilator::class),
             $container->get(PurchaseAmountCalculator::class),
-            $container->get(PurchaseValidatedNotifier::class)
+            $container->get(PurchaseValidatedNotifier::class),
+            $container->get(PurchaseInvoicesHandler::class)
         );
 
         $this->loadFixtures([PurchasePendingTestFixtures::class]);

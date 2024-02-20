@@ -440,6 +440,7 @@ class PurchaseTestFixtures extends Fixture implements DependentFixtureInterface
                         ->setPriceHT(250)
                     )
                 )
+                ->setCreatedAt(new DateTimeImmutable($this->faker->date()))
                 ;
         $manager->persist($purchase);
 
@@ -667,6 +668,7 @@ class PurchaseTestFixtures extends Fixture implements DependentFixtureInterface
                         ->setPriceHT(250)
                     )
                 )
+                ->setCreatedAt(new DateTimeImmutable($this->faker->date()))
                 ;
         $manager->persist($purchase);
 
@@ -894,6 +896,7 @@ class PurchaseTestFixtures extends Fixture implements DependentFixtureInterface
                         ->setPriceHT(250)
                     )
                 )
+                ->setCreatedAt(new DateTimeImmutable($this->faker->date()))
                 ;
         $manager->persist($purchase);
 
@@ -1368,6 +1371,7 @@ class PurchaseTestFixtures extends Fixture implements DependentFixtureInterface
                         ->setPriceHT(250)
                     )
                 )
+                ->setCreatedAt(new DateTimeImmutable($this->faker->date()))
                 ;
         $manager->persist($purchase);
 

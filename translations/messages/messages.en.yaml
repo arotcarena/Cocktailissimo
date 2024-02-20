@@ -102,6 +102,7 @@ customer: Customer
 vat_number: VAT number
 delivery_address: Delivery address
 invoice_address: Invoice address
+quantity: Quantity
 description: Description
 unit_price: Unit price
 vat_rate: VAT rate

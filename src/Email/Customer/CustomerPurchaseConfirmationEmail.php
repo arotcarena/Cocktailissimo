@@ -4,36 +4,53 @@ namespace App\Email\Customer;
 use App\Config\SiteConfig;
 use App\Email\EmailFactory;
 use App\Entity\Purchase;
+use App\Invoice\InvoiceManagement\InvoiceManager;
+use App\Invoice\InvoiceTypes;
 use App\Twig\Runtime\PriceFormaterExtensionRuntime;
 use Symfony\Component\Mime\Email;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use Twig\Environment;
 
 class CustomerPurchaseConfirmationEmail extends EmailFactory
 {
+    public function __construct(
+        Environment $twig, 
+        UrlGeneratorInterface $urlGenerator,
+        TranslatorInterface $translator,
+        private InvoiceManager $invoiceManager,
+        private PriceFormaterExtensionRuntime $priceFormater
+    )
+    {
+
+    }
 
     public function send(Purchase $purchase)
     {
-        // $priceFormater = new PriceFormaterExtensionRuntime;
+        $lang = $purchase->getLang();
 
+        $email = (new Email())
+            ->from(SiteConfig::EMAIL_NOREPLY)
+            ->to($purchase->getCustomerDetail()->getEmail())
+            ->subject($this->translator->trans('purchase_confirmation.subject', [], 'emails', $purchase->getLang()))
+            ->text($this->translator->trans('purchase_confirmation.text', [
+                'amount' => $this->priceFormater->format(
+                                $purchase->getTotalPrice()->getPriceToPay(),
+                                $lang
+                            ),
+                'ref' => $purchase->getRef()
+            ], 'emails', $lang))
+            ->html($this->twig->render('email/customer/purchase_confirmation.html.twig', [
+                'purchase' => $purchase
+            ]));
 
-        // $email = (new Email())
-        //     ->from(SiteConfig::EMAIL_NOREPLY)
-        //     ->to($purchase->getEmail())
-        //     //->cc('cc@example.com')
-        //     //->bcc('bcc@example.com')
-        //     //->replyTo('fabien@example.com')
-        //     //->priority(Email::PRIORITY_HIGH)
-        //     ->subject($this->translator->trans('purchase_confirmation.subject', [], 'emails', $purchase->getLang()))
-        //     ->text($this->translator->trans('purchase_confirmation.text', [
-        //         'amount' => $priceFormater->format(
-        //                         $purchase->getTotalPrice() + $purchase->getShippingInfo()['price']
-        //                     ),
-        //         'ref' => $purchase->getRef()
-        //     ], 'emails', $purchase->getLang()))
-        //     ->html($this->twig->render('email/customer/purchase_confirmation.html.twig', [
-        //         'purchase' => $purchase,
-        //         'isAtHomeDelivery' => $isAtHomeDelivery
-        //     ]));
+        
+        foreach($purchase->getPurchaseVendorGroups() as $purchaseVendorGroup)
+        {
+            $salesInvoice = $this->invoiceManager->getPath($lang, InvoiceTypes::SALES, $purchaseVendorGroup->getSalesInvoiceNumber());
+            $email->attachFromPath($salesInvoice);
+        }
 
-        // $this->sendEmail($email);
+        $this->sendEmail($email);
     }
 }

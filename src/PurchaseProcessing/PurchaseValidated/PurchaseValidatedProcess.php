@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Purchase;
 use App\FinancialOperations\PaymentVentilator;
 use App\Helper\DateTimeGenerator;
-use App\Invoice\InvoiceCreation\PurchaseInvoicesHandler;
+use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\Service\Sendcloud\SendcloudService;
 use App\TrafficAnalytics\Counter\ProductSalesCounter;
