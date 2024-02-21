@@ -118,6 +118,12 @@ invoice_number: Facture n° {number}
 identification_number: Numéro Siret
 cocktailissimo_rcs_line: SAS Cocktailissimo, immatriculée au RCS de Dax sous le numéro 978 536 415, au capital social de 1 000,00 €
 
+contact_info: Informations de contact
+purchase_detail: Détail de la commande
+total: Total
+delivered_time: Livré en {count_hours}h
+reference: Référence
+
 close: Fermer
 see_more: Voir plus
 see_less: Voir moins

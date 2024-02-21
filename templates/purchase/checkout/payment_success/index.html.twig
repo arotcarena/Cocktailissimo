@@ -98,7 +98,7 @@
                     <div class="payment-success-separator"></div>
 
                     <li class="payment-success-details-item big-item">
-                        <div class="details-item-title">Adresse de livraison</div>
+                        <div class="details-item-title">{{ 'delivery_address' | trans }}</div>
                         <div class="details-item-body">
                             {{ include('UI/_address.html.twig', {address: purchase.deliveryDetail}) }}
                         </div>
@@ -107,7 +107,7 @@
                     <div class="payment-success-separator"></div>
 
                     <li class="payment-success-details-item big-item">
-                        <div class="details-item-title">Adresse de facturation</div>
+                        <div class="details-item-title">{{ 'invoice_address' | trans }}</div>
                         <div class="details-item-body">
                             {{ include('UI/_address.html.twig', {address: purchase.invoiceDetail}) }}
                         </div>

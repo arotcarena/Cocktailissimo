@@ -9,8 +9,8 @@
 {% block body %}
 
     <div style="margin: 40px 0;">
-        <p style="font-size: 1.1rem;">Votre colis a été expédié !</p>
-        <p style="font-size: 1.1rem;">Ci-dessous le récapitulatif de la commande.</p>
+        <p style="font-size: 1.1rem;">{{ 'purchase.status.sent.title' | trans({}, 'emails', lang) }}</p>
+        <p style="font-size: 1.1rem;">{{ 'purchase.summary.title' | trans({}, 'emails', lang) }}</p>
     </div>
 
     {% include "email/customer/purchaseStatus/_purchase_status_body.html.twig" %}

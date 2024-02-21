@@ -106,7 +106,31 @@ security:
 
 purchase:
   confirmation:
-    subject: Votre commande est validée
-    title: Votre commande est validée
-    subtitle: Nous avons bien reçu votre paiement d'un montant de {amount}. Votre commande va être préparée.
+    subject: Votre commande est validée !
     text: Nous avons bien reçu votre paiement d'un montant de {amount} pour la commande portant la référence {ref}.
+    title: Votre commande est validée !
+  cancelation:
+    subject: Votre commande a été annulée !
+    text: "Votre commande a été annulée. Référence de la commande : {ref}"
+    title: Votre commande a été annulée !
+    info: >
+      Si vous n'êtes pas à l'origine de cette action, <a target="_blank" style="font-weight: 600;" href="{url}">contactez-nous</a> en indiquant le numéro de commande suivant : {ref}.
+  status:
+    sent: 
+      subject: Votre colis a été expédié !
+      text: "Votre colis a été expédié ! Référence de la commande : {ref}"
+      title: Votre colis a été expédié !
+    delivered:
+      subject: Votre colis a été livré !
+      text: "Votre colis a été livré ! Référence de la commande : {ref}"
+      title: Votre colis a été livré !
+  summary:
+    title: Ci-dessous le récapitulatif de la commande.
+  link:
+    account:
+      label: "Suivez l'avancement de la livraison depuis votre compte :"
+      button: "Voir mes commandes"
+    register:
+      label: >
+        Pas encore de compte ? <a style="color: #872307; font-weight: 600; font-size: 1.1em;" href="{url}" target="_blank">Inscrivez-vous</a> pour suivre vos commandes.
+

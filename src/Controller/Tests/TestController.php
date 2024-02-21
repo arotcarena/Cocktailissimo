@@ -97,6 +97,7 @@ class TestController extends AbstractController
     public function purchaseConfirmationEmail(PurchaseRepository $purchaseRepository)
     {
         $purchase = $purchaseRepository->findOneBy([]);
+        $purchase->setLang('fr');
 
         return $this->render('email/customer/purchase_confirmation.html.twig', [
             'purchase' => $purchase
@@ -117,6 +118,7 @@ class TestController extends AbstractController
     public function purchaseCancelation(PurchaseRepository $purchaseRepository)
     {
         $purchase = $purchaseRepository->findOneBy([]);
+        $purchase->setLang('fr');
 
         return $this->render('email/customer/purchase_cancelation.html.twig', [
             'purchase' => $purchase

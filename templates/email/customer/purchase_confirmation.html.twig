@@ -9,8 +9,8 @@
 {% block body %}
 
     <div style="margin: 40px 0;">
-        <p style="font-size: 1.1rem;">Votre commande est validée !</p>
-        <p style="font-size: 1.1rem;">Ci-dessous le récapitulatif de la commande.</p>
+        <p style="font-size: 1.1rem;">{{ 'purchase.confirmation.title' | trans({}, 'emails', lang) }}</p>
+        <p style="font-size: 1.1rem;">{{ 'purchase.summary.title' | trans({}, 'emails', lang) }}</p>
     </div>
 
     {{ include('email/customer/parts/_purchase_customer_infos.html.twig', {purchase, lang}) }}
