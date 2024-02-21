@@ -1,0 +1,21 @@
+<div style="margin: 40px 0;">
+    <h2 style="font-size: 1.5em; font-weight: 600;">Informations de contact</h2>
+    {% set customerDetail = purchase.customerDetail %}
+    {% if customerDetail.company %}
+        <div style="margin: 5px 0;">{{ customerDetail.company }}</div>
+    {% else %}
+        <div style="text-transform: capitalize; margin: 5px 0;">{{ customerDetail.civility | trans({}, 'configs', lang) }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}</div>
+    {% endif %}
+    <div style="margin: 5px 0;">{{ customerDetail.email }}</div>
+    <div style="margin: 5px 0;">{{ customerDetail.phone }}</div>
+</div>
+
+<div style="margin: 40px 0;">
+    <h2 style="font-size: 1.5em; font-weight: 600;">Adresse de livraison</h2>
+    {{ include('email/UI/_address.html.twig', {address: purchase.deliveryDetail, lang}) }}
+</div>
+
+<div style="margin: 40px 0;">
+    <h2 style="font-size: 1.5em; font-weight: 600;">Adresse de facturation</h2>
+    {{ include('email/UI/_address.html.twig', {address: purchase.invoiceDetail, lang}) }}
+</div>

@@ -4,67 +4,20 @@
 
 {% block title %}{{ 'purchase.confirmation.title' | trans({}, 'emails', lang) }}{% endblock %}
 
+{% block h1 %}{{ 'purchase.confirmation.title' | trans({}, 'emails', lang) }}{% endblock %}
+
 {% block body %}
-    <h1 style="font-size: 1.4em;">{{ 'purchase.confirmation.title' | trans({}, 'emails', lang) }}</h1>
 
     <div style="margin: 40px 0;">
-        <p style="font-size: 1.1em;">Merci pour votre commande. Voici le récapitulatif.</p>
+        <p style="font-size: 1.1rem;">Votre commande est validée !</p>
+        <p style="font-size: 1.1rem;">Ci-dessous le récapitulatif de la commande.</p>
     </div>
 
-    <div style="margin: 40px 0;">
-        <h2 style="font-size: 1.5em; font-weight: 600;">Informations de contact</h2>
-        {% set customerDetail = purchase.customerDetail %}
-        {% if customerDetail.company %}
-            <div style="margin: 5px 0;">{{ customerDetail.company }}</div>
-        {% else %}
-            <div style="text-transform: capitalize; margin: 5px 0;">{{ customerDetail.civility | trans({}, 'configs', lang) }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}</div>
-        {% endif %}
-        <div style="margin: 5px 0;">{{ customerDetail.email }}</div>
-        <div style="margin: 5px 0;">{{ customerDetail.phone }}</div>
-    </div>
+    {{ include('email/customer/parts/_purchase_customer_infos.html.twig', {purchase, lang}) }}
 
-    <div style="margin: 40px 0;">
-        <h2 style="font-size: 1.5em; font-weight: 600;">Adresse de livraison</h2>
-        {{ include('email/UI/_address.html.twig', {address: purchase.deliveryDetail, lang}) }}
-    </div>
+    {{ include('email/customer/parts/_purchase_detail.html.twig', {purchase, lang}) }}
 
-
-    <div style="margin: 40px 0;">
-        <h2 style="font-size: 1.5em; font-weight: 600;">Détail de la commande</h2>
-        {% for purchaseVendorGroup in purchase.purchaseVendorGroups %}
-            {{ include('email/customer/_purchase_vendor_group.html.twig', {purchaseVendorGroup, lang}) }}
-        {% endfor %}
-    </div>
-
-    <div style="margin: 40px 0; max-width: 400px; padding: 10px 5px; border: solid 1px rgb(225, 225, 225);">
-        <table>
-            <tbody>
-                <tr>
-                    <td style="padding: 5px 10px; font-weight: 600; text-transform: uppercase; padding-right: 20px;">Total articles</td>
-                    <td style="padding: 5px 10px; font-size: 1.1em;">{{ include('email/UI/_price_show.html.twig', {price: purchase.articlesPrice, lang}) }}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px 10px; font-weight: 600; text-transform: uppercase; padding-right: 20px;">Frais de livraison</td>
-                    <td style="padding: 5px 10px; font-size: 1.1em;">{{ include('email/UI/_price_show.html.twig', {price: purchase.shippingCost, lang}) }}</td>
-                </tr>
-                <tr>
-                    <td style="padding: 5px 10px; font-weight: 600; text-transform: uppercase; padding-right: 20px;">Total</td>
-                    <td style="padding: 5px 10px; font-size: 1.1em;">{{ include('email/UI/_price_show.html.twig', {price: purchase.totalPrice, lang}) }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
- 
-    <div style="margin: 100px 0 20px; font-size: 1.1rem;">
-        <div style="margin: 20px 0;">
-            <div style="margin: 10px 0;">A tout moment retrouvez vos commandes sur votre compte :</div>
-            <a style="color: #009095; text-transform: uppercase; font-weight: 600; font-size: .9em;" href="{{ url('customerAccount_purchase', {_locale: lang}) }}" target="_blank">
-                {{ 'see_my_orders' | trans({}, 'messages', lang) }}
-            </a>
-        </div>
-        <div style="margin: 20px 0;">Pas encore de compte ? <a style="color: #009095; font-weight: 600; font-size: 1.1em;" href="{{ url('customerAccount_purchase', {_locale: lang}) }}" target="_blank">Inscrivez-vous</a> pour voir vos commandes.</div>
-    </div>
+    {{ include('email/customer/parts/_account_purchase_link.html.twig', {lang}) }}
 
 {% endblock %}
 

@@ -22,6 +22,7 @@ use App\Repository\ArticleRepository;
 use App\Repository\PackagingRepository;
 use App\Repository\ProductRepository;
 use App\Repository\PurchaseRepository;
+use App\Repository\PurchaseVendorGroupRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\UserRepository;
 use Bezhanov\Faker\Provider\Commerce;
@@ -98,6 +99,26 @@ class TestController extends AbstractController
         $purchase = $purchaseRepository->findOneBy([]);
 
         return $this->render('email/customer/purchase_confirmation.html.twig', [
+            'purchase' => $purchase
+        ]);
+    }
+
+    #[Route('/tests/purchase_status_sent_email')]
+    public function purchaseStatusSentEmail(PurchaseVendorGroupRepository $purchaseVendorGroupRepository)
+    {
+        $purchaseVendorGroup = $purchaseVendorGroupRepository->findOneBy([]);
+
+        return $this->render('email/customer/purchaseStatus/sent_status.html.twig', [
+            'purchaseVendorGroup' => $purchaseVendorGroup
+        ]);
+    }
+
+    #[Route('/tests/purchase_cancelation')]
+    public function purchaseCancelation(PurchaseRepository $purchaseRepository)
+    {
+        $purchase = $purchaseRepository->findOneBy([]);
+
+        return $this->render('email/customer/purchase_cancelation.html.twig', [
             'purchase' => $purchase
         ]);
     }

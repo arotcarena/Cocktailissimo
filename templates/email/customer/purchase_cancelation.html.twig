@@ -1,0 +1,17 @@
+{% extends "email/base.html.twig" %}
+
+{% set lang = purchase.lang %}
+
+{% block title %}{{ 'purchase.cancelation.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block h1 %}{{ 'purchase.cancelation.title' | trans({}, 'emails', lang) }}{% endblock %}
+
+{% block body %}
+
+    <div style="margin: 40px 0;">
+        <p style="font-size: 1.1rem;">Une commande a été annulée !</p>
+        <p style="font-size: 1.1rem;">Référence : {{ purchase.ref }}</p>
+        <p style="font-size: 1.1rem;">Si vous n'êtes pas à l'origine de cette action, <a target="_blank" href="{{ url('contact_index') }}">contactez-nous</a> en indiquant le numéro de commande suivant : {{ purchase.ref }}.</p>
+    </div>
+
+{% endblock %}
