@@ -97,7 +97,7 @@ class TestController extends AbstractController
     {
         $purchase = $purchaseRepository->findOneBy([]);
 
-        return $this->render('admin/email/purchase/purchase_confirmation.html.twig', [
+        return $this->render('email/customer/purchase_confirmation.html.twig', [
             'purchase' => $purchase
         ]);
     }

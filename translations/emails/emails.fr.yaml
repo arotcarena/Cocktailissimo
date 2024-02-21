@@ -103,3 +103,10 @@ security:
       title: Créez votre mot de passe
       message: "Votre compte est créé ! Pour pouvoir y accéder vous devez initialiser votre mot de passe en cliquant sur le bouton ci-dessous :" 
       link: Créer mon mot de passe
+
+purchase:
+  confirmation:
+    subject: Votre commande est validée
+    title: Votre commande est validée
+    subtitle: Nous avons bien reçu votre paiement d'un montant de {amount}. Votre commande va être préparée.
+    text: Nous avons bien reçu votre paiement d'un montant de {amount} pour la commande portant la référence {ref}.

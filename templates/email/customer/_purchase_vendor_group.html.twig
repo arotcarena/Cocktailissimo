@@ -1,0 +1,25 @@
+<div style="margin: 20px 0;">
+    {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
+    <div style="margin: 5px 0;">Expédié par <strong>{{ vendorDetail.socialName }}</strong></div>
+
+    <table style="margin-left: -5px;">
+        <thead>
+            <tr>
+                <th style="text-align: left; padding: 5px;">Description</th>
+                <th style="text-align: left; padding: 5px;">Quantité</th>
+                <th style="text-align: left; padding: 5px;">Prix unitaire</th>
+                <th style="text-align: left; padding: 5px;">Prix total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for purchaseLine in purchaseVendorGroup.purchaseLines %}
+                <tr>
+                    <td style="text-align: left; padding: 5px 15px;">{{ attribute(purchaseLine.designation, lang) }} {{ attribute(purchaseLine.packagingLabel, lang) }}<br><span style="color: rgb(155, 155, 155);">{{ purchaseLine.publicRef }}</span></td>
+                    <td style="text-align: left; padding: 5px 15px;">{{ purchaseLine.quantity }}</td>
+                    <td style="text-align: left; padding: 5px 15px;">{{ include('email/UI/_price_show.html.twig', {price: purchaseLine.unitPrice, lang}) }}</td>
+                    <td style="text-align: left; padding: 5px 15px;">{{ include('email/UI/_price_show.html.twig', {price: purchaseLine.totalPrice, lang}) }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

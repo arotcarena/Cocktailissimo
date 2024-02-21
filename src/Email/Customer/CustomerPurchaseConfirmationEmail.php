@@ -32,13 +32,13 @@ class CustomerPurchaseConfirmationEmail extends EmailFactory
         $email = (new Email())
             ->from(SiteConfig::EMAIL_NOREPLY)
             ->to($purchase->getCustomerDetail()->getEmail())
-            ->subject($this->translator->trans('purchase_confirmation.subject', [], 'emails', $purchase->getLang()))
-            ->text($this->translator->trans('purchase_confirmation.text', [
-                'amount' => $this->priceFormater->format(
+            ->subject($this->translator->trans('purchase.confirmation.subject', [], 'emails', $purchase->getLang()))
+            ->text($this->translator->trans('purchase.confirmation.text', [
+                '{amount}' => $this->priceFormater->format(
                                 $purchase->getTotalPrice()->getPriceToPay(),
                                 $lang
                             ),
-                'ref' => $purchase->getRef()
+                '{ref}' => $purchase->getRef()
             ], 'emails', $lang))
             ->html($this->twig->render('email/customer/purchase_confirmation.html.twig', [
                 'purchase' => $purchase

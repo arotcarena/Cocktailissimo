@@ -1,0 +1,8 @@
+<div style="margin: 10px 0;">
+    <div style="margin: 5px 0;">{{ address.lineOne }}</div>
+    {% if address.lineTwo %}
+        <div style="margin: 5px 0;">{{ address.lineTwo }}</div>
+    {% endif %}
+    <div style="margin: 5px 0;">{{ address.postcode }} {{ address.city }}</div>
+    <div style="margin: 5px 0;">{{ address.country | trans({}, 'countries', lang) }} {{ address.country }}{% if address.state %} ({{ address.state }}){% endif %}</div>
+</div>

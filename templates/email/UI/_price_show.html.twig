@@ -1,0 +1,25 @@
+{% if price.showType == 'show_price_ht' %}
+    <span {% if price.payType != 'pay_price_ht' %}style="color: rgb(155, 155, 155);"{% endif %}>{{ price.priceHT | price_format(lang) }}</span>
+{% elseif price.showType == 'show_price_ttc' %}
+    <span {% if price.payType != 'pay_price_ttc' %}style="color: rgb(155, 155, 155);"{% endif %}>{{ price.priceTTC | price_format(lang) }}</span>
+{% else %}
+    {% if price.payType == 'pay-price_ttc' %}
+        <div>
+            <div>
+                <span>{{ price.priceTTC | price_format(lang) }}</span><span style="font-size: .8em; text-transform: uppercase; margin-left: 10px;">{{ 'ttc' | trans({}, 'messages', lang) }}</span>
+            </div>
+            <div style="color: rgb(155, 155, 155);">
+                <span>{{ price.priceHT | price_format(lang) }}</span><span style="font-size: .8em; text-transform: uppercase; margin-left: 10px;">{{ 'ht' | trans({}, 'messages', lang) }}</span>
+            </div>
+        </div>
+    {% else %}
+        <div>
+            <div>
+                <span>{{ price.priceHT | price_format(lang) }}</span><span style="font-size: .8em; text-transform: uppercase; margin-left: 10px;">{{ 'ht' | trans({}, 'messages', lang) }}</span>
+            </div>
+            <div style="color: rgb(155, 155, 155);">
+                <span>{{ price.priceTTC | price_format(lang) }}</span><span style="font-size: .8em; text-transform: uppercase; margin-left: 10px;">{{ 'ttc' | trans({}, 'messages', lang) }}</span>
+            </div>
+        </div>
+    {% endif %}
+{% endif %}

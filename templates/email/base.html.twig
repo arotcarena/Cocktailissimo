@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app.request.locale }}">
+<html lang="{{ lang ?? app.request.locale }}">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,7 +20,7 @@
 
     {% block signature %}
         <div style="margin-top: 60px;">
-            <p style="font-style: italic;">{{ 'see_you_soon' | trans({}, 'emails', lang) }}</p>
+            <p style="font-style: italic;">{{ 'see_you_soon' | trans({}, 'emails', lang ?? app.request.locale) }}</p>
             <img src="http://localhost:8000/img/logo/logo.png" style="width: 150px; height: auto; display: block;" alt="Cocktailissimo logo">
         </div>
     {% endblock %}
