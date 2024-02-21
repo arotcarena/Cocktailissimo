@@ -8,9 +8,9 @@ use Symfony\Component\Mime\Email;
 
 class CustomerPurchaseStatusEmail extends EmailFactory
 {
-    public function send(PurchaseVendorGroup $purchaseVendorGroup, string $newStatus): void
+    public function send(PurchaseVendorGroup $purchaseVendorGroup): void
     {
-        switch($newStatus) 
+        switch($purchaseVendorGroup->getShippingInfo()->getStatus()) 
         {
             case SiteConfig::SHIPPING_STATUS_SENT:
                 $this->sendEmail($this->createSentStatusEmail($purchaseVendorGroup));

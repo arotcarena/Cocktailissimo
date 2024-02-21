@@ -5,7 +5,7 @@
     <div class="text">
         <div class="text-line ws-nowrap">{{ shippingInfo.name }}</div>
         {% if shippingInfo.leadTimeHours %}
-            <div class="text-line mute">{{ 'delivered_time' | trans({count_hours: shippingInfo.leadTimeHours}, 'messages', app.request.locale) }}</div>
+            <div class="text-line mute">{{ 'delivered_time' | trans({count_hours: shippingInfo.leadTimeHours}) }}</div>
         {% endif %}
     </div>
     <div class="right ws-nowrap">

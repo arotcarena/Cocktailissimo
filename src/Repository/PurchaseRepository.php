@@ -72,14 +72,20 @@ class PurchaseRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param User $user
+     * @param string $email
+     * @param int $currentPage
+     * @param int $perPage
      * @return PaginationInterface
      */
-    public function findPaginatedByUser(User $user, $currentPage = 1, $perPage = 5)
+    public function findPaginatedByCustomerEmail($email, $currentPage = 1, $perPage = 5)
     {
         $query = $this->createQueryBuilder('pur')
-                            ->andWhere('pur.user = :user')
-                            ->setParameter('user', $user)
+                            ->select('pur', 'vg', 'pl')
+                            ->join('pur.customerDetail', 'cd')
+                            ->leftJoin('pur.purchaseVendorGroups', 'vg')
+                            ->leftJoin('vg.purchaseLines', 'pl')
+                            ->andWhere('cd.email = :email')
+                            ->setParameter('email', $email)
                             ->andWhere('pur.status != :status')
                             ->setParameter('status', SiteConfig::STATUS_PENDING)
                             ->orderBy('pur.createdAt', 'DESC')

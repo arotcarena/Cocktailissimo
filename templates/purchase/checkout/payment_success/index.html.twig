@@ -25,11 +25,11 @@
     <div class="breadcrumb">
         <a href={{ path('home', {_locale: app.request.locale}) }} class="breadcrumb-home-link">{{ 'home' | trans }}</a>
         >
-        <span class="breadcrumb-item">Récapitulatif de la commande</span>
+        <span class="breadcrumb-item">{{ 'purchase_summary' | trans }} </span>
     </div>
 
     <div class="payment-success">
-        <h1>Votre commande</h1>
+        <h1>{{ 'your_purchase' | trans }}</h1>
 
         <div class="payment-success-wrapper">
             <div class="payment-success-summary">
@@ -46,7 +46,7 @@
                     </ul>
                     <div class="cart-summary-footer">
                         <div class="cart-total-line">
-                            <span>Total articles</span>
+                            <span>{{ 'total_articles' | trans }}</span>
                             <span class="totalPrice">
                                 {{ include('UI/_price_show.html.twig', {
                                     price: purchase.articlesPrice
@@ -54,7 +54,7 @@
                             </span>
                         </div>
                         <div class="cart-total-line">
-                            <span>Livraison</span>
+                            <span>{{ 'delivery' | trans }}</span>
                             <span class="shippingCost">
                                 {{ include('UI/_price_show.html.twig', {
                                     price: purchase.shippingCost
@@ -63,7 +63,7 @@
                         </div>
                         <div class="cart-summary-separator"></div>
                         <div class="cart-total-line main">
-                            <span>Total</span>
+                            <span>{{ 'total' | trans }}</span>
                             <span class="totalPrice">
                                 {{ include('UI/_price_show.html.twig', {
                                     price: purchase.totalPrice
@@ -73,20 +73,20 @@
                     </div>
                 </div>
                 <div class="payment-success-footer">
-                    <div class="payment-success-footer-item">Votre paiement est validé.</div>
-                    <div class="payment-success-footer-item">Votre commande va être préparée.</div>
-                    <div class="payment-success-footer-item">Pour toute question ou information, veuillez nous contacter par email : <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, en indiquant la référence suivante : {{ purchase.ref }}</div>
+                    <div class="payment-success-footer-item">{{ 'info.payment_validated' | trans }}</div>
+                    <div class="payment-success-footer-item">{{ 'info.order_preparing' | trans }}</div>
+                    <div class="payment-success-footer-item">{{ 'info.for_info_contact_us' | trans({'{ref}': purchase.ref}) }}</div>
                 </div>
             </div>
             <div class="payment-success-details">
-                <div class="payment-success-subtitle">Détails</div>
+                <div class="payment-success-subtitle">{{ 'details' | trans }}</div>
                 <ul class="payment-success-details-list">
-                    <li class="payment-success-details-item">Référence : {{ purchase.ref }}</li>
+                    <li class="payment-success-details-item">{{ 'reference' | trans }} : {{ purchase.ref }}</li>
 
                     <div class="payment-success-separator"></div>
 
                     <li class="payment-success-details-item big-item">
-                        <div class="details-item-title">Vos informations</div>
+                        <div class="details-item-title">{{ 'your_details' | trans }}</div>
                         {% set customerDetail = purchase.customerDetail %}
                         <div class="details-item-body">
                             <div class="capitalize">{{ customerDetail.civility | trans({}, 'configs') }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}</div>

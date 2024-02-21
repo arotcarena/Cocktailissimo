@@ -87,4 +87,13 @@ class PurchaseRepositoryTest extends KernelTestCase
         $this->assertCount(1, $purchases);
         $this->assertEquals('purchase_with_2_purchaseLines@mail.com', $purchases[0]->getCustomerDetail()->getEmail());
     }
+
+    //findPaginatedByCustomerEmail
+    public function testFindPaginatedByCustomerEmail()
+    {
+        $pagination = $this->purchaseRepository->findPaginatedByCustomerEmail('purchase_with_2_purchaseLines@mail.com');
+
+        $this->assertCount(1, $pagination->getItems());
+        $this->assertEquals('purchase_with_2_purchaseLines@mail.com', $pagination->getItems()[0]->getCustomerDetail()->getEmail());
+    }
 }

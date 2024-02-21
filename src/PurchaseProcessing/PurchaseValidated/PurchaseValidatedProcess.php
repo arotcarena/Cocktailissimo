@@ -48,7 +48,8 @@ class PurchaseValidatedProcess extends AbstractController
         $this->purchaseValidatedNotifier->notify($purchase);
         
         //on annonce les parcels à sendcloud
-        $parcels = $this->sendcloudService->announceParcels($purchase);
+        //et on stocke les ids dans purchase.purchaseVendorGroup.shippingInfo.parcelId
+        $this->sendcloudService->announceParcels($purchase);
 
         //on ajoute les sales aux products concernés
         $this->productSalesCounter->countSales($purchase);

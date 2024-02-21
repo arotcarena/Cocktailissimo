@@ -34,6 +34,10 @@ info:
   incomplete_stripe_verification: The entered information has been saved, come back whenever you want to finish entering your information and start selling your products.
   on_checkout_force_country: Following the change of delivery country, prices may have changed.
   admin_manual_purchase_email_sent: We have received the details of your order and will contact you as soon as possible to finalize it.
+  for_info_contact_us: >
+    'For any questions or information, please contact us by email: <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, indicating the following reference: {ref}.'
+  payment_validated: Your payment has been validated.
+  order_preparing: Your order is being prepared.
 
 success:
   stripe_verification: Congratulations, your account is validated!
@@ -118,6 +122,15 @@ invoice_number: Invoice No. {number}
 identification_number: Identification number
 cocktailissimo_rcs_line: SAS Cocktailissimo, registered with the RCS of Dax under number 978 536 415, with a share capital of €1,000.00
 
+contact_info: Contact Information
+purchase_detail: Purchase Detail
+total: Total
+delivered_time: Delivered in {count_hours}h
+reference: Reference
+purchase_summary: Purchase Summary
+your_purchase: Your Purchase
+details: Details
+your_details: Your Details
 
 close: Close
 see_more: Show More

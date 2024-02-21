@@ -103,3 +103,33 @@ security:
       title: Create your password
       message: "Your account is created! To access it, you need to initialize your password by clicking the button below:" 
       link: Create my password
+
+purchase:
+  confirmation:
+    subject: Your order has been validated!
+    text: We have received your payment of {amount} for the order with reference {ref}.
+    title: Your order has been validated!
+  cancelation:
+    subject: Your order has been canceled!
+    text: "Your order has been canceled. Order reference: {ref}"
+    title: Your order has been canceled!
+    info: >
+      If you did not initiate this action, <a target="_blank" style="font-weight: 600;" href="{url}">contact us</a> indicating the following order number: {ref}.
+  status:
+    sent: 
+      subject: Your package has been shipped!
+      text: "Your package has been shipped! Order reference: {ref}"
+      title: Your package has been shipped!
+    delivered:
+      subject: Your package has been delivered!
+      text: "Your package has been delivered! Order reference: {ref}"
+      title: Your package has been delivered!
+  summary:
+    title: Below is the summary of the order.
+  link:
+    account:
+      label: "Track the delivery progress from your account:"
+      button: "View My Orders"
+    register:
+      label: >
+        Don't have an account yet? <a style="color: #872307; font-weight: 600; font-size: 1.1em;" href="{url}" target="_blank">Sign up</a> to track your orders.

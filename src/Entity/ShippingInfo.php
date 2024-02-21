@@ -14,6 +14,12 @@ class ShippingInfo
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\OneToOne(mappedBy: 'shippingInfo', cascade: ['persist', 'remove'])]
+    private ?PurchaseVendorGroup $purchaseVendorGroup = null;
+    
+    #[ORM\Column(nullable: true)]
+    private ?int $parcelId = null;
+
     #[ORM\Column]
     private ?int $shippingMethodId = null;
 
@@ -152,6 +158,35 @@ class ShippingInfo
     public function setPrice(CustomPrice $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getPurchaseVendorGroup(): ?PurchaseVendorGroup
+    {
+        return $this->purchaseVendorGroup;
+    }
+
+    public function setPurchaseVendorGroup(PurchaseVendorGroup $purchaseVendorGroup): static
+    {
+        // set the owning side of the relation if necessary
+        if ($purchaseVendorGroup->getShippingInfo() !== $this) {
+            $purchaseVendorGroup->setShippingInfo($this);
+        }
+
+        $this->purchaseVendorGroup = $purchaseVendorGroup;
+
+        return $this;
+    }
+
+    public function getParcelId(): ?int
+    {
+        return $this->parcelId;
+    }
+
+    public function setParcelId(?int $parcelId): static
+    {
+        $this->parcelId = $parcelId;
 
         return $this;
     }

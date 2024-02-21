@@ -34,6 +34,10 @@ info:
   incomplete_stripe_verification: Les informations saisies ont été sauvegardées, revenez quand vous voulez pour finir d'entrer vos informations et pouvoir commencer à vendre vos produits.
   on_checkout_force_country: Suite à la modification du pays de livraison, les prix sont susceptibles d'avoir changé.
   admin_manual_purchase_email_sent: Nous avons bien reçu les détails de votre commande, et allons vous recontacter au plus vite pour la finaliser.
+  for_info_contact_us: >
+    'Pour toute question ou information, veuillez nous contacter par email : <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, en indiquant la référence suivante : {ref}.'
+  payment_validated: Votre paiement est validé.
+  order_preparing: Votre commande va être préparée.
 
 success:
   stripe_verification: Félicitations, votre compte est validé !
@@ -123,6 +127,10 @@ purchase_detail: Détail de la commande
 total: Total
 delivered_time: Livré en {count_hours}h
 reference: Référence
+purchase_summary: Récapitulatif de la commande
+your_purchase: Votre commande
+details: Détails
+your_details: Vos Informations
 
 close: Fermer
 see_more: Voir plus

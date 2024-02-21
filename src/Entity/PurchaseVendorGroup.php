@@ -25,8 +25,8 @@ class PurchaseVendorGroup
 
     #[ORM\OneToMany(mappedBy: 'purchaseVendorGroup', targetEntity: PurchaseLine::class, orphanRemoval: true, cascade: ['persist', 'remove'])]
     private Collection $purchaseLines;
-
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    
+    #[ORM\OneToOne(inversedBy: 'purchaseVendorGroup', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?ShippingInfo $shippingInfo = null;
 
@@ -118,18 +118,6 @@ class PurchaseVendorGroup
                 $purchaseLine->setPurchaseVendorGroup(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getShippingInfo(): ?ShippingInfo
-    {
-        return $this->shippingInfo;
-    }
-
-    public function setShippingInfo(ShippingInfo $shippingInfo): static
-    {
-        $this->shippingInfo = $shippingInfo;
 
         return $this;
     }
@@ -226,6 +214,19 @@ class PurchaseVendorGroup
     public function setCommissionInvoiceNumber(?int $commissionInvoiceNumber): static
     {
         $this->commissionInvoiceNumber = $commissionInvoiceNumber;
+
+        return $this;
+    }
+
+    public function getShippingInfo(): ?ShippingInfo
+    {
+        return $this->shippingInfo;
+    }
+
+    public function setShippingInfo(ShippingInfo $shippingInfo): static
+    {
+        $this->shippingInfo = $shippingInfo;
+        $shippingInfo->setPurchaseVendorGroup($this);
 
         return $this;
     }

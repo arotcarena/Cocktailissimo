@@ -33,7 +33,7 @@ class ApiPurchaseControllerTest extends FunctionalTest
     }
 
     //findPaginatedLight
-    public function testFindPaginatedLightReturnOnlyPurchasesThatBelongToCurrentUser()
+    public function testFindPaginatedLightReturnOnlyPurchasesThatHaveCurrentCustomerEmail()
     {
         $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
         $this->loginUser($user);

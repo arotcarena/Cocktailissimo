@@ -103,3 +103,33 @@ security:
       title: Crea tu contraseña
       message: "¡Tu cuenta está creada! Para acceder a ella, debes inicializar tu contraseña haciendo clic en el botón a continuación:" 
       link: Crear mi contraseña
+
+purchase:
+  confirmation:
+    subject: ¡Su pedido ha sido validado!
+    text: Hemos recibido su pago por un monto de {amount} para el pedido con la referencia {ref}.
+    title: ¡Su pedido ha sido validado!
+  cancelation:
+    subject: ¡Su pedido ha sido cancelado!
+    text: "Su pedido ha sido cancelado. Referencia del pedido: {ref}"
+    title: ¡Su pedido ha sido cancelado!
+    info: >
+      Si no inició esta acción, <a target="_blank" style="font-weight: 600;" href="{url}">contáctenos</a> indicando el siguiente número de pedido: {ref}.
+  status:
+    sent: 
+      subject: ¡Su paquete ha sido enviado!
+      text: "¡Su paquete ha sido enviado! Referencia del pedido: {ref}"
+      title: ¡Su paquete ha sido enviado!
+    delivered:
+      subject: ¡Su paquete ha sido entregado!
+      text: "¡Su paquete ha sido entregado! Referencia del pedido: {ref}"
+      title: ¡Su paquete ha sido entregado!
+  summary:
+    title: A continuación se muestra el resumen del pedido.
+  link:
+    account:
+      label: "Siga el progreso de la entrega desde su cuenta:"
+      button: "Ver Mis Pedidos"
+    register:
+      label: >
+        ¿Todavía no tiene una cuenta? <a style="color: #872307; font-weight: 600; font-size: 1.1em;" href="{url}" target="_blank">Regístrese</a> para hacer seguimiento de sus pedidos.

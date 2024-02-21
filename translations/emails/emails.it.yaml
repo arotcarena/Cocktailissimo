@@ -104,3 +104,33 @@ security:
       title: Crea la tua password
       message: "Il tuo account è stato creato! Per poterci accedere, inizializza la tua password cliccando sul pulsante qui sotto:" 
       link: Crea la mia password
+
+purchase:
+  confirmation:
+    subject: Il tuo ordine è stato convalidato!
+    text: Abbiamo ricevuto il tuo pagamento di {amount} per l'ordine con riferimento {ref}.
+    title: Il tuo ordine è stato convalidato!
+  cancelation:
+    subject: Il tuo ordine è stato annullato!
+    text: "Il tuo ordine è stato annullato. Riferimento dell'ordine: {ref}"
+    title: Il tuo ordine è stato annullato!
+    info: >
+      Se non hai avviato tu questa azione, <a target="_blank" style="font-weight: 600;" href="{url}">contattaci</a> indicando il seguente numero d'ordine: {ref}.
+  status:
+    sent: 
+      subject: Il tuo pacchetto è stato spedito!
+      text: "Il tuo pacchetto è stato spedito! Riferimento dell'ordine: {ref}"
+      title: Il tuo pacchetto è stato spedito!
+    delivered:
+      subject: Il tuo pacchetto è stato consegnato!
+      text: "Il tuo pacchetto è stato consegnato! Riferimento dell'ordine: {ref}"
+      title: Il tuo pacchetto è stato consegnato!
+  summary:
+    title: Di seguito il riepilogo dell'ordine.
+  link:
+    account:
+      label: "Segui il progresso della consegna dal tuo account:"
+      button: "Visualizza i miei ordini"
+    register:
+      label: >
+        Non hai ancora un account? <a style="color: #872307; font-weight: 600; font-size: 1.1em;" href="{url}" target="_blank">Iscriviti</a> per seguire i tuoi ordini.

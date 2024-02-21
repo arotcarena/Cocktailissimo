@@ -34,6 +34,10 @@ info:
   incomplete_stripe_verification: Le informazioni inserite sono state salvate, torna quando vuoi per completare l'inserimento delle informazioni e iniziare a vendere i tuoi prodotti.
   on_checkout_force_country: A seguito della modifica del paese di consegna, i prezzi potrebbero essere cambiati.
   admin_manual_purchase_email_sent: Abbiamo ricevuto i dettagli del tuo ordine e ti contatteremo il prima possibile per completarlo.
+  for_info_contact_us: >
+    'Per qualsiasi domanda o informazione, contattaci via email: <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, indicando il seguente riferimento: {ref}.'
+  payment_validated: Il tuo pagamento è stato convalidato.
+  order_preparing: Il tuo ordine è in fase di preparazione.
 
 success:
   stripe_verification: Congratulazioni, il tuo account è stato convalidato!
@@ -118,6 +122,15 @@ invoice_number: Fattura n. {number}
 identification_number: Numero di identificazione
 cocktailissimo_rcs_line: SAS Cocktailissimo, registrata presso il RCS di Dax con il numero 978 536 415, con un capitale sociale di €1.000,00
 
+contact_info: Informazioni di contatto
+purchase_detail: Dettaglio dell'acquisto
+total: Totale
+delivered_time: Consegnato in {count_hours}h
+reference: Riferimento
+purchase_summary: Riepilogo dell'acquisto
+your_purchase: Il tuo acquisto
+details: Dettagli
+your_details: I tuoi dettagli
 
 close: Chiudi
 see_more: Mostra di più

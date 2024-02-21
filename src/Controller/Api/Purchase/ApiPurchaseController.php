@@ -12,9 +12,10 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
-
+#[IsGranted('ROLE_USER')]
 class ApiPurchaseController extends AbstractController
 {
     public function __construct(
@@ -38,7 +39,10 @@ class ApiPurchaseController extends AbstractController
         $perPage = $request->query->get('limit', 5);
         $currentPage = $request->query->get('page', 1);
 
-        $pagination = $this->purchaseRepository->findPaginatedByUser($this->getUser(), $currentPage, $perPage);
+        /** @var User */
+        $user = $this->getUser();
+
+        $pagination = $this->purchaseRepository->findPaginatedByCustomerEmail($user->getEmail(), $currentPage, $perPage);
         
         $maxPage = ceil($pagination->getTotalItemCount() / $perPage);
         return $this->json([

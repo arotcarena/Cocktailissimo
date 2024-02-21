@@ -38,16 +38,19 @@ class SendcloudService
 
     public function announceParcels(Purchase $purchase)
     {
-        $parcels = $this->parcelsCreator->createParcels($purchase);
-
-        $returnParcels = [];
-        foreach($parcels as $parcel)
+        foreach($purchase->getPurchaseVendorGroups() as $index => $purchaseVendorGroup)
         {
-            $data = $this->curlPost('https://panel.sendcloud.sc/api/v2/parcels?errors=verbose-carrier', [
-                'parcel' => $parcel
+            $parcelData = $this->parcelsCreator->createParcel($purchaseVendorGroup, $index);
+
+            //on envoie parcelData à sendcloud qui nous renvoie l'objet parcel sauvegardé contenant l'id
+            $parcel = $this->curlPost('https://panel.sendcloud.sc/api/v2/parcels?errors=verbose-carrier', [
+                'parcel' => $parcelData
             ]);
-            $returnParcels[] = $data;
+            //on ajoute cet id au shippingInfo : il permettra de retrouver le bon shippingInfo lors des mises à jour du parcel
+            if($parcel)
+            {
+                $purchaseVendorGroup->getShippingInfo()->setParcelId($parcel->id);
+            }
         }
-        return $returnParcels;
     }
 }

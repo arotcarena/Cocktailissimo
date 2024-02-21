@@ -2,6 +2,8 @@
 namespace App\Tests\UnitAndIntegration\Service\Sendcloud;
 
 use App\Entity\Purchase;
+use App\Entity\PurchaseVendorGroup;
+use App\Entity\ShippingInfo;
 use App\HTTP\CurlRequest;
 use App\Service\Sendcloud\Parcel\ParcelsCreator;
 use App\Service\Sendcloud\SendcloudService;
@@ -29,34 +31,46 @@ class SendcloudServiceTest extends TestCase
 
     public function testAnnounceParcelsCorrectPostParcels()
     {
-        $purchase = new Purchase;
-        $this->parcelsCreator->expects($this->once())
-                            ->method('createParcels')
-                            ->with($purchase)
-                            ->willReturn(['parcel1', 'parcel2', 'parcel3']);
+        $purchaseVendorGroup1 = (new PurchaseVendorGroup)->setShippingInfo(new ShippingInfo);
+        $purchaseVendorGroup2 = (new PurchaseVendorGroup)->setShippingInfo(new ShippingInfo);
+        $purchaseVendorGroup3 = (new PurchaseVendorGroup)->setShippingInfo(new ShippingInfo);
+        $purchase = (new Purchase)
+                    ->addPurchaseVendorGroup($purchaseVendorGroup1)
+                    ->addPurchaseVendorGroup($purchaseVendorGroup2)
+                    ->addPurchaseVendorGroup($purchaseVendorGroup3)
+                    ;
+
+        $this->parcelsCreator->expects($this->exactly(3))
+                            ->method('createParcel')
+                            ->willReturn(['parcelData']);
 
         $this->curlRequest->expects($this->exactly(3))
                         ->method('post')
-                        ->willReturn('returnParcel1', 'returnParcel2', 'returnParcel3')
+                        ->willReturn((object)['id' => 1], (object)['id' => 2], (object)['id' => 3])
                         ;
         
         $this->sendcloudService->announceParcels($purchase);
     }
-    public function testAnnounceParcelsCorrectReturnPostReturns()
+    public function testAnnounceParcelsCorrectSetParcelIdOnPurchaseVendorGroupShippingInfo()
     {
-        $purchase = new Purchase;
-        $this->parcelsCreator->expects($this->once())
-                            ->method('createParcels')
-                            ->with($purchase)
-                            ->willReturn(['parcel1', 'parcel2', 'parcel3']);
+        $purchaseVendorGroup1 = (new PurchaseVendorGroup)->setShippingInfo(new ShippingInfo);
+        $purchaseVendorGroup2 = (new PurchaseVendorGroup)->setShippingInfo(new ShippingInfo);
+        $purchaseVendorGroup3 = (new PurchaseVendorGroup)->setShippingInfo(new ShippingInfo);
+        $purchase = (new Purchase)
+                    ->addPurchaseVendorGroup($purchaseVendorGroup1)
+                    ->addPurchaseVendorGroup($purchaseVendorGroup2)
+                    ->addPurchaseVendorGroup($purchaseVendorGroup3)
+                    ;
 
         $this->curlRequest->expects($this->exactly(3))
                         ->method('post')
-                        ->willReturn('returnParcel1', 'returnParcel2', 'returnParcel3')
+                        ->willReturn((object)['id' => 1], (object)['id' => 2], (object)['id' => 3])
                         ;
         
-        $return = $this->sendcloudService->announceParcels($purchase);
+        $this->sendcloudService->announceParcels($purchase);
 
-        $this->assertEquals(['returnParcel1', 'returnParcel2', 'returnParcel3'], $return);
+        $this->assertEquals(1, $purchaseVendorGroup1->getShippingInfo()->getParcelId());
+        $this->assertEquals(2, $purchaseVendorGroup2->getShippingInfo()->getParcelId());
+        $this->assertEquals(3, $purchaseVendorGroup3->getShippingInfo()->getParcelId());
     }
 }
