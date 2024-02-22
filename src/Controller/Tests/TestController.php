@@ -93,6 +93,17 @@ class TestController extends AbstractController
         ]);
     }
 
+    #[Route('/tests/admin_purchase_confirmation_email')]
+    public function adminPurchaseConfirmationEmail(PurchaseRepository $purchaseRepository)
+    {
+        $purchase = $purchaseRepository->findOneBy([]);
+        $purchase->setLang('fr');
+
+        return $this->render('admin/email/purchase/purchase_confirmation.html.twig', [
+            'purchase' => $purchase
+        ]);
+    }
+
     #[Route('/tests/purchase_confirmation_email')]
     public function purchaseConfirmationEmail(PurchaseRepository $purchaseRepository)
     {

@@ -15,53 +15,32 @@
     <div class="admin-product-show" style="max-width: 700px;">
         
         {{ include('admin/parts/_show_row.html.twig', {value: purchase.ref, label: 'Réf.', name: 'ref'}) }}
-
-        {% set customerDetail = purchase.customerDetail %}
-        {% set civilState = (customerDetail.civility | trans({}, 'configs', 'fr')) ~ ' ' ~ customerDetail.firstName ~ ' ' ~ customerDetail.lastName %}
-
-        {% if customerDetail.company %}
-            {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.company, label: 'Entreprise', name: 'civilState'}) }}
-        {% endif %}
-        {% if customerDetail.vatNumber %}
-            {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.vatNumber, label: 'Entreprise', name: 'civilState'}) }}
-        {% endif %}
-
-        {{ include('admin/parts/_show_row.html.twig', {value: civilState, label: 'Client', name: 'civilState'}) }}
-        {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.email, label: 'Adresse email', name: 'email'}) }}
-        {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.phone, label: 'Numéro de téléphone', name: 'phone'}) }}
         
-        <div class="admin-product-show-row">
-            <div class="admin-product-show-row-label">Détail de la commande</div>
-            {% for purchaseVendorGroup in purchase.purchaseVendorGroups %}
-                <div style="margin: 40px 0 60px; padding-left: 20px; border-left: solid 4px;">
-                    {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
-                    <p style="font-weight: 600;">{{ vendorDetail.socialName }} - n° siret {{ vendorDetail.identificationNumber }}</p>
-                    {% set shippingInfo = purchaseVendorGroup.shippingInfo %}
-                    <p>
-                        <span>{{ shippingInfo.type | trans({}, 'configs', 'fr') }}</span>
-                        {% if shippingInfo.type == 'shipping_type.relay' %}
-                            {% set relayInfo = shippingInfo.relayInfo %}
-                            <span>
-                                - {{ relayInfo.name }} {{ relayInfo.address.lineOne }} {% if relayInfo.address.lineTwo %} {{ relayInfo.address.lineTwo }}{% endif %} {{ relayInfo.address.postcode }} {{ relayInfo.address.city }} {{ relayInfo.address.country | trans({}, 'countries', 'fr') }}
-                            </span>
-                        {% endif %}
-                    </p>
-                    <p>{{ shippingInfo.carrier }} - {{ shippingInfo.name }} - {{ shippingInfo.price.priceToPay | price_format('fr') }} - {{ shippingInfo.leadTimeHours }}h</p>
-                    <p>Tracking : {{ shippingInfo.tracking }}</p>
-                    <div style="margin: -20px 0;">
-                        {{ include('UI/invoice/_purchase_vendor_group.html.twig', {purchaseVendorGroup, lang: 'fr'}) }}
-                    </div>
-                    {# REACT #}
-                    <div 
-                        class="purchase-shipping-status-updater" 
-                        data-shippinginfoid="{{ shippingInfo.id }}" 
-                        data-currentstatus="{{ shippingInfo.status }}"
-                        >
-                    </div>
-                </div>
-            {% endfor %}
+        {{ include('admin/parts/_show_row.html.twig', {value: (purchase.status | trans({}, 'configs', 'fr') ), label: 'Statut', name: 'status'}) }}
+
+        {{ include('admin/parts/_show_row.html.twig', {value: purchase.createdAt.format('d/m/Y H:i'), label: 'Passée le', name: 'createdAt'}) }}
+
+        <div class="admin-product-show-row" style="display: flex; flex-direction: column; gap: 20px; border: solid 1px rgb(225, 225, 225); padding: 10px; max-width: 450px;">
+            <div class="admin-product-show-row-label">Client</div>
+            {% set customerDetail = purchase.customerDetail %}
+            {% set civilState = (customerDetail.civility | trans({}, 'configs', 'fr')) ~ ' ' ~ customerDetail.firstName ~ ' ' ~ customerDetail.lastName %}
+
+            {% if customerDetail.company %}
+                {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.company, label: 'Entreprise', name: 'civilState'}) }}
+            {% endif %}
+            {% if customerDetail.vatNumber %}
+                {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.vatNumber, label: 'Entreprise', name: 'civilState'}) }}
+            {% endif %}
+
+            {{ include('admin/parts/_show_row.html.twig', {value: civilState, label: 'Nom', name: 'civilState'}) }}
+            {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.email, label: 'Adresse email', name: 'email'}) }}
+            {{ include('admin/parts/_show_row.html.twig', {value: customerDetail.phone, label: 'Numéro de téléphone', name: 'phone'}) }}
+
+            {{ include('admin/parts/_show_row.html.twig', {value: purchase.lang, label: 'Langue', name: 'lang'}) }}
         </div>
 
+
+        
         <div class="admin-product-show-row">
             <div class="admin-product-show-row-label">Adresse de livraison</div>
             <div class="deliveryDetail">
@@ -78,9 +57,161 @@
         </div>
 
 
-        {{ include('admin/parts/_show_row.html.twig', {value: (purchase.status | trans({}, 'configs', 'fr') ), label: 'Statut', name: 'status'}) }}
+        
+        <div class="admin-product-show-row">
+            <div class="admin-product-show-row-label">Détail de la commande</div>
+            {% for purchaseVendorGroup in purchase.purchaseVendorGroups %}
+                <div style="margin: 40px 0 60px; padding-left: 20px; border-left: solid 4px;">
+                    {% set shippingInfo = purchaseVendorGroup.shippingInfo %}
+                    <p style="font-weight: 600;">Colis #ID {{ shippingInfo.parcelId ?? '...' }} / order_number {{ '...' }} (sendcloud)
+                    {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
+                    <p><span style="font-weight: 600;">Vendeur :</span> {{ vendorDetail.socialName }} - n° siret {{ vendorDetail.identificationNumber }}</p>
+                    <div style="margin: -20px 10px;">
+                        {{ include('UI/invoice/_purchase_vendor_group.html.twig', {purchaseVendorGroup, lang: 'fr'}) }}
+                    </div>
+                    <div class="admin-product-show-row">
+                        <div style="font-weight: 600;">Livraison</div>
+                        <p>
+                            <span>{{ shippingInfo.type | trans({}, 'configs', 'fr') }}</span>
+                            {% if shippingInfo.type == 'shipping_type.relay' %}
+                                {% set relayInfo = shippingInfo.relayInfo %}
+                                <span>
+                                    - {{ relayInfo.name }} {{ relayInfo.address.lineOne }} {% if relayInfo.address.lineTwo %} {{ relayInfo.address.lineTwo }}{% endif %} {{ relayInfo.address.postcode }} {{ relayInfo.address.city }} {{ relayInfo.address.country | trans({}, 'countries', 'fr') }}
+                                </span>
+                            {% endif %}
+                        </p>
+                        <p>{{ shippingInfo.carrier }} - {{ shippingInfo.name }} - {{ shippingInfo.price.priceToPay | price_format('fr') }} - {{ shippingInfo.leadTimeHours }}h</p>
+                        <p>Tracking : {{ shippingInfo.tracking }}</p>
+                        <div style="margin: 10px 0;">
+                            <table style="border-collapse: collapse; border: solid 1px rgb(225, 225, 225);">
+                                <thead style="text-align: left; background-color: rgb(245, 245, 245);">
+                                    <tr>
+                                        {% if shippingInfo.sentAt %}
+                                            <th style="padding: 5px 10px;">Envoyé</th>
+                                        {% endif %}
+                                        {% if shippingInfo.deliveredAt %}
+                                            <th style="padding: 5px 10px;">Livré</th>
+                                        {% endif %}
+                                        {% if shippingInfo.canceledAt %}
+                                            <th style="padding: 5px 10px;">Annulé</th>
+                                        {% endif %}
+                                        {% if shippingInfo.returnSentAt %}
+                                            <th style="padding: 5px 10px;">Retour envoyé</th>
+                                        {% endif %}
+                                        {% if shippingInfo.returnDeliveredAt %}
+                                            <th style="padding: 5px 10px;">Retour reçu</th>
+                                        {% endif %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        {% if shippingInfo.sentAt %}
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.sentAt.format('d/m/Y H:i:s') }}</td>
+                                        {% endif %}
+                                        {% if shippingInfo.deliveredAt %}
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.deliveredAt.format('d/m/Y H:i:s') }}</td>
+                                        {% endif %}
+                                        {% if shippingInfo.canceledAt %}
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.canceledAt.format('d/m/Y H:i:s') }}</td>
+                                        {% endif %}
+                                        {% if shippingInfo.returnSentAt %}
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.returnSentAt.format('d/m/Y H:i:s') }}</td>
+                                        {% endif %}
+                                        {% if shippingInfo.returnDeliveredAt %}
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.returnDeliveredAt.format('d/m/Y H:i:s') }}</td>
+                                        {% endif %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {# REACT #}
+                    <div style="display: flex; align-items: center; gap: 10px; margin: 10px 0;">
+                        <div>Statut</div>
+                        <div 
+                            class="purchase-shipping-status-updater" 
+                            data-shippinginfoid="{{ shippingInfo.id }}" 
+                            data-currentstatus="{{ shippingInfo.status }}"
+                            >
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
 
-        {{ include('admin/parts/_show_row.html.twig', {value: purchase.createdAt.format('d/m/Y H:i'), label: 'Passée le', name: 'createdAt'}) }}
+        <div style="margin-top: -40px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 30px;">
+        {% set articlesPrice = purchase.articlesPrice %}
+        {% set totalPrice = purchase.totalPrice %}
+        {% set shippingPrice = purchase.shippingCost %}
+            <table style="padding: 10px; border: solid 1px rgb(225, 225, 225);">
+                <tbody>
+                    {% if totalPrice.payType == 'pay_price_ttc' %}
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">Total articles HT</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ articlesPrice.priceHT | price_format('fr') }}</strong></td>
+                        </tr>  
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">Total articles TTC</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ articlesPrice.priceTTC | price_format('fr') }}</strong></td>
+                        </tr>  
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">Total livraison HT</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ shippingPrice.priceHT | price_format('fr') }}</strong></td>
+                        </tr>   
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">Total livraison TTC</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ shippingPrice.priceTTC | price_format('fr') }}</strong></td>
+                        </tr>  
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>Total HT</strong></td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceHT | price_format('fr') }}</strong></td>
+                        </tr> 
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>Total TTC</strong></td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceTTC | price_format('fr') }}</strong></td>
+                        </tr> 
+                    {% else %}
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">Total articles HT</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ articlesPrice.priceHT | price_format('fr') }}</strong></td>
+                        </tr>  
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">Total livraison HT</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ shippingPrice.priceHT | price_format('fr') }}</strong></td>
+                        </tr>  
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>Total HT</strong></td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceHT | price_format('fr') }}</strong></td>
+                        </tr> 
+                    {% endif %}
+                    <tr>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>Total payé</strong></td>
+                        <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.priceHT | price_format('fr') }}</strong></td>
+                    </tr>  
+                </tbody>
+            </table>
+            {% if totalPrice.payType == 'pay_price_ttc' %}
+                <table style="padding: 10px; border: solid 1px rgb(225, 225, 225);">
+                    <tbody>
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">TVA articles</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ articlesPrice.vatAmount | price_format('fr') }}</strong></td>
+                        </tr>  
+
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;">TVA livraison</td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ shippingPrice.vatAmount | price_format('fr') }}</strong></td>
+                        </tr>  
+
+                        <tr>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>TVA totale</strong></td>
+                            <td style="vertical-align: top; padding: 5px 30px;"><strong>{{ totalPrice.vatAmount | price_format('fr') }}</strong></td>
+                        </tr> 
+                    </tbody>
+                </table> 
+            {% endif %}
+        </div>
+
 
     </div>
 

@@ -40,8 +40,9 @@ class SendcloudService
     {
         foreach($purchase->getPurchaseVendorGroups() as $index => $purchaseVendorGroup)
         {
-            $parcelData = $this->parcelsCreator->createParcel($purchaseVendorGroup, $index);
-
+            $orderNumber = $purchase->getRef() . '-parcel#' . $index;
+            $parcelData = $this->parcelsCreator->createParcel($purchaseVendorGroup, $orderNumber);
+            
             //on envoie parcelData à sendcloud qui nous renvoie l'objet parcel sauvegardé contenant l'id
             $parcel = $this->curlPost('https://panel.sendcloud.sc/api/v2/parcels?errors=verbose-carrier', [
                 'parcel' => $parcelData
@@ -51,6 +52,8 @@ class SendcloudService
             {
                 $purchaseVendorGroup->getShippingInfo()->setParcelId($parcel->id);
             }
+            //on ajoute aussi order_number
+            $purchaseVendorGroup->getShippingInfo()->setOrderNumber($orderNumber);
         }
     }
 }

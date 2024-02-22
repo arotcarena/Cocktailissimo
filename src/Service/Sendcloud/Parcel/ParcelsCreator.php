@@ -18,10 +18,10 @@ class ParcelsCreator
 
     /**
      * @param PurchaseVendorGroup $purchaseVendorGroup
-     * @param integer $index (la position du purchaseVendorGroup au sein de la purchase)
+     * @param $orderNumber (un identifiant unique créé avec la purchase ref + index du parcel)
      * @return array $parcel  (l'objet parcel prêt à être envoyé à sendcloud)
      */
-    public function createParcel(PurchaseVendorGroup $purchaseVendorGroup, int $index): array
+    public function createParcel(PurchaseVendorGroup $purchaseVendorGroup, string $orderNumber): array
     {
         $purchase = $purchaseVendorGroup->getPurchase();
 
@@ -31,8 +31,6 @@ class ParcelsCreator
 
         $fullName = $this->translator->trans($deliveryAddress->getCivility(), [], 'configs', $purchase->getLang()) 
                     . ' ' . $deliveryAddress->getFirstName() . ' ' . $deliveryAddress->getLastName();
-
-        $orderNumber = $purchase->getRef() . '-parcel#' . $index;
 
         $customerDetail = $purchase->getCustomerDetail();
 

@@ -4,8 +4,12 @@ namespace App\Entity;
 
 use App\Config\SiteConfig;
 use App\Repository\ShippingInfoRepository;
+use DateTimeImmutable;
+use DateTimeZone;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
+#[HasLifecycleCallbacks]
 #[ORM\Entity(repositoryClass: ShippingInfoRepository::class)]
 class ShippingInfo
 {
@@ -62,6 +66,32 @@ class ShippingInfo
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $returnDeliveredAt = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $orderNumber = null;
+
+    #[ORM\PreUpdate]
+    public function onUpdateStatusRegisterDate()
+    {
+        switch($this->status)
+        {
+            case SiteConfig::SHIPPING_STATUS_SENT:
+                $this->sentAt = new DateTimeImmutable();
+                break;
+            case SiteConfig::SHIPPING_STATUS_DELIVERED:
+                $this->deliveredAt = new DateTimeImmutable();
+                break;
+            case SiteConfig::SHIPPING_STATUS_CANCELED:
+                $this->canceledAt = new DateTimeImmutable();
+                break;
+            case SiteConfig::SHIPPING_STATUS_RETURN_SENT:
+                $this->returnSentAt = new DateTimeImmutable();
+                break;
+            case SiteConfig::SHIPPING_STATUS_RETURN_DELIVERED:
+                $this->returnDeliveredAt = new DateTimeImmutable();
+                break;
+        }
+    }
 
     public function getId(): ?int
     {
@@ -262,6 +292,18 @@ class ShippingInfo
     public function setReturnDeliveredAt(?\DateTimeImmutable $returnDeliveredAt): static
     {
         $this->returnDeliveredAt = $returnDeliveredAt;
+
+        return $this;
+    }
+
+    public function getOrderNumber(): ?string
+    {
+        return $this->orderNumber;
+    }
+
+    public function setOrderNumber(?string $orderNumber): static
+    {
+        $this->orderNumber = $orderNumber;
 
         return $this;
     }

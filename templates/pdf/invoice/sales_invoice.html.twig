@@ -49,7 +49,8 @@
     <div style="margin-top: 10px; margin-bottom: 20px;">
         {% set articlesPrice = purchaseVendorGroup.articlesPrice %}
         {% set totalPrice = purchaseVendorGroup.totalPrice %}
-        <table style="padding: 10px; border: solid 1px; margin-left: auto; margin-right: auto;">
+        {% set shippingPrice = purchaseVendorGroup.shippingInfo.price %}
+        <table style="padding: 10px; border: solid 1px rgb(225, 225, 225); margin-left: auto; margin-right: auto;">
             <tbody>
                 <tr>
                     <td style="vertical-align: top; padding: 5px 30px;">{{ 'total_articles' | trans({}, 'messages', lang) }}</td>

@@ -31,10 +31,8 @@ export const PurchaseShippingStatusUpdater = ({shippingInfoId, initialStatus}) =
         setLoading(false);
     };
 
-    console.log(status);
-
     return (
-        <div style={{margin: '20px 0'}}>
+        <div>
             <Select className="admin-form-control" name="shippingStatus" onChange={handleChange} value={status}>
                 <Option value={SiteConfig.SHIPPING_STATUS_PENDING}>
                     {t(SiteConfig.SHIPPING_STATUS_PENDING)}

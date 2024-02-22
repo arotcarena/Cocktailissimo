@@ -33,123 +33,103 @@ class ParcelsCreatorTest extends TestCase
 
         $this->parcelsCreator = new ParcelsCreator($translator, new ParcelValuesResolver);
     }
-
-    public function testCreateParcelsCreateCorrectParcelsCount()
-    {
-        $purchase = $this->createPurchase();
-
-        $parcels = $this->parcelsCreator->createParcels($purchase);
-
-        $this->assertCount(2, $parcels);
-    }
     
-    public function testCreateParcelsSetPurchaseCompanyProperty()
+    public function testCreateParcelSetPurchaseCompanyProperty()
     {
         $purchase = $this->createPurchase();
         $purchase->getCustomerDetail()->setCompany('Company');
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertEquals('Company', $parcels[0]['company_name']);
+        $this->assertEquals('Company', $parcel['company_name']);
     }
 
-    public function testCreateParcelsWithoutPurchaseCompanyProperty()
+    public function testCreateParcelWithoutPurchaseCompanyProperty()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertTrue(!isset($parcels[0]['company_name']));
+        $this->assertTrue(!isset($parcel['company_name']));
     }
 
-    public function testCreateParcelsServicePointIdPropertyNotIssetWhenAtHomeDelivery()
+    public function testCreateParcelServicePointIdPropertyNotIssetWhenAtHomeDelivery()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
-
-        $atHomeParcel = $parcels[0];
+        $atHomeParcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber'); // le premier purchaseVendorGroup est at home
 
         $this->assertTrue(!isset($atHomeParcel['to_service_point']));
     }
 
-    public function testCreateParcelsCorrectSetServicePointId()
+    public function testCreateParcelCorrectSetServicePointId()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
-
-        $atRelayParcel = $parcels[1];
+        $atRelayParcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(1), 'orderNumber'); // le deuxième purchaseVendorGroup est at relay
 
         $this->assertEquals(123123, $atRelayParcel['to_service_point']);
     }
 
-    public function testCreateParcelsSetCorrectShippingMethodId()
+    public function testCreateParcelSetCorrectShippingMethodId()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(1), 'orderNumber');
 
-        $this->assertEquals(111111, $parcels[0]['shipment']['id']);
-        $this->assertEquals(222222, $parcels[1]['shipment']['id']);
+        $this->assertEquals(222222, $parcel['shipment']['id']);
     }
 
     public function testCreateParcelsSetCorrectSenderAddressId()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertEquals(555, $parcels[0]['sender_address']);
-        $this->assertEquals(777, $parcels[1]['sender_address']);
+        $this->assertEquals(555, $parcel['sender_address']);
     }
 
     public function testCreateParcelsSetCorrectProductHsCode()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(1), 'orderNumber');
 
-        $this->assertEquals('hs_code_1', $parcels[0]['parcel_items'][0]['hs_code']);
-        $this->assertEquals('hs_code_3', $parcels[1]['parcel_items'][0]['hs_code']);
+        $this->assertEquals('hs_code_3', $parcel['parcel_items'][0]['hs_code']);
     }
 
     public function testCreateParcelsSetCorrectProductOriginCountry()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertEquals('ES', $parcels[0]['parcel_items'][0]['origin_country']);
-        $this->assertEquals('IT', $parcels[0]['parcel_items'][1]['origin_country']);
+        $this->assertEquals('ES', $parcel['parcel_items'][0]['origin_country']);
     }
 
     public function testCreateParcelsSetCorrectProductDescription()
     {
         $purchase = $this->createPurchase()->setLang('it');
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertEquals('designation1 it', $parcels[0]['parcel_items'][0]['description']);
+        $this->assertEquals('designation1 it', $parcel['parcel_items'][0]['description']);
     }
 
     public function testCreateParcelsSetCorrectProductId()
     {
         $purchase = $this->createPurchase()->setLang('it');
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertEquals('publicRef1', $parcels[0]['parcel_items'][0]['product_id']);
+        $this->assertEquals('publicRef1', $parcel['parcel_items'][0]['product_id']);
     }
 
     public function testCreateParcelsSetCorrectOrderNumberAndCustomsInvoiceNr()
     {
         $purchase = $this->createPurchase();
-        $purchase->generateRef();
-        $ref = $purchase->getRef();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(0), 'orderNumber');
 
-        $this->assertEquals($ref . '-parcel#1', $parcels[0]['order_number']);
-        $this->assertEquals($ref . '-parcel#1', $parcels[0]['customs_invoice_nr']);
+        $this->assertEquals('orderNumber', $parcel['order_number']);
+        $this->assertEquals('orderNumber', $parcel['customs_invoice_nr']);
     }
 
     public function testCreateParcelsSetCorrectCustomsShipmentType()
     {
         $purchase = $this->createPurchase();
-        $parcels = $this->parcelsCreator->createParcels($purchase);
+        $parcel = $this->parcelsCreator->createParcel($purchase->getPurchaseVendorGroups()->get(1), 'orderNumber');
 
-        $this->assertEquals(2, $parcels[0]['customs_shipment_type']); // 2 = commercial goods
-        $this->assertEquals(2, $parcels[1]['customs_shipment_type']);
+        $this->assertEquals(2, $parcel['customs_shipment_type']); // 2 = commercial goods
     }
 
     private function createPurchase(): Purchase

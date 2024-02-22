@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <div style="margin: 40px 0;">
+        <div style="margin: 40px 0; border: solid 1px rgb(225, 225, 225); max-width: 450px; padding: 10px;">
             <h2 style="margin-top: 0;">Client</h3>
             {% set customerDetail = purchase.customerDetail %}
             <h3>Nom</h3>
@@ -59,22 +59,27 @@
         <h3>Détail de la commande</h3>
         {% for purchaseVendorGroup in purchase.purchaseVendorGroups %}
             <div style="margin: 40px 0 60px; padding-left: 20px; border-left: solid 4px;">
-                {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
-                <p style="font-weight: 600;">{{ vendorDetail.socialName }} - n° siret {{ vendorDetail.identificationNumber }}</p>
                 {% set shippingInfo = purchaseVendorGroup.shippingInfo %}
-                <p>
-                    <span>{{ shippingInfo.type | trans({}, 'configs', 'fr') }}</span>
-                    {% if shippingInfo.type == 'shipping_type.relay' %}
-                        {% set relayInfo = shippingInfo.relayInfo %}
-                        <span>
-                            - {{ relayInfo.name }} {{ relayInfo.address.lineOne }} {% if relayInfo.address.lineTwo %} {{ relayInfo.address.lineTwo }}{% endif %} {{ relayInfo.address.postcode }} {{ relayInfo.address.city }} {{ relayInfo.address.country | trans({}, 'countries', 'fr') }}
-                        </span>
-                    {% endif %}
-                </p>
-                <p>{{ shippingInfo.carrier }} - {{ shippingInfo.name }} - {{ shippingInfo.price.priceToPay | price_format('fr') }} - {{ shippingInfo.leadTimeHours }}h</p>
-                <p>Tracking : {{ shippingInfo.tracking }}</p>
-                <div style="margin: -20px 0;">
+                <p style="font-weight: 600;">Colis #ID {{ shippingInfo.parcelId ?? '...' }} / order_number {{ '...' }} (sendcloud)
+                {% set vendorDetail = purchaseVendorGroup.vendorDetail %}
+                <p><span style="font-weight: 600;">Vendeur :</span> {{ vendorDetail.socialName }} - n° siret {{ vendorDetail.identificationNumber }}</p>
+                <div style="margin: -20px 10px;">
                     {{ include('UI/invoice/_purchase_vendor_group.html.twig', {purchaseVendorGroup, lang: 'fr'}) }}
+                </div>
+                <div style="margin: 10px 0;">
+                    <div style="font-weight: 600;">Livraison</div>
+                    {% set shippingInfo = purchaseVendorGroup.shippingInfo %}
+                    <p>
+                        <span>{{ shippingInfo.type | trans({}, 'configs', 'fr') }}</span>
+                        {% if shippingInfo.type == 'shipping_type.relay' %}
+                            {% set relayInfo = shippingInfo.relayInfo %}
+                            <span>
+                                - {{ relayInfo.name }} {{ relayInfo.address.lineOne }} {% if relayInfo.address.lineTwo %} {{ relayInfo.address.lineTwo }}{% endif %} {{ relayInfo.address.postcode }} {{ relayInfo.address.city }} {{ relayInfo.address.country | trans({}, 'countries', 'fr') }}
+                            </span>
+                        {% endif %}
+                    </p>
+                    <p>{{ shippingInfo.carrier }} - {{ shippingInfo.name }} - {{ shippingInfo.price.priceToPay | price_format('fr') }} - {{ shippingInfo.leadTimeHours }}h</p>
+                    <p>Tracking : {{ shippingInfo.tracking }}</p>
                 </div>
             </div>
         {% endfor %}
