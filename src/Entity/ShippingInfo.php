@@ -48,6 +48,21 @@ class ShippingInfo
     #[ORM\JoinColumn(nullable: true)]
     private ?CustomPrice $price = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $sentAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $deliveredAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $canceledAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $returnSentAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $returnDeliveredAt = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +202,66 @@ class ShippingInfo
     public function setParcelId(?int $parcelId): static
     {
         $this->parcelId = $parcelId;
+
+        return $this;
+    }
+
+    public function getSentAt(): ?\DateTimeImmutable
+    {
+        return $this->sentAt;
+    }
+
+    public function setSentAt(?\DateTimeImmutable $sentAt): static
+    {
+        $this->sentAt = $sentAt;
+
+        return $this;
+    }
+
+    public function getDeliveredAt(): ?\DateTimeImmutable
+    {
+        return $this->deliveredAt;
+    }
+
+    public function setDeliveredAt(?\DateTimeImmutable $deliveredAt): static
+    {
+        $this->deliveredAt = $deliveredAt;
+
+        return $this;
+    }
+
+    public function getCanceledAt(): ?\DateTimeImmutable
+    {
+        return $this->canceledAt;
+    }
+
+    public function setCanceledAt(?\DateTimeImmutable $canceledAt): static
+    {
+        $this->canceledAt = $canceledAt;
+
+        return $this;
+    }
+
+    public function getReturnSentAt(): ?\DateTimeImmutable
+    {
+        return $this->returnSentAt;
+    }
+
+    public function setReturnSentAt(?\DateTimeImmutable $returnSentAt): static
+    {
+        $this->returnSentAt = $returnSentAt;
+
+        return $this;
+    }
+
+    public function getReturnDeliveredAt(): ?\DateTimeImmutable
+    {
+        return $this->returnDeliveredAt;
+    }
+
+    public function setReturnDeliveredAt(?\DateTimeImmutable $returnDeliveredAt): static
+    {
+        $this->returnDeliveredAt = $returnDeliveredAt;
 
         return $this;
     }
