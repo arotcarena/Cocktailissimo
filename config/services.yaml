@@ -43,5 +43,9 @@ services:
         tags:
             - { name: doctrine.event_subscriber }
 
+    App\EventSubscriber\DoctrineEventSubscriber\PurchaseShippingStatusSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
+
 
  

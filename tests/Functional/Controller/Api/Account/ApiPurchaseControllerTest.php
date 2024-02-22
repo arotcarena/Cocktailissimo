@@ -22,6 +22,8 @@ class ApiPurchaseControllerTest extends FunctionalTest
 
     private EntityManagerInterface $em;
 
+    private PurchaseRepository $purchaseRepository;
+
 
     public function setUp(): void 
     {
@@ -30,6 +32,8 @@ class ApiPurchaseControllerTest extends FunctionalTest
         $this->loadFixtures([UserPurchaseTestFixtures::class]);
 
         $this->em = $this->client->getContainer()->get(EntityManagerInterface::class);
+
+        $this->purchaseRepository = $this->client->getContainer()->get(PurchaseRepository::class);
     }
 
     //findPaginatedLight
@@ -52,7 +56,7 @@ class ApiPurchaseControllerTest extends FunctionalTest
             }
             $ref = $purchase->ref;
             $dbPurchase = $this->findEntity(PurchaseRepository::class, ['ref' => $ref]);
-            $this->assertEquals($user->getId(), $dbPurchase->getUser()->getId());
+            $this->assertEquals($user->getEmail(), $dbPurchase->getCustomerDetail()->getEmail());
         }
     }
 
@@ -61,7 +65,9 @@ class ApiPurchaseControllerTest extends FunctionalTest
         $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
         $this->loginUser($user);
 
-        $this->assertTrue($user->getPurchases()->count() > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+        $purchases = $this->purchaseRepository->findByCustomerEmail($user->getEmail());
+        $this->assertTrue(count($purchases) > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+
         $this->client->request('GET', $this->urlGenerator->generate('api_purchase_findPaginatedLight', [
             '_locale' => 'en',
             'limit' => 100  // pour éviter une fausse erreur due à la pagination
@@ -75,14 +81,16 @@ class ApiPurchaseControllerTest extends FunctionalTest
         $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
         $this->loginUser($user);
 
-        $this->assertTrue($user->getPurchases()->count() > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+        $purchases = $this->purchaseRepository->findByCustomerEmail($user->getEmail());
+        $this->assertTrue(count($purchases) > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+
         $this->client->request('GET', $this->urlGenerator->generate('api_purchase_findPaginatedLight', [
             '_locale' => 'en'
         ]));
         $data = json_decode($this->client->getResponse()->getContent());
 
         $count = 0;
-        foreach($user->getPurchases() as $purchase)
+        foreach($purchases as $purchase)
         {
             if($purchase->getStatus() !== SiteConfig::STATUS_PENDING) 
             {
@@ -97,7 +105,9 @@ class ApiPurchaseControllerTest extends FunctionalTest
         $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
         $this->loginUser($user);
 
-        $this->assertTrue($user->getPurchases()->count() > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+        $purchases = $this->purchaseRepository->findByCustomerEmail($user->getEmail());
+        $this->assertTrue(count($purchases) > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+        
         $this->client->request('GET', $this->urlGenerator->generate('api_purchase_findPaginatedLight', [
             '_locale' => 'en'
         ]));
@@ -163,8 +173,9 @@ class ApiPurchaseControllerTest extends FunctionalTest
         $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
         $this->loginUser($user);
 
-        $this->assertTrue($user->getPurchases()->count() > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
-        $purchase = $user->getPurchases()->get(0);
+        $purchases = $this->purchaseRepository->findByCustomerEmail($user->getEmail());
+        $this->assertTrue(count($purchases) > 0, 'le test n\'est pas probant car le user n\'a aucune purchase');
+        $purchase = $purchases[0];
         $this->client->request('GET', $this->urlGenerator->generate('api_purchase_findOneFull', [
             'id' => $purchase->getId(),
             '_locale' => 'en'

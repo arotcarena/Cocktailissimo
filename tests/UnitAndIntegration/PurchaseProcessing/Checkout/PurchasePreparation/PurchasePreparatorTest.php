@@ -129,20 +129,6 @@ class PurchasePreparatorTest extends TestCase
         $this->assertEquals('Enterprise', $purchase->getCustomerDetail()->getCompany());
         $this->assertEquals('123456', $purchase->getCustomerDetail()->getVatNumber());
         $this->assertEquals('0601020304', $purchase->getCustomerDetail()->getPhone());
-        $this->assertNull($purchase->getUser());
-    }
-    public function testPersistSetCorrectUserIntoPurchaseIfUserIsPassed()
-    {
-        $user = new User;
-        $purchase = new Purchase;
-        $this->purchaseValidator->expects($this->once())
-                                ->method('validate')
-                                ->willReturn(null)
-                                ;
-        
-        $this->purchasePreparator->prepare($purchase, CheckoutDataFactory::createCheckoutData(), 'en', $user);
-
-        $this->assertEquals($user, $purchase->getUser());
     }
     public function testPersistSetCorrectDeliveryDetailValuesIntoPurchase()
     {

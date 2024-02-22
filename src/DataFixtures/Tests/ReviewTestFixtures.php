@@ -51,7 +51,6 @@ class ReviewTestFixtures extends Fixture implements DependentFixtureInterface
 
         for ($i=0; $i < 20; $i++) { 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($this->faker->randomElement($products))
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -75,7 +74,6 @@ class ReviewTestFixtures extends Fixture implements DependentFixtureInterface
 
         //reviews pour les tests confirmationToken
         $review = (new Review)
-                    ->setUser($this->faker->randomElement($users))
                     ->setProduct($this->faker->randomElement($products))
                     ->setUser($this->faker->randomElement($users))
                     ->setFullName($this->faker->name())
@@ -215,7 +213,6 @@ class ReviewTestFixtures extends Fixture implements DependentFixtureInterface
             $user = $this->faker->randomElement($users);
             $review = (new Review)
                 ->setProduct($product)
-                ->setUser($this->faker->randomElement($users))
                 ->setEmail($user->getEmail())
                 ->setUser($this->faker->randomElement($users))
                 ->setFullName($this->faker->name())

@@ -498,6 +498,17 @@ img {
     text-align: left;
     font-weight: 600;
 }
+.link-underline ul {
+    margin-left: 20px;
+}
+.link-underline li {
+    list-style-type: disc;
+}
+.link-underline {
+    white-space: pre-wrap;
+}
+
+
 
 .border-title::after, .border-title::before {
     content: '';

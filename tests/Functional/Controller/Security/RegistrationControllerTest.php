@@ -8,7 +8,6 @@ use App\Tests\Functional\FunctionalTest;
 use Symfony\Component\HttpFoundation\Response;
 use App\DataFixtures\Tests\UserPurchaseTestFixtures;
 use App\Tests\Functional\Controller\Security\LoginTrait;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @group FunctionalSecurity
@@ -117,19 +116,6 @@ class RegistrationControllerTest extends FunctionalTest
         $this->assertResponseRedirects($this->urlGenerator->generate('security_login'));
     }
 
-    public function testAccountDeleteUserHavingPurchasesInProgressCannotAccess()
-    {
-        $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_one_purchase_paid@gmail.com']); // user avec une purchase en cours
-        $this->client->loginUser($user);
-
-        $this->client->request('GET', $this->urlGenerator->generate('security_accountDelete', [
-            '_locale' => 'en'
-        ]));
-        $this->assertResponseRedirects($this->urlGenerator->generate('account_index'));
-        $this->client->followRedirect();
-        $this->assertSelectorExists('.js-flash-wrapper.danger');
-    }
-
     public function testAccountDeleteUserCanAccess()
     {
         $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
@@ -193,26 +179,5 @@ class RegistrationControllerTest extends FunctionalTest
         // on vérifie que user n'est plus en database
         $dbUser = $this->findEntity(UserRepository::class, ['id' => $id]);
         $this->assertNull($dbUser);
-    }
-
-    public function testAccountDeletePurchasesAreNotDeleted()
-    {
-        $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
-        $purchase = $user->getPurchases()->get(0);
-        $id = $purchase->getId();
-        $this->client->loginUser($user);
-
-        $crawler = $this->client->request('GET', $this->urlGenerator->generate('security_accountDelete', [
-            '_locale' => 'en'
-        ]));
-        $form = $crawler->selectButton(($this->translator->trans('delete_account', [], 'messages', 'en')))->form();
-        $this->client->submit($form);
-        $this->assertResponseRedirects($this->urlGenerator->generate('home', ['_locale' => 'en']));
-        // on vérifie que la purchase est toujours en database et que sa property user vaut désormais null
-        $dbPurchase = $this->findEntity(PurchaseRepository::class, ['id' => $id]);
-        $this->assertNotNull($dbPurchase, 'a la suppression de user, les purchases correspondantes sont supprimées, ça ne devrait pas être le cas');
-        
-        // ceci ne fonctionne pas probablement a cause de la db sqlite qui n'a pas toutes les constraints de la vraie database
-        // $this->assertNull($dbPurchase->getUser(), 'La propriété user de la purchase dont le user vient d\'être supprimé devrait prendre la valeur null');
     }
 }

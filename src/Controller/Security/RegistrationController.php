@@ -160,12 +160,7 @@ class RegistrationController extends AbstractController
     )]
     public function accountDelete(Request $request): Response
     {
-        if($this->purchaseRepository->hasPurchasesInProgress($this->getUser()))
-        {
-            $this->addFlash('danger', $this->translator->trans('error.delete_account.having_purchases_in_progress'));
-            return $this->redirectToRoute('account_index', ['_locale' => $request->getLocale()]);
-        }
-        elseif($this->isGranted('ROLE_VENDOR'))
+        if($this->isGranted('ROLE_VENDOR'))
         {
             $this->addFlash('info', $this->translator->trans('warning.delete_vendor_account'));
             return $this->redirectToRoute('account_index', ['_locale' => $request->getLocale()]);

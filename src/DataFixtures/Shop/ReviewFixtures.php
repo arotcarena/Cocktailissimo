@@ -63,7 +63,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
             $manager->persist($adminAnswer);
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -98,7 +97,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
             $manager->persist($review);
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -144,7 +142,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -182,7 +179,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -216,7 +212,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -249,41 +244,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
             $manager->persist($review);
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
-                        ->setProduct($product)
-                        ->setUser($this->faker->randomElement($users))
-                        ->setFullName($this->faker->name())
-                        ->setTitle($this->faker->paragraph(1))
-                        ->setRate(random_int(1, 5))
-                        ->setComment($this->faker->paragraph())
-                        ->setEmail($this->faker->email())
-                        ->setConfirmed(true)
-                        ->setModerationStatus(SiteConfig::STATUS_PENDING)
-                        ->setBought(true)
-                        ->setCreatedAt(new DateTimeImmutable(($this->faker->dateTimeBetween())->format('Y:m:d H:h:i')))
-                        ->setLang($this->faker->randomElement($this->lang_choices))
-                    ;
-            if(random_int(0, 9) <= 7)
-            {
-                $status = $this->faker->randomElement([SiteConfig::MODERATION_STATUS_ACCEPTED, SiteConfig::MODERATION_STATUS_REFUSED]);
-                $review->setModerationStatus($status);
-                if($status === SiteConfig::MODERATION_STATUS_ACCEPTED)
-                {
-                    if($productCountReviews = $product->getCountReviews())
-                    {
-                        $product->setCountReviews($productCountReviews + 1);
-                    }
-                    else
-                    {
-                        $product->setCountReviews(1);
-                    }
-                }
-            }
-            $manager->persist($review);
-
-
-            $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -317,7 +277,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -351,7 +310,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -385,7 +343,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -419,7 +376,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -453,7 +409,39 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
+                        ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
+                        ->setFullName($this->faker->name())
+                        ->setTitle($this->faker->paragraph(1))
+                        ->setRate(random_int(1, 5))
+                        ->setComment($this->faker->paragraph())
+                        ->setEmail($this->faker->email())
+                        ->setConfirmed(true)
+                        ->setModerationStatus(SiteConfig::STATUS_PENDING)
+                        ->setBought(true)
+                        ->setCreatedAt(new DateTimeImmutable(($this->faker->dateTimeBetween())->format('Y:m:d H:h:i')))
+                        ->setLang($this->faker->randomElement($this->lang_choices))
+                    ;
+            if(random_int(0, 9) <= 7)
+            {
+                $status = $this->faker->randomElement([SiteConfig::MODERATION_STATUS_ACCEPTED, SiteConfig::MODERATION_STATUS_REFUSED]);
+                $review->setModerationStatus($status);
+                if($status === SiteConfig::MODERATION_STATUS_ACCEPTED)
+                {
+                    if($productCountReviews = $product->getCountReviews())
+                    {
+                        $product->setCountReviews($productCountReviews + 1);
+                    }
+                    else
+                    {
+                        $product->setCountReviews(1);
+                    }
+                }
+            }
+            $manager->persist($review);
+
+
+            $review = (new Review)
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -498,7 +486,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
             $manager->persist($adminAnswer);
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -533,7 +520,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -567,7 +553,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -601,7 +586,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -666,7 +650,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
         
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -703,7 +686,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -737,7 +719,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -771,7 +752,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -805,7 +785,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -839,7 +818,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -873,7 +851,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -907,7 +884,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -940,41 +916,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
             $manager->persist($review);
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
-                        ->setProduct($product)
-                        ->setUser($this->faker->randomElement($users))
-                        ->setFullName($this->faker->name())
-                        ->setTitle($this->faker->paragraph(1))
-                        ->setRate(random_int(1, 5))
-                        ->setComment($this->faker->paragraph())
-                        ->setEmail($this->faker->email())
-                        ->setConfirmed(true)
-                        ->setModerationStatus(SiteConfig::STATUS_PENDING)
-                        ->setBought(true)
-                        ->setCreatedAt(new DateTimeImmutable(($this->faker->dateTimeBetween())->format('Y:m:d H:h:i')))
-                        ->setLang($this->faker->randomElement($this->lang_choices))
-                    ;
-            if(random_int(0, 9) <= 7)
-            {
-                $status = $this->faker->randomElement([SiteConfig::MODERATION_STATUS_ACCEPTED, SiteConfig::MODERATION_STATUS_REFUSED]);
-                $review->setModerationStatus($status);
-                if($status === SiteConfig::MODERATION_STATUS_ACCEPTED)
-                {
-                    if($productCountReviews = $product->getCountReviews())
-                    {
-                        $product->setCountReviews($productCountReviews + 1);
-                    }
-                    else
-                    {
-                        $product->setCountReviews(1);
-                    }
-                }
-            }
-            $manager->persist($review);
-
-
-            $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -1008,7 +949,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -1042,7 +982,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -1076,7 +1015,39 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
 
 
             $review = (new Review)
+                        ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
+                        ->setFullName($this->faker->name())
+                        ->setTitle($this->faker->paragraph(1))
+                        ->setRate(random_int(1, 5))
+                        ->setComment($this->faker->paragraph())
+                        ->setEmail($this->faker->email())
+                        ->setConfirmed(true)
+                        ->setModerationStatus(SiteConfig::STATUS_PENDING)
+                        ->setBought(true)
+                        ->setCreatedAt(new DateTimeImmutable(($this->faker->dateTimeBetween())->format('Y:m:d H:h:i')))
+                        ->setLang($this->faker->randomElement($this->lang_choices))
+                    ;
+            if(random_int(0, 9) <= 7)
+            {
+                $status = $this->faker->randomElement([SiteConfig::MODERATION_STATUS_ACCEPTED, SiteConfig::MODERATION_STATUS_REFUSED]);
+                $review->setModerationStatus($status);
+                if($status === SiteConfig::MODERATION_STATUS_ACCEPTED)
+                {
+                    if($productCountReviews = $product->getCountReviews())
+                    {
+                        $product->setCountReviews($productCountReviews + 1);
+                    }
+                    else
+                    {
+                        $product->setCountReviews(1);
+                    }
+                }
+            }
+            $manager->persist($review);
+
+
+            $review = (new Review)
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())
@@ -1117,7 +1088,6 @@ class ReviewFixtures extends Fixture implements DependentFixtureInterface, Fixtu
             $product = $this->faker->randomElement($productsWithReview);
 
             $review = (new Review)
-                        ->setUser($this->faker->randomElement($users))
                         ->setProduct($product)
                         ->setUser($this->faker->randomElement($users))
                         ->setFullName($this->faker->name())

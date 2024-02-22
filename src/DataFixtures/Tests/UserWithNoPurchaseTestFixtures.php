@@ -175,7 +175,6 @@ class UserWithNoPurchaseTestFixtures extends Fixture implements DependentFixture
 
         $specificPurchase = (new Purchase)
                             ->setCreatedAt(new DateTimeImmutable())
-                            ->setUser($user)
                             ->setLang('fr')
                             ->setCustomerDetail(
                                 (new CustomerDetail)
@@ -191,7 +190,7 @@ class UserWithNoPurchaseTestFixtures extends Fixture implements DependentFixture
                                 ->setVendorDetail(
                                     (new VendorDetail)
                                     ->setSocialName('vendor ets.')
-                                    ->setAddress(
+                                    ->setSocialAddress(
                                         (new LightAddress)
                                         ->setLineOne('rue de l\'invention de rue')
                                         ->setPostcode('19000')

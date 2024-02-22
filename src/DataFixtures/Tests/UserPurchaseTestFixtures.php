@@ -68,7 +68,6 @@ class UserPurchaseTestFixtures extends Fixture implements DependentFixtureInterf
         $packaging = $this->faker->randomElement($packagings);
 
         $purchase = (new Purchase)
-                        ->setUser($user)
                         ->setCustomerDetail(
                             (new CustomerDetail)
                             ->setEmail($user->getEmail())
@@ -213,7 +212,6 @@ class UserPurchaseTestFixtures extends Fixture implements DependentFixtureInterf
         $packaging2 = $this->faker->randomElement($packagings);
 
         $purchase = (new Purchase)
-                        ->setUser($user)
                         ->setCustomerDetail(
                             (new CustomerDetail)
                             ->setEmail($user->getEmail())
@@ -339,7 +337,6 @@ class UserPurchaseTestFixtures extends Fixture implements DependentFixtureInterf
                         ;
 
         $purchase = (new Purchase)
-                        ->setUser($user)
                         ->setCustomerDetail(
                             (new CustomerDetail)
                             ->setEmail($user->getEmail())
@@ -483,7 +480,6 @@ class UserPurchaseTestFixtures extends Fixture implements DependentFixtureInterf
         $packaging = $this->faker->randomElement($packagings);
 
         $purchase = (new Purchase)
-                        ->setUser($user)
                         ->setCustomerDetail(
                             (new CustomerDetail)
                             ->setEmail($user->getEmail())
@@ -631,7 +627,6 @@ class UserPurchaseTestFixtures extends Fixture implements DependentFixtureInterf
             $packaging2 = $this->faker->randomElement($packagings);
 
             $purchase = (new Purchase)
-                            ->setUser($user)
                             ->setCustomerDetail(
                                 (new CustomerDetail)
                                 ->setEmail($user->getEmail())

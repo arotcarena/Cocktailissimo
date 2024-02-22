@@ -174,7 +174,6 @@ class TestController extends AbstractController
                         ->setLastName($user->getLastName())
                         ->setPhone($this->faker->phoneNumber())
                     )
-                    ->setUser($user)
                     ->setStatus($this->faker->randomElement([SiteConfig::STATUS_PAID, SiteConfig::STATUS_TERMINATED]))
                     ->setCreatedAt(new DateTimeImmutable())
                     ->setDeliveryDetail($postalDetail)

@@ -79,22 +79,6 @@
             </div>
         </section>
 
-
-        {# <section class="admin-block">
-            <h2 class="admin-block-title">Commandes</h2>
-            <div class="admin-block-body">
-                <p class="admin-block-text purchases-in-process">
-                    <strong>{{ purchases_in_process_count }}</strong> Commande{% if purchases_in_process_count > 1 %}s{% endif %}
-                      en cours
-                </p>
-            </div>
-            <div class="admin-block-controls">
-                <a href={{ path('admin_purchase_index') }} class="admin-button secondary-color">Gérer les commandes</a>
-            </div>
-        </section> #}
-        
-
-
         <section class="admin-block">
             <h2 class="admin-block-title">Vendeurs</h2>
             <div class="admin-block-body">
@@ -121,6 +105,19 @@
                 <a href="{{ path('admin_vendorContact_index') }}" class="admin-button secondary-color">Contacts vendeurs</a>
                 <a href="{{ path('admin_prospect_index') }}" class="admin-button secondary-color">Prospection</a>
                 <a href="{{ path('admin_sendcloud_index') }}" class="admin-button third-color">Sendcloud</a>
+            </div>
+        </section>
+
+        <section class="admin-block">
+            <h2 class="admin-block-title">Commandes</h2>
+            <div class="admin-block-body">
+                <p class="admin-block-text purchases-in-process">
+                    <strong>{{ purchases_in_progress_count }}</strong> Commande{% if purchases_in_progress_count > 1 %}s{% endif %}
+                      en cours
+                </p>
+            </div>
+            <div class="admin-block-controls">
+                <a href={{ path('admin_purchase_index') }} class="admin-button secondary-color">Gérer les commandes</a>
             </div>
         </section>
 

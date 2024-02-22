@@ -2,7 +2,6 @@
 namespace App\PurchaseProcessing\Checkout\PurchasePreparation;
 
 use stdClass;
-use App\Entity\User;
 use App\Entity\Purchase;
 use App\Entity\CustomPrice;
 use App\Entity\PostalDetail;
@@ -33,15 +32,10 @@ class PurchasePreparator
     /**
      * @return ConstraintViolationList[]|null
      */
-    public function prepare(Purchase $purchase, stdClass $checkoutData, string $lang, User $user = null)
+    public function prepare(Purchase $purchase, stdClass $checkoutData, string $lang)
     {
         //on supprime toutes les relations qui seraient déjà présentes : ex. vendorGroups, CustomerDetail, deliveryAddress, CustomPrice etc...
         $this->purchaseRelationsCleaner->clean($purchase);
-
-        if($user)
-        {
-            $purchase->setUser($user);
-        }
 
         $purchase
                 ->setLang($lang)

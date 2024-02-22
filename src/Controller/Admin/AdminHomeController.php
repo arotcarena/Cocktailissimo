@@ -76,6 +76,7 @@ class AdminHomeController extends AbstractController
         $vendorContactCount = $this->vendorContactRepository->count([]);
         $countVisits = $this->visitRepository->count([]);
         $countAcceptedReviews = $this->reviewRepository->count(['moderationStatus' => SiteConfig::MODERATION_STATUS_ACCEPTED]);
+        $countPurchaseInProgress = $this->purchaseRepository->countPurchasesInProgress();
 
         $vendorsWithoutSendcloudIdCount = $this->userRepository->countVendorsWithoutSendcloudId();
 
@@ -99,7 +100,8 @@ class AdminHomeController extends AbstractController
             'vendorContact_count' => $vendorContactCount,
             'vendorsWithoutSendcloudId_count' => $vendorsWithoutSendcloudIdCount,
             'count_visits' => $countVisits,
-            'count_acceptedReviews' => $countAcceptedReviews
+            'count_acceptedReviews' => $countAcceptedReviews,
+            'purchases_in_progress_count' => $countPurchaseInProgress
         ]);
     }
 }

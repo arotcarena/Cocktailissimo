@@ -130,7 +130,7 @@ class ApiCheckoutController extends AbstractController
         //on hydrate checkoutData.vendorGroups avec certaines valeurs nécessaires pour la création de la purchase
         $this->checkoutVendorGroupsHydrator->hydrate($checkoutData->vendorGroups, $cart);
         //on hydrate la purchase avec checkoutData et on la valide
-        $violations = $this->purchasePreparator->prepare($purchase, $checkoutData, $request->getLocale(), $this->security->getUser());
+        $violations = $this->purchasePreparator->prepare($purchase, $checkoutData, $request->getLocale());
         if($violations)
         {
             return new JsonResponse([

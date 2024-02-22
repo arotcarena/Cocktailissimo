@@ -139,22 +139,6 @@ class PurchaseRepository extends ServiceEntityRepository
         return $productId;
     }
 
-    public function hasPurchasesInProgress(User $user): bool 
-    {
-        $qb = $this->createQueryBuilder('p');
-
-        $count = $qb
-                ->select('COUNT(p.id) as count')
-                ->andWhere('p.user = :user')
-                ->setParameter('user', $user)
-                ->andWhere('p.status = :status_paid')
-                ->setParameter('status_paid', SiteConfig::STATUS_PAID)
-                ->getQuery()
-                ->getOneOrNullResult()['count']
-                ;
-        return $count > 0;
-    }
-
     public function countPurchasesInProgress(): int
     {
         return $this->createQueryBuilder('p')
@@ -169,8 +153,7 @@ class PurchaseRepository extends ServiceEntityRepository
     public function adminFilter(Request $request, PurchaseFilter $purchaseFilter, int $limit = 20): PaginationInterface
     {
         $qb = $this->createQueryBuilder('p')
-                        ->select('p', 'u')
-                        ->leftJoin('p.user', 'u')
+                        ->select('p')
                         ->orderBy('p.createdAt', 'DESC') // par défaut : ceci peut être modifié dans applyAdminFilters si purchaseFilter.sortBy === 'createdAt_ASC'
                         ;
         

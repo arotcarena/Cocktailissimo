@@ -23,10 +23,6 @@ class Purchase
     #[ORM\Column(nullable: true, length: 255)]
     private ?string $ref = null;
 
-    #[ORM\ManyToOne(inversedBy: 'purchases')]
-    #[ORM\JoinColumn(nullable: true)]
-    private ?User $user = null;
-
     #[ORM\Column(length: 255)]
     private ?string $status = SiteConfig::STATUS_PENDING;
 
@@ -81,6 +77,11 @@ class Purchase
        $this->ref = 'COC' . (new DateTime())->format('YmdHi') . substr(str_shuffle(str_repeat('AZERTYUIOPQSDFGHJKLMWXCVBN0123456789', 5)), 0, 4);
     }
 
+    public function isStrong()
+    {
+        return $this->status = SiteConfig::STATUS_PAID;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,22 +90,6 @@ class Purchase
     public function getRef(): ?string
     {
         return $this->ref;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-        if(!$user->getPurchases()->contains($this))
-        {
-            $user->addPurchase($this);
-        }
-
-        return $this;
     }
 
     public function getStatus(): ?string

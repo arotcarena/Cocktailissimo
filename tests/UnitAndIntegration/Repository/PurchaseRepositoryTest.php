@@ -53,32 +53,6 @@ class PurchaseRepositoryTest extends KernelTestCase
         );
     }
 
-    //hasPurchasesInProgress
-    public function testhasPurchasesInProgressWithUserHavingOnlyCompletedPurchases()
-    {
-        $this->loadFixtures([UserPurchaseTestFixtures::class]);
-        $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_two_terminated_purchases@gmail.com']);
-        $this->assertFalse(
-            $this->purchaseRepository->hasPurchasesInProgress($user)
-        );
-    }
-    public function testhasPurchasesInProgressWithUserHavingOnePurchaseInProgress()
-    {
-        $this->loadFixtures([UserPurchaseTestFixtures::class]);
-        $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_one_purchase_paid@gmail.com']);
-        $this->assertTrue(
-            $this->purchaseRepository->hasPurchasesInProgress($user)
-        );
-    }
-    public function testhasPurchasesInProgressWithUserHavingOnePurchasePending()
-    {
-        $this->loadFixtures([UserPurchaseTestFixtures::class]);
-        $user = $this->findEntity(UserRepository::class, ['email' => 'user_having_one_purchase_pending@gmail.com']);
-        $this->assertFalse(
-            $this->purchaseRepository->hasPurchasesInProgress($user)
-        );
-    }
-
     //findByCustomerEmail
     public function testFindByCustomerEmail()
     {

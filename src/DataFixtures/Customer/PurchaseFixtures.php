@@ -74,7 +74,6 @@ class PurchaseFixtures extends Fixture implements DependentFixtureInterface, Fix
                         ->setLastName($lastName)
                         ->setPhone($this->faker->phoneNumber())
                     )
-                    ->setUser($this->faker->randomElement($users))
                     ->setStatus(SiteConfig::STATUS_PAID) //pour qu'elles soient visibles du user
                     ->setDeliveryDetail($postalDetail)
                     ->setInvoiceDetail($postalDetail)

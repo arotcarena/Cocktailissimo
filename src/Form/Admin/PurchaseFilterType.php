@@ -27,9 +27,7 @@ class PurchaseFilterType extends AbstractType
                 'choices' => [
                     $this->translator->trans(SiteConfig::STATUS_PENDING, [], 'configs', 'fr') => SiteConfig::STATUS_PENDING,
                     $this->translator->trans(SiteConfig::STATUS_PAID, [], 'configs', 'fr') => SiteConfig::STATUS_PAID,
-                    $this->translator->trans(SiteConfig::STATUS_SENT, [], 'configs', 'fr') => SiteConfig::STATUS_SENT,
-                    $this->translator->trans(SiteConfig::STATUS_DELIVERED, [], 'configs', 'fr') => SiteConfig::STATUS_DELIVERED,
-                    $this->translator->trans(SiteConfig::STATUS_CANCELED, [], 'configs', 'fr') => SiteConfig::STATUS_CANCELED
+                    $this->translator->trans(SiteConfig::STATUS_TERMINATED, [], 'configs', 'fr') => SiteConfig::STATUS_TERMINATED
                 ]
             ])
             ->add('sortBy', ChoiceType::class, [

@@ -41,9 +41,10 @@
                 <tr>
                     <th>Réf.</th>
                     <th>Client</th>
-                    <th>Adresse email</th>
-                    <th>Utilisateur inscrit ?</th>
-                    <th>Prix total</th>
+                    <th>Adresse de livraison</th>
+                    <th>Adresse de facturation</th>
+                    <th>Nb d'articles</th>
+                    <th>Prix payé</th>
                     <th>Statut</th>
                     <th>Date</th>
                     <th></th>
@@ -51,15 +52,50 @@
             </thead>
             <tbody>
                 {% for purchase in pagination %}
+                    {% set customerDetail = purchase.customerDetail %}
                     <tr{% if purchase.strong %} class="strong"{% endif %}>
 
-                        <td class="ref">{{ purchase.ref }}</td>
-                        <td class="customer">{{ purchase.civility | trans({}, 'configs', 'fr') }} {{ purchase.firstName }} {{ purchase.lastName }}</td>
-                        <td class="email">{{ purchase.email }}</td>
-                        <td class="user">{% if purchase.user %}OUI{% else %}NON{% endif %}</td>
-                        <td class="totalPrice">{{ (purchase.totalPrice + purchase.shippingInfo.price) | price_format('fr') }}</td>
-                        <td class="status" value={{ purchase.status }}>{{ purchase.status | trans({}, 'configs', 'fr') }}</td>
-                        <td class="createdAt" value={{ purchase.createdAt.timestamp }}>{{ purchase.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ purchase.ref }}</td>
+                        <td>
+                            {% if customerDetail.company %}
+                                <div>{{ customerDetail.company }}</div>
+                            {% endif %}
+                            {% if customerDetail.vatNumber %}
+                                <div>{{ customerDetail.vatNumber }}</div>
+                            {% endif %}
+                            <div style="margin: 4px 0;">
+                                {{ customerDetail.civility | trans({}, 'configs', 'fr') }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}
+                            </div>
+                            <div style="margin: 4px 0;">{{ customerDetail.email }}</div>
+                            <div style="margin: 4px 0;">{{ customerDetail.phone }}</div>
+                        </td>
+                        <td>
+                            {{ include('UI/_address.html.twig', {address: purchase.deliveryDetail}) }}
+                        </td>
+                        <td>
+                            {{ include('UI/_address.html.twig', {address: purchase.invoiceDetail}) }}
+                        </td>
+                        <td>{{ purchase.countArticles }}</td>
+                        <td style="text-align: left;">
+                            <table class="inner-table">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 5px 10px;">Articles</td>
+                                        <td style="padding: 5px 10px;">{{ purchase.articlesPrice.priceToPay | price_format('fr') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 10px;">Livraison</td>
+                                        <td style="padding: 5px 10px;">{{ purchase.shippingCost.priceToPay | price_format('fr') }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding: 5px 10px;">Total</td>
+                                        <td style="padding: 5px 10px;">{{ purchase.totalPrice.priceToPay | price_format('fr') }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>{{ purchase.status | trans({}, 'configs', 'fr') }}</td>
+                        <td>{{ purchase.createdAt.format('d/m/Y H:i') }}</td>
                         <td class="controls">
                             <a class="admin-table-button success" href="{{ path('admin_purchase_show', {id: purchase.id}) }}" title="Voir la commande">
                                 <svg class="icon">
