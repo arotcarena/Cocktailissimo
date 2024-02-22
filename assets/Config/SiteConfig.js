@@ -17,9 +17,15 @@ export class SiteConfig {
     /**purchase status */
     static STATUS_PENDING = 'status_pending';
     static STATUS_PAID = 'status_paid';
-    static STATUS_SENT = 'status_sent';
-    static STATUS_DELIVERED = 'status_delivered';
-    static STATUS_CANCELED = 'status_canceled';
+    static STATUS_TERMINATED = 'status_terminated';
+    
+    /*parcel shipping status */
+    static SHIPPING_STATUS_PENDING = 'shipping_status.pending';
+    static SHIPPING_STATUS_SENT = 'shipping_status.sent';
+    static SHIPPING_STATUS_DELIVERED = 'shipping_status.delivered';
+    static SHIPPING_STATUS_CANCELED = 'shipping_status.canceled';
+    static SHIPPING_STATUS_RETURN_SENT = 'shipping_status.return_sent';
+    static SHIPPING_STATUS_RETURN_DELIVERED = 'shipping_status.return_delivered';
 
 
     /** review status */

@@ -4,9 +4,15 @@ shipping_type:
 
 status_pending: Pending
 status_paid: Paid
-status_sent: Sent
-status_delivered: Delivered
-status_canceled: Canceled
+status_sent: Sent 
+status_terminated: Finished
+
+shipping_status.pending: Pending
+shipping_status.sent: Sent
+shipping_status.delivered: Delivered
+shipping_status.canceled: Canceled
+shipping_status.return_sent: Return sent
+shipping_status.return_delivered: Return delivered
 
 civility_m: Mr.
 civility_f: Mrs.

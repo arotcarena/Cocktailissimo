@@ -5,8 +5,14 @@ shipping_type:
 status_pending: In attesa
 status_paid: Pagata
 status_sent: Inviata
-status_delivered: Consegnata
-status_canceled: Annullata
+status_terminated: Finita
+
+shipping_status.pending: In attesa
+shipping_status.sent: Inviato
+shipping_status.delivered: Consegnato
+shipping_status.canceled: Annullato
+shipping_status.return_sent: Ritorno inviato
+shipping_status.return_delivered: Ritorno ricevuto
 
 civility_m: Signor
 civility_f: Signora

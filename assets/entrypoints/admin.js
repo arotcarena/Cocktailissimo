@@ -20,7 +20,7 @@ import '../styles/Admin/alerts.css';
 import '../bootstrap';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { PurchaseStatusUpdater } from '../Components/Admin/PurchaseStatusUpdater';
+import { PurchaseShippingStatusUpdater } from '../Components/Admin/PurchaseShippingStatusUpdater';
 import { ReviewModerator } from '../Components/Admin/ReviewModerator';
 import i18n from './i18n';
 import { IngredientsQuantitiesInput } from '../Components/Admin/IngredientsQuantitiesInput';
@@ -90,14 +90,17 @@ if(document.getElementById('packaging-choices-input')) {
 }
 
 
-if(document.getElementById('purchase-status-updater')) {
-    const purchaseStatusUpdater = document.getElementById('purchase-status-updater');
+document.querySelectorAll('.purchase-shipping-status-updater').forEach(purchaseStatusUpdater => {
     const purchaseStatusUpdaterRoot = createRoot(purchaseStatusUpdater);
 
     purchaseStatusUpdaterRoot.render(
-        <PurchaseStatusUpdater id={purchaseStatusUpdater.dataset.id} initialStatus={purchaseStatusUpdater.dataset.status} />
+        <PurchaseShippingStatusUpdater
+            shippingInfoId={purchaseStatusUpdater.dataset.shippinginfoid} 
+            initialStatus={purchaseStatusUpdater.dataset.currentstatus} 
+        />
     );
-}
+});
+
 
 if(document.querySelector('.review-moderator')) {
     document.querySelectorAll('.review-moderator').forEach(reviewModerator => {

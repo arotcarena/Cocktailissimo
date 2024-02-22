@@ -2,9 +2,13 @@
   "status_pending": "Pendiente",
   "status_paid": "Pagada",
   "status_terminated": "Terminada",
-  "status_sent": "Enviada",
-  "status_delivered": "Entregada",
-  "status_canceled": "Cancelada",
+
+  "shipping_status.pending": "Pendiente",
+  "shipping_status.sent": "Enviado",
+  "shipping_status.delivered": "Entregado",
+  "shipping_status.canceled": "Cancelado",
+  "shipping_status.return_sent": "Devolución enviada",
+  "shipping_status.return_delivered": "Devolución recibida",
 
   "civility_m": "Señor",
   "civility_f": "Señora",
