@@ -4,9 +4,13 @@ import { PurchaseLineCard } from './PurchaseLineCard';
 import { ShippingCard } from './ShippingCard';
 import { useTranslation } from 'react-i18next';
 import { ShippingStatusUpdateTable } from './ShippingStatusUpdateTable';
+import { SiteConfig } from '../../../../../../Config/SiteConfig';
+import { InvoiceDownloaderLink } from '../../../../../../UI/Invoice/InvoiceDownloaderLink';
 
-export const PurchaseVendorGroupCard = ({purchaseVendorGroup: {vendor, purchaseLines, shippingInfo, salesInvoiceNumber}, position}) => {
+export const PurchaseVendorGroupCard = ({purchaseVendorGroup, position}) => {
     const {t} = useTranslation('messages');
+
+    const {vendor, purchaseLines, shippingInfo, salesInvoiceNumber} = purchaseVendorGroup;
 
     return (
         <div className="purchase-vendor-group">
@@ -39,7 +43,7 @@ export const PurchaseVendorGroupCard = ({purchaseVendorGroup: {vendor, purchaseL
             {
                 shippingInfo.tracking && <div>Numéro de suivi : {shippingInfo.tracking}</div>
             }
-            <div className="purchase-vendor-group-download-link">{t('download.invoice')} : {salesInvoiceNumber}</div>
+            <InvoiceDownloaderLink purchaseVendorGroupId={purchaseVendorGroup.id} type={SiteConfig.INVOICE_TYPE_SALES} />
         </div>
     )
 }

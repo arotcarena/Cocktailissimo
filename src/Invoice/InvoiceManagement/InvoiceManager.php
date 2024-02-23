@@ -3,7 +3,7 @@ namespace App\Invoice\InvoiceManagement;
 
 use App\Config\SiteConfig;
 use App\Entity\PurchaseVendorGroup;
-use App\Helper\PdfManager;
+use App\File\Pdf\PdfManager;
 use App\Invoice\InvoiceTypes;
 use Exception;
 use Twig\Environment;
@@ -18,22 +18,35 @@ class InvoiceManager
         
     }
 
-    public function create(string $lang, string $type, PurchaseVendorGroup $purchaseVendorGroup, int $number): void
+    public function create(string $lang, string $type, PurchaseVendorGroup $purchaseVendorGroup): void
     {
         $html = $this->twig->render('pdf/invoice/' . $type . '.html.twig', [
             'lang' => $lang,
             'purchaseVendorGroup' => $purchaseVendorGroup,
             'vendorIsCocktailissimo' => $purchaseVendorGroup->getVendorDetail()->getIdentificationNumber() === SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER
         ]);
-        $this->pdfManager->createFromHtml($html, $this->getFileRelativePath($purchaseVendorGroup, $type, $lang));
+
+        [$relativeDir, $name] = $this->getFilePathInfos($purchaseVendorGroup, $type, $lang);
+
+        $this->pdfManager->createFromHtml($html, $relativeDir, $name);
     }
 
-    public function getPath(PurchaseVendorGroup $purchaseVendorGroup, string $type, string $lang): string 
+    public function getPath(PurchaseVendorGroup $purchaseVendorGroup, string $type, string $lang): ?string 
     {
-        return $this->pdfManager->getPath($this->getFileRelativePath($purchaseVendorGroup, $type, $lang));
+        [$relativeDir, $name] = $this->getFilePathInfos($purchaseVendorGroup, $type, $lang);
+
+        return $this->pdfManager->getPath($relativeDir, $name);
     }
 
-    private function getFileRelativePath(PurchaseVendorGroup $purchaseVendorGroup, string $type, string $lang)
+    /**
+     * Undocumented function
+     *
+     * @param PurchaseVendorGroup $purchaseVendorGroup
+     * @param string $type
+     * @param string $lang
+     * @return array [relativeDir, name]
+     */
+    private function getFilePathInfos(PurchaseVendorGroup $purchaseVendorGroup, string $type, string $lang): array
     {
         $purchase = $purchaseVendorGroup->getPurchase();
         $createdAt = $purchase->getCreatedAt();
@@ -51,7 +64,11 @@ class InvoiceManager
                 break;
         }
 
-        return DIRECTORY_SEPARATOR . $createdAt->format('Y') . DIRECTORY_SEPARATOR . $createdAt->format('m')
-                . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $lang . DIRECTORY_SEPARATOR . $invoiceNumber;
+        $relativeDir = $createdAt->format('Y') . DIRECTORY_SEPARATOR . $createdAt->format('m')
+                . DIRECTORY_SEPARATOR . $type . DIRECTORY_SEPARATOR . $invoiceNumber;
+
+        $name = 'invoice-' . $invoiceNumber . '_' . $lang;
+        
+        return [$relativeDir, $name];
     }
 }

@@ -27,6 +27,10 @@ export class SiteConfig {
     static SHIPPING_STATUS_RETURN_SENT = 'shipping_status.return_sent';
     static SHIPPING_STATUS_RETURN_DELIVERED = 'shipping_status.return_delivered';
 
+    /*invoice types*/
+    static INVOICE_TYPE_SALES = 'sales_invoice';
+    static INVOICE_TYPE_COMMISSION = 'commission_invoice';
+
 
     /** review status */
     static MODERATION_STATUS_PENDING = 'moderation_status_pending';

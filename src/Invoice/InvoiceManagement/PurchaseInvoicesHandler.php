@@ -11,7 +11,7 @@ class PurchaseInvoicesHandler
 {
     public function __construct(
         private LastInvoiceNumberFinder $lastInvoiceNumberFinder,
-        private InvoiceManager $invoiceCreator,
+        private InvoiceManager $invoiceManager,
         private EntityManagerInterface $em
     )
     {
@@ -33,11 +33,11 @@ class PurchaseInvoicesHandler
             $purchaseVendorGroup->setSalesInvoiceNumber($invoiceNumber);
 
             //la facture de vente est en 2 langues : langue du client et français (cocktailissimo)
-            $this->invoiceCreator->create(SiteConfig::ADMIN_LANG, InvoiceTypes::SALES, $purchaseVendorGroup, $invoiceNumber);
+            $this->invoiceManager->create(SiteConfig::ADMIN_LANG, InvoiceTypes::SALES, $purchaseVendorGroup);
             
             if($lang !== SiteConfig::ADMIN_LANG)
             {
-                $this->invoiceCreator->create($lang, InvoiceTypes::SALES, $purchaseVendorGroup, $invoiceNumber);
+                $this->invoiceManager->create($lang, InvoiceTypes::SALES, $purchaseVendorGroup);
             }
 
             //commission invoice
@@ -46,7 +46,7 @@ class PurchaseInvoicesHandler
                 $invoiceNumber++;
                 $purchaseVendorGroup->setCommissionInvoiceNumber($invoiceNumber);
                 //la facture de commission est uniquement en français (le client est cocktailissimo)
-                $this->invoiceCreator->create(SiteConfig::ADMIN_LANG, InvoiceTypes::COMMISSION, $purchaseVendorGroup, $invoiceNumber);
+                $this->invoiceManager->create(SiteConfig::ADMIN_LANG, InvoiceTypes::COMMISSION, $purchaseVendorGroup);
             }
         }
 

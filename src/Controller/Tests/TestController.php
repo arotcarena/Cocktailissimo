@@ -59,6 +59,17 @@ class TestController extends AbstractController
         $this->faker->addProvider(new Commerce($this->faker));
     }
 
+    #[Route('/tests/invoice-generate')]
+    public function invoiceGenerate(PurchaseInvoicesHandler $purchaseInvoicesHandler)
+    {
+        $purchases = $this->purchaseRepository->findAll();
+        foreach($purchases as $purchase)
+        {
+            $purchaseInvoicesHandler->createInvoices($purchase);
+        }
+        return $this->json('ok');
+    }
+
     #[Route('/tests/purchases/setToAdmin')]
     public function purchasesSetToAdmin()
     {

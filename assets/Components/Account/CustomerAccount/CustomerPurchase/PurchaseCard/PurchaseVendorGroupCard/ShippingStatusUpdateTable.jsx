@@ -13,7 +13,7 @@ export const ShippingStatusUpdateTable = ({shippingInfo}) => {
 
     return (
         <div className="purchase-lines-list">
-            <table className="purchase-full-item-table">
+            <table className="purchase-full-item-table td-small">
                 <thead>
                     <tr>
                         {

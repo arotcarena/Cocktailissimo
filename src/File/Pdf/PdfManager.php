@@ -1,6 +1,7 @@
 <?php
-namespace App\Helper;
+namespace App\File\Pdf;
 
+use App\File\FileStorage;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -8,7 +9,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class PdfManager
 {
     public function __construct(
-        private KernelInterface $kernel
+        private KernelInterface $kernel,
+        private FileStorage $fileStorage
     )
     {
         
@@ -18,12 +20,13 @@ class PdfManager
      * Undocumented function
      *
      * @param string $html
-     * @param string $relativePath (ex: /2024/03/sales_invoice/1/invoice_1_fr)
+     * @param string $relativeDir (ex: 2024/03/sales_invoice/1)
+     * @param string $name (ex: invoice_1_fr)
      * @param string $paperSize
      * @param string $orientation (portrait | landscape)
-     * @return string $pdfFile (ex: projectDir/pdf/invoices/invoice_1.pdf)
+     * @return bool true if success, false if failure
      */
-    public function createFromHtml(string $html, string $relativePath, string $paperSize = 'A4', $orientation = 'portrait'): string
+    public function createFromHtml(string $html, string $relativeDir, string $name, string $paperSize = 'A4', $orientation = 'portrait'): bool
     {
         // instantiate and use the dompdf class
         $options = new Options();
@@ -38,19 +41,22 @@ class PdfManager
         // get pdf string
         $pdfContent = $dompdf->output();
 
-        $filename = $this->getPdfDirectory() . $relativePath . '.pdf';
-
-        file_put_contents($filename, $pdfContent);
-
-        return $filename;
+        return $this->fileStorage->storeFile(
+            $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $relativeDir,
+            $name . '.pdf',
+            $pdfContent
+        );
     }
 
     /**
-     * @param string $relativePath (ex: /2024/02/commission_invoice/1/invoice_1_fr /)
+     * @param string $relativeDir (ex: 2024/03/sales_invoice/1)
+     * @param string $name (ex: invoice_1_fr)
      */
-    public function getPath(string $relativePath)
+    public function getPath(string $relativeDir, string $name): ?string
     {
-        return $this->getPdfDirectory() . $relativePath . '.pdf';
+        return $this->fileStorage->getPathOrNull(
+            $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $relativeDir . DIRECTORY_SEPARATOR . $name . '.pdf'
+        );
     }
 
     private function getPdfDirectory(): string

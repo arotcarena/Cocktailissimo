@@ -28,11 +28,11 @@ class ShippingInfoToArrayConvertor
             'relayInfo' => $shippingInfo->getRelayInfo() ? $this->relayInfoToArrayConvertor->convert($shippingInfo->getRelayInfo()): null,
             'status' => $shippingInfo->getStatus(),
             'tracking' => $shippingInfo->getTracking(),
-            'sentAt' => $shippingInfo->getSentAt() ? $this->dateTimeToString->getDateString($shippingInfo->getSentAt(), $lang): null,
-            'deliveredAt' => $shippingInfo->getDeliveredAt() ? $this->dateTimeToString->getDateString($shippingInfo->getDeliveredAt(), $lang): null,
-            'canceledAt' => $shippingInfo->getCanceledAt() ? $this->dateTimeToString->getDateString($shippingInfo->getCanceledAt(), $lang): null,
-            'returnSentAt' => $shippingInfo->getReturnSentAt() ? $this->dateTimeToString->getDateString($shippingInfo->getReturnSentAt(), $lang): null,
-            'returnDeliveredAt' => $shippingInfo->getReturnDeliveredAt() ? $this->dateTimeToString->getDateString($shippingInfo->getReturnDeliveredAt(), $lang): null
+            'sentAt' => $shippingInfo->getSentAt() ? $this->dateTimeToString->getDateTimeString($shippingInfo->getSentAt(), $lang): null,
+            'deliveredAt' => $shippingInfo->getDeliveredAt() ? $this->dateTimeToString->getDateTimeString($shippingInfo->getDeliveredAt(), $lang): null,
+            'canceledAt' => $shippingInfo->getCanceledAt() ? $this->dateTimeToString->getDateTimeString($shippingInfo->getCanceledAt(), $lang): null,
+            'returnSentAt' => $shippingInfo->getReturnSentAt() ? $this->dateTimeToString->getDateTimeString($shippingInfo->getReturnSentAt(), $lang): null,
+            'returnDeliveredAt' => $shippingInfo->getReturnDeliveredAt() ? $this->dateTimeToString->getDateTimeString($shippingInfo->getReturnDeliveredAt(), $lang): null
         ];
     }
 }
