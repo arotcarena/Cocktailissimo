@@ -172,7 +172,13 @@ secure_payment: Pago seguro
 secure_payment_explanation: Para garantizar la máxima seguridad, las transacciones financieras son procesadas por nuestro socio Stripe, líder en soluciones de pago. Tus datos están encriptados, garantizando total confidencialidad durante toda la transacción.
 product_details: Detalles del producto
 delivery_and_return: Entrega y devolución
-delivery_and_return_explanation: Explicación sobre entrega y devoluciones (por hacer)
+delivery_and_return_explanation: 
+  delivery: Nos esforzamos por priorizar los métodos de envío más respetuosos con el medio ambiente. Para ayudarnos en este objetivo, elige la entrega en un punto de recogida. Los tiempos de entrega son los comunicados por los transportistas y se proporcionan solo con fines informativos.
+  return: >
+    Puedes devolvernos todos los artículos no alimentarios hasta 14 días después de la recepción, en su embalaje sin abrir, y recibir un reembolso completo. Los gastos de envío corren por tu cuenta. Para solicitar una devolución, <a target="_blank" href="{contact_url}">contáctanos</a>.
+  cancelation: >
+    Es posible cancelar un pedido antes de su envío, y tendrás derecho a un reembolso completo. Para solicitar una cancelación, <a target="_blank" href="{contact_url}">contáctanos</a>.
+
 create_review: Dejar mi opinión sobre "{product}"
 ht: sin IVA
 ttc: con IVA

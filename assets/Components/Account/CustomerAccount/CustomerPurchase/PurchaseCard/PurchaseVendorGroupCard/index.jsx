@@ -3,6 +3,7 @@ import { VendorLine } from './VendorLine';
 import { PurchaseLineCard } from './PurchaseLineCard';
 import { ShippingCard } from './ShippingCard';
 import { useTranslation } from 'react-i18next';
+import { ShippingStatusUpdateTable } from './ShippingStatusUpdateTable';
 
 export const PurchaseVendorGroupCard = ({purchaseVendorGroup: {vendor, purchaseLines, shippingInfo, salesInvoiceNumber}, position}) => {
     const {t} = useTranslation('messages');
@@ -34,6 +35,10 @@ export const PurchaseVendorGroupCard = ({purchaseVendorGroup: {vendor, purchaseL
                 <span className="purchase-vendor-group-shipping-title-badge">{t(shippingInfo.type, {ns: 'configs'})}</span>
             </div>
             <ShippingCard shippingInfo={shippingInfo} />
+            <ShippingStatusUpdateTable shippingInfo={shippingInfo} />
+            {
+                shippingInfo.tracking && <div>Numéro de suivi : {shippingInfo.tracking}</div>
+            }
             <div className="purchase-vendor-group-download-link">{t('download.invoice')} : {salesInvoiceNumber}</div>
         </div>
     )

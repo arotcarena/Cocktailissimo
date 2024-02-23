@@ -99,7 +99,7 @@ class PurchaseToArrayConvertor
                 'countReviews' => $vendor ? $vendor->getCountReviews(): null,
             ],
             'purchaseLines' => $this->convertPurchaseLines($purchaseVendorGroup->getPurchaseLines()),
-            'shippingInfo' => $this->shippingInfoConvertor->convert($purchaseVendorGroup->getShippingInfo()),
+            'shippingInfo' => $this->shippingInfoConvertor->convert($purchaseVendorGroup->getShippingInfo(), $this->lang),
             'articlesPrice' => $this->customPriceToArrayConvertor->convert($purchaseVendorGroup->getArticlesPrice()),
             'totalPrice' => $this->customPriceToArrayConvertor->convert($purchaseVendorGroup->getTotalPrice()),
             'salesInvoiceNumber' => $purchaseVendorGroup->getSalesInvoiceNumber()

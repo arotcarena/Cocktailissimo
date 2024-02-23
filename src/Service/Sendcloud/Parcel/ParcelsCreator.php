@@ -53,7 +53,7 @@ class ParcelsCreator
             // 'width' => '',
             // 'height' => '',
             'order_number' => $orderNumber,
-            'total_order_value' => number_format($purchaseVendorGroup->getTotalPrice()->getPriceToPay() / 100, 2, '.', ''),
+            'total_order_value' => number_format($purchaseVendorGroup->getArticlesPrice()->getPriceToPay() / 100, 2, '.', ''),
             'total_order_value_currency' => 'EUR',
             'shipment' => [
                 'id' => $shippingInfo->getShippingMethodId(),

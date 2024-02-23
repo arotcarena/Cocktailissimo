@@ -172,7 +172,12 @@ secure_payment: Paiement sécurisé
 secure_payment_explanation: Pour garantir une sécurité maximale, les transactions financières sont traitées par notre partenaire Stripe, un leader en solutions de paiement. Vos données sont cryptées, garantissant ainsi une confidentialité absolue durant toute la transaction.
 product_details: Détails du produit
 delivery_and_return: Livraison & retour
-delivery_and_return_explanation: Explication sur la livraison et les retours (à faire)
+delivery_and_return_explanation: 
+  delivery: Nous oeuvrons pour privilégier les modes d'expédition les plus éco-responsables. Pour nous aider dans cet objectif, choisissez la livraison en point relais. Les délais de livraison sont les délais communiqués par les transporteurs, et vous sont donnés à titre indicatif.
+  return: >
+    Vous pouvez nous retourner tous les articles non alimentaires jusqu'à 14 jours après réception, dans leur emballage non ouvert, et obtenir un remboursement total. Les frais d'envoi sont à votre charge. Pour demander à effectuer un retour, <a target="_blank" href="{contact_url}">contactez-nous</a>.
+  cancelation: >
+    L'annulation d'une commande est possible avant l'expédition de celle-ci, et donne lieu à un remboursement total. Pour demander une annulation, <a target="_blank" href="{contact_url}">contactez-nous</a>.
 create_review: Donner mon avis sur "{product}"
 ht: HT
 ttc: TTC

@@ -531,6 +531,11 @@ img {
     overflow-wrap: normal;
 }
 
+.delivery-status-badge {
+    color: var(--color-success);
+    font-weight: 600;
+}
+
 @media only screen and (min-width: 700px) {
     .page-show {
         padding-top: 40px;

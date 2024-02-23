@@ -59,6 +59,18 @@ class TestController extends AbstractController
         $this->faker->addProvider(new Commerce($this->faker));
     }
 
+    #[Route('/tests/purchases/setToAdmin')]
+    public function purchasesSetToAdmin()
+    {
+        $purchases = $this->purchaseRepository->findAll();
+        for ($i=0; $i < 3; $i++) { 
+            $purchases[$i]->getCustomerDetail()->setEmail('fnsandin@gmail.com');
+        }
+        $this->em->flush();
+
+        return $this->json('ok');
+    }
+
     #[Route('/tests/email')]
     public function testEmail(UserRepository $userRepository, AllInOneInitEmail $allInOneInitEmail)
     {
@@ -71,7 +83,6 @@ class TestController extends AbstractController
             'lang' => 'fr'
         ]);
     }
-
 
     #[Route('/tests/purchaseInvoices')]
     public function purchaseInvoices(PurchaseRepository $purchaseRepository, PurchaseInvoicesHandler $purchaseInvoicesHandler)

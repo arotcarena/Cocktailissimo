@@ -56,6 +56,8 @@ export const PurchaseCard = ({purchase}) => {
 }
 
 const FullPurchase = ({fullPurchase, isLoading, close}) => {
+    const {t} = useTranslation('messages');
+
     if(isLoading) {
         return <Loader />
     } else if(!fullPurchase) {

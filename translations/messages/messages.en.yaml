@@ -172,7 +172,13 @@ secure_payment: Secure payment
 secure_payment_explanation: To ensure maximum security, financial transactions are processed by our partner Stripe, a leader in payment solutions. Your data is encrypted, ensuring absolute confidentiality throughout the transaction.
 product_details: Product details
 delivery_and_return: Delivery & return
-delivery_and_return_explanation: Explanation on delivery and returns (to be done)
+delivery_and_return_explanation: 
+  delivery: We strive to prioritize the most eco-friendly shipping methods. To assist us in this goal, please choose delivery to a pickup point. Delivery times are those communicated by the carriers and are provided for informational purposes only.
+  return: >
+    You can return all non-food items to us up to 14 days after receipt, in their unopened packaging, and receive a full refund. Shipping costs are at your expense. To request a return, <a target="_blank" href="{contact_url}">contact us</a>.
+  cancelation: >
+    Cancelling an order is possible before its shipment, and entitles you to a full refund. To request a cancellation, <a target="_blank" href="{contact_url}">contact us</a>.
+
 create_review: Leave a review on "{product}"
 ht: excluding VAT
 ttc: VAT included

@@ -78,6 +78,16 @@
             </button>
             <div class="toggle invisible">
                 <p>{{ 'delivery_and_return_explanation' | trans }}</p>
+                <p>
+                    {{ 'delivery_and_return_explanation.return' | trans({
+                        '{contact_url}': path('contact_index', {_locale: app.request.locale})
+                    }) }}
+                </p>
+                <p>
+                    {{ 'delivery_and_return_explanation.cancelation' | trans({
+                        '{contact_url}': path('contact_index', {_locale: app.request.locale})
+                    }) }}
+                </p>
             </div>
         </li>
     </ul>
