@@ -18,12 +18,12 @@ class PdfManager
      * Undocumented function
      *
      * @param string $html
-     * @param string $name (ex: invoice_1)
+     * @param string $relativePath (ex: /2024/03/sales_invoice/1/invoice_1_fr)
      * @param string $paperSize
      * @param string $orientation (portrait | landscape)
      * @return string $pdfFile (ex: projectDir/pdf/invoices/invoice_1.pdf)
      */
-    public function createFromHtml(string $html, string $name, string $paperSize = 'A4', $orientation = 'portrait'): string
+    public function createFromHtml(string $html, string $relativePath, string $paperSize = 'A4', $orientation = 'portrait'): string
     {
         // instantiate and use the dompdf class
         $options = new Options();
@@ -38,16 +38,19 @@ class PdfManager
         // get pdf string
         $pdfContent = $dompdf->output();
 
-        $filename = $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $name . '.pdf';
+        $filename = $this->getPdfDirectory() . $relativePath . '.pdf';
 
         file_put_contents($filename, $pdfContent);
 
         return $filename;
     }
 
-    public function getPath(string $name)
+    /**
+     * @param string $relativePath (ex: /2024/02/commission_invoice/1/invoice_1_fr /)
+     */
+    public function getPath(string $relativePath)
     {
-        return $this->getPdfDirectory() . DIRECTORY_SEPARATOR . $name . '.pdf';
+        return $this->getPdfDirectory() . $relativePath . '.pdf';
     }
 
     private function getPdfDirectory(): string

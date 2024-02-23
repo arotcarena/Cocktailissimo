@@ -32,7 +32,7 @@ class CustomerPurchaseConfirmationEmail extends EmailFactory
         $email = (new Email())
             ->from(SiteConfig::EMAIL_NOREPLY)
             ->to($purchase->getCustomerDetail()->getEmail())
-            ->subject($this->translator->trans('purchase.confirmation.subject', [], 'emails', $purchase->getLang()))
+            ->subject($this->translator->trans('purchase.confirmation.subject', [], 'emails', $lang))
             ->text($this->translator->trans('purchase.confirmation.text', [
                 '{amount}' => $this->priceFormater->format(
                                 $purchase->getTotalPrice()->getPriceToPay(),
@@ -47,7 +47,7 @@ class CustomerPurchaseConfirmationEmail extends EmailFactory
         
         foreach($purchase->getPurchaseVendorGroups() as $purchaseVendorGroup)
         {
-            $salesInvoice = $this->invoiceManager->getPath($lang, InvoiceTypes::SALES, $purchaseVendorGroup->getSalesInvoiceNumber());
+            $salesInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::SALES, $lang);
             $email->attachFromPath($salesInvoice);
         }
 

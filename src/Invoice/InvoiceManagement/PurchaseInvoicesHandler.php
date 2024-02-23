@@ -1,6 +1,7 @@
 <?php
 namespace App\Invoice\InvoiceManagement;
 
+use App\Config\SiteConfig;
 use App\Entity\Purchase;
 use App\Invoice\InvoiceTypes;
 use App\Invoice\LastInvoiceNumberFinder;
@@ -30,9 +31,11 @@ class PurchaseInvoicesHandler
             //sales invoice
             $invoiceNumber++;
             $purchaseVendorGroup->setSalesInvoiceNumber($invoiceNumber);
-            $this->invoiceCreator->create('fr', InvoiceTypes::SALES, $purchaseVendorGroup, $invoiceNumber);
+
+            //la facture de vente est en 2 langues : langue du client et français (cocktailissimo)
+            $this->invoiceCreator->create(SiteConfig::ADMIN_LANG, InvoiceTypes::SALES, $purchaseVendorGroup, $invoiceNumber);
             
-            if($lang !== 'fr')
+            if($lang !== SiteConfig::ADMIN_LANG)
             {
                 $this->invoiceCreator->create($lang, InvoiceTypes::SALES, $purchaseVendorGroup, $invoiceNumber);
             }
@@ -42,12 +45,8 @@ class PurchaseInvoicesHandler
             {
                 $invoiceNumber++;
                 $purchaseVendorGroup->setCommissionInvoiceNumber($invoiceNumber);
-                $this->invoiceCreator->create('fr', InvoiceTypes::COMMISSION, $purchaseVendorGroup, $invoiceNumber);
-
-                if($lang !== 'fr')
-                {
-                    $this->invoiceCreator->create($lang, InvoiceTypes::COMMISSION, $purchaseVendorGroup, $invoiceNumber);
-                }
+                //la facture de commission est uniquement en français (le client est cocktailissimo)
+                $this->invoiceCreator->create(SiteConfig::ADMIN_LANG, InvoiceTypes::COMMISSION, $purchaseVendorGroup, $invoiceNumber);
             }
         }
 
