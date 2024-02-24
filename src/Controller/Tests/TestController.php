@@ -147,17 +147,6 @@ class TestController extends AbstractController
         ]);
     }
 
-    #[Route('/tests/purchase_cancelation')]
-    public function purchaseCancelation(PurchaseRepository $purchaseRepository)
-    {
-        $purchase = $purchaseRepository->findOneBy([]);
-        $purchase->setLang('fr');
-
-        return $this->render('email/customer/purchase_cancelation.html.twig', [
-            'purchase' => $purchase
-        ]);
-    }
-
     #[Route('/tests/findPurchases')]
     public function findPurchases()
     {

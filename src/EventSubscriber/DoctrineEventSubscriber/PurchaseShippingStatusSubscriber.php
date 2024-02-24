@@ -6,7 +6,6 @@ use App\Email\Customer\CustomerPurchaseStatusEmail;
 use App\Entity\ShippingInfo;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\PostUpdateEventArgs;
-use Doctrine\ORM\Event\PreUpdateEventArgs;
 use Doctrine\ORM\Events;
 
 class PurchaseShippingStatusSubscriber implements EventSubscriber

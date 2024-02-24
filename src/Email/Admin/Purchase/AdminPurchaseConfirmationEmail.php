@@ -37,11 +37,15 @@ class AdminPurchaseConfirmationEmail extends EmailFactory
 
         foreach($purchase->getPurchaseVendorGroups() as $purchaseVendorGroup)
         {
-            $salesInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::SALES, SiteConfig::ADMIN_LANG);
-            $email->attachFromPath($salesInvoice);
+            if($salesInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::SALES, SiteConfig::ADMIN_LANG))
+            {
+                $email->attachFromPath($salesInvoice);
+            }
 
-            $commissionInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::COMMISSION, SiteConfig::ADMIN_LANG);
-            $email->attach($commissionInvoice);
+            if($commissionInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::COMMISSION, SiteConfig::ADMIN_LANG))
+            {
+                $email->attach($commissionInvoice);
+            }
         }
 
         $this->sendEmail($email);

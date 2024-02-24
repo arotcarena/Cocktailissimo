@@ -47,8 +47,10 @@ class CustomerPurchaseConfirmationEmail extends EmailFactory
         
         foreach($purchase->getPurchaseVendorGroups() as $purchaseVendorGroup)
         {
-            $salesInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::SALES, $lang);
-            $email->attachFromPath($salesInvoice);
+            if($salesInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::SALES, $lang))
+            {
+                $email->attachFromPath($salesInvoice);
+            }
         }
 
         $this->sendEmail($email);

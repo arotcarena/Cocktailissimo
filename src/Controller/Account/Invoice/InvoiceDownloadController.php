@@ -42,7 +42,7 @@ class InvoiceDownloadController extends AbstractController
         $voterAttribute = $type === InvoiceTypes::COMMISSION ? 'CAN_DOWNLOAD_COMMISSION_INVOICE': 'CAN_DOWNLOAD_SALES_INVOICE';
         if(!$this->isGranted($voterAttribute, $purchaseVendorGroup))
         {
-            throw new Exception('Forbidden access');
+            return new Response(null, Response::HTTP_FORBIDDEN);
         }
 
         $file = $this->invoiceManager->getPath($purchaseVendorGroup, $type, $lang);
