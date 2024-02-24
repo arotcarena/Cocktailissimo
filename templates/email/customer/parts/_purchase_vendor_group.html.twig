@@ -48,7 +48,8 @@
                     <tbody>
                         <tr>
                             <td>
-                                {{ include('UI/_carrier_icon.html.twig', {carrier: shippingInfo.carrier, height: 30}) }}
+                                {{ include('UI/_carrier_icon.html.twig', {carrier: shippingInfo.carrier, height: 30, imgUrlPrefix: 'https://cocktailissimo.com'}) }}
+                                {# imgUrlPrefix est obligatoire car dans un email on doit mettre l'url complète de l'image et pas seulement le relative path #}
                             </td>
                             <td style="padding: 5px 15px;">
                                 {% if shippingInfo.leadTimeHours %}{{ 'delivered_time' | trans({'{count_hours}': shippingInfo.leadTimeHours}) }}{% endif %}

@@ -62,7 +62,7 @@
                     </svg>
                 </button>
                 <div class="toggle product-show-long-description link-underline">
-                    {{ (attribute(product.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale)) | raw }}
+                    {{ (attribute(product.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale)) | raw | nl2br }}
                 </div>
             </li>
         {% endif %}

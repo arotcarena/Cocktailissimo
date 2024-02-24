@@ -2,6 +2,8 @@
 namespace App\Invoice\InvoiceManagement;
 
 use App\Config\SiteConfig;
+use App\Email\Admin\AdminNotificationEmail;
+use App\Email\Admin\Exceptions\AdminInvoiceGenerationExceptionEmail;
 use App\Entity\PurchaseVendorGroup;
 use App\File\Pdf\PdfManager;
 use App\Invoice\InvoiceTypes;
@@ -12,7 +14,8 @@ class InvoiceManager
 {
     public function __construct(
         private PdfManager $pdfManager,
-        private Environment $twig
+        private Environment $twig,
+        private AdminInvoiceGenerationExceptionEmail $adminInvoiceGenerationExceptionEmail
     )
     {
         
@@ -20,15 +23,23 @@ class InvoiceManager
 
     public function create(string $lang, string $type, PurchaseVendorGroup $purchaseVendorGroup): void
     {
-        $html = $this->twig->render('pdf/invoice/' . $type . '.html.twig', [
-            'lang' => $lang,
-            'purchaseVendorGroup' => $purchaseVendorGroup,
-            'vendorIsCocktailissimo' => $purchaseVendorGroup->getVendorDetail()->getIdentificationNumber() === SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER
-        ]);
-
-        [$relativeDir, $name] = $this->getFilePathInfos($purchaseVendorGroup, $type, $lang);
-
-        $this->pdfManager->createFromHtml($html, $relativeDir, $name);
+        try
+        {
+            throw new Exception();
+            $html = $this->twig->render('pdf/invoice/' . $type . '.html.twig', [
+                'lang' => $lang,
+                'purchaseVendorGroup' => $purchaseVendorGroup,
+                'vendorIsCocktailissimo' => $purchaseVendorGroup->getVendorDetail()->getIdentificationNumber() === SiteConfig::COCKTAILISSIMO_IDENTIFICATION_NUMBER
+            ]);
+    
+            [$relativeDir, $name] = $this->getFilePathInfos($purchaseVendorGroup, $type, $lang);
+    
+            $this->pdfManager->createFromHtml($html, $relativeDir, $name);
+        }
+        catch(Exception $e)
+        {
+            $this->adminInvoiceGenerationExceptionEmail->send($purchaseVendorGroup, $lang, $type, $e->getMessage());
+        }
     }
 
     public function getPath(PurchaseVendorGroup $purchaseVendorGroup, string $type, string $lang): ?string 

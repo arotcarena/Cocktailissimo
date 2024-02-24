@@ -44,7 +44,7 @@ class AdminPurchaseConfirmationEmail extends EmailFactory
 
             if($commissionInvoice = $this->invoiceManager->getPath($purchaseVendorGroup, InvoiceTypes::COMMISSION, SiteConfig::ADMIN_LANG))
             {
-                $email->attach($commissionInvoice);
+                $email->attachFromPath($commissionInvoice);
             }
         }
 

@@ -29,7 +29,7 @@
             </h3>
             {# extrait du texte #}
             <div class="highlighted-article-text link-underline">
-                {{ ((attribute(article.htmlContent, locale) | parse_master_tags(locale)) | excerpt(15)) | raw }}
+                {{ ((attribute(article.htmlContent, locale) | parse_master_tags(locale)) | excerpt(15)) | raw | nl2br }}
             </div>
             <div class="center-wrapper highlighted-article-link-wrapper">
                 <a href="{{ target }}" class="home-cta-link">

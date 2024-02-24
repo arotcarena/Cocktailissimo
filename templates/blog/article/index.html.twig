@@ -49,7 +49,7 @@
     </div>
 
     <div class="product-index-footer link-underline">
-        {{ attribute(articlesCategory.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale) | raw }}
+        {{ attribute(articlesCategory.longHtmlDescription, app.request.locale) | parse_master_tags(app.request.locale) | raw | nl2br }}
     </div>
 
 {% endblock %}

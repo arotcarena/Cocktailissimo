@@ -55,15 +55,14 @@
                     alt="{{ article.picture | picture_alt_resolver(locale) }}"
                 >
             </div>
-            <div class="recipe-show-text article link-underline">
+            <div class="recipe-show-text article">
                 <h1 class="recipe-show-title article-show-title">{{ attribute(article.title, locale) }}</h1>
                 <h2 class="article-show-subtitle">{{ attribute(article.subtitle, locale) }}</h2>
                 <div class="recipe-show-text link-underline">
-                    {{ attribute(article.htmlContent, locale) | parse_master_tags(locale) | raw }}
+                    {{ attribute(article.htmlContent, locale) | parse_master_tags(locale) | raw | nl2br }}
                 </div>
             </div>
             <div class="recipe-show-footer">
-                <p>{{ article.createdAt.format('d/m/Y') }}</p>
                 {% if article.author.firstName and article.author.lastName %}
                     <p class="capitalize">{{ article.author.firstName }} {{ article.author.lastName }}</p>
                 {% endif %}

@@ -3,6 +3,9 @@ namespace App\Controller\Tests;
 
 use App\Config\SiteConfig;
 use App\Config\VatLevels;
+use App\Controller\Admin\Customer\AdminPurchaseController;
+use App\Email\Admin\Purchase\AdminPurchaseConfirmationEmail;
+use App\Email\Customer\CustomerPurchaseConfirmationEmail;
 use App\Email\Security\AllInOneInitEmail;
 use App\Entity\CustomerDetail;
 use App\Entity\CustomPrice;
@@ -57,6 +60,16 @@ class TestController extends AbstractController
     {
         $this->faker = Factory::create('fr_FR');
         $this->faker->addProvider(new Commerce($this->faker));
+    }
+
+    #[Route('/tests/purchaseEmails')]
+    public function purchaseEmails(AdminPurchaseConfirmationEmail $adminEmail, CustomerPurchaseConfirmationEmail $customerEmail)
+    {
+        $purchase = $this->purchaseRepository->findOneBy([]);
+        $adminEmail->send($purchase);
+        $customerEmail->send($purchase);
+
+        return $this->json('salut');
     }
 
     #[Route('/tests/invoice-generate')]
@@ -119,7 +132,6 @@ class TestController extends AbstractController
     public function adminPurchaseConfirmationEmail(PurchaseRepository $purchaseRepository)
     {
         $purchase = $purchaseRepository->findOneBy([]);
-        $purchase->setLang('fr');
 
         return $this->render('admin/email/purchase/purchase_confirmation.html.twig', [
             'purchase' => $purchase

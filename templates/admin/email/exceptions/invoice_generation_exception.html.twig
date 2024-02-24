@@ -1,0 +1,64 @@
+{% extends "admin/email/base.html.twig" %}
+
+{% block title %}Erreur lors de la génération d'une facture{% endblock %}
+
+{% block body %}
+
+    <h1>Erreur lors de la génération d'une facture</h1>
+
+    {% set purchase = purchaseVendorGroup.purchase %}
+    {% set customerDetail = purchase.customerDetail %}
+    {% set shippingInfo = purchaseVendorGroup.shippingInfo %}
+
+    <div style="margin: 20px 0;">
+        <h3>Référence de la commande</h3>
+        <p>{{purchase.ref}}</p>
+    </div>
+    <div style="margin: 20px 0;">
+        <h3>Date de la commande</h3>
+        <div>{{ purchase.createdAt.format('d/m/Y H:i:s') }}</div>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <h3>Colis concerné</h3>
+        <p>purchaseVendorGroup #ID : {{ purchaseVendorGroup.id }}</p>
+        {% if shippingInfo.parcelId is defined %}
+            <p>parcel #ID : {{shippingInfo.parcelId}}</p>
+        {% endif %}
+        {% if shippingInfo.orderNumber is defined %}
+            <p>orderNumber : {{shippingInfo.orderNumber}}</p>
+        {% endif %}
+    </div>
+
+    <div style="margin: 20px 0;">
+        <h3>Type de facture concernée</h3>
+        <p>{{ type }}</p>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <h3>Langue de la facture</h3>
+        <p>{{ lang }}</p>
+    </div>
+  
+    <div>
+        <div style="margin: 40px 0; border: solid 1px rgb(225, 225, 225); max-width: 450px; padding: 10px;">
+            <h2 style="margin-top: 0;">Client</h3>
+            {% set customerDetail = purchase.customerDetail %}
+            <h3>Nom</h3>
+            <p class="capitalize">{{ customerDetail.civility | trans({}, 'configs', 'fr') }} {{ customerDetail.firstName }} {{ customerDetail.lastName }}</p>
+
+            <h3>Adresse email</h3>
+            <p>{{customerDetail.email}}</p>
+
+            <h3>Numéro de téléphone</h3>
+            <p>{{ customerDetail.phone }}</p>
+        </div>
+    </div>
+
+    <div style="margin: 20px 0;">
+        <h3>Message d'erreur</h3>
+        <p>{{ errorMessage }}</p>
+    </div>
+
+    
+{% endblock %}

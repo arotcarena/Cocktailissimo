@@ -1,7 +1,7 @@
 {% if carrier == 'chronopost' %}
-    <img {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} class="icon i-carrier i-chronopost" src="/img/icons/carriers/chronopost.png" alt="chronopost logo">
+    <img {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} class="icon i-carrier i-chronopost" src="{% if imgUrlPrefix is defined %}{{ imgUrlPrefix }}{% endif %}/img/icons/carriers/chronopost.png" alt="chronopost logo">
 {% elseif carrier == 'colissimo' %}
-    <img {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} class="icon i-carrier i-colissimo" src="/img/icons/carriers/colissimo.jpg" alt="colissimo logo">
+    <img {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} class="icon i-carrier i-colissimo" src="{% if imgUrlPrefix is defined %}{{ imgUrlPrefix }}{% endif %}/img/icons/carriers/colissimo.jpg" alt="colissimo logo">
 {% elseif carrier == 'colisprive' %}
     <svg {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} class="icon i-carrier i-colisprive">
         <use xlink:href="/img/icons/sprite.svg#colisprive"></use>
@@ -19,7 +19,7 @@
         <use xlink:href="/img/icons/sprite.svg#fedex"></use>
     </svg>
 {% elseif carrier == 'mondial_relay' %}
-    <img {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} src="/img/icons/carriers/mondialrelay.png" alt="mondial relay logo">
+    <img {% if height is defined %}style="height: {{height}}px; width: auto;"{% endif %} src="{% if imgUrlPrefix is defined %}{{ imgUrlPrefix }}{% endif %}/img/icons/carriers/mondialrelay.png" alt="mondial relay logo">
 {% else %}
     <div class="carrier-default-icon uppercase">{{ carrier }}</div>
 {% endif %}

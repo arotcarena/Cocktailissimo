@@ -8,8 +8,8 @@
 
 {% block body %}
     <div class="container legal-page">
-        <h1 class="legal-title align-left bold">{{ 'cgv.title' | trans({}, 'static') }}</h1>
+        <h1 class="legal-title align-left bold">{{ 'title' | trans({}, 'cgv') }}</h1>
         
-        {{ 'cgv.text' | trans({}, 'static') | raw }}
+        {{ 'text' | trans({}, 'cgv') | raw }}
     </div>
 {% endblock %}

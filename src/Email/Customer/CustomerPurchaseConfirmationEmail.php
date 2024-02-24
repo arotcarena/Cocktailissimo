@@ -22,7 +22,7 @@ class CustomerPurchaseConfirmationEmail extends EmailFactory
         private PriceFormaterExtensionRuntime $priceFormater
     )
     {
-
+        parent::__construct($twig, $urlGenerator, $translator);
     }
 
     public function send(Purchase $purchase)
