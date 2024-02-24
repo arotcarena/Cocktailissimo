@@ -88,7 +88,12 @@ class TestController extends AbstractController
     {
         $purchases = $this->purchaseRepository->findAll();
         for ($i=0; $i < 3; $i++) { 
-            $purchases[$i]->getCustomerDetail()->setEmail('fnsandin@gmail.com');
+            $purchase = $purchases[$i];
+            $purchase->getCustomerDetail()->setEmail('fnsandin@gmail.com');
+            foreach($purchase->getPurchaseVendorGroups() as $vendorGroup)
+            {
+                $vendorGroup->getShippingInfo()->setTracking('0123456');
+            }
         }
         $this->em->flush();
 
@@ -143,6 +148,10 @@ class TestController extends AbstractController
     {
         $purchase = $purchaseRepository->findOneBy([]);
         $purchase->setLang('fr');
+        foreach($purchase->getPurchaseVendorGroups() as $vendorGroup)
+        {
+            $vendorGroup->getShippingInfo()->setTracking('0123456');
+        }
 
         return $this->render('email/customer/purchase_confirmation.html.twig', [
             'purchase' => $purchase
@@ -153,6 +162,7 @@ class TestController extends AbstractController
     public function purchaseStatusSentEmail(PurchaseVendorGroupRepository $purchaseVendorGroupRepository)
     {
         $purchaseVendorGroup = $purchaseVendorGroupRepository->findOneBy([]);
+        $purchaseVendorGroup->getShippingInfo()->setTracking('0123456');
 
         return $this->render('email/customer/purchaseStatus/sent_status.html.twig', [
             'purchaseVendorGroup' => $purchaseVendorGroup

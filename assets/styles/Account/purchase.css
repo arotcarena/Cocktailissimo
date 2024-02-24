@@ -285,10 +285,13 @@
 }
 
 .purchase-vendor-group-download-link {
-    margin-top: 10px;
+    margin-top: 25px;
     font-weight: 600;
-    text-decoration: underline;
     font-size: .9em;
+}
+.purchase-vendor-group-download-link .i-download {
+    width: 1.3em;
+    height: 1.3em;
 }
 .purchase-item .purchase-line-designation {
     text-align: left;
@@ -298,6 +301,18 @@
     justify-content: flex-start;
 }
 
+.purchase-vendor-group-tracking {
+    font-size: .9em;
+}
+.purchase-vendor-group-tracking strong {
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.purchase-vendor-group-shipping-block {
+    padding-left: 10px;
+    border-left: solid 4px var(--color-bordeaux);
+}
 
 @media only screen and (min-width: 500px) {
     .purchase-item {

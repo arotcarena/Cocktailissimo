@@ -50,7 +50,9 @@ class SendcloudService
             //on ajoute cet id au shippingInfo : il permettra de retrouver le bon shippingInfo lors des mises à jour du parcel
             if($parcel)
             {
-                $purchaseVendorGroup->getShippingInfo()->setParcelId($parcel->id);
+                $purchaseVendorGroup->getShippingInfo()->setParcelId($parcel->id)
+                                                        ->setTracking($parcel->tracking_number ?? null)
+                                                        ;
             }
             //on ajoute aussi order_number
             $purchaseVendorGroup->getShippingInfo()->setOrderNumber($orderNumber);

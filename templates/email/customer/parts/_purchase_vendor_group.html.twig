@@ -64,6 +64,11 @@
                     </tbody>
                 </table>
             </div>
+            {% if shippingInfo.tracking %}
+                <div style="margin: 10px 0; font-size: .9em;">
+                    <span style="font-weight: 600; margin-right: 10px;">{{ 'tracking_number' | trans({}, 'messages', lang) }}</span> {{ shippingInfo.tracking }}
+                </div>
+            {% endif %}
         </div>
     </div>
 </div>

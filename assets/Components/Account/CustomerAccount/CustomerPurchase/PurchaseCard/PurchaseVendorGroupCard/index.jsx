@@ -34,15 +34,17 @@ export const PurchaseVendorGroupCard = ({purchaseVendorGroup, position}) => {
                     </tbody>
                 </table>
             </div>
-            <div className="purchase-vendor-group-shipping-title">
-                <span>{t('delivery')}{position !== '1/1' ? (' ' + position): ''}</span>
-                <span className="purchase-vendor-group-shipping-title-badge">{t(shippingInfo.type, {ns: 'configs'})}</span>
+            <div className="purchase-vendor-group-shipping-block">
+                <div className="purchase-vendor-group-shipping-title">
+                    <span>{t('delivery')}{position !== '1/1' ? (' ' + position): ''}</span>
+                    <span className="purchase-vendor-group-shipping-title-badge">{t(shippingInfo.type, {ns: 'configs'})}</span>
+                </div>
+                <ShippingCard shippingInfo={shippingInfo} />
+                <ShippingStatusUpdateTable shippingInfo={shippingInfo} />
+                {
+                    shippingInfo.tracking && <div className="purchase-vendor-group-tracking"><strong>{t('tracking_number')}</strong> {shippingInfo.tracking}</div>
+                }
             </div>
-            <ShippingCard shippingInfo={shippingInfo} />
-            <ShippingStatusUpdateTable shippingInfo={shippingInfo} />
-            {
-                shippingInfo.tracking && <div>Numéro de suivi : {shippingInfo.tracking}</div>
-            }
             <InvoiceDownloaderLink purchaseVendorGroupId={purchaseVendorGroup.id} type={SiteConfig.INVOICE_TYPE_SALES} />
         </div>
     )

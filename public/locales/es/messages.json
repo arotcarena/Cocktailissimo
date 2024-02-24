@@ -270,6 +270,7 @@
   "total_stock": "Existencias totales",
   "ht": "sin IVA",
   "ttc": "con IVA",
+  "tracking_number": "Número de seguimiento",
 
   "delivery": "Entrega",
   "sent_by": "Enviado por",
