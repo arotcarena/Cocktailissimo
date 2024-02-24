@@ -5,8 +5,8 @@ use App\Entity\Product;
 use App\Convertor\ConvertorTrait;
 use App\Entity\Packaging;
 use App\Entity\Picture;
-use App\Helper\DateTimeToString;
 use App\Service\PicturePathResolver;
+use App\Twig\Runtime\DateTimeFormaterExtensionRuntime;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class VendorProductToArrayConvertor
@@ -20,8 +20,8 @@ class VendorProductToArrayConvertor
 
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
-        private DateTimeToString $dateTimeToString,
-        private PicturePathResolver $picturePathResolver
+        private PicturePathResolver $picturePathResolver,
+        private DateTimeFormaterExtensionRuntime $dateTimeFormater
     )
     {
         
@@ -72,7 +72,7 @@ class VendorProductToArrayConvertor
             'countCarts' => $product->getCountCarts() ?: 0,
             'countSales' => $product->getCountSales() ?: 0,
 
-            'createdAt' => $this->dateTimeToString->getDateString($product->getCreatedAt(), $this->lang)
+            'createdAt' => $this->dateTimeFormater->dateGeoFormat($product->getCreatedAt(), $this->lang)
         ];
 
     }

@@ -4,7 +4,6 @@ namespace App\Tests\UnitAndIntegration\PurchaseProcessing\PurchaseValidated;
 use App\Config\SiteConfig;
 use App\Entity\Purchase;
 use App\FinancialOperations\PaymentVentilator;
-use App\Helper\DateTimeGenerator;
 use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedNotifier;
@@ -12,8 +11,6 @@ use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedProcess;
 use App\Service\Sendcloud\SendcloudService;
 use App\Tests\UnitAndIntegration\PurchaseProcessing\Utils\Factory\PurchasePendingFactory;
 use App\TrafficAnalytics\Counter\ProductSalesCounter;
-use DateTime;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -45,12 +42,7 @@ class PurchaseValidatedProcessTest extends TestCase
         $this->purchaseValidatedNotifier = $this->createMock(PurchaseValidatedNotifier::class);
         $this->purchaseInvoicesHandler = $this->createMock(PurchaseInvoicesHandler::class);
 
-        $dateTimeGenerator = $this->createMock(DateTimeGenerator::class);
-        $dateTimeGenerator->expects($this->any())->method('generate')->willReturn(new DateTime());
-        $dateTimeGenerator->expects($this->any())->method('generateImmutable')->willReturn(new DateTimeImmutable());
-
         $this->purchaseValidatedProcess = new PurchaseValidatedProcess(
-            $dateTimeGenerator,
             $this->em,
             $this->productSalesCounter,
             $this->sendcloudService,

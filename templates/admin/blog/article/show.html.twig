@@ -55,7 +55,7 @@
 
         {{ include('admin/parts/_show_row.html.twig', {name: 'ref', label: 'Réf.', value: article.ref}) }}
 
-        {{ include('admin/parts/_show_row.html.twig', {name: 'createdAt', label: 'Date de création', value: article.createdAt.format('d/m/Y H:i')}) }}
+        {{ include('admin/parts/_show_row.html.twig', {name: 'createdAt', label: 'Date de création', value: (article.createdAt | datetime_geoformat('fr')) }) }}
 
         <div class="admin-product-show-row">
             <div class="admin-product-show-row-label">Recettes liées</div>

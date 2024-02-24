@@ -7,8 +7,8 @@ use App\Entity\Contact;
 use App\Entity\VendorContact;
 use App\Form\ContactType;
 use App\Form\VendorContactType;
-use App\Helper\DateTimeGenerator;
 use App\Persister\VendorContactPersister;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -23,7 +23,6 @@ class ApiContactController extends AbstractController
         private VendorContactEmail $vendorContactEmail,
         private BasicContactEmail $basicContactEmail,
         private EntityManagerInterface $em,
-        private DateTimeGenerator $dateTimeGenerator,
         private ValidatorInterface $validator,
         private VendorContactPersister $vendorContactPersister,
         private TranslatorInterface $translator
@@ -44,7 +43,7 @@ class ApiContactController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $contact->setLang($request->getLocale())
-                    ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
                     ;
             $this->em->persist($contact);
             $this->em->flush();

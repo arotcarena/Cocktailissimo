@@ -54,7 +54,7 @@
                         </td>
                         <td>{{ visit.route }}</td>
                         <td>{{ visit.url }}</td>
-                        <td>{{ visit.createdAt.format('d/m/Y H:i:s') }}</td>
+                        <td>{{ visit.createdAt | datetimesecond_geoformat('fr') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

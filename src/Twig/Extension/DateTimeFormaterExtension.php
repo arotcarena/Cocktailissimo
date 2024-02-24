@@ -16,7 +16,8 @@ class DateTimeFormaterExtension extends AbstractExtension
             // parameter: ['is_safe' => ['html']]
             // Reference: https://twig.symfony.com/doc/3.x/advanced.html#automatic-escaping
             new TwigFilter('date_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateGeoFormat']),
-            new TwigFilter('date_time_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateTimeGeoFormat']),
+            new TwigFilter('datetime_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateTimeGeoFormat']),
+            new TwigFilter('datetimesecond_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateTimeSecondGeoFormat']),
         ];
     }
 
@@ -24,7 +25,8 @@ class DateTimeFormaterExtension extends AbstractExtension
     {
         return [
             new TwigFunction('date_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateGeoFormat']),
-            new TwigFunction('date_time_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateTimeGeoFormat']),
+            new TwigFunction('datetime_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateTimeGeoFormat']),
+            new TwigFunction('datetimesecond_geoformat', [DateTimeFormaterExtensionRuntime::class, 'dateTimeSecondGeoFormat']),
         ];
     }
 }

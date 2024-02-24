@@ -4,7 +4,6 @@ namespace App\DataFixtures\Tests;
 
 use App\Config\SiteConfig;
 use App\Entity\User;
-use App\Helper\DateTimeGenerator;
 use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,7 +15,6 @@ class UserWithTokenTestFixtures extends Fixture
     public function __construct(
         private UserPasswordHasherInterface $hasher,
         private TokenGeneratorInterface $tokenGenerator,
-        private DateTimeGenerator $dateTimeGenerator
     )
     {
 

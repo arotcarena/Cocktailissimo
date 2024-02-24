@@ -83,7 +83,7 @@
 
         {{ include('admin/parts/_show_row.html.twig', {name: 'ref', label: 'Réf.', value: recipe.ref}) }}
 
-        {{ include('admin/parts/_show_row.html.twig', {name: 'createdAt', label: 'Date de création', value: recipe.createdAt.format('d/m/Y H:i')}) }}
+        {{ include('admin/parts/_show_row.html.twig', {name: 'createdAt', label: 'Date de création', value: (recipe.createdAt | datetime_geoformat('fr'))}) }}
 
 
         <div class="admin-product-show-row">

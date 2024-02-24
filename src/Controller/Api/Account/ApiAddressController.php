@@ -5,10 +5,10 @@ use App\Config\SiteConfig;
 use App\Convertor\AddressToArrayConvertor;
 use App\Entity\Address;
 use App\Entity\User;
-use App\Helper\DateTimeGenerator;
 use App\Helper\ObjectHydrator;
 use App\Repository\AddressRepository;
 use App\Verificator\StateRequiredVerificator;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,7 +23,6 @@ class ApiAddressController extends AbstractController
 {
     public function __construct(
         private AddressRepository $addressRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
         private AddressToArrayConvertor $addressConvertor,
         private TranslatorInterface $translator,
@@ -65,7 +64,7 @@ class ApiAddressController extends AbstractController
         $data = json_decode($request->getContent());
         $address = (new Address)
                     ->setUser($this->getUser())
-                    ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
                     ;
         $this->objectHydrator->hydrate($address, (array)$data);
 

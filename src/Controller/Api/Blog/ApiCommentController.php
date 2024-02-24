@@ -6,7 +6,6 @@ use App\Entity\User;
 use App\Entity\Comment;
 use App\Form\SearchParamsType;
 use App\Helper\ObjectHydrator;
-use App\Helper\DateTimeGenerator;
 use App\Form\DataModel\SearchParams;
 use App\Repository\RecipeRepository;
 use App\Repository\ArticleRepository;
@@ -20,6 +19,7 @@ use App\Convertor\ConstraintViolationsToArrayConvertor;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Verificator\LimitEmailOnCommentWithSameOwnerVerificator;
+use DateTimeImmutable;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ApiCommentController extends AbstractController
@@ -29,7 +29,6 @@ class ApiCommentController extends AbstractController
         private CommentToArrayConvertor $commentToArrayConvertor,
         private RecipeRepository $recipeRepository,
         private ArticleRepository $articleRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private ObjectHydrator $objectHydrator,
         private ValidatorInterface $validator,
         private LimitEmailOnCommentWithSameOwnerVerificator $limitEmailOnCommentWithSameOwnerVerificator,
@@ -118,7 +117,7 @@ class ApiCommentController extends AbstractController
         /** @var User */
         $user = $this->getUser();
         $comment->setUser($user)
-                        ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                        ->setCreatedAt(new DateTimeImmutable())
                         ->setLang($request->getLocale())
                         ->setFullName($user->getFirstName())
                         ->setEmail($user->getEmail())

@@ -4,7 +4,7 @@ namespace App\Convertor;
 use App\Convertor\ConvertorTrait;
 use App\Entity\Review;
 use App\Entity\User;
-use App\Helper\DateTimeToString;
+use App\Twig\Runtime\DateTimeFormaterExtensionRuntime;
 
 class ReviewToArrayConvertor
 {
@@ -20,7 +20,8 @@ class ReviewToArrayConvertor
 
     public function __construct(
         private AnswerToArrayConvertor $answerConvertor,
-        private ProductToArrayConvertor $productConvertor
+        private ProductToArrayConvertor $productConvertor,
+        private DateTimeFormaterExtensionRuntime $dateTimeFormater
     )
     {
         
@@ -54,8 +55,6 @@ class ReviewToArrayConvertor
      */
     private function convertOne($review): array 
     {
-        $dateTimeToString = new DateTimeToString;
-
         $email = $review->getEmail();
         $canRemove = $this->userEmail === $email ? true: false;
 
@@ -66,7 +65,7 @@ class ReviewToArrayConvertor
             'title' => $review->getTitle(),
             'rate' => $review->getRate(),
             'comment' => $review->getComment(),
-            'createdAt' => $dateTimeToString->getDateString($review->getCreatedAt(), $this->lang),
+            'createdAt' => $this->dateTimeFormater->dateGeoFormat($review->getCreatedAt(), $this->lang),
             'bought' => $review->isBought(),
             'canRemove' => $canRemove,
             'canAnswer' => $this->canAnswer,

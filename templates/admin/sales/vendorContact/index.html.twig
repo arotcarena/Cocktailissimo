@@ -42,7 +42,7 @@
                         <td>
                             {{ vendorContact.statusLabel }}
                         </td>                       
-                        <td>{{ vendorContact.createdAt.format('d/m/Y H:i') }}</td>  
+                        <td>{{ vendorContact.createdAt | datetime_geoformat('fr') }}</td>  
                         <td>
                             <div class="admin-table-controls">
                                 <a class="admin-table-button success" href="{{ path('admin_vendorContact_show', {id: vendorContact.id}) }}" title="Voir">

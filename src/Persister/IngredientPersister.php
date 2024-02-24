@@ -3,7 +3,6 @@ namespace App\Persister;
 
 use App\Entity\Ingredient;
 use App\Entity\TranslatableString;
-use App\Helper\DateTimeGenerator;
 use App\Image\PictureUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
@@ -11,7 +10,6 @@ use Symfony\Component\Form\FormInterface;
 class IngredientPersister 
 {
     public function __construct(
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
         private PictureUploader $pictureUploader
     )

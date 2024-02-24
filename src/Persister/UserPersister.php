@@ -5,8 +5,8 @@ use App\Entity\User;
 use App\Entity\Company;
 use App\Config\SiteConfig;
 use App\Image\PictureUploader;
-use App\Helper\DateTimeGenerator;
 use App\Form\DataModel\UserRegistration;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -17,7 +17,6 @@ class UserPersister
     public function __construct(
         private EntityManagerInterface $em,
         private UserPasswordHasherInterface $hasher,
-        private DateTimeGenerator $dateTimeGenerator,
         private ValidatorInterface $validator,
         private TokenGeneratorInterface $tokenGenerator,
         private PictureUploader $pictureUploader
@@ -38,7 +37,7 @@ class UserPersister
                 $this->hasher->hashPassword($user, $userRegistration->plainPassword)
             )
             ->setRoles([SiteConfig::ROLE_USER])
-            ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+            ->setCreatedAt(new DateTimeImmutable())
             ;
 
         if($type === 'pro')

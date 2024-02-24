@@ -2,13 +2,13 @@
 namespace App\Convertor;
 
 use App\Entity\User;
-use App\Helper\DateTimeToString;
 use App\Image\PictureUploader;
+use App\Twig\Runtime\DateTimeFormaterExtensionRuntime;
 
 class AccountVendorToArrayConvertor
 {
     public function __construct(
-        private DateTimeToString $dateTimeToString,
+        private DateTimeFormaterExtensionRuntime $dateTimeFormater,
         private LightAddressToArrayConvertor $lightAddressToArrayConvertor,
         private PictureUploader $pictureUploader
     )
@@ -52,7 +52,7 @@ class AccountVendorToArrayConvertor
             'sendcloudId' => $vendor->getSendcloudId(),
             'countReviews' => $vendor->getCountReviews(),
             'reviewNote' => $vendor->getReviewNote(),
-            'createdAt' => $this->dateTimeToString->getDateString($vendor->getCreatedAt(), $lang)
+            'createdAt' => $this->dateTimeFormater->dateGeoFormat($vendor->getCreatedAt(), $lang)
         ];
     }
 }

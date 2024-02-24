@@ -5,11 +5,11 @@ use App\Entity\Packaging;
 use App\Entity\Product;
 use App\Entity\TranslatableString;
 use App\Entity\TranslatableText;
-use App\Helper\DateTimeGenerator;
 use App\Helper\ObjectArrayByIdIndexor;
 use App\Helper\ObjectHydrator;
 use App\Helper\PackagingListPositionHydrator;
 use App\Image\PictureUploader;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use stdClass;
@@ -19,7 +19,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class ProductPersister 
 {
     public function __construct(
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
         private PictureUploader $pictureUploader,
         private ObjectHydrator $objectHydrator,
@@ -97,7 +96,7 @@ class ProductPersister
                 ->setEs($form->get('esMetaDescription')->getData())
                 ->setIt($form->get('itMetaDescription')->getData())
             )
-            ->setCreatedAt($this->dateTimeGenerator->generateImmutable());
+            ->setCreatedAt(new DateTimeImmutable());
         ;
 
         //on ajoute les packagingChoices

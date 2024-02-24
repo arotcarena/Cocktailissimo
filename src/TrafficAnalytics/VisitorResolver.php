@@ -2,10 +2,10 @@
 namespace App\TrafficAnalytics;
 
 use App\Entity\Visitor;
-use App\Helper\DateTimeGenerator;
 use App\Helper\UniqueStringGenerator;
 use App\Repository\VisitorRepository;
 use App\TrafficAnalytics\Storage\TrafficAnalyticsCookie;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -16,7 +16,6 @@ class VisitorResolver
         private VisitorRepository $visitorRepository,
         private TrafficAnalyticsCookie $taCookie,
         private UniqueStringGenerator $uniqueStringGenerator,
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
         private RequestStack $requestStack
     )
@@ -52,9 +51,9 @@ class VisitorResolver
         $this->taCookie->set($cookieId);
         $visitor = (new Visitor)
                     ->setCookieId($cookieId)
-                    ->setUserAgent($request->headers->get('User-Agent'))
+                    ->setUserAgent($request->headers->get('User-Agent', 'unknown_user-agent'))
                     ->setLang($request->getLocale())
-                    ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
                     ;
         if($origin = $request->query->get('origin'))
         {

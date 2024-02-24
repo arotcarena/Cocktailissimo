@@ -54,7 +54,7 @@
                         </td>
                         <td>{{ action.type | trans({}, 'configs', 'fr') }}</td>
                         <td>{{ action.detail | show_va_detail(action.type) }}</td>
-                        <td>{{ action.createdAt.format('d/m/Y H:i:s') }}</td>
+                        <td>{{ action.createdAt | datetimesecond_geoformat('fr') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

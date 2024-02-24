@@ -2,9 +2,9 @@
 namespace App\Convertor;
 
 use App\Entity\Comment;
-use App\Helper\DateTimeToString;
 use App\Convertor\ConvertorTrait;
 use App\Entity\User;
+use App\Twig\Runtime\DateTimeFormaterExtensionRuntime;
 
 class CommentToArrayConvertor
 {
@@ -16,7 +16,7 @@ class CommentToArrayConvertor
 
 
     public function __construct(
-        private DateTimeToString $dateTimeToString,
+        private DateTimeFormaterExtensionRuntime $dateTimeFormater,
         private AnswerToArrayConvertor $answerConvertor
     )
     {
@@ -57,7 +57,7 @@ class CommentToArrayConvertor
             'email' => $email,
             'fullName' => $comment->getFullName(),
             'content' => $comment->getContent(),
-            'createdAt' => $this->dateTimeToString->getDateString($comment->getCreatedAt(), $this->lang),
+            'createdAt' => $this->dateTimeFormater->dateGeoFormat($comment->getCreatedAt(), $this->lang),
             'lang' => $comment->getLang(),
             'firstAnswers' => $this->answerConvertor->convert($comment->getFirstAnswers(), $this->userEmail, $this->lang),
             'restAnswers' => $this->answerConvertor->convert($comment->getRestAnswers(), $this->userEmail, $this->lang),

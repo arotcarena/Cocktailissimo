@@ -58,7 +58,7 @@
     <div>
         <h3>Autres informations</h3>
         <p>Langue de navigation : {{vendorContact.lang}}</p>
-        <p>Date et heure : {{vendorContact.createdAt.format('d/m/Y H:i')}}</p>
+        <p>Date et heure : {{vendorContact.createdAt | datetime_geoformat('fr')}}</p>
     </div>
 
 {% endblock %}

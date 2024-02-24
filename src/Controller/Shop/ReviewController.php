@@ -2,11 +2,8 @@
 namespace App\Controller\Shop;
 
 use App\Entity\Review;
-use App\Helper\DateTimeGenerator;
-use App\Repository\ProductRepository;
 use App\Repository\ReviewRepository;
 use App\Security\TokenVerificator;
-use App\Verificator\UserBoughtProductVerificator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,10 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ReviewController extends AbstractController
 {
     public function __construct(
-        private ProductRepository $productRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
-        private UserBoughtProductVerificator $userBoughtProductVerificator,
         private TranslatorInterface $translator,
         private TokenVerificator $tokenVerificator,
         private ReviewRepository $reviewRepository

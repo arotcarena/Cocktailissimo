@@ -8,12 +8,12 @@ use App\Email\Security\ReviewConfirmationEmail;
 use App\Entity\Review;
 use App\Form\DataModel\SearchParams;
 use App\Form\SearchParamsType;
-use App\Helper\DateTimeGenerator;
 use App\Helper\ObjectHydrator;
 use App\Repository\ProductRepository;
 use App\Repository\ReviewRepository;
 use App\Verificator\UserBoughtProductVerificator;
 use App\Verificator\UniqueEmailOnReviewAboutSameProductVerificator;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use stdClass;
@@ -35,7 +35,6 @@ class ApiReviewController extends AbstractController
         private ObjectHydrator $objectHydrator,
         private EntityManagerInterface $em,
         private ProductRepository $productRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private TokenGeneratorInterface $tokenGenerator,
         private ReviewConfirmationEmail $reviewConfirmationEmail,
         private UserBoughtProductVerificator $userBoughtProductVerificator,
@@ -163,7 +162,7 @@ class ApiReviewController extends AbstractController
         $review->setProduct($product)
                 ->setUser($this->getUser())
                 ->setConfirmed($this->getUser() !== null)
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
                 ->setLang($request->getLocale())
                 ->setModerationStatus(SiteConfig::MODERATION_STATUS_PENDING)
                 ;

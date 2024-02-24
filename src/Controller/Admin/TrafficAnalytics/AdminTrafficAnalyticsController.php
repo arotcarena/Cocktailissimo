@@ -3,13 +3,13 @@ namespace App\Controller\Admin\TrafficAnalytics;
 
 use App\Form\Admin\DataModel\TrafficFilter;
 use App\Form\Admin\TrafficStatsFilterType;
-use App\Helper\DateTimeGenerator;
 use App\Repository\UserRepository;
 use App\Repository\VisitorActionRepository;
 use App\Repository\VisitorRepository;
 use App\Repository\VisitRepository;
 use App\TrafficAnalytics\Admin\TrafficAnalyticsCalculator;
 use DateInterval;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +24,6 @@ class AdminTrafficAnalyticsController extends AbstractController
         private VisitorRepository $visitorRepository,
         private VisitorActionRepository $visitorActionRepository,
         private UserRepository $userRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private TrafficAnalyticsCalculator $taCalculator
     )
     {
@@ -36,8 +35,8 @@ class AdminTrafficAnalyticsController extends AbstractController
     {
         //par défaut la date de début est il y a 7 jours et la date de fin maintenant
         $trafficFilter = (new TrafficFilter)->setRoles([null, 'ROLE_USER', 'ROLE_PRO']) //par défaut on exclut les admins et les vendeurs
-                        ->setStartAt($this->dateTimeGenerator->generate()->sub(new DateInterval('P7D')))
-                        ->setEndAt($this->dateTimeGenerator->generate())
+                        ->setStartAt((new DateTime())->sub(new DateInterval('P7D')))
+                        ->setEndAt(new DateTime())
                         ;
         $form = $this->createForm(TrafficStatsFilterType::class, $trafficFilter);
         $form->handleRequest($request);

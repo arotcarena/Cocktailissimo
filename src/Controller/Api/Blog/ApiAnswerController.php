@@ -7,11 +7,11 @@ use App\Email\Blog\AnswerNotificationEmail;
 use App\Entity\Answer;
 use App\Entity\Review;
 use App\Entity\User;
-use App\Helper\DateTimeGenerator;
 use App\Repository\AnswerRepository;
 use App\Repository\CommentRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\ReviewRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +27,6 @@ class ApiAnswerController extends AbstractController
         private ReviewRepository $reviewRepository,
         private QuestionRepository $questionRepository,
         private CommentRepository $commentRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private ValidatorInterface $validator,
         private AnswerNotificationEmail $answerNotificationEmail,
         private ConstraintViolationsToArrayConvertor $constraintViolationsConvertor,
@@ -104,7 +103,7 @@ class ApiAnswerController extends AbstractController
         $answer
                 ->setEmail($user->getEmail())
                 ->setContent($data->content)
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
             ;
 
         //on valide la Answer

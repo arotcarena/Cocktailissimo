@@ -6,16 +6,15 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Purchase;
 use App\FinancialOperations\PaymentVentilator;
-use App\Helper\DateTimeGenerator;
 use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\Service\Sendcloud\SendcloudService;
 use App\TrafficAnalytics\Counter\ProductSalesCounter;
+use DateTimeImmutable;
 
 class PurchaseValidatedProcess extends AbstractController
 {
     public function __construct(
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
         private ProductSalesCounter $productSalesCounter,
         private SendcloudService $sendcloudService,
@@ -32,7 +31,7 @@ class PurchaseValidatedProcess extends AbstractController
     {
         //on marque la commande comme payée
         $purchase->setStatus(SiteConfig::STATUS_PAID)
-                ->setPaidAt($this->dateTimeGenerator->generateImmutable())
+                ->setPaidAt(new DateTimeImmutable())
                 ;
         $this->em->flush();
 

@@ -7,7 +7,6 @@ use App\Entity\Product;
 use App\Entity\Purchase;
 use App\Entity\PurchaseLine;
 use App\FinancialOperations\PaymentVentilator;
-use App\Helper\DateTimeGenerator;
 use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
 use App\PurchaseProcessing\PurchaseValidated\Calculator\PurchaseAmountCalculator;
 use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedNotifier;
@@ -47,7 +46,6 @@ class PurchaseValidatedProcessTest extends KernelTestCase
         $this->em = $container->get(EntityManagerInterface::class);
 
         $this->purchaseValidatedProcess = new PurchaseValidatedProcess(
-            $container->get(DateTimeGenerator::class),
             $this->em,
             $container->get(ProductSalesCounter::class),
             $this->createMock(SendcloudService::class),

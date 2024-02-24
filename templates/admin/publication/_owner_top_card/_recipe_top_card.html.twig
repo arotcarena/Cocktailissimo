@@ -10,7 +10,7 @@
             <span class="admin-review-card-text-mute ml">{{ recipe.ref }}</span>
         </div>
         <div class="header-text">
-            <span>{{ recipe.createdAt.format('d/m/Y H:i') }}</span>
+            <span>{{ recipe.createdAt | datetime_geoformat('fr') }}</span>
         </div>
     </div>
     <div class="admin-review-card-header-type">Recette</div>

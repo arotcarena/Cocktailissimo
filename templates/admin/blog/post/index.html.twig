@@ -37,7 +37,7 @@
                         </td>
                         <td>{{ post.title.fr }}</td>
                         <td>{{ post.linkedProducts | length }}</td>
-                        <td>{{ post.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ post.createdAt | datetime_geoformat('fr') }}</td>
                         <td>
                             <div class="admin-table-controls">
                                 <a class="admin-table-button success" href="{{ path('admin_post_show', {id: post.id}) }}" title="Voir">

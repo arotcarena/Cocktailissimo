@@ -2,7 +2,6 @@
 namespace App\Tests\IntegrationOnly\TrafficAnalytics\Visit;
 
 use App\DataFixtures\Tests\VisitTestFixtures;
-use App\Helper\DateTimeGenerator;
 use App\Helper\UniqueStringGenerator;
 use App\Helper\UrlRefExtractor;
 use App\Repository\ArticleRepository;
@@ -64,12 +63,11 @@ class VisitSaverTest extends KernelTestCase
         $this->visitSaver = new VisitSaver(
             $this->taSession,
             $em,
-            new VisitCreator(new DateTimeGenerator),
+            new VisitCreator,
             new VisitorResolver(
                 $container->get(VisitorRepository::class),
                 $this->taCookie,
                 new UniqueStringGenerator,
-                new DateTimeGenerator,
                 $em,
                 $requestStack
             ),

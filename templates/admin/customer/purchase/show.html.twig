@@ -18,7 +18,7 @@
         
         {{ include('admin/parts/_show_row.html.twig', {value: (purchase.status | trans({}, 'configs', 'fr') ), label: 'Statut', name: 'status'}) }}
 
-        {{ include('admin/parts/_show_row.html.twig', {value: purchase.createdAt.format('d/m/Y H:i'), label: 'Passée le', name: 'createdAt'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: (purchase.createdAt | datetime_geoformat('fr')), label: 'Passée le', name: 'createdAt'}) }}
 
         <div class="admin-product-show-row" style="display: flex; flex-direction: column; gap: 20px; border: solid 1px rgb(225, 225, 225); padding: 10px; max-width: 450px;">
             <div class="admin-product-show-row-label">Client</div>
@@ -106,19 +106,19 @@
                                 <tbody>
                                     <tr>
                                         {% if shippingInfo.sentAt %}
-                                            <td style="padding: 5px 10px;">{{ shippingInfo.sentAt.format('d/m/Y H:i:s') }}</td>
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.sentAt | datetimesecond_geoformat('fr') }}</td>
                                         {% endif %}
                                         {% if shippingInfo.deliveredAt %}
-                                            <td style="padding: 5px 10px;">{{ shippingInfo.deliveredAt.format('d/m/Y H:i:s') }}</td>
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.deliveredAt | datetimesecond_geoformat('fr') }}</td>
                                         {% endif %}
                                         {% if shippingInfo.canceledAt %}
-                                            <td style="padding: 5px 10px;">{{ shippingInfo.canceledAt.format('d/m/Y H:i:s') }}</td>
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.canceledAt | datetimesecond_geoformat('fr') }}</td>
                                         {% endif %}
                                         {% if shippingInfo.returnSentAt %}
-                                            <td style="padding: 5px 10px;">{{ shippingInfo.returnSentAt.format('d/m/Y H:i:s') }}</td>
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.returnSentAt | datetimesecond_geoformat('fr') }}</td>
                                         {% endif %}
                                         {% if shippingInfo.returnDeliveredAt %}
-                                            <td style="padding: 5px 10px;">{{ shippingInfo.returnDeliveredAt.format('d/m/Y H:i:s') }}</td>
+                                            <td style="padding: 5px 10px;">{{ shippingInfo.returnDeliveredAt | datetimesecond_geoformat('fr') }}</td>
                                         {% endif %}
                                     </tr>
                                 </tbody>

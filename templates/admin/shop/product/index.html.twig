@@ -74,7 +74,7 @@
                         </td>
                         <td>{{ product.vendor.company.usualName }}</td>
                         <td>{{ product.basePackaging.publicRef }}</td>
-                        <td>{{ product.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ product.createdAt | datetime_geoformat('fr') }}</td>
                         <td>
                             <div class="admin-table-controls">
                                 <a class="admin-table-button success" href="{{ path('admin_product_show', {id: product.id}) }}" title="Voir">

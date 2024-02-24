@@ -29,7 +29,7 @@
         {{ include('admin/parts/_show_row.html.twig', {value: post.title.it, label: 'Titre (IT)', name: 'itName', lang: 'it'}) }}
 
 
-        {{ include('admin/parts/_show_row.html.twig', {value: post.createdAt.format('d/m/Y H:i'), label: 'Date de publication', name: 'createdAt'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: (post.createdAt | datetime_geoformat('fr')), label: 'Date de publication', name: 'createdAt'}) }}
 
         <div class="admin-product-show-row">
             <div class="admin-product-show-row-label">Produits associés</div>

@@ -15,7 +15,7 @@
                     non inscrit
                 {% endif %}
             </span>
-            <span class="admin-review-card-text-semi-mute">{{ review.createdAt.format('d/m/Y H:i') }}</span>
+            <span class="admin-review-card-text-semi-mute">{{ review.createdAt | datetime_geoformat('fr') }}</span>
             <div class="admin-review-card-body-info-end">
                 <span class="admin-review-card-chip{{review.bought ? ' success': ''}}">
                     {% if review.bought %}

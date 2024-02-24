@@ -2,9 +2,9 @@
 namespace App\Convertor;
 
 use App\Entity\Question;
-use App\Helper\DateTimeToString;
 use App\Convertor\ConvertorTrait;
 use App\Entity\User;
+use App\Twig\Runtime\DateTimeFormaterExtensionRuntime;
 
 class QuestionToArrayConvertor
 {
@@ -20,7 +20,8 @@ class QuestionToArrayConvertor
     public function __construct(
         private AnswerToArrayConvertor $answerConvertor,
         private ProductToArrayConvertor $productConvertor,
-        private RecipeToArrayConvertor $recipeToArrayConvertor
+        private RecipeToArrayConvertor $recipeToArrayConvertor,
+        private DateTimeFormaterExtensionRuntime $dateTimeFormater,
     )
     {
         
@@ -52,8 +53,6 @@ class QuestionToArrayConvertor
      */
     private function convertOne($question): array 
     {
-        $dateTimeToString = new DateTimeToString;
-
         $countRestAnswers = $question->getCountAnswers() - count($question->getFirstAnswers());
 
         $email = $question->getEmail();
@@ -64,7 +63,7 @@ class QuestionToArrayConvertor
             'fullName' => $question->getFullName(),
             'title' => $question->getTitle(),
             'content' => $question->getContent(),
-            'createdAt' => $dateTimeToString->getDateString($question->getCreatedAt(), $this->lang),
+            'createdAt' => $this->dateTimeFormater->dateGeoFormat($question->getCreatedAt(), $this->lang),
             'firstAnswers' => $this->answerConvertor->convert($question->getFirstAnswers(), $this->userEmail, $this->lang),
             'restAnswers' => $this->answerConvertor->convert($question->getRestAnswers(), $this->userEmail, $this->lang),
             'lang' => $question->getLang(),

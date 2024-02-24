@@ -2,19 +2,22 @@
 namespace App\Price;
 
 use App\Config\SiteConfig;
-use Symfony\Component\HttpFoundation\RequestStack;
+use App\Service\GeolocCountry\GeolocCountryStorage;
 
 class CountryLocation
 {
     public function __construct(
-        private RequestStack $requestStack
+        private GeolocCountryStorage $geolocCountryStorage
     )
     {
         
     }
 
+    /**
+     * return stored geoloc country or default geolocation country
+     */
     public function getCountry(): string
     {
-        return $this->requestStack->getSession()->get('country', SiteConfig::DEFAULT_GEOLOCATION_COUNTRY);
+        return $this->geolocCountryStorage->get() ?: SiteConfig::DEFAULT_GEOLOCATION_COUNTRY;
     }
 }

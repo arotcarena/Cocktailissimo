@@ -8,9 +8,9 @@ use App\Entity\TranslatableString;
 use App\Entity\TranslatableText;
 use App\Entity\User;
 use App\Helper\CompanySlugCreator;
-use App\Helper\DateTimeGenerator;
 use App\Image\PictureUploader;
 use App\Verificator\StateRequiredVerificator;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormInterface;
@@ -21,7 +21,6 @@ class VendorPersister
         private EntityManagerInterface $em,
         private PictureUploader $pictureUploader,
         private StateRequiredVerificator $stateRequiredVerificator,
-        private DateTimeGenerator $dateTimeGenerator,
         private CompanySlugCreator $companySlugCreator
     )
     {
@@ -41,7 +40,7 @@ class VendorPersister
         $vendor 
             //on donne un password impossible à trouver qui n'a pas d'importance car le vendeur devra créer son propre mot de passe
             ->setPassword(substr(str_shuffle(str_repeat('azertyuiopqsdfghjkklmwxcvbn0123456789', 5)), 0, 20))
-            ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+            ->setCreatedAt(new DateTimeImmutable())
             ->setRoles(['ROLE_USER', 'ROLE_PRO', 'ROLE_VENDOR'])
             //form
             ->setCivility($form->get('civility')->getData())

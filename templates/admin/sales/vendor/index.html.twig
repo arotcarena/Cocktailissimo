@@ -104,7 +104,7 @@
                         </td>
                         <td>{{ vendor.sendcloudId }}</td>
                         <td>{{ vendor.stripeConnectId }}</td>
-                        <td>{{ vendor.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ vendor.createdAt | datetime_geoformat('fr') }}</td>
                         <td>
                             {% if vendor.stripeConfirmed %}
                                 <span class="admin-active-account-badge">Vérifié</span>

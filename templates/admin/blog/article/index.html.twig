@@ -47,7 +47,7 @@
                         <td class="capitalize">{{ article.author.firstName }} {{ article.author.lastName }}</td>
                         <td>{{ article.countViews ?? 0 }}</td>
                         <td>{{ article.ref }}</td>
-                        <td>{{ article.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ article.createdAt | datetime_geoformat('fr') }}</td>
                         <td>
                             <div class="admin-table-controls">
                                 <a class="admin-table-button success" href="{{ path('admin_article_show', {id: article.id}) }}" title="Voir">

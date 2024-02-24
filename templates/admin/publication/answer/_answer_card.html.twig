@@ -7,7 +7,7 @@
         {% endif %}
         <span><strong>{{ answer.fullName }}</strong></span>
         <span class="admin-review-card-text-mute">{{ answer.email }}</span>
-        <span>{{ answer.createdAt.format('d/m/Y H:i') }}</span>
+        <span>{{ answer.createdAt | datetime_geoformat('fr') }}</span>
     </div>
     <div class="admin-answer-body">
         {{ answer.content }}

@@ -85,7 +85,7 @@
 
         {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.lang, label: 'Langue du navigateur', name: 'lang'}) }}
 
-        {{ include('admin/parts/_show_row_inline.html.twig', {value: vendorContact.createdAt.format('d/m/Y H:i'), label: 'Date', name: 'createdAt'}) }}
+        {{ include('admin/parts/_show_row_inline.html.twig', {value: (vendorContact.createdAt | datetime_geoformat('fr')), label: 'Date', name: 'createdAt'}) }}
 
 
 

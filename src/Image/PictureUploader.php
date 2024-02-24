@@ -4,8 +4,8 @@ namespace App\Image;
 use App\Config\SiteConfig;
 use App\Entity\Picture;
 use App\Entity\TranslatableString;
-use App\Helper\DateTimeGenerator;
 use App\Service\PicturePathResolver;
+use DateTimeImmutable;
 use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -15,7 +15,6 @@ class PictureUploader
 {
     public function __construct(
         private Base64Util $base64Util,
-        private DateTimeGenerator $dateTimeGenerator,
         private ValidatorInterface $validator,
         private PicturePathResolver $picturePathResolver
     )
@@ -29,7 +28,7 @@ class PictureUploader
         $picture->setFile($file)
                 ->setFileSize($file->getSize())
                 ->setAlt($alt)
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
                 ;
 
         return $picture;
@@ -60,7 +59,7 @@ class PictureUploader
         $picture = new Picture;
         $picture->setFile($imageFile)
                 ->setFileSize($imageFile->getSize())
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
                 ;
 
         return $picture;

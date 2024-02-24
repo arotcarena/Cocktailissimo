@@ -80,7 +80,7 @@
                 {{ (attribute(recipe.htmlContent, locale) | parse_master_tags(app.request.locale)) | raw | nl2br }}
             </div>
             <div class="recipe-show-footer">
-                {{ recipe.createdAt.format('d/m/Y') }}
+                {{ recipe.createdAt | date_geoformat() }}
             </div>
         </main>
 

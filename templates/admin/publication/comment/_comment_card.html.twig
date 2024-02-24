@@ -16,7 +16,7 @@
                     non inscrit    
                 {% endif %}
             </span>
-            <span class="admin-review-card-text-semi-mute">{{ comment.createdAt.format('d/m/Y H:i') }}</span>
+            <span class="admin-review-card-text-semi-mute">{{ comment.createdAt | datetime_geoformat('fr') }}</span>
         </div>
         <div class="admin-review-card-body-content">
             {{ comment.content }}

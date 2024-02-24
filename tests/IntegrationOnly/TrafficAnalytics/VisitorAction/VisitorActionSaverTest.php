@@ -2,8 +2,6 @@
 namespace App\Tests\IntegrationOnly\TrafficAnalytics\VisitorAction;
 
 use App\Config\SiteConfig;
-use App\Convertor\Admin\AnonymousPurchaseToArrayConvertor;
-use App\Convertor\CartToArrayConvertor;
 use App\DataFixtures\Tests\AnswerTestFixtures;
 use App\DataFixtures\Tests\CartTestFixtures;
 use App\DataFixtures\Tests\CommentTestFixtures;
@@ -13,7 +11,6 @@ use App\DataFixtures\Tests\ReviewTestFixtures;
 use App\DataFixtures\Tests\VisitTestFixtures;
 use App\Entity\Visitor;
 use App\Entity\VisitorAction;
-use App\Helper\DateTimeGenerator;
 use App\Helper\MainRoleResolver;
 use App\Helper\UniqueStringGenerator;
 use App\Repository\AnswerRepository;
@@ -71,7 +68,6 @@ class VisitorActionSaverTest extends KernelTestCase
             $container->get(VisitorRepository::class),
             $this->taCookie,
             new UniqueStringGenerator,
-            new DateTimeGenerator,
             $em,
             $requestStack
         );
@@ -80,7 +76,6 @@ class VisitorActionSaverTest extends KernelTestCase
             $visitorResolver,
             $em,
             new EntityCountAdder($em),
-            new DateTimeGenerator,
             new MainRoleResolver
         );
 

@@ -22,7 +22,7 @@
     <div>
         <h3>Autres informations</h3>
         <p>Langue de navigation : {{contact.lang}}</p>
-        <p>Date et heure : {{contact.createdAt.format('d/m/Y H:i')}}</p>
+        <p>Date et heure : {{contact.createdAt | datetime_geoformat('fr') }}</p>
     </div>
 
 {% endblock %}

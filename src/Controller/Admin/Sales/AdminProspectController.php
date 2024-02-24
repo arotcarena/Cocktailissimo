@@ -3,8 +3,8 @@ namespace App\Controller\Admin\Sales;
 
 use App\Email\Admin\Business\ProspectEmailSender;
 use App\Entity\ProspectEmail;
-use App\Helper\DateTimeGenerator;
 use App\Repository\ProspectEmailRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,6 @@ class AdminProspectController extends AbstractController
     public function __construct(
         private ProspectEmailSender $prospectEmailSender,
         private ValidatorInterface $validator,
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
         private ProspectEmailRepository $prospectEmailRepository
     )
@@ -85,7 +84,7 @@ class AdminProspectController extends AbstractController
                     $this->prospectEmailSender->send($email, $lang);
                     $prospectEmail = (new ProspectEmail)
                                         ->setEmail($email)
-                                        ->setSentAt($this->dateTimeGenerator->generateImmutable())
+                                        ->setSentAt(new DateTimeImmutable())
                                         ->setLang($lang)
                                     ;
                     $this->em->persist($prospectEmail);

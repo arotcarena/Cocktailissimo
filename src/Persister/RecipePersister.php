@@ -5,10 +5,10 @@ use App\Entity\IngredientQuantity;
 use App\Entity\Recipe;
 use App\Entity\TranslatableText;
 use App\Entity\TranslatableString;
-use App\Helper\DateTimeGenerator;
 use App\Image\PictureUploader;
 use App\Repository\IngredientQuantityRepository;
 use App\Repository\IngredientRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Form\FormInterface;
@@ -18,7 +18,6 @@ class RecipePersister
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private DateTimeGenerator $dateTimeGenerator,
         private IngredientQuantityRepository $ingredientQuantityRepository,
         private PictureUploader $pictureUploader,
         private IngredientRepository $ingredientRepository,
@@ -78,9 +77,7 @@ class RecipePersister
                 ->setEs($form->get('esHtmlContent')->getData())
                 ->setIt($form->get('itHtmlContent')->getData())
             )
-            ->setCreatedAt(
-                $this->dateTimeGenerator->generateImmutable()
-            );
+            ->setCreatedAt(new DateTimeImmutable());
         ;
 
         //ingredientsQuantities

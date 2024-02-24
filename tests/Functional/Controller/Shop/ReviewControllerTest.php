@@ -1,13 +1,8 @@
 <?php
 namespace App\Tests\Functional\Controller\Shop;
 
-use App\Entity\Product;
-use App\Entity\Purchase;
-use App\Repository\ProductRepository;
-use App\Repository\PurchaseRepository;
 use App\Tests\Functional\FunctionalTest;
 use App\Tests\Functional\LoginUserTrait;
-use Doctrine\ORM\EntityManagerInterface;
 use App\DataFixtures\Tests\PurchaseTestFixtures;
 use App\DataFixtures\Tests\ReviewTestFixtures;
 use App\Entity\Review;

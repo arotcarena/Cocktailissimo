@@ -6,7 +6,6 @@ use Exception;
 use App\Entity\User;
 use App\Form\SearchParamsType;
 use App\Helper\ObjectHydrator;
-use App\Helper\DateTimeGenerator;
 use App\Form\DataModel\SearchParams;
 use App\Repository\AnswerRepository;
 use App\Repository\RecipeRepository;
@@ -27,6 +26,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Verificator\LimitEmailOnQuestionWithSameOwnerVerificator;
+use DateTimeImmutable;
 use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 
 class ApiQuestionController extends AbstractController
@@ -40,7 +40,6 @@ class ApiQuestionController extends AbstractController
         private EntityManagerInterface $em,
         private ProductRepository $productRepository,
         private RecipeRepository $recipeRepository,
-        private DateTimeGenerator $dateTimeGenerator,
         private TokenGeneratorInterface $tokenGenerator,
         private ReviewConfirmationEmail $reviewConfirmationEmail,
         private UserBoughtProductVerificator $userBoughtProductVerificator,
@@ -157,7 +156,7 @@ class ApiQuestionController extends AbstractController
         /** @var User */
         $user = $this->getUser();
         $question->setUser($user)
-                        ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                        ->setCreatedAt(new DateTimeImmutable())
                         ->setLang($request->getLocale())
                         ->setFullName($user->getFirstName())
                         ->setEmail($user->getEmail())

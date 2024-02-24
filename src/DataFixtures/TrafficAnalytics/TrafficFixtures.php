@@ -1,10 +1,8 @@
 <?php
 namespace App\DataFixtures\TrafficAnalytics;
 
-use App\Cart\Utils\CartTotalsHydrator;
 use App\Config\SiteConfig;
 use App\Convertor\Admin\AnonymousPurchaseToArrayConvertor;
-use App\Convertor\CartToArrayConvertor;
 use App\DataFixtures\Blog\ArticleFixtures;
 use App\DataFixtures\Blog\CommentFixtures;
 use App\DataFixtures\Blog\RecipeFixtures;
@@ -17,10 +15,8 @@ use App\DataFixtures\Utils\ExampleUrlsGenerator;
 use App\Entity\Visit;
 use App\Entity\Visitor;
 use App\Entity\VisitorAction;
-use App\Helper\DateTimeGenerator;
 use App\Helper\UniqueStringGenerator;
 use App\Repository\ArticleRepository;
-use App\Repository\CartRepository;
 use App\Repository\CommentRepository;
 use App\Repository\PackagingRepository;
 use App\Repository\ProductRepository;
@@ -28,7 +24,7 @@ use App\Repository\PurchaseRepository;
 use App\Repository\QuestionRepository;
 use App\Repository\RecipeRepository;
 use DateInterval;
-use DateTime;
+use DateTimeImmutable;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -50,7 +46,6 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
 
     public function __construct(
         private UniqueStringGenerator $uniqueStringGenerator,
-        private DateTimeGenerator $dateTimeGenerator,
         private ExampleUrlsGenerator $exampleUrlsGenerator,
         private PackagingRepository $packagingRepository,
         private PurchaseRepository $purchaseRepository,
@@ -80,7 +75,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
 
 
         for ($i=0; $i < 250; $i++) { 
-            $visitorCreatedAt = $this->dateTimeGenerator->generateImmutable($this->faker->dateTimeBetween('-3 years')->format('Y:m:d H:i:s'));
+            $visitorCreatedAt = new DateTimeImmutable($this->faker->dateTimeBetween('-3 years')->format('Y:m:d H:i:s'));
             $visitor = (new Visitor)
                         ->setCookieId($this->uniqueStringGenerator->generate(20))
                         ->setLang($this->faker->randomElement(SiteConfig::LANG_CHOICES))
@@ -99,7 +94,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                             ->setRoute($route)
                             ->setUrl($url)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -116,7 +111,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                             ->setRoute($route)
                             ->setUrl($url)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -133,7 +128,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                             ->setRoute($route)
                             ->setUrl($url)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -150,7 +145,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                             ->setRoute($route)
                             ->setUrl($url)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -167,7 +162,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                             ->setRoute($route)
                             ->setUrl($url)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -184,7 +179,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                 $action = (new VisitorAction)
                             ->setType(VisitorAction::TYPE_PRE_REGISTER)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -198,7 +193,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                 $action = (new VisitorAction)
                             ->setType(VisitorAction::TYPE_REGISTER_CONFIRM)
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -212,7 +207,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
             //cart_create
             if(random_int(0, 9) > 6)
             {
-                $cartCreateDate = $this->dateTimeGenerator->generateImmutable(
+                $cartCreateDate = new DateTimeImmutable(
                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                 ->format('Y:m:d H:i:s')
                 );
@@ -354,7 +349,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -372,7 +367,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -390,7 +385,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -409,7 +404,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'article' => $article->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -427,7 +422,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'article' => $article->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -447,7 +442,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -465,7 +460,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -483,7 +478,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -501,7 +496,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -519,7 +514,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -537,7 +532,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'recipe' => $recipe->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -556,7 +551,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'product' => $product->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -574,7 +569,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'product' => $product->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -592,7 +587,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'product' => $product->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -610,7 +605,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'product' => $product->getId()
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -630,7 +625,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'rate' => random_int(1, 5)
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -649,7 +644,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'rate' => random_int(1, 5)
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -668,7 +663,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'rate' => random_int(1, 5)
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -688,7 +683,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'comment' => $comment->getId(),
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -706,7 +701,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'comment' => $comment->getId(),
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -725,7 +720,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'question' => $question->getId(),
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -743,7 +738,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'question' => $question->getId(),
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )
@@ -761,7 +756,7 @@ class TrafficFixtures extends Fixture implements DependentFixtureInterface, Fixt
                                 'question' => $question->getId(),
                             ])
                             ->setCreatedAt(
-                                $this->dateTimeGenerator->generateImmutable(
+                                new DateTimeImmutable(
                                     $this->faker->dateTimeBetween($visitorCreatedAt->format('Y:m:d H:i:s'))
                                                 ->format('Y:m:d H:i:s')
                                 )

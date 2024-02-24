@@ -18,12 +18,10 @@ class DateTimeZoneResolver
 
     public function resolve(): string 
     {
-        $country = $this->geolocCountryStorage->get();
-        if(!$country)
-        {
-            $country = SiteConfig::DEFAULT_GEOLOCATION_COUNTRY;
-        }
+        $country = $this->geolocCountryStorage->get() ?: SiteConfig::DEFAULT_GEOLOCATION_COUNTRY;
+        
         $result = DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $country);
+
         return $result[0] ?? self::DEFAULT_DATETIME_ZONE;
     }
 }

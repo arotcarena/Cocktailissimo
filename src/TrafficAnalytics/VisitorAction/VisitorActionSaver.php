@@ -8,10 +8,10 @@ use App\Entity\Purchase;
 use App\Entity\Question;
 use App\Entity\Review;
 use App\Entity\VisitorAction;
-use App\Helper\DateTimeGenerator;
 use App\Helper\MainRoleResolver;
 use App\TrafficAnalytics\Counter\EntityCountAdder;
 use App\TrafficAnalytics\VisitorResolver;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 
 class VisitorActionSaver
@@ -20,7 +20,6 @@ class VisitorActionSaver
         private VisitorResolver $visitorResolver,
         private EntityManagerInterface $em,
         private EntityCountAdder $entityCountAdder,
-        private DateTimeGenerator $dateTimeGenerator,
         private MainRoleResolver $mainRoleResolver
     )
     {
@@ -37,7 +36,7 @@ class VisitorActionSaver
     {
         $action = (new VisitorAction)
                     ->setType(VisitorAction::TYPE_REGISTER_CONFIRM)
-                    ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
                     ;
         //on marque le visitor comme registered
         $visitor = $this->visitorResolver->resolve();
@@ -54,7 +53,7 @@ class VisitorActionSaver
     {
         $action = (new VisitorAction)
                     ->setType(VisitorAction::TYPE_DELETE_ACCOUNT)
-                    ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
                     ;
         //on passe visitor.registered à false
         $visitor = $this->visitorResolver->resolve();
@@ -198,7 +197,7 @@ class VisitorActionSaver
 
     private function save(VisitorAction $action)
     {
-        $action->setCreatedAt($this->dateTimeGenerator->generateImmutable());
+        $action->setCreatedAt(new DateTimeImmutable());
         
         $visitor = $this->visitorResolver->resolve();
         $visitor->addAction($action);

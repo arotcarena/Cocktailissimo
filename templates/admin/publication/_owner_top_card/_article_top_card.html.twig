@@ -15,7 +15,7 @@
                 <a href="{{ path('admin_user_show', {id: article.author.id}) }}">{{ article.author.email }}</a>
             </span>
         </div>
-        <div class="header-text">{{ article.createdAt.format('d/m/Y H:i') }}</div>
+        <div class="header-text">{{ article.createdAt | datetime_geoformat('fr') }}</div>
     </div>
     <div class="admin-review-card-header-type">Article</div>
 </div>

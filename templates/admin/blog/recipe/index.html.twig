@@ -58,7 +58,7 @@
                         </td>
                         <td>{{ recipe.countViews ?? 0 }}</td>
                         <td>{{ recipe.ref }}</td>
-                        <td>{{ recipe.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ recipe.createdAt | datetime_geoformat('fr') }}</td>
 
                         <td>
                             <div class="admin-table-controls">

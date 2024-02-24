@@ -3,7 +3,8 @@ namespace App\Convertor;
 
 use App\Entity\Answer;
 use App\Convertor\ConvertorTrait;
-use App\Helper\DateTimeToString;
+use App\Twig\Extension\DateTimeFormaterExtension;
+use App\Twig\Runtime\DateTimeFormaterExtensionRuntime;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 
@@ -18,7 +19,7 @@ class AnswerToArrayConvertor
     private ?string $userEmail = null;
 
     public function __construct(
-        private DateTimeToString $dateTimeToString,
+        private DateTimeFormaterExtensionRuntime $dateTimeFormater,
         private UrlGeneratorInterface $urlGenerator
     )
     {
@@ -75,7 +76,7 @@ class AnswerToArrayConvertor
             'target' => $vendorTarget,
             'fullName' => $answer->getFullName(),
             'content' => $answer->getContent(),
-            'createdAt' => $this->dateTimeToString->getDateString($answer->getCreatedAt(), $this->lang),
+            'createdAt' => $this->dateTimeFormater->dateGeoFormat($answer->getCreatedAt(), $this->lang),
             'email' => $email,
             'canRemove' => $canRemove
         ];

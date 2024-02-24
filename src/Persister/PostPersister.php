@@ -3,14 +3,12 @@ namespace App\Persister;
 
 use App\Entity\Post;
 use App\Entity\TranslatableString;
-use App\Helper\DateTimeGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 
 class PostPersister 
 {
     public function __construct(
-        private DateTimeGenerator $dateTimeGenerator,
         private EntityManagerInterface $em,
     )
     {

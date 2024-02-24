@@ -7,8 +7,8 @@ use App\Entity\CustomPrice;
 use App\Entity\PostalDetail;
 use App\Entity\CustomerDetail;
 use App\Helper\ObjectHydrator;
-use App\Helper\DateTimeGenerator;
 use App\PurchaseProcessing\Checkout\PurchasePreparation\VendorGroups\PurchaseVendorGroupsHandler;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Validator\ConstraintViolationList;
 
@@ -18,7 +18,6 @@ class PurchasePreparator
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private DateTimeGenerator $dateTimeGenerator,
         private PurchaseValidator $purchaseValidator,
         private ObjectHydrator $objectHydrator,
         private PurchaseRelationsCleaner $purchaseRelationsCleaner,
@@ -39,7 +38,7 @@ class PurchasePreparator
 
         $purchase
                 ->setLang($lang)
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
                 ->setCustomerDetail(
                     $this->createCustomerDetail($checkoutData)
                 )
@@ -102,7 +101,7 @@ class PurchasePreparator
                 ->setPostcode($address->postcode)
                 ->setCity($address->city)
                 ->setCountry($address->country)
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
                 ;
     }
     private function createInvoiceDetail(stdClass $address, stdClass $civilState): PostalDetail 
@@ -116,7 +115,7 @@ class PurchasePreparator
                 ->setPostcode($address->postcode)
                 ->setCity($address->city)
                 ->setCountry($address->country)
-                ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                ->setCreatedAt(new DateTimeImmutable())
                 ;
     }
 

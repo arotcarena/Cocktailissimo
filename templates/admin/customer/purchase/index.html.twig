@@ -95,7 +95,7 @@
                             </table>
                         </td>
                         <td>{{ purchase.status | trans({}, 'configs', 'fr') }}</td>
-                        <td>{{ purchase.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ purchase.createdAt | datetime_geoformat('fr') }}</td>
                         <td class="controls">
                             <a class="admin-table-button success" href="{{ path('admin_purchase_show', {id: purchase.id}) }}" title="Voir la commande">
                                 <svg class="icon">

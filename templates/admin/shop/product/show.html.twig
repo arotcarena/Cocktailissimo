@@ -132,7 +132,7 @@
             <div class="admin-product-show-row-text">Ventes : {{ product.countSales ?? 0 }}</div>
         </div>
         
-        {{ include('admin/parts/_show_row.html.twig', {value: product.createdAt.format('d/m/Y H:i'), label: 'Date de création', name: 'createdAt'}) }}
+        {{ include('admin/parts/_show_row.html.twig', {value: (product.createdAt | datetime_geoformat('fr')), label: 'Date de création', name: 'createdAt'}) }}
         
         <div class="admin-product-show-row">
             <div class="admin-product-show-row-label">Produits suggérés</div>

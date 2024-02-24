@@ -3,7 +3,6 @@ namespace App\Tests\IntegrationOnly\TrafficAnalytics;
 
 use App\DataFixtures\Tests\VisitTestFixtures;
 use App\Entity\Visitor;
-use App\Helper\DateTimeGenerator;
 use App\Helper\UniqueStringGenerator;
 use App\Repository\VisitorRepository;
 use App\Tests\Utils\FixturesTrait;
@@ -45,7 +44,6 @@ class VisitorResolverTest extends KernelTestCase
             static::getContainer()->get(VisitorRepository::class),
             $this->taCookie,
             $this->uniqueStringGenerator,
-            new DateTimeGenerator,
             static::getContainer()->get(EntityManagerInterface::class),
             $this->requestStack
         );

@@ -4,11 +4,11 @@ namespace App\Persister;
 use App\Entity\Article;
 use App\Entity\TranslatableText;
 use App\Entity\TranslatableString;
-use App\Helper\DateTimeGenerator;
 use App\Image\PictureUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use App\Repository\IngredientQuantityRepository;
+use DateTimeImmutable;
 use Symfony\Bundle\SecurityBundle\Security;
 
 class ArticlePersister 
@@ -16,7 +16,6 @@ class ArticlePersister
     public function __construct(
         private EntityManagerInterface $em,
         private PictureUploader $pictureUploader,
-        private DateTimeGenerator $dateTimeGenerator,
         private IngredientQuantityRepository $ingredientQuantityRepository,
         private Security $security
     )
@@ -83,9 +82,7 @@ class ArticlePersister
             ->setIt($form->get('itHtmlContent')->getData())
         )
         ->setAuthor($this->security->getUser())
-        ->setCreatedAt(
-            $this->dateTimeGenerator->generateImmutable()
-        );
+        ->setCreatedAt(new DateTimeImmutable());
 
         $this->em->persist($article);
         $this->em->flush();

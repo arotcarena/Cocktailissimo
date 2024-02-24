@@ -56,8 +56,8 @@
                         </td>
                         <td>{{ visitor.visits | length }}</td>
                         <td>{{ visitor.actions | length }}</td>
-                        <td>{{ visitor.createdAt.format('d/m/Y H:i:s') }}</td>
-                        <td>{{ visitor.visits[(visitor.visits | length) - 1].createdAt.format('d/m/Y H:i:s') }}</td>
+                        <td>{{ visitor.createdAt | datetimesecond_geoformat('fr') }}</td>
+                        <td>{{ visitor.visits[(visitor.visits | length) - 1].createdAt | datetimesecond_geoformat('fr') }}</td>
                         <td>
                             <div class="admin-table-controls">
                                 <a class="admin-table-button success" href="{{ path('admin_visitor_show', {id: visitor.id}) }}" title="Voir le détail">

@@ -4,7 +4,6 @@ namespace App\Tests\UnitAndIntegration\Persister;
 use App\Config\SiteConfig;
 use App\Form\DataModel\UserRegistration;
 use App\Persister\UserPersister;
-use Exception;
 use Faker\Factory;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;

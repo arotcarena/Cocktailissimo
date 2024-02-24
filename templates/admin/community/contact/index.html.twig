@@ -36,7 +36,7 @@
                         </td>
                         <td style="white-space: wrap; max-width: 400px;">{{ contact.message | excerpt }}</td>
                         <td>{{ contact.lang }}</td>
-                        <td>{{ contact.createdAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ contact.createdAt | datetime_geoformat('fr') }}</td>
                         <td>
                             <div class="admin-table-controls">
                                 <a class="admin-table-button success" href="{{ path('admin_contact_show', {id: contact.id}) }}" title="Voir">

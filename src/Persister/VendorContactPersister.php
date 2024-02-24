@@ -3,7 +3,7 @@ namespace App\Persister;
 
 use App\Entity\LightAddress;
 use App\Entity\VendorContact;
-use App\Helper\DateTimeGenerator;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -11,7 +11,6 @@ class VendorContactPersister
 {
     public function __construct(
         private EntityManagerInterface $em,
-        private DateTimeGenerator $dateTimeGenerator
     )
     {
         
@@ -40,7 +39,7 @@ class VendorContactPersister
                     )
         //puis la langue et la date
                     ->setLang($lang)
-                    ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+                    ->setCreatedAt(new DateTimeImmutable())
                     ;
 
         $this->em->persist($vendorContact);

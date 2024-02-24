@@ -10,9 +10,9 @@
 
 {% block body %}
     <div style="text-align: right">
-        <div>{{ 'invoice_date' | trans({}, 'messages', lang) }} : {{ purchase.createdAt.format('d/m/Y') }}</div>
+        <div>{{ 'invoice_date' | trans({}, 'messages', lang) }} : {{ purchase.createdAt | date_geoformat(lang) }}</div>
         <div>{{ 'purchase_ref' | trans({}, 'messages', lang) }} : {{ purchase.ref }}</div>
-        <div>{{ 'purchase_date' | trans({}, 'messages', lang) }} : {{ purchase.createdAt.format('d/m/Y') }}</div>
+        <div>{{ 'purchase_date' | trans({}, 'messages', lang) }} : {{ purchase.createdAt | date_geoformat(lang) }}</div>
     </div>
 
     {% if customerDetail.company %}

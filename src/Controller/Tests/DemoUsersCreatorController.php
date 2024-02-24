@@ -6,7 +6,6 @@ use App\Entity\Company;
 use App\Entity\LightAddress;
 use App\Entity\User;
 use App\Helper\CompanySlugCreator;
-use App\Helper\DateTimeGenerator;
 use App\Repository\UserRepository;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +21,6 @@ class DemoUsersCreatorController extends AbstractController
         private UserRepository $userRepository,
         private UserPasswordHasherInterface $hasher,
         private CompanySlugCreator $companySlugCreator,
-        private DateTimeGenerator $dateTimeGenerator
     )
     {
         
@@ -44,7 +42,7 @@ class DemoUsersCreatorController extends AbstractController
             ->setFirstName('Julie')
             ->setLastName('Durand')
             ->setConfirmed(true)
-            ->setCreatedAt($this->dateTimeGenerator->generateImmutable())
+            ->setCreatedAt(new DateTimeImmutable())
             ;
         $this->em->persist($user);
         //pro

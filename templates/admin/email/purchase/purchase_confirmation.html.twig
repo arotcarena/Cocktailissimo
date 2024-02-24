@@ -12,7 +12,7 @@
     </div>
     <div style="margin: 20px 0;">
         <h3>Date de la commande</h3>
-        <div>{{ purchase.createdAt.format('d/m/Y H:i:s') }}</div>
+        <div>{{ purchase.createdAt | datetimesecond_geoformat('fr') }}</div>
     </div>
 
     <div>

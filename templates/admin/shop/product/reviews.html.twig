@@ -94,7 +94,7 @@
                         </td>
                         <td class="moderationStatus" value={{ review.moderationStatus }}>{{ review.moderationStatusLabel }}</td>
                         <td class="confirmed" value={{ review.confirmed ? 'Oui': 'Pas encore' }}>{{ review.confirmed ? 'Oui': 'Pas encore' }}</td>
-                        <td class="createdAt" value={{ review.createdAt.timestamp }}>{{ review.createdAt.format('d/m/Y H:i') }}</td>
+                        <td class="createdAt" value={{ review.createdAt.timestamp }}>{{ review.createdAt | datetime_geoformat('fr') }}</td>
                         <td class="controls">
                             <a class="admin-table-button success" href={{ path('admin_review_show', {id: review.id}) }} title="Voir l'avis">
                                 <svg class="icon">

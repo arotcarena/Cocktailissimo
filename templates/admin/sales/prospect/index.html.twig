@@ -34,7 +34,7 @@
                     <tr>
                         <td>{{ prospectEmail.email }}</td>
                         <td>{{ prospectEmail.lang }}</td>
-                        <td>{{ prospectEmail.sentAt.format('d/m/Y H:i') }}</td>
+                        <td>{{ prospectEmail.sentAt | datetime_geoformat('fr') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -3,11 +3,9 @@ namespace App\Tests\UnitAndIntegration\PurchaseProcessing\Checkout\PurchasePrepa
 
 use App\Config\SiteConfig;
 use App\Entity\CustomPrice;
-use App\Entity\User;
 use DateTimeImmutable;
 use App\Entity\Purchase;
 use PHPUnit\Framework\TestCase;
-use App\Helper\DateTimeGenerator;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use App\Helper\ObjectHydrator;
@@ -42,9 +40,6 @@ class PurchasePreparatorTest extends TestCase
     {
         $this->em = $this->createMock(EntityManagerInterface::class);
         
-        $dateTimeGenerator = $this->createMock(DateTimeGenerator::class);
-        $dateTimeGenerator->expects($this->any())->method('generateImmutable')->willReturn(new DateTimeImmutable());
-
         $this->purchaseValidator = $this->createMock(PurchaseValidator::class);
         $this->objectHydrator = $this->createMock(ObjectHydrator::class);
         $this->objectHydrator->expects($this->any())->method('hydrate')->willReturn(new CustomPrice);
@@ -53,7 +48,6 @@ class PurchasePreparatorTest extends TestCase
 
         $this->purchasePreparator = new PurchasePreparator(
             $this->em, 
-            $dateTimeGenerator,
             $this->purchaseValidator,
             $this->objectHydrator,
             $this->purchaseRelationsCleaner,
