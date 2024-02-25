@@ -39,7 +39,7 @@ abstract class EmailFactory
     private function configureMailer(string $senderEmail): void
     {
         //DELETE FOR PROD // a suppr pour Prod
-        $transport = Transport::fromDsn(SiteConfig::SMTP_TEST);
+        $transport = Transport::fromDsn(SecurityConfig::SMTP_TEST);
         // DECOMMENTER CETTE LIGNE POUR PROD
         // $transport = Transport::fromDsn('smtp://'.$senderEmail.':'.SecurityConfig::EMAIL_PASSWORD.'@'.SecurityConfig::EMAIL_SERVER);
         $this->mailer = new Mailer($transport);

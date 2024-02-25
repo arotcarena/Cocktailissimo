@@ -3,7 +3,6 @@
 namespace App\Command;
 
 use App\AutoRemover\OldVisitorsRemover;
-use App\Config\SiteConfig;
 use App\Email\Admin\AdminNotificationListEmail;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

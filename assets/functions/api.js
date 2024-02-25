@@ -1,3 +1,4 @@
+import { SecurityConfig } from "../Config/SecurityConfig";
 import { SiteConfig } from "../Config/SiteConfig";
 
 
@@ -108,7 +109,7 @@ export const addUrlParams = (entrypoint, data) => {
 export const apiSendcloudFetch = async (endpoint, data = {}, method = 'GET') => {
     let options = {};
     let url = endpoint;
-    const authorization = 'Basic '+  window.btoa(SiteConfig.SENDCLOUD_PUBLIC_KEY+':'+SiteConfig.SENDCLOUD_PRIVATE_KEY);
+    const authorization = 'Basic '+  window.btoa(SecurityConfig.SENDCLOUD_PUBLIC_KEY+':'+SecurityConfig.SENDCLOUD_PRIVATE_KEY);
 
     switch(method) {
         case 'GET':

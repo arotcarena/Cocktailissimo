@@ -36,13 +36,9 @@ yarn-error.log
 /public/img/pictures/
 ###< uploaded images ###
 
-
-/src/Config/SiteConfig.php
+/assets/Config/SecurityConfig.js
 /src/Config/SecurityConfig.php
 
-/src/DataFixtures/User/UserFixtures.php
-
 a_faire.txt
-
 
 /data/
