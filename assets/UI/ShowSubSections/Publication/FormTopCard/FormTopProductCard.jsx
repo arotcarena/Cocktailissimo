@@ -5,7 +5,11 @@ export const FormTopProductCard = ({product}) => {
 
     return (
         <div className="review-form-product-card">
-            <img className="review-form-product-img" src={product.firstPicture.path} alt={product.firstPicture.alt} />
+            {
+                product.firstPicture && (
+                    <img className="review-form-product-img" src={product.firstPicture.path} alt={product.firstPicture.alt} />
+                )
+            }
             <div className="review-form-product-text">
                 <div className="review-form-product-designation">{product.designation}</div>
                 <div className="review-form-product-sub-designation">{product.basePackaging.label}</div>

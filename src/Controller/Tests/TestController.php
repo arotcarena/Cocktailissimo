@@ -21,6 +21,7 @@ use App\Entity\User;
 use App\Entity\VendorDetail;
 use App\Helper\PdfCreator;
 use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
+use App\PurchaseProcessing\PurchaseValidated\PurchaseValidatedProcess;
 use App\Repository\ArticleRepository;
 use App\Repository\PackagingRepository;
 use App\Repository\ProductRepository;
@@ -60,6 +61,16 @@ class TestController extends AbstractController
     {
         $this->faker = Factory::create('fr_FR');
         $this->faker->addProvider(new Commerce($this->faker));
+    }
+
+    #[Route('/tests/purchaseValidation')]
+    public function purchaseValidation(PurchaseValidatedProcess $purchaseValidatedProcess)
+    {
+        $purchase = $this->purchaseRepository->findOneBy([]);
+
+        $purchaseValidatedProcess->process($purchase);
+
+        dd($purchase);
     }
 
     #[Route('/tests/purchaseEmails')]

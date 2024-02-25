@@ -10,7 +10,7 @@
         <span>{{ answer.createdAt | datetime_geoformat('fr') }}</span>
     </div>
     <div class="admin-answer-body">
-        {{ answer.content }}
+        {{ answer.content | nl2br }}
     </div>
     <div class="admin-answer-footer">
         <form action="{{ path('admin_answer_delete') }}" method="POST">

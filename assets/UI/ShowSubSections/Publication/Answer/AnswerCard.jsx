@@ -1,6 +1,7 @@
 import React from 'react';
 import { useRemover } from '../../../../CustomHook/remover/useRemover';
 import { PublicationRemover } from '../PublicationRemover';
+import nl2br from 'react-nl2br';
 
 export const AnswerCard = ({ownerId, answer, deleteAnswer, isSummary = false}) => {
 
@@ -14,7 +15,7 @@ export const AnswerCard = ({ownerId, answer, deleteAnswer, isSummary = false}) =
                 <span>{answer.fullName}</span>
                 <span>{answer.createdAt}</span>
             </div>
-            <div className="review-card-body">{answer.content}</div>
+            <div className="review-card-body">{nl2br(answer.content)}</div>
             {
                 answer.canRemove && !isSummary && (
                     <PublicationRemover 

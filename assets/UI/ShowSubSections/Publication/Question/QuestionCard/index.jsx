@@ -11,6 +11,7 @@ import { ImportantAnswer } from '../../Answer/ImportantAnswer';
 import { PublicationRemover } from '../../PublicationRemover';
 import { useRemover } from '../../../../../CustomHook/remover/useRemover';
 import { useTranslation } from 'react-i18next';
+import nl2br from 'react-nl2br';
 
 export const QuestionCard = ({ownerTopCard, question, deleteQuestion, fetchOneFull, createAnswer, deleteAnswer, verifyLoginBeforeAnswer = true}) => {
     const {t} = useTranslation('messages');
@@ -66,7 +67,7 @@ export const QuestionCard = ({ownerTopCard, question, deleteQuestion, fetchOneFu
                 <div className="review-card-body">
                     <div className="review-card-body-title">{question.title}</div>
                     <div className="review-card-body-content">
-                        {question.content}
+                        {nl2br(question.content)}
                     </div>
                     {
                         question.canRemove && (

@@ -2,6 +2,7 @@ import React from 'react';
 import { PublicationRemover } from '../PublicationRemover';
 import { useRemover } from '../../../../CustomHook/remover/useRemover';
 import { t } from 'i18next';
+import nl2br from 'react-nl2br';
 
 export const ImportantAnswer = ({ownerId, answer, deleteAnswer, removeIsOpen = true}) => {
 
@@ -30,7 +31,7 @@ export const ImportantAnswer = ({ownerId, answer, deleteAnswer, removeIsOpen = t
                 }
                 <span>{answer.createdAt}</span>
             </div>
-            <div className="review-card-body">{answer.content}</div>
+            <div className="review-card-body">{nl2br(answer.content)}</div>
             {
                 answer.canRemove && removeIsOpen && (
                     <PublicationRemover 

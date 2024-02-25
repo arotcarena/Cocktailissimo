@@ -12,6 +12,7 @@ import { ReviewSummary } from './ReviewSummary';
 import { FormButton } from '../../../../../Form/FormButton';
 import { FormTopProductCard } from '../../../FormTopCard/FormTopProductCard';
 import { useTranslation } from 'react-i18next';
+import nl2br from 'react-nl2br';
 
 export const ReviewCard = ({review, deleteReview, createAnswer, deleteAnswer, product = null}) => {
     const {t} = useTranslation('messages');
@@ -47,7 +48,7 @@ export const ReviewCard = ({review, deleteReview, createAnswer, deleteAnswer, pr
             <div className="review-card-body">
                 <div className="review-card-body-title">{review.title}</div>
                 <div className="review-card-body-content">
-                    {review.comment}
+                    {nl2br(review.comment)}
                 </div>
                 {
                     review.canRemove && (

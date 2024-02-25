@@ -4,6 +4,7 @@ namespace App\TrafficAnalytics;
 use App\Entity\Visitor;
 use App\Helper\UniqueStringGenerator;
 use App\Repository\VisitorRepository;
+use App\Service\GeolocCountry\GeolocCountryStorage;
 use App\TrafficAnalytics\Storage\TrafficAnalyticsCookie;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +18,8 @@ class VisitorResolver
         private TrafficAnalyticsCookie $taCookie,
         private UniqueStringGenerator $uniqueStringGenerator,
         private EntityManagerInterface $em,
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
+        private GeolocCountryStorage $geolocCountryStorage
     )
     {
         
@@ -52,6 +54,9 @@ class VisitorResolver
         $visitor = (new Visitor)
                     ->setCookieId($cookieId)
                     ->setUserAgent($request->headers->get('User-Agent', 'unknown_user-agent'))
+                    ->setGeolocCountry(
+                        $this->geolocCountryStorage->get()
+                    )
                     ->setLang($request->getLocale())
                     ->setCreatedAt(new DateTimeImmutable())
                     ;

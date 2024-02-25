@@ -11,6 +11,7 @@ import { ImportantAnswer } from '../../Answer/ImportantAnswer';
 import { PublicationRemover } from '../../PublicationRemover';
 import { useRemover } from '../../../../../CustomHook/remover/useRemover';
 import { useTranslation } from 'react-i18next';
+import nl2br from 'react-nl2br';
 
 export const CommentCard = ({ownerTopCard, comment, deleteComment, deleteAnswer, createAnswer, fetchOneFull}) => {
     const {t} = useTranslation('messages');
@@ -49,7 +50,7 @@ export const CommentCard = ({ownerTopCard, comment, deleteComment, deleteAnswer,
     //delete comment
     const {confirmationIsOpen, openConfirmation, closeConfirmation, isRemoving, setRemoving} = useRemover();
 
-
+    
     return (
         <li ref={commentCardRef} className={'review-card' + (confirmationIsOpen ? ' remove-confirm': '') + (isRemoving ? ' is-removing': '')}>
             <div className="qa-card-top">
@@ -61,7 +62,7 @@ export const CommentCard = ({ownerTopCard, comment, deleteComment, deleteAnswer,
                 </div>
                 <div className="review-card-body">
                     <div className="review-card-body-content">
-                        {comment.content}
+                        {nl2br(comment.content)}
                     </div>
                     {
                         comment.canRemove && (

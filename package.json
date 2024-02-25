@@ -38,6 +38,7 @@
         "react-dropzone": "^14.2.3",
         "react-hook-form": "^7.44.2",
         "react-i18next": "^13.0.2",
+        "react-nl2br": "^1.0.4",
         "react-phone-number-input": "^3.3.6",
         "react-router": "^6.13.0",
         "react-router-dom": "^6.13.0",

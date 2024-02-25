@@ -10,6 +10,7 @@ use App\Repository\PackagingRepository;
 use App\Repository\RecipeRepository;
 use App\Repository\VisitorRepository;
 use App\Repository\VisitRepository;
+use App\Service\GeolocCountry\GeolocCountryStorage;
 use App\Tests\Utils\FixturesTrait;
 use App\TrafficAnalytics\Counter\EntityCountAdder;
 use App\TrafficAnalytics\Counter\EntityViewCounter;
@@ -60,6 +61,10 @@ class VisitSaverTest extends KernelTestCase
 
         $em = $container->get(EntityManagerInterface::class);
 
+        /** @var GeolocCountryStorage|MockObject */
+        $geolocCountryStorage = $this->createMock(GeolocCountryStorage::class);
+        $geolocCountryStorage->expects($this->any())->method('get')->willReturn('FR');
+
         $this->visitSaver = new VisitSaver(
             $this->taSession,
             $em,
@@ -69,7 +74,8 @@ class VisitSaverTest extends KernelTestCase
                 $this->taCookie,
                 new UniqueStringGenerator,
                 $em,
-                $requestStack
+                $requestStack,
+                $geolocCountryStorage
             ),
             new EntityViewCounter(
                 $container->get(PackagingRepository::class),

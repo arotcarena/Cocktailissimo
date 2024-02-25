@@ -29,6 +29,7 @@ class PaymentVentilator
             $accountId = $vendorDetail->getStripeConnectId();
 
             //si le vendeur est cocktailissimo vendorRestAmount n'a pas été configuré donc = null donc aucun transfert
+            //si le vendeur n'est pas cocktailissimo on lui envoie sa part
             if($amount = $purchaseVendorGroup->getVendorRestAmount())
             {
                 $this->stripeService->createTransfer($amount, $accountId, $transferGroup);

@@ -5,6 +5,7 @@ use App\DataFixtures\Tests\VisitTestFixtures;
 use App\Entity\Visitor;
 use App\Helper\UniqueStringGenerator;
 use App\Repository\VisitorRepository;
+use App\Service\GeolocCountry\GeolocCountryStorage;
 use App\Tests\Utils\FixturesTrait;
 use App\TrafficAnalytics\Storage\TrafficAnalyticsCookie;
 use App\TrafficAnalytics\VisitorResolver;
@@ -40,12 +41,17 @@ class VisitorResolverTest extends KernelTestCase
         );
         $this->uniqueStringGenerator = $this->createMock(UniqueStringGenerator::class);
 
+        /** @var GeolocCountryStorage|MockObject */
+        $geolocCountryStorage = $this->createMock(GeolocCountryStorage::class);
+        $geolocCountryStorage->expects($this->any())->method('get')->willReturn('FR');
+
         $this->visitorResolver = new VisitorResolver(
             static::getContainer()->get(VisitorRepository::class),
             $this->taCookie,
             $this->uniqueStringGenerator,
             static::getContainer()->get(EntityManagerInterface::class),
-            $this->requestStack
+            $this->requestStack,
+            $geolocCountryStorage
         );
 
         $this->loadFixtures([VisitTestFixtures::class]);

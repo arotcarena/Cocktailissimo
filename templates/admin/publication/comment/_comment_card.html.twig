@@ -19,7 +19,7 @@
             <span class="admin-review-card-text-semi-mute">{{ comment.createdAt | datetime_geoformat('fr') }}</span>
         </div>
         <div class="admin-review-card-body-content">
-            {{ comment.content }}
+            {{ comment.content | nl2br }}
         </div>
     </div>
 
