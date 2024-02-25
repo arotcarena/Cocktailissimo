@@ -26,6 +26,7 @@ visitor_action:
   pre_register: Inscription (non confirmée)
   register_confirm: Confirmation inscription
   delete_account: Suppression du compte
+  geoloc_country_change: Changement du pays de géoloc.
   cart_create: Création d'un panier
   cart_change: Modification du panier
   checkout_start: Checkout - arrivée sur le formulaire

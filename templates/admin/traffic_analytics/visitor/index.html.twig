@@ -31,6 +31,7 @@
             <thead>
                 <tr>
                     <th>Cookie #ID</th>
+                    <th>Pays (géoloc)</th>
                     <th>Langue</th>
                     <th>Origine</th>
                     <th>Rôle</th>
@@ -46,6 +47,7 @@
                 {% for visitor in pagination %}
                     <tr>
                         <td>#{{ visitor.cookieId }}</td>
+                        <td>{{ visitor.geolocCountry | trans({}, 'countries', 'fr') }} {{ visitor.geolocCountry }}</td>
                         <td>{{ visitor.lang }}</td>
                         <td>{{ (visitor.origin ?? '') | trans({}, 'configs', 'fr') }}</td>
                         <td>{{ (visitor.role ?? '') | trans({}, 'configs', 'fr') }}</td>

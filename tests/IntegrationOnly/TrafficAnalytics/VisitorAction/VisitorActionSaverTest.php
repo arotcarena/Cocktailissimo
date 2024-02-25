@@ -169,6 +169,10 @@ class VisitorActionSaverTest extends KernelTestCase
     {
         $this->assertSaveCorrectType(VisitorAction::TYPE_DELETE_ACCOUNT, 'saveTypeDeleteAccount');
     }
+    public function testSaveTypeGeolocCountryChange()
+    {
+        $this->assertSaveCorrectType(VisitorAction::TYPE_GEOLOC_COUNTRY_CHANGE, 'saveGeolocCountryChange');
+    }
     public function testSaveTypeCartCreate()
     {
         $this->assertSaveCorrectType(VisitorAction::TYPE_CART_CREATE, 'saveTypeCartCreate', [121 => 1]);

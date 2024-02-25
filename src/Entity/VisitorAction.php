@@ -16,6 +16,8 @@ class VisitorAction
 
     public const TYPE_DELETE_ACCOUNT = 'visitor_action.delete_account';
 
+    public const TYPE_GEOLOC_COUNTRY_CHANGE = 'visitor_action.geoloc_country_change';
+
     public const TYPE_CART_CREATE = 'visitor_action.cart_create';
 
     public const TYPE_CART_CHANGE = 'visitor_action.cart_change';

@@ -45,6 +45,7 @@
                                     #{{ visit.visitor.cookieId }}
                                 </a>
                             </div>
+                            <div><strong>Pays (géoloc) :</strong> {{ visit.visitor.geolocCountry | trans({}, 'countries', 'fr') }} {{ visit.visitor.geolocCountry }}</div>
                             <div><strong>Langue :</strong> {{ visit.visitor.lang }}</div>
                             <div><strong>Rôle :</strong> {{ (action.visitor.role ?? '') | trans({}, 'configs', 'fr') }}</div>
                             <div><strong>Origine :</strong> {{ (visit.visitor.origin ?? '') | trans({}, 'configs', 'fr') }}</div>

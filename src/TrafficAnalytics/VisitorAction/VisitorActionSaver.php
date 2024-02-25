@@ -64,6 +64,22 @@ class VisitorActionSaver
         $this->em->flush();
     }
 
+    public function saveTypeGeolocCountryChange(string $newGeolocCountry)
+    {
+        $action = (new VisitorAction)
+                    ->setType(VisitorAction::TYPE_GEOLOC_COUNTRY_CHANGE)
+                    ->setDetail(['country' => $newGeolocCountry])
+                    ->setCreatedAt(new DateTimeImmutable())
+                    ;
+        //on modifie la geolocCountry du visitor
+        $visitor = $this->visitorResolver->resolve();
+        $visitor->addAction($action)
+                ->setGeolocCountry($newGeolocCountry)
+                ;
+        $this->em->persist($action);
+        $this->em->flush();
+    }
+
     public function saveTypeCartCreate(array $cookieCart)
     {
         $action = (new VisitorAction)

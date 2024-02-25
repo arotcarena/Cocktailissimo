@@ -21,6 +21,10 @@
                 {{ include('admin/parts/_show_row.html.twig', {name: 'cookieId', label: 'Cookie #ID', value: visitor.cookieId}) }}
             </div>
             <div class="admin-form-row" style="gap: 50px;">
+            
+                {% set geolocCountryString = (visitor.geolocCountry | trans({}, 'countries', 'fr')) ~ ' ' ~ visitor.geolocCountry %}
+                {{ include('admin/parts/_show_row.html.twig', {name: 'geolocCountry', label: 'Pays (géoloc)', value: geolocCountryString}) }}
+
                 {{ include('admin/parts/_show_row.html.twig', {name: 'lang', label: 'Langue', value: visitor.lang}) }}
 
                 {{ include('admin/parts/_show_row.html.twig', {name: 'origin', label: 'Origine', value: (visitor.origin | trans({}, 'configs', 'fr'))}) }}

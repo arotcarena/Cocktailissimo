@@ -35,6 +35,8 @@ class VisitorActionDetailShowExtensionRuntime implements RuntimeExtensionInterfa
 
         switch($type)
         {
+            case VisitorAction::TYPE_GEOLOC_COUNTRY_CHANGE:
+                return 'Nouveau pays : '.$detail['country'];
             case VisitorAction::TYPE_CART_CREATE:
                 return $this->cookieCartToHtml($detail);
             case VisitorAction::TYPE_CART_CHANGE:

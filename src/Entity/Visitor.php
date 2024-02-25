@@ -39,6 +39,9 @@ class Visitor
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $role = null;
 
+    #[ORM\Column(length: 2, nullable: true)]
+    private ?string $geolocCountry = null;
+
 
 
     public function __construct()
@@ -180,6 +183,18 @@ class Visitor
     public function setRole(?string $role): static
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    public function getGeolocCountry(): ?string
+    {
+        return $this->geolocCountry;
+    }
+
+    public function setGeolocCountry(?string $geolocCountry): static
+    {
+        $this->geolocCountry = $geolocCountry;
 
         return $this;
     }

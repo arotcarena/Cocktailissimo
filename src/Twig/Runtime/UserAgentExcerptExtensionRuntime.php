@@ -11,8 +11,13 @@ class UserAgentExcerptExtensionRuntime implements RuntimeExtensionInterface
         // Inject dependencies if needed
     }
 
-    public function excerpt(string $userAgent)
+    public function excerpt(?string $userAgent): ?string
     {
+        if(!$userAgent)
+        {
+            return null;
+        }
+
         return '...' . explode(')', explode('(', $userAgent)[1])[0] . '...';
     }
 }

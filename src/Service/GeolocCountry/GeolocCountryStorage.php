@@ -1,6 +1,7 @@
 <?php
 namespace App\Service\GeolocCountry;
 
+use App\TrafficAnalytics\VisitorAction\VisitorActionSaver;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
@@ -9,7 +10,8 @@ class GeolocCountryStorage
     public const GEOLOC_COUNTRY_SESSION_KEY = 'country';
 
     public function __construct(
-        private RequestStack $requestStack
+        private RequestStack $requestStack,
+        private VisitorActionSaver $visitorActionSaver
     )
     {
         
@@ -23,6 +25,17 @@ class GeolocCountryStorage
     public function set(string $country): void
     {
         $session = $this->requestStack->getSession();
+
+        //En cas de changement d'une geolocCountry pour une autre,
+        //on crée une VisitorAction
+        if($prevCountry = $session->get(self::GEOLOC_COUNTRY_SESSION_KEY))
+        {
+            if($prevCountry !== $country)
+            {
+                $this->visitorActionSaver->saveTypeGeolocCountryChange($country);
+            }
+        }
+
         $session->set(self::GEOLOC_COUNTRY_SESSION_KEY, $country);
         
         //pour le front : sessionStorage.C_ISO 
