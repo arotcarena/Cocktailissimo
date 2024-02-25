@@ -46,7 +46,9 @@
     "regenerate_link": "Regenerate the link? WARNING, THE OLD LINK WILL NO LONGER BE VALID.",
     "need_login_to_post_answer": "To post an answer, you need to log in or create an account.",
     "need_login_to_post_comment": "To post a comment, you need to log in or create an account.",
-    "need_login_to_post_question": "To ask a question, you need to log in or create an account."
+    "need_login_to_post_question": "To ask a question, you need to log in or create an account.",
+    "only_majors": "Consulting cocktailissimo.com is reserved for adults only.",
+    "if_major_click_to_access": "If you are an adult, click the button below to access the site."
   },
   "info": {
     "six_digits_token_sent_to": "Please enter the 6-digit code sent by email to the address {{email}}.",

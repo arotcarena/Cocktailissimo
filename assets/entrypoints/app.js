@@ -42,6 +42,7 @@ import { apiFetch } from '../functions/api';
 import i18n from './i18n';
 import { Security } from '../Config/Security';
 import { configureLanguage } from '../functions/language/configureLanguage';
+import { AgeFilter } from '../Components/PopUp/AgeFilter';
 
 
 configureLanguage();
@@ -53,6 +54,9 @@ topScrollArrowRoot.render(
 )
 
 
+//filtre d'âge (interdiction aux mineurs)
+const popupRoot = createRoot(document.getElementById('popup'));
+popupRoot.render(<AgeFilter />);
 
 
 //session storage

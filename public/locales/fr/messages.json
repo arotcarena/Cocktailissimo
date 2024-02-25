@@ -46,7 +46,9 @@
     "regenerate_link": "Régénérer le lien ? ATTENTION, L'ANCIEN LIEN NE SERA PLUS VALIDE.",
     "need_login_to_post_answer": "Pour poster une réponse, vous devez vous connecter ou créer un compte",
     "need_login_to_post_comment": "Pour poster un commentaire, vous devez vous connecter ou créer un compte",
-    "need_login_to_post_question": "Pour poser une question, vous devez vous connecter ou créer un compte"
+    "need_login_to_post_question": "Pour poser une question, vous devez vous connecter ou créer un compte",
+    "only_majors": "La consultation de cocktailissimo.com est réservée à un public majeur.",
+    "if_major_click_to_access": "Si c'est votre cas, cliquez sur le bouton ci-dessous pour accéder au site"
   },
   "info": {
     "six_digits_token_sent_to": "Veuillez entrer le code à 6 chiffres envoyé par email à l'adresse {{email}}.",

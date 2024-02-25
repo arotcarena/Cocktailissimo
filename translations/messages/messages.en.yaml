@@ -2,7 +2,8 @@ warning:
   need_login: To perform this action, you must log in or create an account.
   delete_vendor_account: >
     We're sorry to hear that you want to leave us. As a vendor, you cannot directly delete your account, but you just need to request it by email at <a target="_blank" href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, specifying the email address associated with your account. Your request will be processed as soon as possible.
-  alcohol_danger: Excessive alcohol consumption is dangerous to your health, consume with moderation
+  alcohol_danger: Excessive alcohol consumption is dangerous to your health, consume with moderation.
+  no_alcohol_minors: Prohibition of selling alcoholic beverages to minors under the age of 18.
   
 error:
   temporary_failure: An error occurred. Please try again later.

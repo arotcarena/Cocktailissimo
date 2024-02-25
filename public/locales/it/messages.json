@@ -46,7 +46,9 @@
     "regenerate_link": "Rigenerare il link? ATTENZIONE, IL VECCHIO LINK NON SARÀ PIÙ VALIDO.",
     "need_login_to_post_answer": "Per inviare una risposta, devi effettuare l'accesso o creare un account",
     "need_login_to_post_comment": "Per inviare un commento, devi effettuare l'accesso o creare un account",
-    "need_login_to_post_question": "Per fare una domanda, devi effettuare l'accesso o creare un account"
+    "need_login_to_post_question": "Per fare una domanda, devi effettuare l'accesso o creare un account",
+    "only_majors": "La consultazione di cocktailissimo.com è riservata a un pubblico adulto.",
+    "if_major_click_to_access": "Se sei maggiorenne, clicca il pulsante qui sotto per accedere al sito."
   },
   "info": {
     "six_digits_token_sent_to": "Inserisci il codice a 6 cifre inviato via email all'indirizzo {{email}}.",

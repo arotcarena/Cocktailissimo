@@ -129,6 +129,13 @@
     font-weight: 600;
     color: #FFF;
     background-color: var(--color-bordeaux);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    column-gap: 10px;
+}
+.footer-bottom-warning div {
+    margin: 5px 0;
 }
 
 @media only screen and (min-width: 650px) {

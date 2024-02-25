@@ -2,7 +2,8 @@ warning:
   need_login: Per effettuare questa azione, devi effettuare l'accesso o creare un account.
   delete_vendor_account: >
     Siamo spiacenti di apprendere che desideri lasciarci. Come venditore, non puoi eliminare direttamente il tuo account, ma è sufficiente richiederlo via e-mail a <a target="_blank" href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, specificando l'indirizzo e-mail associato al tuo account. La tua richiesta verrà elaborata nel più breve tempo possibile.
-  alcohol_danger: L'abuso di alcol è pericoloso per la salute, consumare con moderazione
+  alcohol_danger: L'abuso di alcol è pericoloso per la salute, consumare con moderazione.
+  no_alcohol_minors: Divieto di vendita di bevande alcoliche ai minori di 18 anni.
 
 error:
   temporary_failure: Si è verificato un errore. Riprova più tardi.
