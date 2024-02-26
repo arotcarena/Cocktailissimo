@@ -250,6 +250,7 @@ class PurchasePendingTestFixtures extends Fixture implements DependentFixtureInt
                         ->setType(SiteConfig::SHIPPING_TYPE_HOME)
                     )
                 )
+                ->setCreatedAt(new DateTimeImmutable())
                 ;
         $manager->persist($purchase);
 

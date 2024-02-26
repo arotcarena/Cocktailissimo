@@ -88,19 +88,25 @@ class StockUpdaterTest extends KernelTestCase
         
         $quantity1 = $purchase->getPurchaseVendorGroups()->get(0)->getPurchaseLines()->get(0)->getQuantity();
         $publicRef1 = $purchase->getPurchaseVendorGroups()->get(0)->getPurchaseLines()->get(0)->getPublicRef();
-        $stock1 = $this->findEntity(PackagingRepository::class, ['publicRef' => $publicRef1])->getStock();
+        $packaging1 = $this->findEntity(PackagingRepository::class, ['publicRef' => $publicRef1]);
+        //pour éviter les erreurs liées au stock insuffisant
+        $packaging1->setStock(1000);
 
         $quantity2 = $purchase->getPurchaseVendorGroups()->get(1)->getPurchaseLines()->get(0)->getQuantity();
         $publicRef2 = $purchase->getPurchaseVendorGroups()->get(1)->getPurchaseLines()->get(0)->getPublicRef();
-        $stock2 = $this->findEntity(PackagingRepository::class, ['publicRef' => $publicRef2])->getStock();
+        $packaging2 = $this->findEntity(PackagingRepository::class, ['publicRef' => $publicRef2]);
+        //pour éviter les erreurs liées au stock insuffisant
+        $packaging2->setStock(2000);
+
+        $this->em->flush();
 
         $this->stockUpdater->handlePurchase($purchase);
 
         $updatedStock1 = $this->findEntity(PackagingRepository::class, ['publicRef' => $publicRef1])->getStock();
         $updatedStock2 = $this->findEntity(PackagingRepository::class, ['publicRef' => $publicRef2])->getStock();
 
-        $this->assertEquals($stock1 - $quantity1, $updatedStock1);
-        $this->assertEquals($stock2 - $quantity2, $updatedStock2);
+        $this->assertEquals(1000 - $quantity1, $updatedStock1);
+        $this->assertEquals(2000 - $quantity2, $updatedStock2);
     }
 
 }

@@ -2,6 +2,7 @@
 namespace App\Tests\UnitAndIntegration\PurchaseProcessing\PurchaseValidated;
 
 use App\Config\SiteConfig;
+use App\Email\Admin\AdminNotificationEmail;
 use App\Entity\Purchase;
 use App\FinancialOperations\PaymentVentilator;
 use App\Invoice\InvoiceManagement\PurchaseInvoicesHandler;
@@ -49,7 +50,8 @@ class PurchaseValidatedProcessTest extends TestCase
             $this->paymentVentilator,
             $this->purchaseAmountCalculator,
             $this->purchaseValidatedNotifier,
-            $this->purchaseInvoicesHandler
+            $this->purchaseInvoicesHandler,
+            $this->createMock(AdminNotificationEmail::class)
         );
 
         $this->purchase = PurchasePendingFactory::create();

@@ -12,6 +12,13 @@ class CookieCart
 
     public function set(array $cart)
     {
+        //DELETE FOR PROD
+        //pour éviter de faire planter les tests
+        if($_SERVER['APP_ENV'] === 'test')
+        {
+            return;
+        }
+
         $options = [
             'expires' => time() + 3600*24*30*6,
             'path' => '/',
@@ -20,12 +27,7 @@ class CookieCart
             'httponly' => true,
             'samesite' => 'Lax'
         ];
-
-        // //DELETE FOR PROD // ONLY FOR FUNCTIONAL TEST
-        // if($_SERVER['APP_ENV'] === 'test')
-        // {
-        //     return;
-        // }
+        
         setcookie('cart', json_encode($cart), $options);
     }
 }

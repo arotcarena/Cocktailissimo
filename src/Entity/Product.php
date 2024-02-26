@@ -87,6 +87,7 @@ class Product
     private ?string $brand = null;
 
     #[Assert\NotBlank(message: 'Le HS code est obligatoire')]
+    #[Assert\Length(max: 12, maxMessage: '12 caractères maximum (sinon erreur sendcloud au moment d\'annoncer un colis)')]
     #[ORM\Column(length: 255)]
     private ?string $hsCode = null;
 

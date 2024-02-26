@@ -25,7 +25,6 @@ class InvoiceManager
     {
         try
         {
-            throw new Exception();
             $html = $this->twig->render('pdf/invoice/' . $type . '.html.twig', [
                 'lang' => $lang,
                 'purchaseVendorGroup' => $purchaseVendorGroup,

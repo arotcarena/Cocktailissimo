@@ -3,6 +3,7 @@ namespace App\Tests\IntegrationOnly\PurchaseProcessing\PurchaseValidated;
 
 use App\Config\SiteConfig;
 use App\DataFixtures\Tests\PurchasePendingTestFixtures;
+use App\Email\Admin\AdminNotificationEmail;
 use App\Entity\Product;
 use App\Entity\Purchase;
 use App\Entity\PurchaseLine;
@@ -52,7 +53,8 @@ class PurchaseValidatedProcessTest extends KernelTestCase
             $this->createMock(PaymentVentilator::class),
             $container->get(PurchaseAmountCalculator::class),
             $container->get(PurchaseValidatedNotifier::class),
-            $container->get(PurchaseInvoicesHandler::class)
+            $container->get(PurchaseInvoicesHandler::class),
+            $container->get(AdminNotificationEmail::class)
         );
 
         $this->loadFixtures([PurchasePendingTestFixtures::class]);

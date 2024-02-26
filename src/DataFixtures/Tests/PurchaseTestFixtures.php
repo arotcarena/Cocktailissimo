@@ -450,6 +450,19 @@ class PurchaseTestFixtures extends Fixture implements DependentFixtureInterface
         //purchase with 2 purchaseLines in 2 vendorGroups
         $packaging1 = $this->faker->randomElement($packagings);
         $packaging2 = $this->faker->randomElement($packagings);
+        //pour pas que les 2 packagings soient les même car ça fait échouer les tests
+        if($packaging2->getId() === $packaging1->getId())
+        {
+            $packaging2 = $this->faker->randomElement($packagings);
+        }
+        if($packaging2->getId() === $packaging1->getId())
+        {
+            $packaging2 = $this->faker->randomElement($packagings);
+        }
+        if($packaging2->getId() === $packaging1->getId())
+        {
+            $packaging2 = $this->faker->randomElement($packagings);
+        }
 
         $deliveryAddress = (new PostalDetail)
                             ->setCivility(SiteConfig::CIVILITY_F)

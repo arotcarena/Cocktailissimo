@@ -21,7 +21,6 @@ use App\Repository\QuestionRepository;
 use App\Repository\ReviewRepository;
 use App\Repository\VisitorActionRepository;
 use App\Repository\VisitorRepository;
-use App\Service\GeolocCountry\GeolocCountryStorage;
 use App\Tests\Utils\Factory\CartTotalsHydratorFactoryTrait;
 use App\Tests\Utils\FixturesTrait;
 use App\TrafficAnalytics\Counter\EntityCountAdder;
@@ -65,17 +64,12 @@ class VisitorActionSaverTest extends KernelTestCase
         /** @var EntityManagerInterface */
         $em = $container->get(EntityManagerInterface::class);
 
-        /** @var GeolocCountryStorage|MockObject */
-        $geolocCountryStorage = $this->createMock(GeolocCountryStorage::class);
-        $geolocCountryStorage->expects($this->any())->method('get')->willReturn('FR');
-
         $visitorResolver = new VisitorResolver(
             $container->get(VisitorRepository::class),
             $this->taCookie,
             new UniqueStringGenerator,
             $em,
             $requestStack,
-            $geolocCountryStorage
         );
 
         $this->visitorActionSaver = new VisitorActionSaver(
@@ -177,7 +171,7 @@ class VisitorActionSaverTest extends KernelTestCase
     }
     public function testSaveTypeGeolocCountryChange()
     {
-        $this->assertSaveCorrectType(VisitorAction::TYPE_GEOLOC_COUNTRY_CHANGE, 'saveGeolocCountryChange');
+        $this->assertSaveCorrectType(VisitorAction::TYPE_GEOLOC_COUNTRY_CHANGE, 'saveTypeGeolocCountryChange', 'FR');
     }
     public function testSaveTypeCartCreate()
     {

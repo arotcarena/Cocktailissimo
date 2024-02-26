@@ -6,7 +6,6 @@ use Faker\Factory;
 use Faker\Generator;
 use DateTimeImmutable;
 use App\Entity\Address;
-use App\Entity\TranslatableString;
 use App\Repository\UserRepository;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;

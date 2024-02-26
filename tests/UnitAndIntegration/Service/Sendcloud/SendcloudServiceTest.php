@@ -64,7 +64,7 @@ class SendcloudServiceTest extends TestCase
 
         $this->curlRequest->expects($this->exactly(3))
                         ->method('post')
-                        ->willReturn((object)['id' => 1], (object)['id' => 2], (object)['id' => 3])
+                        ->willReturn((object)['parcel' => (object)['id' => 1]], (object)['parcel' => (object)['id' => 2]], (object)['parcel' => (object)['id' => 3]])
                         ;
         
         $this->sendcloudService->announceParcels($purchase);

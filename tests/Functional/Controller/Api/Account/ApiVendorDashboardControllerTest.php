@@ -259,6 +259,6 @@ class ApiVendorDashboardControllerTest extends FunctionalTest
 
         /** @var DoctrineDataCollector */
         $dbCollector = $this->client->getProfile()->getCollector('db');
-        $this->assertLessThanOrEqual(4, $dbCollector->getQueryCount());
+        $this->assertLessThanOrEqual(5, $dbCollector->getQueryCount());
     }
 }

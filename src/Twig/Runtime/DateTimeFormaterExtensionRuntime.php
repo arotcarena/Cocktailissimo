@@ -20,12 +20,17 @@ class DateTimeFormaterExtensionRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param DateTime|DateTimeImmutable $dateTime
+     * @param DateTime|DateTimeImmutable|null $dateTime
      * @param string $forceLang
-     * @return string
+     * @return null|string
      */
-    public function dateGeoFormat($dateTime, $forceLang = null)
+    public function dateGeoFormat($dateTime = null, $forceLang = null): ?string
     {
+        if(!$dateTime)
+        {
+            return null;
+        }
+
         $dateTime->setTimezone(new DateTimeZone($this->dateTimeZoneResolver->resolve()));
 
         $lang = $forceLang ?: $this->translator->getLocale();
@@ -37,12 +42,17 @@ class DateTimeFormaterExtensionRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param DateTime|DateTimeImmutable $dateTime
+     * @param DateTime|DateTimeImmutable|null $dateTime
      * @param string $forceLang
-     * @return string
+     * @return null|string
      */
-    public function dateTimeGeoFormat($dateTime, $forceLang = null)
+    public function dateTimeGeoFormat($dateTime = null, $forceLang = null): ?string
     {
+        if(!$dateTime)
+        {
+            return null;
+        }
+
         $zoneDateTime = $dateTime->setTimezone(
             new DateTimeZone($this->dateTimeZoneResolver->resolve())
         );
@@ -56,12 +66,17 @@ class DateTimeFormaterExtensionRuntime implements RuntimeExtensionInterface
     }
 
     /**
-     * @param DateTime|DateTimeImmutable $dateTime
+     * @param DateTime|DateTimeImmutable|null $dateTime
      * @param string $forceLang
-     * @return string
+     * @return string|null
      */
-    public function dateTimeSecondGeoFormat($dateTime, $forceLang = null)
+    public function dateTimeSecondGeoFormat($dateTime = null, $forceLang = null): ?string
     {
+        if(!$dateTime)
+        {
+            return null;
+        }
+
         $zoneDateTime = $dateTime->setTimezone(
             new DateTimeZone($this->dateTimeZoneResolver->resolve())
         );

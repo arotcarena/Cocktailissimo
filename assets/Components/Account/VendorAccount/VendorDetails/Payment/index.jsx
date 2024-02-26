@@ -4,9 +4,9 @@ import { Updater } from './StripeVerification/Updater';
 import { Finalizer } from './StripeVerification/Finalizer';
 import { Starter } from './StripeVerification/Starter';
 import { loadStripe } from '@stripe/stripe-js';
-import { SiteConfig } from '../../../../../Config/SiteConfig';
 import { Flash } from '../../../../../UI/Flash/Flash';
 import { useTranslation } from 'react-i18next';
+import { SecurityConfig } from '../../../../../Config/SecurityConfig';
 
 export const DetailsPayment = ({vendor, stripeAccount, stripeAccountIsLoading}) => {
     const {t, i18n} = useTranslation('messages');
@@ -21,7 +21,7 @@ export const DetailsPayment = ({vendor, stripeAccount, stripeAccountIsLoading}) 
         setLoading(true);
         setError(false);
         try {
-            const stripe = await loadStripe(SiteConfig.STRIPE_PUBLIC_KEY);
+            const stripe = await loadStripe(SecurityConfig.STRIPE_PUBLIC_KEY);
             const accountResult = await stripe.createToken('account', {
                 business_type: 'company',
                 tos_shown_and_accepted: true,

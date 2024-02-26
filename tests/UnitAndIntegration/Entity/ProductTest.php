@@ -52,7 +52,21 @@ class ProductTest extends EntityTest
                 ->addSuggestedProduct(new Product)
                 ->addSuggestedProduct(new Product)
                 ->addSuggestedProduct(new Product)
-                // 8
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                ->addSuggestedProduct(new Product)
+                // 22   limit 20
         );
     }
 
@@ -68,7 +82,20 @@ class ProductTest extends EntityTest
             ->addSuggestedProduct(new Product)
             ->addSuggestedProduct(new Product)
             ->addSuggestedProduct(new Product)
-            //  7 
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+            ->addSuggestedProduct(new Product)
+
+            //  19    limit 20
         );
     }
 
@@ -259,7 +286,7 @@ class ProductTest extends EntityTest
                     ->setEs('un-slug-valide-en')
                     ->setIt('un-slug-valide-en')
                 )
-                ->setHsCode('code-douanier')
+                ->setHsCode('max_12_car')
                 ->setOriginCountry('FR')
                 ->addPicture(
                     (new Picture)

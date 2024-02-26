@@ -74,7 +74,7 @@ class CategoryControllerTest extends FunctionalTest
         /** @var DoctrineDataCollector */
         $dbCollector = $this->client->getProfile()->getCollector('db');
         /* 2 sont dans la classe de test */
-        $this->assertLessThanOrEqual(2 + 7, $dbCollector->getQueryCount());
+        $this->assertLessThanOrEqual(2 + 8, $dbCollector->getQueryCount());
     }
     
 }

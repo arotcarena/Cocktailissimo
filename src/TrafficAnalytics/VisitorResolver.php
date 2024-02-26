@@ -19,7 +19,6 @@ class VisitorResolver
         private UniqueStringGenerator $uniqueStringGenerator,
         private EntityManagerInterface $em,
         private RequestStack $requestStack,
-        private GeolocCountryStorage $geolocCountryStorage
     )
     {
         
@@ -55,7 +54,7 @@ class VisitorResolver
                     ->setCookieId($cookieId)
                     ->setUserAgent($request->headers->get('User-Agent', 'unknown_user-agent'))
                     ->setGeolocCountry(
-                        $this->geolocCountryStorage->get()
+                        $request->hasSession() ? $request->getSession()->get(GeolocCountryStorage::GEOLOC_COUNTRY_SESSION_KEY): null
                     )
                     ->setLang($request->getLocale())
                     ->setCreatedAt(new DateTimeImmutable())
