@@ -116,8 +116,8 @@ export const apiSendcloudFetch = async (endpoint, data = {}, method = 'GET') => 
             options = {
                 method: 'GET',
                 headers: {
-                    Accept: 'application/json',
-                    Authorization: authorization
+                    'Accept': 'application/json',
+                    'Authorization': authorization
                 },
             };
             url = addUrlParams(endpoint, data);
@@ -138,11 +138,13 @@ export const apiSendcloudFetch = async (endpoint, data = {}, method = 'GET') => 
             //
     }
 
+    return apiFetch(url, options);
+
     //API RELAIS POUR LES TESTS (car CORS empêche les requêtes depuis localhost)
-    const result = await apiPreparedFetch('/tests/apiSendcloud', {
-        method: method,
-        data: data,
-        endpoint: url
-    }, 'POST');
-    return result;
+    // const result = await apiPreparedFetch('/tests/apiSendcloud', {
+    //     method: method,
+    //     data: data,
+    //     endpoint: url
+    // }, 'POST');
+    // return result;
 }

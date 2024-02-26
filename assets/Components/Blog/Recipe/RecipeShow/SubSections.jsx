@@ -22,7 +22,7 @@ export const SubSections = ({recipe}) => {
         <>
             {
                 //WITHOUT_SHOP //supprimer la condition
-                user && ['consumer@email.com', 'pro@email.com', 'vendor@email.com'].includes(user.email) && (
+                user && ['consumer@email.com', 'pro@email.com', 'vendor@email.com', 'fnsandin@gmail.com'].includes(user.email) && (
                     <section className="product-show-sub-block suggestedProducts-block">
                         <h2 className="border-title">
                             <span>{t('linked_products')}</span>

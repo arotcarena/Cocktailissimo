@@ -31,7 +31,7 @@ class CurlRequest
         ]);
 
         //DELETE_FOR_PROD
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
         $response = curl_exec($curl);
         $error = curl_error($curl);
@@ -71,7 +71,7 @@ class CurlRequest
         ]);
 
         //DELETE_FOR_PROD
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        // curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 
         $response = curl_exec($curl);
         $error = curl_error($curl);

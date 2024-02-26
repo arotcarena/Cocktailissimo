@@ -31,7 +31,7 @@ export const AgeFilter = () => {
                     <InfoIcon />
                     <strong>{t('warning.only_majors')}</strong> {t('warning.if_major_click_to_access')}
                 </div>
-                <FormButton additionalClass="bordeaux mt-20" onClick={handleClick}>Je suis majeur</FormButton>
+                <FormButton additionalClass="bordeaux mt-20" onClick={handleClick}>{t('i_major')}</FormButton>
             </div>
         </PopupModal>
     )

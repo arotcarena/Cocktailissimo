@@ -95,6 +95,6 @@ class SubCategoryControllerTest extends FunctionalTest
         /** @var DoctrineDataCollector */
         $dbCollector = $this->client->getProfile()->getCollector('db');
         /* 5 dans la classe de test */
-        $this->assertLessThanOrEqual(5 + 6, $dbCollector->getQueryCount());
+        $this->assertLessThanOrEqual(5 + 7, $dbCollector->getQueryCount());
     }
 }

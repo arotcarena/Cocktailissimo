@@ -23,7 +23,7 @@ export const SearchIndex = () => {
     const {user, updateUser} = useGetUser();
     const [shopIsOpen, setShopIsOpen] = useState(false);
     useEffect(() => {
-        if(user && ['consumer@email.com', 'pro@email.com', 'vendor@email.com'].includes(user.email)) {
+        if(user && ['consumer@email.com', 'pro@email.com', 'vendor@email.com', 'fnsandin@gmail.com'].includes(user.email)) {
             setShopIsOpen(true);
             setType(TYPE_PRODUCT);
         }

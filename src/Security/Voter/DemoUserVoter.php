@@ -31,7 +31,7 @@ class DemoUserVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case self::DEMO_USER:
-                if(in_array($email, ['consumer@email.com', 'pro@email.com', 'vendor@email.com']))
+                if(in_array($email, ['consumer@email.com', 'pro@email.com', 'vendor@email.com', 'fnsandin@gmail.com']))
                 {
                     return true;
                 }

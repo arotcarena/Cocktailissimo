@@ -14,12 +14,12 @@ class TrafficAnalyticsCookie
 
     public function set(string $cookieValue)
     {
-        //DELETE FOR PROD
+        //DELETE_FOR_PROD
         //pour éviter de faire planter les tests
-        if($_SERVER['APP_ENV'] === 'test') 
-        {
-            return;
-        }
+        // if($_SERVER['APP_ENV'] === 'test') 
+        // {
+        //     return;
+        // }
 
         $options = [
             'expires' => time() + SiteConfig::TA_COOKIE_EXPIRATION_TIME,

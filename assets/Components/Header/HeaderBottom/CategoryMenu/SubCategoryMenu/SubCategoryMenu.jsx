@@ -13,7 +13,7 @@ export const SubCategoryMenu = ({category, subCategories, openWithoutShopFlash})
         if(category.name.en === 'Recipes') {
             return;
         }
-        if(!user || !['consumer@email.com', 'pro@email.com', 'vendor@email.com'].includes(user.email)) {
+        if(!user || !['consumer@email.com', 'pro@email.com', 'vendor@email.com', 'fnsandin@gmail.com'].includes(user.email)) {
             e.preventDefault();
             openWithoutShopFlash();
         }

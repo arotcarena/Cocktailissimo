@@ -59,7 +59,7 @@
                 <h1 class="recipe-show-title article-show-title">{{ attribute(article.title, locale) }}</h1>
                 <h2 class="article-show-subtitle">{{ attribute(article.subtitle, locale) }}</h2>
                 <div class="recipe-show-text link-underline">
-                    {{ attribute(article.htmlContent, locale) | parse_master_tags(locale) | raw | nl2br }}
+                    {{ attribute(article.htmlContent, locale) | parse_master_tags(locale) | raw }}
                 </div>
             </div>
             <div class="recipe-show-footer">

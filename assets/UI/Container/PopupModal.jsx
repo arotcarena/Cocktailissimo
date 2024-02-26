@@ -49,7 +49,7 @@ export const PopupModal = forwardRef(({children, additionalClass, isOpen, close 
         } else {
             document.querySelectorAll('html, body').forEach(elt => elt.classList.remove('no-overflow'));
         }
-    }, [isOpen]);
+    }, [modalIsOpen]);
 
     const handleStopPropagation = e => {
         e.stopPropagation();
