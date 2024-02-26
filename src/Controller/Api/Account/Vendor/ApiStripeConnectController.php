@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Api\Account\Vendor;
 
+use App\Config\SiteConfig;
 use App\Convertor\StripeAccountToArrayConvertor;
 use App\Entity\User;
 use App\Service\Stripe\StripeService;
@@ -59,10 +60,17 @@ class ApiStripeConnectController extends AbstractController
     {
         /** @var User */
         $vendor = $this->getUser();
-        if(!$vendor->getStripeConnectId())
+        
+        //si le vendeur n'a pas de stripeConnectId
+        //ou s'il s'agit du vendeur cocktailissimo (qui n'est pas un vrai vendeur avec connect account)
+        if(
+            !$vendor->getStripeConnectId()
+            || $vendor->getStripeConnectId() === SiteConfig::COCKTAILISSIMO_STRIPE_ACCOUNT_ID    
+        )
         {
             return $this->json(null);
         }
+     
         $account = $this->stripeService->getAccount($vendor->getStripeConnectId());
         
         return $this->json(

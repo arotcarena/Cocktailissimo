@@ -18,6 +18,8 @@ class SiteConfig
 
     public const COCKTAILISSIMO_IDENTIFICATION_NUMBER = '97853641500018';
     public const COCKTAILISSIMO_VAT_NUMBER = 'FR93978536415';
+    public const COCKTAILISSIMO_STRIPE_ACCOUNT_ID = 'acct_cocktailissimo';
+
 
     public const SUPPORTED_LOCALES = ['en', 'fr', 'es', 'it'];
     public const DEFAULT_LOCALE = 'en';

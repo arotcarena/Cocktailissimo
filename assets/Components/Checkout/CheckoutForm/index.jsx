@@ -62,7 +62,10 @@ export const CheckoutForm = () => {
 
             {
                 step >= 3 && (
-                    Countries.EU_ISO.includes(checkoutData.deliveryAddress.country) ? (
+                    //si on a pas de deliveryAddress.country ou si le country est dans l'UE on affiche les blocks normaux
+                    //sinon on affiche le block pour commande manuelle
+                    checkoutData.deliveryAddress.country?.length < 2
+                    || Countries.EU_ISO.includes(checkoutData.deliveryAddress.country) ? (
                         <>
                             {
                                 step >= 4 ? (

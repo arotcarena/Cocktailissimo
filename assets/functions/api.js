@@ -140,6 +140,7 @@ export const apiSendcloudFetch = async (endpoint, data = {}, method = 'GET') => 
 
     return apiFetch(url, options);
 
+    //DELETE_FOR_PROD
     //API RELAIS POUR LES TESTS (car CORS empêche les requêtes depuis localhost)
     // const result = await apiPreparedFetch('/tests/apiSendcloud', {
     //     method: method,

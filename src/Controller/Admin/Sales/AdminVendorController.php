@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Admin\Sales;
 
+use App\Config\SiteConfig;
 use App\Entity\VendorContact;
 use App\Form\Admin\VendorFilterType;
 use App\Form\Admin\DataModel\VendorFilter;
@@ -195,7 +196,7 @@ class AdminVendorController extends AbstractController
             if($vendor->getSendcloudId())
             {
                 //on demande vérification de token pour l'initialisation du compte vendeur
-                $this->tokenVerificationDemander->demandAllInOneInitVerification($vendor, $request->getLocale());
+                $this->tokenVerificationDemander->demandAllInOneInitVerification($vendor, SiteConfig::ADMIN_LANG);
                 
                 $this->addFlash('success', 'Le vendeur "'.$vendor->getCompany()->getUsualName().' - '.$vendor->getEmail().'" a été correctement synchronisé avec sendcloud ! Le vendeur va recevoir un email contenant un lien pour initialiser son mot de passe et accéder à son compte.');
                 return $this->redirectToRoute('admin_vendor_show', [
