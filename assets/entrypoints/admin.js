@@ -85,7 +85,12 @@ if(document.getElementById('packaging-choices-input')) {
     const input = document.getElementById('packaging-choices-input');
     const root = createRoot(input);
     root.render(
-        <PackagingChoicesInput name={input.dataset.name} value={input.dataset.value} productId={input.dataset.productid} />
+        <PackagingChoicesInput 
+            name={input.dataset.name} 
+            value={input.dataset.value} 
+            productId={input.dataset.productid} 
+            vatLevel={input.dataset.vatlevel} // data-vatlevel est ajouté en js par le productform_controller.js
+        />
     )
 }
 

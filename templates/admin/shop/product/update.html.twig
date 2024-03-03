@@ -15,7 +15,7 @@
     <h1>Modifier "{{ product.designation.fr }}"</h1>
 
    {{ form_start(form) }}
-    <div class="admin-form lang-switch-wrapper">
+    <div class="admin-form lang-switch-wrapper" data-controller="productform">
 
         {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
         
@@ -82,6 +82,8 @@
         {{ include('admin/form/_admin_form_row.html.twig', {name: 'itSlug', label: 'Slug (IT) *', field: form.itSlug, lang: 'it'}) }}
 
 
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vatLevel', label: 'Niveau de TVA *', field: form.vatLevel}) }}
+
         <div 
             id="packaging-choices-input"
             data-productid="{{ product.id }}"
@@ -120,7 +122,6 @@
 
         {{ include('admin/form/_admin_form_row.html.twig', {name: 'originCountry', label: 'Pays d\'origine *', field: form.originCountry}) }}
 
-        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vatLevel', label: 'Niveau de TVA *', field: form.vatLevel}) }}
 
         {# géré en react #}
         {# suggestedProducts #}

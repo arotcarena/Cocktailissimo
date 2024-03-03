@@ -61,6 +61,10 @@
                     {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.es: '', label: 'Label (ES)', lang: 'es'}) }}
                     {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.it: '', label: 'Label (IT)', lang: 'it'}) }}
 
+                    {% if packaging.supplyPriceHT %}
+                        {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.supplyPriceHT | price_format), label: 'Prix d\'achat (HT)'}) }}
+                    {% endif %}
+
                     {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.consumerPriceHT | price_format), label: 'Prix public (HT)'}) }}
                     {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.businessPriceHT | price_format), label: 'Prix pro (HT)'}) }}
                     {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.weight, label: 'Poids (g)'}) }}

@@ -3,6 +3,7 @@ import * as yup from "yup"
 import { useFormWithValidation } from '../../../CustomHook/form/useFormWithValidation';
 import { AdminTextField } from '../../../styles/UI/Admin/Form/AdminTextField';
 import { apiFetch } from '../../../functions/api';
+import { PriceCalculator } from './PriceCalculator';
 
 
 const packagingSchema = yup
@@ -13,13 +14,14 @@ const packagingSchema = yup
     frLabel: yup.string().max(200, '200 caractères max.'),
     esLabel: yup.string().max(200, '200 caractères max.'),
     itLabel: yup.string().max(200, '200 caractères max.'),
+    supplyPriceHT: yup.number(),
     consumerPriceHT: yup.number().typeError('Cette valeur doit être un nombre').positive('Cette valeur doit être supérieure à 0').required('Le prix public (HT) est obligatoire'),
     businessPriceHT: yup.number().typeError('Cette valeur doit être un nombre').positive('Cette valeur doit être supérieure à 0').required('Le prix pro (HT) est obligatoire'),
     stock: yup.number().typeError('Cette valeur doit être un nombre').min(0, 'Cette valeur ne peut être négative').required('Le stock est obligatoire'),
     eanCode: yup.string().max(200, '200 caractères max.').required('Le code EAN est obligatoire'),
     weight: yup.number().typeError('Cette valeur doit être un nombre').positive('Cette valeur doit être supérieure à zéro').required('Le poids (g) est obligatoire'),
     exciseTax: yup.number(),
-    frSocialTax: yup.number()
+    frSocialTax: yup.number(),
   })
   .required();
 
@@ -31,6 +33,7 @@ const defaultPackaging = {
     frLabel: '',
     esLabel: '',
     itLabel: '',
+    supplyPrice: '',
     consumerPriceHT: '',
     businessPriceHT: '',
     stock: '',
@@ -46,6 +49,7 @@ const prepareDefaultPackaging = packaging => {
     }
     return {
         ...packaging,
+        supplyPriceHT: packaging.supplyPriceHT / 100,
         consumerPriceHT: packaging.consumerPriceHT / 100,
         businessPriceHT: packaging.businessPriceHT / 100,
         exciseTax: packaging.exciseTax ? packaging.exciseTax / 100: '',
@@ -53,8 +57,8 @@ const prepareDefaultPackaging = packaging => {
     };
 }
 
-export const PackagingChoicesForm = ({onSubmitSuccess, close, packagingChoices, productId, packaging = null}) => {
-    const {handleSubmit, control, errors, setError, isSubmitting} = useFormWithValidation(packagingSchema, prepareDefaultPackaging(packaging));
+export const PackagingChoicesForm = ({onSubmitSuccess, close, packagingChoices, productId, vatLevel, packaging = null}) => {
+    const {handleSubmit, control, errors, setError, setValue, watch, isSubmitting} = useFormWithValidation(packagingSchema, prepareDefaultPackaging(packaging));
 
     const [isLoading, setLoading] = useState(false);
 
@@ -74,6 +78,7 @@ export const PackagingChoicesForm = ({onSubmitSuccess, close, packagingChoices, 
             try {
                 await apiFetch('/admin/api/packaging/validation/uniquePublicRef/'+ (productId ?? '0') +'/'+ formData.publicRef); //dans create productId est undefined --> on envoie 0
                 //priceTransformer
+                formData.supplyPriceHT = Math.round(formData.supplyPriceHT * 100);
                 formData.consumerPriceHT = Math.round(formData.consumerPriceHT * 100);
                 formData.businessPriceHT = Math.round(formData.businessPriceHT * 100);
                 formData.exciseTax = Math.round(formData.exciseTax * 100);
@@ -104,14 +109,18 @@ export const PackagingChoicesForm = ({onSubmitSuccess, close, packagingChoices, 
                 <AdminTextField control={control} name="itLabel" error={errors.itLabel?.message} maxLength="200">IT</AdminTextField>
             </div>
 
+            <AdminTextField type="number" control={control} name="supplyPriceHT" error={errors.supplyPriceHT?.message} maxLength="200">Prix d'achat (HT)</AdminTextField>
+
+            <PriceCalculator setValue={setValue} supplyPriceHT={watch('supplyPriceHT')} vatLevel={vatLevel} /> 
+
             <AdminTextField type="number" control={control} name="consumerPriceHT" error={errors.consumerPriceHT?.message} maxLength="200">Prix public (HT) *</AdminTextField>
             <AdminTextField type="number" control={control} name="businessPriceHT" error={errors.businessPriceHT?.message} maxLength="200">Prix pro (HT) *</AdminTextField>
 
             <AdminTextField type="number" control={control} name="weight" error={errors.weight?.message} maxLength="200">Poids (g) *</AdminTextField>
 
-            <AdminTextField type="number" control={control} name="exciseTax" error={errors.exciseTax?.message} maxLength="200">Droits d'accise (EUR) *</AdminTextField>
+            <AdminTextField type="number" control={control} name="exciseTax" error={errors.exciseTax?.message} maxLength="200">Droits d'accise (EUR)</AdminTextField>
             
-            <AdminTextField type="number" control={control} name="frSocialTax" error={errors.frSocialTax?.message} maxLength="200">Cotisation Sécurité Sociale (France) (EUR) *</AdminTextField>
+            <AdminTextField type="number" control={control} name="frSocialTax" error={errors.frSocialTax?.message} maxLength="200">Cotisation Sécurité Sociale (France) (EUR)</AdminTextField>
 
             <AdminTextField type="number" control={control} name="stock" error={errors.stock?.message} maxLength="200">Stock *</AdminTextField>
 

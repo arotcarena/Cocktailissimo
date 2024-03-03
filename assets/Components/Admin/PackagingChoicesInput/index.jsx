@@ -5,7 +5,7 @@ import { Modal } from '../../../UI/Container/Modal';
 import { PackagingChoicesForm } from './PackagingChoicesForm';
 import { AdminPackagingCard } from './AdminPackagingCard';
 
-export const PackagingChoicesInput = ({name, value, productId}) => {
+export const PackagingChoicesInput = ({name, value, productId, vatLevel}) => {
 
     //à l'ouverture, si une value est passée on la prend en compte
     useEffect(() => {
@@ -100,6 +100,7 @@ export const PackagingChoicesInput = ({name, value, productId}) => {
                     close={closeForm} 
                     packagingChoices={packagingChoices} 
                     productId={productId}
+                    vatLevel={vatLevel}
                 />
             </Modal>
             <input type="hidden" name={name} value={packagingChoicesString} />

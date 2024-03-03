@@ -69,6 +69,9 @@ class Packaging
     #[ORM\Column(nullable: true)]
     private ?int $frSocialTax = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $supplyPriceHT = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -226,6 +229,18 @@ class Packaging
     public function setFrSocialTax(?int $frSocialTax): static
     {
         $this->frSocialTax = $frSocialTax;
+
+        return $this;
+    }
+
+    public function getSupplyPriceHT(): ?int
+    {
+        return $this->supplyPriceHT;
+    }
+
+    public function setSupplyPriceHT(?int $supplyPriceHT): static
+    {
+        $this->supplyPriceHT = $supplyPriceHT;
 
         return $this;
     }

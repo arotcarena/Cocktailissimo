@@ -48,6 +48,7 @@ class ProductFormSpecialHydrater
                 'frLabel' => $packaging->getLabel() ? $packaging->getLabel()->getFr(): '',
                 'esLabel' => $packaging->getLabel() ? $packaging->getLabel()->getEs(): '',
                 'itLabel' => $packaging->getLabel() ? $packaging->getLabel()->getIt(): '',
+                'supplyPriceHT' => $packaging->getSupplyPriceHT(),
                 'consumerPriceHT' => $packaging->getConsumerPriceHT(),
                 'businessPriceHT' => $packaging->getBusinessPriceHT(),
                 'stock' => $packaging->getStock(),
