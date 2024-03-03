@@ -18,8 +18,8 @@ const packagingSchema = yup
     stock: yup.number().typeError('Cette valeur doit être un nombre').min(0, 'Cette valeur ne peut être négative').required('Le stock est obligatoire'),
     eanCode: yup.string().max(200, '200 caractères max.').required('Le code EAN est obligatoire'),
     weight: yup.number().typeError('Cette valeur doit être un nombre').positive('Cette valeur doit être supérieure à zéro').required('Le poids (g) est obligatoire'),
-    exciseTax: yup.number().typeError('Cette valeur doit être un nombre').positive('Cette valeur doit être supérieure à zéro'),
-    frSocialTax: yup.number().typeError('Cette valeur doit être un nombre').positive('Cette valeur doit être supérieure à zéro')
+    exciseTax: yup.number(),
+    frSocialTax: yup.number()
   })
   .required();
 
@@ -109,9 +109,9 @@ export const PackagingChoicesForm = ({onSubmitSuccess, close, packagingChoices, 
 
             <AdminTextField type="number" control={control} name="weight" error={errors.weight?.message} maxLength="200">Poids (g) *</AdminTextField>
 
-            <AdminTextField type="number" control={control} name="exciseTax" error={errors.exciseTax?.message} maxLength="200">Droits d'accise (€) *</AdminTextField>
+            <AdminTextField type="number" control={control} name="exciseTax" error={errors.exciseTax?.message} maxLength="200">Droits d'accise (EUR) *</AdminTextField>
             
-            <AdminTextField type="number" control={control} name="frSocialTax" error={errors.frSocialTax?.message} maxLength="200">Cotisation Sécurité Sociale (France) (€) *</AdminTextField>
+            <AdminTextField type="number" control={control} name="frSocialTax" error={errors.frSocialTax?.message} maxLength="200">Cotisation Sécurité Sociale (France) (EUR) *</AdminTextField>
 
             <AdminTextField type="number" control={control} name="stock" error={errors.stock?.message} maxLength="200">Stock *</AdminTextField>
 

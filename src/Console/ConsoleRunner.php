@@ -9,7 +9,8 @@ class ConsoleRunner
     public static function run(string $command, string ...$suffix): string
     {
         $console = dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'bin' . DIRECTORY_SEPARATOR . 'console';
-        $command = ['php', $console, $command];
+        //en dev on peut mettre simplement 'php'
+        $command = [PHP_BINDIR . DIRECTORY_SEPARATOR . 'php', $console, $command];
 
         foreach($suffix as $s)
         {

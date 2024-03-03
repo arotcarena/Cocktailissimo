@@ -10,16 +10,15 @@ use Doctrine\ORM\EntityManagerInterface;
 class RobotsVisitorsRemover
 {
     public const ROBOTS_LIST = [
-        'Unknown robot',
+        'bingbot',
+        'applebot',
+        'bot',
+        'SemrushBot',
+        'YandexBot',
+        'crawler', //www.ionos.de
+        'robot',
         'Googlebot',
-        'Voila',
-        'Yahoo Slurp',
         'MSNBot',
-        'Alexa (IA Archiver)',
-        'Ask',
-        'MSNBot-media',
-        'The web archive (IA Archiver)',
-        'Netcraft'
     ];
 
     public int $count = 0;
@@ -41,9 +40,9 @@ class RobotsVisitorsRemover
      * @param array|null $robots (liste de morceaux de user-agent appartenant à des robots)
      * @return string $message
      */
-    public function process(array $robots = null): void
+    public function process(array $robots = []): void
     {
-        $robotsList = $robots ? array_merge(self::ROBOTS_LIST, $robots): self::ROBOTS_LIST;
+        $robotsList = array_merge(self::ROBOTS_LIST, $robots);
 
         $visitorsToDelete = [];
         foreach($robotsList as $robot)
