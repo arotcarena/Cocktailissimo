@@ -63,6 +63,11 @@ textarea.admin-form-control {
     font-size: 0.8em;
     color: var(--color-admin-lightgrey);
 }
+.admin-form-info.strong {
+    color: rgb(100, 100, 100);
+    font-size: .9em;
+    margin: 10px 0;
+}
 .admin-main-error {
     margin: 20px 0;
     color: red;

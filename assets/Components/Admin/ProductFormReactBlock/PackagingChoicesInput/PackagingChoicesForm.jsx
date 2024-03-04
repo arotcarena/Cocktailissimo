@@ -30,7 +30,7 @@ const defaultPackaging = {
     frLabel: '',
     esLabel: '',
     itLabel: '',
-    supplyPrice: '',
+    supplyPriceHT: '',
     consumerPriceHT: '',
     businessPriceHT: '',
     stock: '',

@@ -16,7 +16,6 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
 
     const [consumerPriceTTCFR, setConsumerPriceTTCFR] = useState('');
     const [businessPriceTTCFR, setBusinessPriceTTCFR] = useState('');
-    const [marginRate, setMarginRate] = useState(null);
     const [margin, setMargin] = useState(null);
 
     const handleChange = e => {
@@ -34,7 +33,15 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
             setValue('consumerPriceHT', priceHT);
             //si on a un supplyPrice, on calcule marge
             if(supplyPriceHT) {
-                setMargin(priceHT - supplyPriceHT);
+                const marginAmount = priceHT - supplyPriceHT;
+                const marginRate = (marginAmount / supplyPriceHT) * 100;
+                setMargin(margin => ({
+                    ...margin,
+                    consumer: {
+                        amount: marginAmount,
+                        rate: Math.round(marginRate * 100) / 100 //pour arrondir avec 2 décimales
+                    }
+                }));
             }
         }
     }, [consumerPriceTTCFR]);
@@ -45,53 +52,71 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
             const priceHT = calcPriceHT(businessPriceTTCFR, frVatRate);
             setValue('businessPriceHT', priceHT);
             //si on a un supplyPrice, on calcule marge
+            //si on a un supplyPrice, on calcule marge
             if(supplyPriceHT) {
-                setMargin(priceHT - supplyPriceHT);
+                const marginAmount = priceHT - supplyPriceHT;
+                const marginRate = (marginAmount / supplyPriceHT) * 100;
+                setMargin(margin => ({
+                    ...margin,
+                    business: {
+                        amount: marginAmount,
+                        rate: Math.round(marginRate * 100) / 100 //pour arrondir avec 2 décimales
+                    }
+                }));
             }
         }
     }, [businessPriceTTCFR]);
 
     return (
-        <div className="admin-form-modal-apparted">
-            <div style={{fontWeight: '600'}}>Prix de vente</div>
-            {
-                frVatRate ? (
-                    <>
-                        <div className="admin-form-row admin-modal-form-row">
-                            <div className="admin-form-group">
-                                <label htmlFor="consumerPriceTTCFR" className="admin-form-label">Prix public (TTC France) *</label>
-                                <input id="consumerPriceTTCFR" name="consumerPriceTTCFR" type="number" className="admin-form-control" value={consumerPriceTTCFR} onChange={handleChange} />
-                                {
-                                    consumerPriceError && <div className="form-error">{consumerPriceError}</div>
-                                }
-                            </div>
-                            <div className="admin-form-group">
-                                <label htmlFor="businessPriceTTCFR" className="admin-form-label">Prix pro (TTC France) *</label>
-                                <input id="businessPriceTTCFR" name="businessPriceTTCFR" type="number" className="admin-form-control" value={businessPriceTTCFR} onChange={handleChange} />
-                                {
-                                    businessPriceError && <div className="form-error">{businessPriceError}</div>
-                                }
-                            </div>
-                        </div>
-                        {/* affichage des prix HT */}
-                        <div className="admin-form-row">
-                            <div className="admin-form-group">
-                                <div className="admin-form-label">Prix public (HT)</div>
-                                <div className="admin-form-control" style={{display: 'flex', alignItems: 'center', padding: '0 10px'}}>{consumerPriceHT}</div>
-                            </div>
-                            <div className="admin-form-group">
-                                <div className="admin-form-div">Prix pro (HT)</div>
-                                <div className="admin-form-control" style={{display: 'flex', alignItems: 'center', padding: '0 10px'}}>{businessPriceHT}</div>
-                            </div>
-                        </div>
-                    </>
-                ): (
-                    <div className="admin-form-info">Chargement du calculateur de prix...</div>
-                )
-            }
-            {
-                margin && <div className="admin-form-info">Marge : {priceFormater(margin * 100)}</div>
-            }
-        </div>
+        frVatRate ? (
+            <>
+                <div className="admin-form-row admin-modal-form-row">
+                    <div className="admin-form-group">
+                        <label htmlFor="consumerPriceTTCFR" className="admin-form-label">Prix public (TTC France) *</label>
+                        <input id="consumerPriceTTCFR" name="consumerPriceTTCFR" type="number" className="admin-form-control" value={consumerPriceTTCFR} onChange={handleChange} />
+                        {
+                            consumerPriceError && <div className="form-error">{consumerPriceError}</div>
+                        }
+                        {
+                            consumerPriceHT && (
+                                <div className="admin-form-info strong">
+                                    {priceFormater(consumerPriceHT * 100)} HT
+                                </div>
+                            )
+                        }
+                        {
+                            margin?.consumer && (
+                                <div className="admin-form-info strong">
+                                    Marge : {margin.consumer.rate} % ({priceFormater(margin.consumer.amount * 100)})
+                                </div>
+                            )
+                        }
+                    </div>
+                    <div className="admin-form-group">
+                        <label htmlFor="businessPriceTTCFR" className="admin-form-label">Prix pro (TTC France) *</label>
+                        <input id="businessPriceTTCFR" name="businessPriceTTCFR" type="number" className="admin-form-control" value={businessPriceTTCFR} onChange={handleChange} />
+                        {
+                            businessPriceError && <div className="form-error">{businessPriceError}</div>
+                        }
+                        {
+                            businessPriceHT && (
+                                <div className="admin-form-info strong">
+                                    {priceFormater(businessPriceHT * 100)} HT
+                                </div>
+                            )
+                        }
+                        {
+                            margin?.business && (
+                                <div className="admin-form-info strong">
+                                    Marge : {margin.business.rate} % ({priceFormater(margin.business.amount * 100)})
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            </>
+        ): (
+            <div className="admin-form-info">Chargement du calculateur de prix...</div>
+        )
     )
 }
