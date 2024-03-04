@@ -5,5 +5,8 @@
  * @returns 
  */
 export const calcPriceHT = (priceTTC, vatRate) => {
-    return priceTTC / (1 + (vatRate / 100));
+    //prix non arrondi
+    const price = priceTTC / (1 + (vatRate / 100));
+    //on retourne le prix arrondi
+    return Math.round(price * 100) / 100;
 }

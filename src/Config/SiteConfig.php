@@ -5,8 +5,8 @@ class SiteConfig
 {
     /**project */
     //DELETE_FOR_PROD
-    // public const PUBLIC_DIR = 'public';
-    public const PUBLIC_DIR = 'www';
+    public const PUBLIC_DIR = 'public';
+    // public const PUBLIC_DIR = 'www';
 
     /**site */
     public const SITE_NAME = 'Cocktailissimo';

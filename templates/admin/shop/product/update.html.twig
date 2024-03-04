@@ -15,7 +15,7 @@
     <h1>Modifier "{{ product.designation.fr }}"</h1>
 
    {{ form_start(form) }}
-    <div class="admin-form lang-switch-wrapper" data-controller="productform">
+    <div class="admin-form lang-switch-wrapper">
 
         {% include "admin/shop/product/parts/_lang_controls.html.twig" %}
         
@@ -82,16 +82,20 @@
         {{ include('admin/form/_admin_form_row.html.twig', {name: 'itSlug', label: 'Slug (IT) *', field: form.itSlug, lang: 'it'}) }}
 
 
-        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vatLevel', label: 'Niveau de TVA *', field: form.vatLevel}) }}
-
+        {# Bloc incluant vatLevel + packaging choices #}
         <div 
-            id="packaging-choices-input"
+            id="product-form-react-block"
             data-productid="{{ product.id }}"
-            data-name="product[packagingChoices]"
-            data-value="{{ form.packagingChoices.vars.value }}"
+            data-packagingchoices="{{ form.packagingChoices.vars.value }}"
+            data-vatLevel="{{ form.vatLevel.vars.value }}"
+            data-packagingchoicesname="product[packagingChoices]"
+            data-vatlevelname="product[vatLevel]"
             >
             {# crée des packagingChoices en local et place un array de packagingChoices stringifié dans input type=hidden name="packagingChoices" #}
+
+            {# on met ces widgets ici pour éviter qu'ils soient affichés en fin de form #}
             {{ form_widget(form.packagingChoices) }}
+            {{ form_widget(form.vatLevel) }}
         </div>
         
         {{ include('admin/form/_admin_form_row.html.twig', {name: 'brand', label: 'Marque', field: form.brand}) }}

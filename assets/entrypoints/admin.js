@@ -27,8 +27,9 @@ import { IngredientsQuantitiesInput } from '../Components/Admin/IngredientsQuant
 import { SelectLinkedItems } from '../Components/Admin/SelectLinkedItems';
 import { AdminPictureUpload } from '../Components/Admin/AdminPictureUpload';
 import { AdminAnswerControl } from '../Components/Admin/AdminAnswerControl';
-import { PackagingChoicesInput } from '../Components/Admin/PackagingChoicesInput';
+import { PackagingChoicesInput } from '../Components/Admin/ProductFormReactBlock/PackagingChoicesInput';
 import { SelectUniqueItem } from '../Components/Admin/SelectUniqueItem';
+import { ProductFormReactBlock } from '../Components/Admin/ProductFormReactBlock';
 
 
 i18n.changeLanguage('fr');
@@ -80,16 +81,17 @@ document.querySelectorAll('.select-unique-item-input').forEach(input => {
 })
 
 
-//product form : packagingChoices input
-if(document.getElementById('packaging-choices-input')) {
-    const input = document.getElementById('packaging-choices-input');
-    const root = createRoot(input);
+//product form react block : vatLevel + packagingChoices
+if(document.getElementById('product-form-react-block')) {
+    const block = document.getElementById('product-form-react-block');
+    const root = createRoot(block);
     root.render(
-        <PackagingChoicesInput 
-            name={input.dataset.name} 
-            value={input.dataset.value} 
-            productId={input.dataset.productid} 
-            vatLevel={input.dataset.vatlevel} // data-vatlevel est ajouté en js par le productform_controller.js
+        <ProductFormReactBlock
+            productId={block.dataset.productid}
+            packagingChoices={block.dataset.packagingchoices}
+            vatLevel={block.dataset.vatlevel}
+            packagingChoicesName={block.dataset.packagingchoicesname}
+            vatLevelName={block.dataset.vatlevelname}
         />
     )
 }

@@ -325,6 +325,9 @@ textarea.admin-form-control {
     max-height: 80vh;
     overflow: auto;
 }
+.admin-form-modal.large {
+    width: 550px
+}
 .admin-form-modal .admin-form {
     margin: 0;
 }
@@ -561,4 +564,9 @@ textarea.admin-form-control {
 .admin-table-vatrates .admin-form-control {
     width: 75px;
     margin: 0 auto;
+}
+
+
+.admin-form .admin-form-row.admin-modal-form-row .admin-form-control {
+    width: 165px;
 }
