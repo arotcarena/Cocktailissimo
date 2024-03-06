@@ -42,6 +42,9 @@
         {{ include('admin/parts/_show_row.html.twig', {value: product.slug.it, label: 'Slug (IT)', name: 'itSlug', lang: 'it'}) }}
 
 
+        {{ include('admin/parts/_show_row.html.twig', {value: (product.vatLevel | trans({}, 'configs', 'fr')), label: 'Niveau de TVA', name: 'vatLevel'}) }}
+
+
         <div class="admin-product-show-row">
             <div class="admin-product-show-row-label">Conditionnements</div>
             {% for packaging in product.packagingChoices %}
@@ -62,12 +65,28 @@
                     {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.label ? packaging.label.it: '', label: 'Label (IT)', lang: 'it'}) }}
 
                     {% if packaging.supplyPriceHT %}
-                        {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.supplyPriceHT | price_format), label: 'Prix d\'achat (HT)'}) }}
+                        {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.supplyPriceHT | price_format('fr')), label: 'Prix d\'achat (HT)'}) }}
+                    {% endif %}
+                    
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.consumerPriceHT | fr_price_ttc(product.vatLevel) | price_format('fr'), label: 'Prix public (TTC France)'}) }}
+
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.businessPriceHT | fr_price_ttc(product.vatLevel) | price_format('fr'), label: 'Prix pro (TTC France)'}) }}
+
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.consumerPriceHT | price_format('fr'), label: 'Prix public (HT)'}) }}
+                
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.businessPriceHT | price_format('fr'), label: 'Prix pro (HT)'}) }}
+
+                    {% if packaging.supplyPriceHT %}
+                        {% set consumerMarginAmount = packaging.consumerPriceHT - packaging.supplyPriceHT %}
+                        {% set consumerMarginLine = calc_margin_rate(consumerMarginAmount, packaging.supplyPriceHT) ~ '% (' ~ (consumerMarginAmount | price_format('fr')) ~ ')' %}
+                        {{ include('admin/parts/_show_card_row.html.twig', {value: consumerMarginLine, label: 'Marge public'}) }}
+
+                        
+                        {% set businessMarginAmount = packaging.businessPriceHT - packaging.supplyPriceHT %}
+                        {% set businessMarginLine = calc_margin_rate(businessMarginAmount, packaging.supplyPriceHT) ~ '% (' ~ (businessMarginAmount | price_format('fr')) ~ ')' %}
+                        {{ include('admin/parts/_show_card_row.html.twig', {value: businessMarginLine, label: 'Marge pro'}) }}
                     {% endif %}
 
-                    {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.consumerPriceHT | price_format), label: 'Prix public (HT)'}) }}
-                    {{ include('admin/parts/_show_card_row.html.twig', {value: (packaging.businessPriceHT | price_format), label: 'Prix pro (HT)'}) }}
-                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.weight, label: 'Poids (g)'}) }}
                     {{ include('admin/parts/_show_card_row.html.twig', {
                         value: packaging.exciseTax ? (packaging.exciseTax | price_format('fr')): '-', 
                         label: 'Droits d\'accise'
@@ -76,6 +95,10 @@
                         value: packaging.frSocialTax ? (packaging.frSocialTax | price_format('fr')): '-', 
                         label: 'Cotisation Sécurité Sociale (France)'
                     }) }}
+
+                    
+                    {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.weight, label: 'Poids (g)'}) }}
+
                     {{ include('admin/parts/_show_card_row.html.twig', {value: packaging.stock, label: 'Stock'}) }}
                 </div>
             {% endfor %}
@@ -109,7 +132,6 @@
         {% set originCountry = (product.originCountry | trans({}, 'countries', 'fr')) ~ ' ('~ product.originCountry ~')' %}
         {{ include('admin/parts/_show_row.html.twig', {value: originCountry, label: 'Pays d\'origine', name: 'originCountry'}) }}
 
-        {{ include('admin/parts/_show_row.html.twig', {value: (product.vatLevel | trans({}, 'configs', 'fr')), label: 'Niveau de TVA', name: 'vatLevel'}) }}
 
 
         <div class="admin-product-show-row">

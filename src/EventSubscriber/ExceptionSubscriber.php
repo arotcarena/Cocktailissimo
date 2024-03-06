@@ -22,7 +22,7 @@ class ExceptionSubscriber implements EventSubscriberInterface
         if(!str_contains($error->getMessage(), 'o route found for'))
         {
             //DELETE_FOR_PROD // à décommenter pour prod 
-            $this->adminExceptionEmail->send($error);
+            // $this->adminExceptionEmail->send($error);
         }
     }
 

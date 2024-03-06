@@ -8,6 +8,7 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
     const [frVatRate, setFrVatRate] = useState(null);
     useEffect(() => {
         (async () => {
+            //vatRate en %mille
             const vatRate = await apiFetch('/admin/api/vatRates/getFr/' + vatLevel);
             setFrVatRate(vatRate);
         })();
