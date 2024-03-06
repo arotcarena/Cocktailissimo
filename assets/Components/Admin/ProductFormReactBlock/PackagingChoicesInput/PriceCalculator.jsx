@@ -12,7 +12,7 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
             const vatRate = await apiFetch('/admin/api/vatRates/getFr/' + vatLevel);
             setFrVatRate(vatRate);
         })();
-    }, []);
+    }, [vatLevel]);
 
 
     const [consumerPriceTTCFR, setConsumerPriceTTCFR] = useState('');

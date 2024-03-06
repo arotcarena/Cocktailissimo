@@ -10,6 +10,11 @@
                     <span>{{ product.vendor.company.usualName }}</span>
                 </a>
             </div>
+            {% if product.brand %}
+                <div class="product-show-subtitle-wrapper">
+                    <div class="product-show-subtitle">{{ product.brand }}</div>
+                </div>
+            {% endif %}
 
             {% if product.reviewNote and product.countReviews %}
                 {{ include('UI/_review_note_show.html.twig', {count: product.countReviews, note: product.reviewNote}) }}
