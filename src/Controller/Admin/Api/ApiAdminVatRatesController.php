@@ -19,7 +19,6 @@ class ApiAdminVatRatesController extends AbstractController
     public function getFr(string $vatLevel): JsonResponse
     {
         $rate = $this->vatResolver->getRate('FR', $vatLevel);
-
         return $this->json($rate);
     }
 }

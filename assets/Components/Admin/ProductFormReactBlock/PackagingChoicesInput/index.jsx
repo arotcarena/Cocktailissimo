@@ -87,6 +87,7 @@ export const PackagingChoicesInput = ({name, value, productId, vatLevel}) => {
                             packagingChoices={packagingChoices}
                             productId={productId}
                             selectAsBase={handleSelectAsBase}
+                            vatLevel={vatLevel}
                         />
                     ))
                 }

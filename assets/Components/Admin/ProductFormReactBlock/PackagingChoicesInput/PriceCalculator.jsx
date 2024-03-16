@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { apiFetch } from '../../../../functions/api';
-import { calcPriceHT } from '../../../../functions/price/vatCalculator';
+import { calcPriceHT, calcPriceTTC, calcPriceTTCFR } from '../../../../functions/price/vatCalculator';
 import { priceFormater } from '../../../../functions/formaters';
+import { calcMargin } from '../../../../functions/price/marginCalculator';
 
 export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPriceHT, consumerPriceHT, businessPriceError, consumerPriceError}) => {
 
@@ -11,13 +12,28 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
             //vatRate en %mille
             const vatRate = await apiFetch('/admin/api/vatRates/getFr/' + vatLevel);
             setFrVatRate(vatRate);
+
+            // en cas de update il faut calculer les prices TTCFR
+            if(consumerPriceHT) {
+                setConsumerPriceTTCFR(
+                    calcPriceTTC(consumerPriceHT, vatRate)
+                );
+            }
+            if(businessPriceHT) {
+                setBusinessPriceTTCFR(
+                    calcPriceTTC(businessPriceHT, vatRate)
+                );
+            }
         })();
     }, [vatLevel]);
 
 
     const [consumerPriceTTCFR, setConsumerPriceTTCFR] = useState('');
     const [businessPriceTTCFR, setBusinessPriceTTCFR] = useState('');
-    const [margin, setMargin] = useState(null);
+    const [margin, setMargin] = useState({
+        consumer: null,
+        business: null
+    });
 
     const handleChange = e => {
         if(e.target.name === 'consumerPriceTTCFR') {
@@ -34,14 +50,9 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
             setValue('consumerPriceHT', priceHT);
             //si on a un supplyPrice, on calcule marge
             if(supplyPriceHT) {
-                const marginAmount = priceHT - supplyPriceHT;
-                const marginRate = (marginAmount / supplyPriceHT) * 100;
                 setMargin(margin => ({
                     ...margin,
-                    consumer: {
-                        amount: marginAmount,
-                        rate: Math.round(marginRate * 100) / 100 //pour arrondir avec 2 décimales
-                    }
+                    consumer: calcMargin(supplyPriceHT, priceHT)
                 }));
             }
         }
@@ -53,16 +64,10 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
             const priceHT = calcPriceHT(businessPriceTTCFR, frVatRate);
             setValue('businessPriceHT', priceHT);
             //si on a un supplyPrice, on calcule marge
-            //si on a un supplyPrice, on calcule marge
             if(supplyPriceHT) {
-                const marginAmount = priceHT - supplyPriceHT;
-                const marginRate = (marginAmount / supplyPriceHT) * 100;
                 setMargin(margin => ({
                     ...margin,
-                    business: {
-                        amount: marginAmount,
-                        rate: Math.round(marginRate * 100) / 100 //pour arrondir avec 2 décimales
-                    }
+                    business: calcMargin(supplyPriceHT, priceHT)
                 }));
             }
         }
@@ -79,16 +84,16 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
                             consumerPriceError && <div className="form-error">{consumerPriceError}</div>
                         }
                         {
-                            consumerPriceHT && (
+                            consumerPriceHT && consumerPriceHT > 0 && (
                                 <div className="admin-form-info strong">
                                     {priceFormater(consumerPriceHT * 100)} HT
                                 </div>
                             )
                         }
                         {
-                            margin?.consumer && (
+                            consumerPriceHT && consumerPriceHT > 0 && margin.consumer && (
                                 <div className="admin-form-info strong">
-                                    Marge : {margin.consumer.rate} % ({priceFormater(margin.consumer.amount * 100)})
+                                    Marge : {margin.consumer.rate}% ({priceFormater(margin.consumer.amount * 100)})
                                 </div>
                             )
                         }
@@ -100,16 +105,16 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
                             businessPriceError && <div className="form-error">{businessPriceError}</div>
                         }
                         {
-                            businessPriceHT && (
+                            businessPriceHT && businessPriceHT > 0 && (
                                 <div className="admin-form-info strong">
                                     {priceFormater(businessPriceHT * 100)} HT
                                 </div>
                             )
                         }
                         {
-                            margin?.business && (
+                            businessPriceHT && businessPriceHT > 0 && margin.business && (
                                 <div className="admin-form-info strong">
-                                    Marge : {margin.business.rate} % ({priceFormater(margin.business.amount * 100)})
+                                    Marge : {margin.business.rate}% ({priceFormater(margin.business.amount * 100)})
                                 </div>
                             )
                         }
