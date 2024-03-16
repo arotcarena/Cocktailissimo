@@ -36,7 +36,7 @@ export const AdminPackagingCard = ({packaging, remove, update, packagingChoices,
             const bpTTCFR = await calcPriceTTCFR(packaging.businessPriceHT, vatLevel);
             setBusinessPriceTTCFR(bpTTCFR);
         })();
-    }, []);
+    }, [packaging.consumerPriceHT, packaging.businessPriceHT, vatLevel]);
 
     //calcul des marges
     const [margin, setMargin] = useState({
@@ -50,7 +50,7 @@ export const AdminPackagingCard = ({packaging, remove, update, packagingChoices,
                 business: calcMargin(packaging.supplyPriceHT, packaging.businessPriceHT)
             });
         }
-    }, []);
+    }, [packaging.consumerPriceHT, packaging.businessPriceHT, packaging.supplyPriceHT]);
 
     return (
         <>

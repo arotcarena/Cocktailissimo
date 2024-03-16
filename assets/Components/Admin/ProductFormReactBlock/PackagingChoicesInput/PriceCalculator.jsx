@@ -48,6 +48,8 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
         if(frVatRate && consumerPriceTTCFR) {
             const priceHT = calcPriceHT(consumerPriceTTCFR, frVatRate);
             setValue('consumerPriceHT', priceHT);
+        } else {
+            setValue('consumerPriceHT', '');
         }
     }, [consumerPriceTTCFR, frVatRate]);
 
@@ -56,6 +58,8 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
         if(frVatRate && consumerPriceTTCFR) {
             const priceHT = calcPriceHT(businessPriceTTCFR, frVatRate);
             setValue('businessPriceHT', priceHT);
+        } else {
+            setValue('businessPriceHT', '');
         }
     }, [businessPriceTTCFR, frVatRate]);
 
@@ -79,14 +83,14 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
                             consumerPriceError && <div className="form-error">{consumerPriceError}</div>
                         }
                         {
-                            consumerPriceHT && consumerPriceHT > 0 && (
+                            consumerPriceHT && consumerPriceHT !== '' && (
                                 <div className="admin-form-info strong">
                                     {priceFormater(consumerPriceHT * 100)} HT
                                 </div>
                             )
                         }
                         {
-                            consumerPriceHT && consumerPriceHT > 0 && margin.consumer && (
+                            consumerPriceHT && consumerPriceHT !== '' && margin.consumer && (
                                 <div className="admin-form-info strong">
                                     Marge : {margin.consumer.rate}% ({priceFormater(margin.consumer.amount * 100)})
                                 </div>
@@ -100,14 +104,14 @@ export const PriceCalculator = ({setValue, supplyPriceHT, vatLevel, businessPric
                             businessPriceError && <div className="form-error">{businessPriceError}</div>
                         }
                         {
-                            businessPriceHT && businessPriceHT > 0 && (
+                            businessPriceHT && businessPriceHT !== '' && (
                                 <div className="admin-form-info strong">
                                     {priceFormater(businessPriceHT * 100)} HT
                                 </div>
                             )
                         }
                         {
-                            businessPriceHT && businessPriceHT > 0 && margin.business && (
+                            businessPriceHT && businessPriceHT !== '' && margin.business && (
                                 <div className="admin-form-info strong">
                                     Marge : {margin.business.rate}% ({priceFormater(margin.business.amount * 100)})
                                 </div>

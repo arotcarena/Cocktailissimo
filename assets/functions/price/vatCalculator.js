@@ -2,7 +2,7 @@ import { apiFetch } from "../api";
 
 /**
  * 
- * @param {number} priceTTC
+ * @param {number} priceTTC (en euros)
  * @param {number} vatRate (en %mille) 
  * @returns 
  */
@@ -16,7 +16,7 @@ export const calcPriceHT = (priceTTC, vatRate) => {
 
 /**
  * 
- * @param {number} priceHT 
+ * @param {number} priceHT (en euros)
  * @param {number} vatRate (en %mille) 
  * @returns 
  */
