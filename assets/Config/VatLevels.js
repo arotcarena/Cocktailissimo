@@ -17,11 +17,10 @@ export class VatLevels {
     ];
 
     static ADMIN_CHOICES = {
-        ['Taux standard']: VatLevels.STANDARD,
-        ['Taux parking']: VatLevels.PARKING,
-        ['Taux réduit 1']: VatLevels.REDUCE_1,
-        ['Taux réduit 2']: VatLevels.REDUCE_2,
-        ['Taux super-réduit']: VatLevels.SUPER_REDUCE,
-        ['Taux zéro']: VatLevels.ZERO
+        ['Taux standard = 20% (FR)']: VatLevels.STANDARD,
+        ['Taux réduit 1 = 10% (FR)']: VatLevels.REDUCE_1,
+        ['Taux réduit 2 = 5,5% (FR)']: VatLevels.REDUCE_2,
+        ['Taux super-réduit = 2,1% (FR)']: VatLevels.SUPER_REDUCE,
+        ['Taux zéro = 0% (FR)']: VatLevels.ZERO
     };
 }

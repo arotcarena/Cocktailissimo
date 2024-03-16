@@ -6,6 +6,7 @@ use App\Config\SiteConfig;
 use App\Entity\CustomPrice;
 use App\Entity\Packaging;
 use App\Entity\User;
+use App\Price\Vat\VatCalculator;
 use App\Price\Vat\VatResolver;
 use Symfony\Bundle\SecurityBundle\Security;
 
@@ -31,7 +32,8 @@ class PriceResolver
     public function __construct(
         private VatResolver $vatResolver,
         private Security $security,
-        private CountryLocation $countryLocation
+        private CountryLocation $countryLocation,
+        private VatCalculator $vatCalculator
     )
     {
         
@@ -56,7 +58,7 @@ class PriceResolver
         if(in_array($this->customerCountry, Countries::EU_ISO))
         {
             $rate = $this->vatResolver->getRate($this->customerCountry, $packaging->getProduct()->getVatLevel());
-            $vatAmount = (int)($price->getPriceHT() * $rate / 1000);  // divise par 1000 car rate est en %pour mille
+            $vatAmount = $this->vatCalculator->calcVatAmountFromHT($price->getPriceHT(), $rate);
             $price->setVatRate($rate)
                     ->setVatAmount($vatAmount)
                     ->setPriceTTC(

@@ -7,10 +7,11 @@ import { apiFetch } from "../api";
  * @returns 
  */
 export const calcPriceHT = (priceTTC, vatRate) => {
-    //prix non arrondi
-    const price = priceTTC / (1 + (vatRate / 1000));
-    //on retourne le prix arrondi
-    return Math.round(price * 100) / 100;
+    const vatAmount = priceTTC - (priceTTC / (1 + (vatRate / 1000)));
+    const vatAmountRounded = Math.round(vatAmount * 100) / 100;
+    const priceHT = priceTTC - vatAmountRounded;
+
+    return priceHT;
 }
 
 /**
@@ -21,9 +22,10 @@ export const calcPriceHT = (priceTTC, vatRate) => {
  */
 export const calcPriceTTC = (priceHT, vatRate) => {
     const vatAmount = priceHT * vatRate / 1000;
-    const priceTTC = priceHT + vatAmount;
+    const vatAmountRounded = Math.round(vatAmount * 100) / 100;
+    const priceTTC = priceHT + vatAmountRounded;
 
-    return Math.round(priceTTC * 100) / 100;
+    return priceTTC;
 }
 
 export const calcPriceTTCFR = async (priceHT, vatLevel) => {

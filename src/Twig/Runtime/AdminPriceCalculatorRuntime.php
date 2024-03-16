@@ -2,13 +2,15 @@
 
 namespace App\Twig\Runtime;
 
+use App\Price\Vat\VatCalculator;
 use App\Price\Vat\VatResolver;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class AdminPriceCalculatorRuntime implements RuntimeExtensionInterface
 {
     public function __construct(
-        private VatResolver $vatResolver
+        private VatResolver $vatResolver,
+        private VatCalculator $vatCalculator
     )
     {
         // Inject dependencies if needed
@@ -22,7 +24,8 @@ class AdminPriceCalculatorRuntime implements RuntimeExtensionInterface
     public function getFrPriceTTC(int $priceHT, string $vatLevel): int
     {
         $vatRate = $this->vatResolver->getRate('FR', $vatLevel);
-        $vatAmount = (int)($priceHT * $vatRate / 1000);
+        $vatAmount = $this->vatCalculator->calcVatAmountFromHT($priceHT, $vatRate);
+
         return $priceHT + $vatAmount;
     }
 }
