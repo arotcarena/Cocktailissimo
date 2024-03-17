@@ -7,11 +7,9 @@ use App\Tests\Utils\FixturesTrait;
 use App\Repository\ProductRepository;
 use App\DataFixtures\Tests\ProductTestFixtures;
 use App\DataFixtures\Tests\ProductWithOrWithoutStockTestFixtures;
-use App\Form\Admin\DataModel\ProductFilter;
 use App\Form\DataModel\SearchParams;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @group Repository

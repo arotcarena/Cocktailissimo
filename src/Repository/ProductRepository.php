@@ -2,6 +2,8 @@
 
 namespace App\Repository;
 
+use App\Config\SiteConfig;
+use App\Config\VatLevels;
 use App\Entity\CustomPrice;
 use App\Entity\User;
 use App\Entity\Product;
@@ -13,6 +15,8 @@ use App\Form\DataModel\SearchParams;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Form\Admin\DataModel\ProductFilter;
+use App\Price\CountryLocation;
+use App\Price\Vat\VatResolver;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +43,9 @@ class ProductRepository extends ServiceEntityRepository
         private EntityManagerInterface $em,
         private Security $security,
         private VatCalculator $vatCalculator,
-        private PriceResolver $priceResolver
+        private PriceResolver $priceResolver,
+        private CountryLocation $countryLocation,
+        private VatResolver $vatResolver
     )
     {
         parent::__construct($registry, Product::class);
@@ -613,21 +619,171 @@ class ProductRepository extends ServiceEntityRepository
         {
             $pricePropertyName = $this->security->isGranted('ROLE_PRO') ? 'baseBusinessPriceHT': 'baseConsumerPriceHT';
             $needToConvertHT = $this->priceResolver->getPayType() === CustomPrice::PAY_PRICE_TTC;
+            //si les prix affichés sont TTC
+            //alors on doit convertir en HT pour pouvoir filtrer
+            if($needToConvertHT) 
+            {
+                $country = $this->countryLocation->getCountry();
 
-            if($params->getMaxPrice() !== null)
-            {
-                $maxPrice = $needToConvertHT ? $this->vatCalculator->calcPriceHT($params->getMaxPrice()): $params->getMaxPrice();
-                $qb->andWhere('p.'.$pricePropertyName.' <= :maxPrice')
-                ->setParameter('maxPrice', $maxPrice)
-                ;
-            }
-            if($params->getMinPrice() !== null)
-            {
-                $minPrice = $needToConvertHT ? $this->vatCalculator->calcPriceHT($params->getMinPrice()): $params->getMinPrice();
-                $qb->andWhere('p.'.$pricePropertyName.' >= :minPrice')
-                    ->setParameter('minPrice', $minPrice)
+                //on filtre pour chaque vatLevel car le prix HT sera différent selon le vatLevel
+                //maxPrice
+                if($params->getMaxPrice() !== null)
+                {
+                    $qb
+                    ->andWhere(
+                        $qb->expr()->orX(
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' <= :productsWithVatLevelStandardMaxPrice',
+                                'p.vatLevel = :vatLevelStandard'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' <= :productsWithVatLevelReduce1MaxPrice',
+                                'p.vatLevel = :vatLevelReduce1'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' <= :productsWithVatLevelReduce2MaxPrice',
+                                'p.vatLevel = :vatLevelReduce2'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' <= :productsWithVatLevelSuperReduceMaxPrice',
+                                'p.vatLevel = :vatLevelSuperReduce'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' <= :productsWithVatLevelZeroMaxPrice',
+                                'p.vatLevel = :vatLevelZero'
+                            ),
+                        )
+                    )
+                    ->setParameter(
+                        'productsWithVatLevelStandardMaxPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMaxPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::STANDARD)
+                        )
+                    )
+                    ->setParameter('vatLevelStandard', VatLevels::STANDARD)
+                    ->setParameter(
+                        'productsWithVatLevelReduce1MaxPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMaxPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::REDUCE_1)
+                        )
+                    )
+                    ->setParameter('vatLevelReduce1', VatLevels::REDUCE_1)
+                    ->setParameter(
+                        'productsWithVatLevelReduce2MaxPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMaxPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::REDUCE_2)
+                        )
+                    )
+                    ->setParameter('vatLevelReduce2', VatLevels::REDUCE_2)
+                    ->setParameter(
+                        'productsWithVatLevelSuperReduceMaxPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMaxPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::SUPER_REDUCE)
+                        )
+                    )
+                    ->setParameter('vatLevelSuperReduce', VatLevels::SUPER_REDUCE)
+                    ->setParameter(
+                        'productsWithVatLevelZeroMaxPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMaxPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::ZERO)
+                        )
+                    )
+                    ->setParameter('vatLevelZero', VatLevels::ZERO)
                     ;
+                }
+                
+                //minPrice
+                if($params->getMinPrice() !== null)
+                {
+                    $qb
+                    ->andWhere(
+                        $qb->expr()->orX(
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' >= :productsWithVatLevelStandardMinPrice',
+                                'p.vatLevel = :vatLevelStandard'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' >= :productsWithVatLevelReduce1MinPrice',
+                                'p.vatLevel = :vatLevelReduce1'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' >= :productsWithVatLevelReduce2MinPrice',
+                                'p.vatLevel = :vatLevelReduce2'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' >= :productsWithVatLevelSuperReduceMinPrice',
+                                'p.vatLevel = :vatLevelSuperReduce'
+                            ),
+                            $qb->expr()->andX(
+                                'p.'.$pricePropertyName.' >= :productsWithVatLevelZeroMinPrice',
+                                'p.vatLevel = :vatLevelZero'
+                            ),
+                        )
+                    )
+                    ->setParameter(
+                        'productsWithVatLevelStandardMinPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMinPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::STANDARD)
+                        )
+                    )
+                    ->setParameter('vatLevelStandard', VatLevels::STANDARD)
+                    ->setParameter(
+                        'productsWithVatLevelReduce1MinPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMinPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::REDUCE_1)
+                        )
+                    )
+                    ->setParameter('vatLevelReduce1', VatLevels::REDUCE_1)
+                    ->setParameter(
+                        'productsWithVatLevelReduce2MinPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMinPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::REDUCE_2)
+                        )
+                    )
+                    ->setParameter('vatLevelReduce2', VatLevels::REDUCE_2)
+                    ->setParameter(
+                        'productsWithVatLevelSuperReduceMinPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMinPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::SUPER_REDUCE)
+                        )
+                    )
+                    ->setParameter('vatLevelSuperReduce', VatLevels::SUPER_REDUCE)
+                    ->setParameter(
+                        'productsWithVatLevelZeroMinPrice',
+                        $this->vatCalculator->calcPriceHTFromTTC(
+                            $params->getMinPrice(), 
+                            $this->vatResolver->getRate($country, VatLevels::ZERO)
+                        )
+                    )
+                    ->setParameter('vatLevelZero', VatLevels::ZERO)
+                    ;
+                }
             }
+            else // sinon on utilise simplement les valeurs qu'on a
+            {
+                if($params->getMaxPrice() !== null)
+                {
+                    $qb->andWhere('p.'.$pricePropertyName.' <= :maxPrice')
+                    ->setParameter('maxPrice', $params->getMaxPrice())
+                    ;
+                }
+                if($params->getMinPrice() !== null)
+                {
+                    $qb->andWhere('p.'.$pricePropertyName.' >= :minPrice')
+                        ->setParameter('minPrice', $params->getMinPrice())
+                        ;
+                }
+            }
+
         }
 
         

@@ -6,7 +6,7 @@ use App\Config\VatLevels;
 class VatResolver
 {
     public function __construct(
-        private VatRatesStorage $vatRatesStorage
+        private VatRatesStorage $vatRatesStorage,
     )
     {
         
@@ -15,11 +15,11 @@ class VatResolver
     /**
      * Undocumented function
      *
-     * @param string|null $country
+     * @param string $country
      * @param string $vatLevel
      * @return integer rate %pour mille
      */
-    public function getRate(string $country = null, string $vatLevel): int
+    public function getRate(string $country, string $vatLevel): int
     {
         $vatRates = $this->vatRatesStorage->get();
         
