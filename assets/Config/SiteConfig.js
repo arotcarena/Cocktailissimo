@@ -1,7 +1,7 @@
 export class SiteConfig {
 
-    static SITE_URL = 'https://localhost:8000';  // A MODIFIER POUR PROD
-    // static SITE_URL = 'https://cocktailissimo.com';
+    // static SITE_URL = 'https://localhost:8000';  // A MODIFIER POUR PROD
+    static SITE_URL = 'https://cocktailissimo.com';
 
     //locales
     static SUPPORTED_LOCALES = ['en', 'fr', 'es', 'it'];

@@ -16,7 +16,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 
 
-
 class CheckoutController extends AbstractController
 {
 
@@ -116,7 +115,7 @@ class CheckoutController extends AbstractController
             $this->cartService->empty();
 
             $this->addFlash('success', $this->translator->trans('success.payment', [
-                '{amount}' => $this->priceFormater->format($paymentIntent->amount_received)
+                '{amount}' => $this->priceFormater->format($paymentIntent->amount_received, $request->getLocale())
             ]));
         }
 

@@ -5,14 +5,14 @@ import { ApiError, apiPreparedFetch } from '../../../../functions/api';
 import { PaymentForm } from './PaymentForm';
 import { Loader } from '../../../../UI/Icon/Loader';
 import { CheckoutContext } from '../..';
-import { SiteConfig } from '../../../../Config/SiteConfig';
 import { useTranslation } from 'react-i18next';
+import { SecurityConfig } from '../../../../Config/SecurityConfig';
 
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your publishable API key.
-const stripePromise = loadStripe(SiteConfig.STRIPE_PUBLIC_KEY);
+const stripePromise = loadStripe(SecurityConfig.STRIPE_PUBLIC_KEY);
 
 
 export const Payment = () => {

@@ -36,7 +36,7 @@ info:
   on_checkout_force_country: Following the change of delivery country, prices may have changed.
   admin_manual_purchase_email_sent: We have received the details of your order and will contact you as soon as possible to finalize it.
   for_info_contact_us: >
-    'For any questions or information, please contact us by email: <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, indicating the following reference: {ref}.'
+    For any questions or information, please contact us by email: <a href="mailto:contact@cocktailissimo.com">contact@cocktailissimo.com</a>, indicating the following reference: {ref}.
   payment_validated: Your payment has been validated.
   order_preparing: Your order is being prepared.
 

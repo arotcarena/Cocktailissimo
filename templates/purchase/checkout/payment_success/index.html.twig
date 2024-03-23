@@ -75,7 +75,7 @@
                 <div class="payment-success-footer">
                     <div class="payment-success-footer-item">{{ 'info.payment_validated' | trans }}</div>
                     <div class="payment-success-footer-item">{{ 'info.order_preparing' | trans }}</div>
-                    <div class="payment-success-footer-item">{{ 'info.for_info_contact_us' | trans({'{ref}': purchase.ref}) }}</div>
+                    <div class="payment-success-footer-item">{{ 'info.for_info_contact_us' | trans({'{ref}': purchase.ref}) | raw }}</div>
                 </div>
             </div>
             <div class="payment-success-details">
