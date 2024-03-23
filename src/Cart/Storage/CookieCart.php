@@ -13,11 +13,11 @@ class CookieCart
     public function set(array $cart)
     {
         //DELETE_FOR_PROD
-        //pour éviter de faire planter les tests
-        // if($_SERVER['APP_ENV'] === 'test')
-        // {
-        //     return;
-        // }
+        // pour éviter de faire planter les tests
+        if($_SERVER['APP_ENV'] === 'test')
+        {
+            return;
+        }
 
         $options = [
             'expires' => time() + 3600*24*30*6,

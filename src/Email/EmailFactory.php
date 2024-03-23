@@ -34,15 +34,16 @@ abstract class EmailFactory
         $this->configureMailer($senderEmail);
 
         //DELETE_FOR_PROD
+        //décommenter pour prod
         // $this->mailer->send($email);
     }
 
     private function configureMailer(string $senderEmail): void
     {
         //DELETE_FOR_PROD // a suppr pour Prod
-        // $transport = Transport::fromDsn(SecurityConfig::SMTP_TEST);
+        $transport = Transport::fromDsn(SecurityConfig::SMTP_TEST);
         // DECOMMENTER CETTE LIGNE POUR PROD
-        $transport = Transport::fromDsn('smtp://'.$senderEmail.':'.SecurityConfig::EMAIL_PASSWORD.'@'.SecurityConfig::EMAIL_SERVER);
+        // $transport = Transport::fromDsn('smtp://'.$senderEmail.':'.SecurityConfig::EMAIL_PASSWORD.'@'.SecurityConfig::EMAIL_SERVER);
         $this->mailer = new Mailer($transport);
     }
 }

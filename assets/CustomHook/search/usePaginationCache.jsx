@@ -54,5 +54,5 @@ export const usePaginationCache = (handleFetchPage, filters, onRenderChange = nu
         addPageToCache(page, items);
     };
 
-    return { handlePageChange, onAfterFetch, setCacheItem, currentPage, items: getPageFromCache(currentPage) ?? [] }
+    return { handlePageChange, onAfterFetch, setCacheItem, currentPage, items: getPageFromCache(currentPage) ?? [] };
 }

@@ -71,7 +71,7 @@ export const useSearchIndex = (endpoint, initialFilters, q = '', onRenderChange 
     }, [isLoading]);
     
     //Pagination cache
-    const {handlePageChange, onAfterFetch, currentPage, items, removeItemFromCache} = usePaginationCache(handleFetchPage, filters, onRenderChange);
+    const {handlePageChange, onAfterFetch, currentPage, items} = usePaginationCache(handleFetchPage, filters, onRenderChange);
     useEffect(() => {
         if(result) {
             onAfterFetch(filters, result.currentPage, result.items);
@@ -80,10 +80,6 @@ export const useSearchIndex = (endpoint, initialFilters, q = '', onRenderChange 
 
     const setSortBy = newSort => {
         setFilterValue('sortBy', newSort);
-    };
-
-    const deleteItem = id => {
-        removeItemFromCache(currentPage, id);
     };
 
     return {
@@ -97,7 +93,6 @@ export const useSearchIndex = (endpoint, initialFilters, q = '', onRenderChange 
             perPage: result?.perPage,
             currentPage: currentPage
         }, 
-        deleteItem,
         isLoading,
         handleReset, 
         handlePageChange,
