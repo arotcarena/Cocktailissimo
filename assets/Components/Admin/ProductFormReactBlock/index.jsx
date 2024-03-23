@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { PackagingChoicesInput } from './PackagingChoicesInput';
 import { Option, Select } from '../../../UI/Form/Select';
 import { VatLevels } from '../../../Config/VatLevels';

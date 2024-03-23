@@ -19,7 +19,6 @@
                     <th>Pays</th>
                     <th>code ISO</th>
                     <th>Taux standard (%)</th>
-                    <th>Taux parking (%)</th>
                     <th>Taux réduit 1 (%)</th>
                     <th>Taux réduit 2 (%)</th>
                     <th>Taux super-réduit (%)</th>
@@ -33,9 +32,6 @@
                         <td>{{ country }}</td>
                         <td>
                             {{ form_widget(form[country ~ ':vat_level_standard'], {attr: {class: 'admin-form-control'}}) }}
-                        </td>
-                        <td>
-                            {{ form_widget(form[country ~ ':vat_level_parking'], {attr: {class: 'admin-form-control'}}) }}
                         </td>
                         <td>
                             {{ form_widget(form[country ~ ':vat_level_reduce_1'], {attr: {class: 'admin-form-control'}}) }}

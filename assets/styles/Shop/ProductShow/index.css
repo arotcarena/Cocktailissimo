@@ -214,18 +214,34 @@
 }
 .product-show-payment-card {
     position: absolute;
-    top: calc(100% + 10px);
+    top: calc(100% + 15px);
     left: auto;
     right: 0;
     left: 0;
     padding: 10px 15px;
-    padding-right: calc(1em + 10px);
+    padding-right: calc(1em + 20px);
     background-color: #FFF;
     bottom: auto;
     box-shadow: 0 0 5px var(--color-lightgrey);
     border-radius: 6px;
     max-width: 400px;
     margin: 0 auto;
+}
+.product-show-payment-card p {
+    margin: 0;
+}
+.product-show-payment-card::after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: -5px;
+    transform: rotate(45deg);
+    background-color: #FFF;
+    height: 10px;
+    width: 10px;
+    left: calc(50% - 5px);
+    border-left: solid 1px var(--color-lightgrey);
+    border-top: solid 1px var(--color-lightgrey);
 }
 .product-show-payment-card .toggle-closer {
     position: absolute;

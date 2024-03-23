@@ -3,9 +3,10 @@
 }
 .info-bubble {
     position: absolute;
+    z-index: 1;
     top: calc(100% + 10px);
-    left: -100px;
-    right: -100px;
+    left: -140px;
+    right: -50px;
     background-color: #FFF;
     box-shadow: 0 0 4px var(--color-lightgrey);
     padding: 10px 15px;
@@ -16,7 +17,7 @@
 .info-bubble::before {
     position: absolute;
     top: -5px;
-    left: calc(50% - 5px);
+    left: calc(65% - 5px);
     content: '';
     display: block;
     width: 10px;
