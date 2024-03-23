@@ -35,15 +35,31 @@ class CheckoutPiResolverTest extends TestCase
     public function testResolveWithExistingPaymentIntentWillCallUpdatePaymentIntent()
     {
         $this->piSession->expects($this->once())->method('get')->willReturn('pi_id');
+
+        $pi = new PaymentIntent('pi_id');
+        //pour éviter qu'on essaye de créer un nouveau paymentIntent
+        //auquel cas si on gère pas pour que le mock renvoie un pi avec un id ça bug
+        $pi->amount_received = 0;
+        $pi->client_secret = 'client_secret';
         $this->stripeService->expects($this->once())
-                            ->method('updatePaymentIntent');
+                            ->method('updatePaymentIntent')
+                            ->willReturn($pi);
 
         $this->checkoutPiResolver->resolve(500, 'FR', 'email@mail.com', 'Jean Badaud');
     }
 
-    public function testResolveWithExistingPaymentIntentWontCallCreatePaymentIntent()
+    public function testResolveWithExistingValidAndYetNotPaidPaymentIntentWontCallCreatePaymentIntent()
     {
         $this->piSession->expects($this->once())->method('get')->willReturn('pi_id');
+
+        //pour que la méthode create ne soit pas appelée, il faut que le pi actuel soit valide (non payé et ayant un client_secret)
+        $pi = new PaymentIntent('pi_id');
+        $pi->amount_received = 0;
+        $pi->client_secret = 'client_secret';
+        $this->stripeService->expects($this->once())
+                            ->method('updatePaymentIntent')
+                            ->willReturn($pi);
+
         $this->checkoutPiCreator->expects($this->never())->method('create');
 
         $this->checkoutPiResolver->resolve(500, 'FR', 'email@mail.com', 'Jean Badaud');
@@ -52,10 +68,14 @@ class CheckoutPiResolverTest extends TestCase
     public function testResolveWithExistingPaymentIntentWillReturnCorrectPaymentIntent()
     {
         $this->piSession->expects($this->once())->method('get')->willReturn('pi_id');
+        //pour que la méthode create ne soit pas appelée, il faut que le pi actuel soit valide (non payé et ayant un client_secret)
+        $pi = new PaymentIntent('updated_pi_id');
+        $pi->amount_received = 0;
+        $pi->client_secret = 'client_secret';
         $this->stripeService->expects($this->once())
                             ->method('updatePaymentIntent')
                             ->with('pi_id', 500)
-                            ->willReturn(new PaymentIntent('updated_pi_id'));
+                            ->willReturn($pi);
 
         $paymentIntent = $this->checkoutPiResolver->resolve(500, 'FR', 'email@mail.com', 'Jean Badaud');
         $this->assertEquals('updated_pi_id', $paymentIntent->id);
@@ -96,6 +116,7 @@ class CheckoutPiResolverTest extends TestCase
     public function testResolveWithNoExistingPaymentIntentWillReturnCorrectPaymentIntent()
     {
         $this->piSession->expects($this->once())->method('get')->willReturn(null);
+       
         $this->checkoutPiCreator->expects($this->once())
                             ->method('create')
                             ->with(500, 'FR', 'email@mail.com', 'Jean Badaud')

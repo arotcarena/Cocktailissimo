@@ -164,7 +164,7 @@ export const PaymentForm = ({piSecret}) => {
             </>
             :
             <span>
-                {t('pay')} {checkoutData.cart ? priceFormater(checkoutData.cart.totalPrice.priceToUse + checkoutData.cart.shippingCost): ''}
+                {t('pay')} {checkoutData.totalPrice ? priceFormater(checkoutData.totalPrice.priceToPay): ''}
             </span>
           }
         </span>

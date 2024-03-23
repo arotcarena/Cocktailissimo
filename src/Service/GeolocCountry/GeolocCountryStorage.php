@@ -20,22 +20,22 @@ class GeolocCountryStorage
     public function get(): ?string 
     {
         //DELETE_FOR_PROD
-        // if(!$this->requestStack->getCurrentRequest())
-        // {
-        //     //pour éviter de faire planter les tests
-        //     return null;
-        // }
+        if(!$this->requestStack->getCurrentRequest())
+        {
+            //pour éviter de faire planter les tests
+            return null;
+        }
         return $this->requestStack->getSession()->get(self::GEOLOC_COUNTRY_SESSION_KEY);
     }
 
     public function set(string $country): void
     {
         //DELETE_FOR_PROD
-        // if(!$this->requestStack->getCurrentRequest())
-        // {
-        //     //pour éviter de faire planter les tests
-        //     return;
-        // }
+        if(!$this->requestStack->getCurrentRequest())
+        {
+            //pour éviter de faire planter les tests
+            return;
+        }
 
         $session = $this->requestStack->getSession();
 

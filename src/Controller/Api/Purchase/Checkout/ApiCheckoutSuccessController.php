@@ -34,10 +34,10 @@ class ApiCheckoutSuccessController extends AbstractController
     public function getSuggestedProducts(int $id, Request $request): JsonResponse
     {
         $productId = $this->purchaseRepository->findMoreExpansiveProductId($id);
+
         $limit = $request->query->get('limit', 20);
 
         $suggestedProducts = $this->productRepository->findSuggestedProducts($productId, $limit);
-
         return new JsonResponse(
             $this->productToArrayConvertor->convert($suggestedProducts, $request->getLocale())
         );

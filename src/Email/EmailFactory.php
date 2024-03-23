@@ -34,7 +34,7 @@ abstract class EmailFactory
         $this->configureMailer($senderEmail);
 
         //DELETE_FOR_PROD
-        $this->mailer->send($email);
+        // $this->mailer->send($email);
     }
 
     private function configureMailer(string $senderEmail): void
