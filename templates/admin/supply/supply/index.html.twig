@@ -11,7 +11,7 @@
    <div class="admin-container">
         <h1>Achats</h1>
 
-        {% include "admin/shop/supply/supply/parts/_filters.html.twig" %}
+        {% include "admin/supply/supply/parts/_filters.html.twig" %}
 
         {# total items count #}
         <div class="admin-count">
@@ -47,16 +47,16 @@
                             <div><strong>Niveau :</strong> {{ supply.vatLevel | trans({}, 'configs', 'fr') }}</div>
                             <div><strong>Pays :</strong> {{ supply.vatCountry | trans({}, 'countries', 'fr') }} {{ supply.vatCountry }}</div>
                             <div><strong>Taux :</strong> {{ supply.vatRate }}</div>
-                            <div><strong>Montant total :</strong> {{ supply.totalVatAmount | price_formater('fr') }}</div>
+                            <div><strong>Montant total :</strong> {{ supply.totalVatAmount | price_format('fr') }}</div>
                         </td>
                         <td>
-                            <div>{{ supply.priceHT | price_formater('fr') }} HT</div>
-                            <div>{{ supply.priceTTC | price_formater('fr') }} TTC</div>
+                            <div>{{ supply.priceHT | price_format('fr') }} HT</div>
+                            <div>{{ supply.priceTTC | price_format('fr') }} TTC</div>
                         </td>
                         <td>{{ supply.quantity }}</td>
                         <td>
-                            <div>{{ supply.totalPriceHT | price_formater('fr') }} HT</div>
-                            <div>{{ supply.totalPriceTTC | price_formater('fr') }} TTC</div>
+                            <div>{{ supply.totalPriceHT | price_format('fr') }} HT</div>
+                            <div>{{ supply.totalPriceTTC | price_format('fr') }} TTC</div>
                         </td>
                         <td>{{ supplier.purchasedAt | datetime_geoformat('fr') }}</td>
                         <td>
@@ -74,7 +74,7 @@
                                 <form action="{{ path('admin_supply_delete') }}" method="POST">
                                     <input type="hidden" name="token" value="{{ csrf_token('delete-supply') }}">
                                     <button class="admin-table-button danger" name="id" value="{{ supplier.id }}" type="submit" title="Supprimer"
-                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement l\'achat "#' supplier.id ~ ' ' ~ supplier.designation ~ '" ?' }}"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement l\'achat "#' ~ supplier.id ~ ' ' ~ supplier.designation ~ '" ?' }}"
                                     >
                                         <svg class="icon">
                                             <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>

@@ -8,9 +8,9 @@ class SupplyFilter
 {
     private ?Supplier $supplier = null;
 
-    private ?DateTime $startDate = null;
+    private ?DateTime $startAt = null;
 
-    private ?DateTime $endDate = null;
+    private ?DateTime $endAt = null;
 
     private ?string $sortBy = null;
     
@@ -55,47 +55,7 @@ class SupplyFilter
 
         return $this;
     }
-
-    /**
-     * Get the value of endDate
-     */ 
-    public function getEndDate()
-    {
-        return $this->endDate;
-    }
-
-    /**
-     * Set the value of endDate
-     *
-     * @return  self
-     */ 
-    public function setEndDate($endDate)
-    {
-        $this->endDate = $endDate;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of startDate
-     */ 
-    public function getStartDate()
-    {
-        return $this->startDate;
-    }
-
-    /**
-     * Set the value of startDate
-     *
-     * @return  self
-     */ 
-    public function setStartDate($startDate)
-    {
-        $this->startDate = $startDate;
-
-        return $this;
-    }
-
+    
     /**
      * Get the value of limit
      */ 
@@ -112,6 +72,46 @@ class SupplyFilter
     public function setLimit($limit)
     {
         $this->limit = $limit;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of startAt
+     */ 
+    public function getStartAt()
+    {
+        return $this->startAt;
+    }
+
+    /**
+     * Set the value of startAt
+     *
+     * @return  self
+     */ 
+    public function setStartAt($startAt)
+    {
+        $this->startAt = $startAt;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of endAt
+     */ 
+    public function getEndAt()
+    {
+        return $this->endAt;
+    }
+
+    /**
+     * Set the value of endAt
+     *
+     * @return  self
+     */ 
+    public function setEndAt($endAt)
+    {
+        $this->endAt = $endAt;
 
         return $this;
     }

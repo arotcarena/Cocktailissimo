@@ -12,6 +12,11 @@
              <div class="admin-filters-row">   
                 {{ include('admin/form/_admin_form_row.html.twig', {name: 'limit', label: 'Nombre de lignes par page', field: filter_form.limit}) }}
             </div>
+
+            <div class="admin-filters-row">
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'startAt', label: 'Début', field: filter_form.startAt}) }}
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'endAt', label: 'Fin', field: filter_form.endAt}) }}
+            </div>
         </div>
         <div class="admin-filters-submit">
             <button type="submit" class="admin-button">Recherche</button>
