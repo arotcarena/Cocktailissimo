@@ -1,0 +1,20 @@
+{{ form_start(filter_form) }}
+    <div class="admin-filters-container">
+        <div class="admin-filters">
+            <div class="admin-filters-row">            
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'supplier', label: 'Fournisseur', field: filter_form.supplier}) }}
+            </div>
+            
+            <div class="admin-filters-row">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'sortBy', label: 'Tri', field: filter_form.sortBy}) }}
+            </div>
+
+             <div class="admin-filters-row">   
+                {{ include('admin/form/_admin_form_row.html.twig', {name: 'limit', label: 'Nombre de lignes par page', field: filter_form.limit}) }}
+            </div>
+        </div>
+        <div class="admin-filters-submit">
+            <button type="submit" class="admin-button">Recherche</button>
+        </div>
+    </div>
+{{ form_end(filter_form) }}

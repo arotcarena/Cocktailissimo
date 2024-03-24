@@ -1,0 +1,100 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_supply_index') }} class="breadcrumb-link">Achats ({{count_supplies}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Achats</h1>
+
+        {% include "admin/shop/supply/supply/parts/_filters.html.twig" %}
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Fournisseur</th>
+                    <th>Produit</th>
+                    <th>TVA</th>
+                    <th>Prix unitaire</th>
+                    <th>Quantité</th>
+                    <th>Prix total</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for supply in pagination %}
+                    <tr>
+                        <td>{{ supply.id }}</td>
+                        <td>{{ supply.supplier }}</td>
+                        <td>
+                            <div><strong>Désignation :</strong> {{ supply.designation }} {{ supply.packagingLabel }}</div>
+                            <div><strong>Réf. publique :</strong> {{ supply.publicRef }}</div>
+                            <div><strong>Pays d'origine :</strong> {{ supply.publicRef }}</div>
+                        </td>
+                        <td>
+                            <div><strong>Niveau :</strong> {{ supply.vatLevel | trans({}, 'configs', 'fr') }}</div>
+                            <div><strong>Pays :</strong> {{ supply.vatCountry | trans({}, 'countries', 'fr') }} {{ supply.vatCountry }}</div>
+                            <div><strong>Taux :</strong> {{ supply.vatRate }}</div>
+                            <div><strong>Montant total :</strong> {{ supply.totalVatAmount | price_formater('fr') }}</div>
+                        </td>
+                        <td>
+                            <div>{{ supply.priceHT | price_formater('fr') }} HT</div>
+                            <div>{{ supply.priceTTC | price_formater('fr') }} TTC</div>
+                        </td>
+                        <td>{{ supply.quantity }}</td>
+                        <td>
+                            <div>{{ supply.totalPriceHT | price_formater('fr') }} HT</div>
+                            <div>{{ supply.totalPriceTTC | price_formater('fr') }} TTC</div>
+                        </td>
+                        <td>{{ supplier.purchasedAt | datetime_geoformat('fr') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_supply_show', {id: supply.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_supply_update', {id: supply.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_supply_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-supply') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ supplier.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement l\'achat "#' supplier.id ~ ' ' ~ supplier.designation ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_supply_create') }}">Ajouter un achat</a>
+        </div>
+   </div>
+
+{% endblock %}

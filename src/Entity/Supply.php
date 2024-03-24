@@ -64,6 +64,13 @@ class Supply
     #[ORM\Column]
     private ?\DateTimeImmutable $purchasedAt = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $vatRate = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $totalVatAmount = null;
+    
+
     public function __construct()
     {
         $this->purchasedAt = new DateTimeImmutable();
@@ -283,6 +290,30 @@ class Supply
     public function setPurchasedAt(\DateTimeImmutable $purchasedAt): static
     {
         $this->purchasedAt = $purchasedAt;
+
+        return $this;
+    }
+
+    public function getVatRate(): ?int
+    {
+        return $this->vatRate;
+    }
+
+    public function setVatRate(?int $vatRate): static
+    {
+        $this->vatRate = $vatRate;
+
+        return $this;
+    }
+
+    public function getTotalVatAmount(): ?int
+    {
+        return $this->totalVatAmount;
+    }
+
+    public function setTotalVatAmount(?int $totalVatAmount): static
+    {
+        $this->totalVatAmount = $totalVatAmount;
 
         return $this;
     }

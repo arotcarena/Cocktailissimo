@@ -1,0 +1,54 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_supplier_index') }} class="breadcrumb-link">Fournisseurs ({{count_suppliers}})</a>
+        >
+        <span class="breadcrumb-item">Ajouter</span>
+    </div>
+
+    <h1>Ajouter un fournisseur</h1>
+    
+
+    {{ form_start(form) }}
+    <div class="admin-form">
+
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'socialName', label: 'Raison sociale *', field: form.socialName}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'commercialName', label: 'Nom commercial', field: form.commercialName}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'country', label: 'Pays *', field: form.country}) }}
+
+        <h2>Adresse du siège social</h2>
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'addressLineOne', label: 'Numéro et voie *', field: form.addressLineOne}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'addressLineTwo', label: 'Complément d\'adresse', field: form.addressLineTwo}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'addressPostcode', label: 'Code postal *', field: form.addressPostcode}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'addressCity', label: 'Ville *', field: form.addressCity}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'addressCountry', label: 'Pays *', field: form.addressCountry}) }}
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'addressState', label: 'État/Province', field: form.addressState}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'identificationNumber', label: 'N° Siret *', field: form.identificationNumber}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'vatNumber', label: 'N° de TVA intracommunautaire', field: form.vatNumber}) }}
+
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Ajouter</button>
+        </div>
+
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}

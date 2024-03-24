@@ -1,0 +1,86 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_supplier_index') }} class="breadcrumb-link">Fournisseurs ({{count_suppliers}})</a>
+    </div>
+
+   <div class="admin-container">
+        <h1>Fournisseurs</h1>
+
+        {% include "admin/shop/supply/supplier/parts/_filters.html.twig" %}
+
+        {# total items count #}
+        <div class="admin-count">
+            {{ pagination.getTotalItemCount }} résultat{% if pagination.getTotalItemCount > 1 %}s{% endif %}
+            
+        </div>
+        
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>#ID</th>
+                    <th>Raison sociale</th>
+                    <th>Nom commercial</th>
+                    <th>Adresse siège social</th>
+                    <th>Pays</th>
+                    <th>N° Siret</th>
+                    <th>N° TVA</th>
+                    <th>Nombre de transactions</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for supplier in pagination %}
+                    <tr>
+                        <td>{{ supplier.id }}</td>
+                        <td>{{ supplier.socialName }}</td>
+                        <td>{{ supplier.commercialName }}</td>
+                        <td>{{ include('UI/_light_address.html.twig', {address: supplier.socialAddress}) }}</td>
+                        <td>{{ supplier.country | trans({}, 'countries', 'fr') }} ({{supplier.country}})</td>
+                        <td>{{ supplier.vatNumber }}</td>
+                        <td>{{ supplier.supplies.count }}</td>
+                        <td>{{ supplier.createdAt | datetime_geoformat('fr') }}</td>
+                        <td>
+                            <div class="admin-table-controls">
+                                <a class="admin-table-button success" href="{{ path('admin_supplier_show', {id: supplier.id}) }}" title="Voir">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#eye"></use>
+                                    </svg>
+                                </a>
+                                <a class="admin-table-button success" href="{{ path('admin_supplier_update', {id: supplier.id}) }}" title="Modifier">
+                                    <svg class="icon">
+                                        <use xlink:href="/img/icons/admin_sprite.svg#edit"></use>
+                                    </svg>
+                                </a>
+                                <form action="{{ path('admin_supplier_delete') }}" method="POST">
+                                    <input type="hidden" name="token" value="{{ csrf_token('delete-supplier') }}">
+                                    <button class="admin-table-button danger" name="id" value="{{ supplier.id }}" type="submit" title="Supprimer"
+                                            data-controller="deleteconfirm" data-deletemessage="{{ 'Supprimer définitivement le fournisseur "' ~ supplier.socialName ~ '" ?' }}"
+                                    >
+                                        <svg class="icon">
+                                            <use xlink:href="/img/icons/admin_sprite.svg#delete"></use>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="admin-navigation">
+            {{ knp_pagination_render(pagination, 'admin/layouts/_admin_pagination.html.twig') }}
+        </div>
+
+        <div class="admin-buttons-fixed-wrapper">
+            <a class="admin-button" href="{{ path('admin_supplier_create') }}">Ajouter un fournisseur</a>
+        </div>
+   </div>
+
+{% endblock %}

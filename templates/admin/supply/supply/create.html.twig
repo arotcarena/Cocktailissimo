@@ -1,0 +1,44 @@
+{% extends "admin/admin_base.html.twig" %}
+
+{% block body %}
+
+    <div class="breadcrumb">
+        <a href={{ path('admin_home') }} class="breadcrumb-home-link">Administration</a>
+        >
+        <a href={{ path('admin_supply_index') }} class="breadcrumb-link">Achats ({{count_supplies}})</a>
+        >
+        <span class="breadcrumb-item">Ajouter</span>
+    </div>
+
+    <h1>Ajouter un achat</h1>
+    
+
+    {{ form_start(form) }}
+    <div class="admin-form">
+
+        {% if not form.vars.valid %}
+            <div class="admin-main-error">Le formulaire comporte des erreurs</div>
+        {% endif %}
+
+        {% if form_errors(form) %}
+            <div class="admin-main-error">{{ form_errors(form) }}</div>
+        {% endif %}
+        
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'supplier', label: 'Fournisseur *', field: form.supplier}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'packaging', label: 'Conditionnement *', field: form.packaging}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'country', label: 'Pays TVA *', field: form.vatCountry}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'priceHT', label: 'Prix HT *', field: form.priceHT}) }}
+
+        {{ include('admin/form/_admin_form_row.html.twig', {name: 'quantity', label: 'Quantité *', field: form.quantity}) }}
+
+        <div class="admin-form-submit">
+            <button type="submit" class="admin-button">Ajouter</button>
+        </div>
+
+    </div>
+    {{ form_end(form) }}
+
+{% endblock %}
